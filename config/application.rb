@@ -12,7 +12,7 @@ module Departure
     config.load_defaults 5.2
 
     # JS, CSS, minitest  generate false
-    config.generations do |g|
+    config.generators do |g|
       g.assets false
       g.test_framework false
     end
