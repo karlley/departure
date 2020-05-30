@@ -3,3 +3,16 @@ inherit_from:
 
 Rails:
   Enabled: true
+
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/*'
+    - 'spec/*'
+
+Airbnb/OptArgParameters:
+  Enabled: false
+
+Style/MixinUsage:
+  Enabled: false
