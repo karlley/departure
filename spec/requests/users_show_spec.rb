@@ -7,5 +7,4 @@ RSpec.describe "Profile", type: :request do
     get user_path(user)
     expect(response).to render_template('users/show')
   end
-
 end

@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
 
@@ -55,6 +54,5 @@ RSpec.describe User, type: :model do
       user.valid?
       expect(user).to be_valid
     end
-
   end
 end

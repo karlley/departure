@@ -14,7 +14,6 @@ RSpec.describe "Users", type: :system do
       it "正しいタイトル表示を確認" do
         expect(page).to have_title full_title('Signup')
       end
-
     end
   end
 end
