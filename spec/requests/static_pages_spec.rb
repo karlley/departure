@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :request do
-  describe "Home" do
+  describe "Home ページ" do
     it "正常なレスポンスを返すこと" do
       get root_path
       expect(response).to be_successful
@@ -9,7 +9,7 @@ RSpec.describe "StaticPages", type: :request do
     end
   end
 
-  describe "About" do
+  describe "About ページ" do
     it "正常なレスポンスを返すこと" do
       get about_path
       expect(response).to be_successful

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Profile", type: :request do
+RSpec.describe "Profile ページ", type: :request do
   let!(:user) { create(:user) }
 
   it "レスポンスが正常に表示されること" do

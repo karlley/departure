@@ -40,7 +40,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "Plofile ページ" do
+  describe "Profile ページ" do
     context "ページレイアウト" do
       before do
         visit user_path(user)
