@@ -155,8 +155,8 @@ ja:
     select:
       prompt: 選択してください
     submit:
-      create: 登録する
-      submit: 保存する
+      create: サインアップ
+      submit: ログイン
       update: 更新する
   number:
     currency:

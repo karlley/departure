@@ -11,7 +11,7 @@
         <%= User.human_attribute_name(:password) %>
         <%= f.password_field :email, class: 'form-control', id: 'user_password' %> 
       </div>
-      <%= f.submit nil, class: 'btn btn-primary' %>
+      <%= f.submit class: 'btn btn-primary' %>
     <% end %>
     <br>ユーザー登録されていない方は<%= link_to 'こちら', signup_path %><br>
     パスワードをお忘れの方は<%= link_to 'こちら', '#' %>
