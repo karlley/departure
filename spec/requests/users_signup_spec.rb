@@ -5,7 +5,7 @@ RSpec.describe "Signup ページ", type: :request do
     get signup_path
   end
 
-  it "正常なレスポンスを返すこと" do
+  it "正常なレスポンスを返す" do
     expect(response).to be_successful
     expect(response).to have_http_status "200"
   end

@@ -19,21 +19,21 @@ RSpec.describe "Users", type: :system do
     end
 
     context "ユーザー登録処理" do
-      it "有効なユーザーで登録処理を行うと成功のフラッシュが表示される事" do
+      it "有効なユーザーで登録処理を行うと成功のフラッシュが表示される" do
         fill_in "ユーザー名", with: "Example User"
         fill_in "メールアドレス", with: "user@example.com"
         fill_in "パスワード", with: "password"
         fill_in "パスワード(確認)", with: "password"
-        click_button "登録する"
+        click_button "サインアップ"
         expect(page).to have_content "Welcome to Departure!"
       end
 
-      it "無効なユーザーで登録処理を行うと失敗のフラッシュが表示される事" do
+      it "無効なユーザーで登録処理を行うと失敗のフラッシュが表示される" do
         fill_in "ユーザー名", with: ""
         fill_in "メールアドレス", with: "user@example.com"
         fill_in "パスワード", with: "password"
         fill_in "パスワード(確認)", with: "pass"
-        click_button "登録する"
+        click_button "サインアップ"
         expect(page).to have_content "ユーザー名を入力してください"
         expect(page).to have_content "パスワード(確認)とパスワードの入力が一致しません"
       end
