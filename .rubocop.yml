@@ -16,3 +16,10 @@ Airbnb/OptArgParameters:
 
 Style/MixinUsage:
   Enabled: false
+
+Rails/HelperInstanceVariable:
+  Enabled: false
+
+Style/MultilineTernaryOperator:
+  Enabled: false
+
