@@ -11,6 +11,12 @@
         <%= User.human_attribute_name(:password) %>
         <%= f.password_field :password, class: 'form-control', id: 'user_password' %> 
       </div>
+      <div class="form-group">
+        <%= f.label :remrmber_me, class: "checkbox inline" do %>
+          <%= f.check_box :remember_me %>
+          <span><%= t('.remember_me') %></span>
+        <% end %>
+      </div>
       <%= f.submit class: 'btn btn-primary' %>
     <% end %>
     <br>ユーザー登録されていない方は<%= link_to 'こちら', signup_path %><br>

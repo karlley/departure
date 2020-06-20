@@ -1,14 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-//ミックスイン
+/* mixin  */
 @mixin box-sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-//共通
+/* common */
 body {
   padding-top: 60px;
 }
@@ -28,7 +28,7 @@ textarea {
   }
 }
 
-//テキスト
+/* text */
 h1, h1,  h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -54,7 +54,7 @@ p {
   line-height: 1.7em;
 }
 
-// header
+/* header */
 .navbar ul {
   margin-top: 12px;
   margin-bottom: 12px;
@@ -69,7 +69,7 @@ p {
   }
 }
 
-//footer
+/* footer */
 footer {
   margin-top: 45px;
   padding-top: 5px;
@@ -80,7 +80,23 @@ footer {
   }
 }
 
-//new
+/* forms */
+
+.checkbox {
+  margin: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+/* new */
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -106,3 +122,4 @@ input {
     color: $state-danger-text;
   }
 }
+
