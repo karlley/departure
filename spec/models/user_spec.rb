@@ -55,4 +55,10 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
   end
+
+  context "autenticated? メソッド" do
+    it "remember_digest が存在しない場合はfalse を返すこと" do
+      expect(user.authenticated?('')).to eq false
+    end
+  end
 end
