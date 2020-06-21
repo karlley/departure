@@ -23,3 +23,5 @@ Rails/HelperInstanceVariable:
 Style/MultilineTernaryOperator:
   Enabled: false
 
+Lint/AssignmentInCondition:
+  Enabled: false
