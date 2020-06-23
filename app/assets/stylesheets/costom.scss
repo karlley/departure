@@ -123,3 +123,29 @@ input {
   }
 }
 
+/* show */
+
+.user-picture img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.user-picture-box {
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+
+.show-user-name {
+  display: inline-box;
+}
+
+.account-edit {
+  margin-top: 20px;
+}
+
+/* edit */
+
+.gravatar_edit {
+  margin-bottom: 20px;
+}
