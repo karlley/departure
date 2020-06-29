@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   private
-  
+
   # ログイン済みユーザーか確認
   def logged_in_user
     unless logged_in?
