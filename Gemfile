@@ -35,6 +35,12 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'devise'
+gem 'bootstrap-sass'
+gem 'faker'
+gem 'jquery-rails', '4.3.1'
+gem 'will_paginate', '3.1.7'
+gem 'bootstrap-will_paginate', '1.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -70,11 +76,6 @@ group :test do
   gem 'webdrivers'
   gem 'rspec-rails', '~> 4.0.0.beta2'
 end
-
-gem 'devise'
-gem 'bootstrap-sass'
-gem 'faker'
-gem 'jquery-rails', '4.3.1'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
