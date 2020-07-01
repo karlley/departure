@@ -41,9 +41,21 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    flash[:success] = "Your Account has been deleted!"
-    redirect_to root_url
+    # 管理者ユーザー
+    if current_user.admin?
+      @user.destroy
+      flash[:success] = "This Account has been deleted!"
+      redirect_to root_url
+    # 管理者ユーザーではなく、自分のアカウント
+    elsif current_user?(@user)
+      @user.destroy
+      flash[:success] = "Your Account has been deleted!"
+      redirect_to root_url
+    # 管理者ユーザーではなく、自分のアカウントでもない
+    else
+      flash[:danger] = "You can't delete this Account!'"
+      redirect_to root_url
+    end
   end
 
   private
