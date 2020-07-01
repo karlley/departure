@@ -26,6 +26,7 @@
         <%= f.text_field :nationality, class: 'form-control', id: 'user_nationality' %>
       </div>
       <%= f.submit class: 'btn btn-primary' %>
+      <%= link_to "アカウントを削除する", user_path(@user), method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>
   </div>
 </div>
