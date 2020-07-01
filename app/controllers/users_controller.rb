@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     if current_user.admin?
       @user.destroy
       flash[:success] = "This Account has been deleted!"
-      redirect_to root_url
+      redirect_to users_url
     # 管理者ユーザーではなく、自分のアカウント
     elsif current_user?(@user)
       @user.destroy

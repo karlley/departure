@@ -26,7 +26,7 @@ RSpec.describe "All Users", type: :request do
     patch user_path(user), params: { user: {
       password: user.password,
       password_confirmation: user.password,
-      admin: true
+      admin: true,
     } }
     expect(user.reload.admin).to be_falsey
   end
