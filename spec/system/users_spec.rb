@@ -2,15 +2,36 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
+  let!(:admin_user) { create(:user, :admin) }
 
   describe "All Users ページ" do
-    it "ページネーション機能を確認" do
-      create_list(:user, 31)
-      login_for_system(user)
-      visit users_path
-      expect(page).to have_css "div.pagination"
-      User.paginate(page: 1).each do |u|
-        expect(page).to have_link u.name, href: user_path(u)
+    context "管理者ユーザーの場合" do
+      it "ページネーション機能, 自分以外のユーザーの削除ボタンが表示される" do
+        create_list(:user, 30)
+        login_for_system(admin_user)
+        visit users_path
+        expect(page).to have_css "div.pagination"
+        User.paginate(page: 1).each do |u|
+          expect(page).to have_link u.name, href: user_path(u)
+          expect(page).to have_content "#{u.name} | 削除" unless u == admin_user
+        end
+      end
+    end
+
+    context "管理者ユーザー以外の場合" do
+      it "ページネーション, 自分のアカウントのみ削除ボタンが表示される" do
+        create_list(:user, 30)
+        login_for_system(user)
+        visit users_path
+        expect(page).to have_css "div.pagination"
+        User.paginate(page: 1).each do |u|
+          expect(page).to have_link u.name, href: user_path(u)
+          if u == user
+            expect(page).to have_content "#{u.name} | 削除"
+          else
+            expect(page).not_to have_content "#{u.name} | 削除"
+          end
+        end
       end
     end
   end
@@ -85,6 +106,14 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content "メールアドレスを入力してください"
         expect(page).to have_content "メールアドレスは不正な値です"
         expect(user.reload.email).not_to eq ""
+      end
+    end
+
+    context "アカウント削除処理", js: true do
+      it "正常に削除できる" do
+        click_link "アカウントを削除する"
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content "Your Account has been deleted!"
       end
     end
   end
