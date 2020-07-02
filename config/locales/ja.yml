@@ -17,7 +17,7 @@ ja:
         password: パスワード
         password_confirmation: パスワード(確認)
         introduction: 自己紹介
-        nationarity: 国籍
+        nationality: 国籍
         created_at: 登録日時
         updated_at: 更新日時
   date:

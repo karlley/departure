@@ -2,9 +2,13 @@ FactoryBot.define do
   factory :user do
     name { Faker::Name.name }
     sequence(:email) { |n| "example#{n}@example.com" }
-    password { "foobar" }
-    password_confirmation { "foobar" }
-    nationality { "Japan" }
+    password { "password" }
+    password_confirmation { "password" }
     introduction { "Hello! My name is Faker!" }
+    nationality { "Japan" }
+
+    trait :admin do
+      admin { true }
+    end
   end
 end

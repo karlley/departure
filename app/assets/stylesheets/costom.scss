@@ -80,8 +80,7 @@ footer {
   }
 }
 
-/* forms */
-
+/* user forms */
 .checkbox {
   margin: -10px;
   margin-bottom: 10px;
@@ -96,7 +95,7 @@ footer {
   margin-left: 0;
 }
 
-/* new */
+/* user new */
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -120,6 +119,42 @@ input {
   @extend .has-error;
   .form-control {
     color: $state-danger-text;
+  }
+}
+
+/* user show */
+.user-picture img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.user-picture-box {
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+
+.show-user-name {
+  display: inline-box;
+}
+
+.account-edit {
+  margin-top: 20px;
+}
+
+/* user edit */
+.gravatar_edit {
+  margin-bottom: 20px;
+}
+
+/* user index */
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
   }
 }
 
