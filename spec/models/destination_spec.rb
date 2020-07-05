@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Destination, type: :model do
+  let!(:destination_yesterday) { create(:destination, :yesterday) }
+  let!(:destination_one_week_ago) { create(:destination, :one_week_ago) }
+  let!(:destination_one_month_ago) { create(:destination, :one_month_ago) }
   let!(:destination) { create(:destination) }
 
   context "バリデーション" do
@@ -36,6 +39,16 @@ RSpec.describe Destination, type: :model do
       destination = build(:destination, description: "a" * 141)
       destination.valid?
       expect(destination.errors[:description]).to include("は140文字以内で入力してください")
+    end
+  end
+
+  context "並び順" do
+    it "最新の投稿が最初の投稿になっていること" do
+      expect(destination).to eq Destination.first
+    end
+
+    it "最古の投稿が最後の投稿になっていること" do
+      expect(destination_one_month_ago).to eq Destination.last
     end
   end
 end
