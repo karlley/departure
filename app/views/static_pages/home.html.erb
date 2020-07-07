@@ -1,3 +1,10 @@
-<center>
-<h1>Welcome to Departure!</h1>
-</center>
+<% if logged_in? %>
+<div class="container">
+  <h3>All Destination (<%= @feed_items.count %>)</h3>
+  <%= render 'shared/feed' %>
+</div>
+<% else %>
+  <center>
+    <h1>Welcome to Departure!</h1>
+  </center>
+<% end %>

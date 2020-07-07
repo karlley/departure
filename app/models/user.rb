@@ -39,6 +39,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  # 行き先一覧を取得
+  def feed
+    Destination.where("user_id = ?", id)
+  end
+
   private
 
   def downcase_email
