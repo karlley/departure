@@ -122,6 +122,7 @@ RSpec.describe "Users", type: :system do
     context "ページレイアウト" do
       before do
         login_for_system(user)
+        create_list(:destination, 10, user: user)
         visit user_path(user)
       end
 
@@ -141,6 +142,23 @@ RSpec.describe "Users", type: :system do
 
       it "Edit Profile ページヘのリンク表示を確認" do
         expect(page).to have_link "Edit Profile", href: edit_user_path(user)
+      end
+
+      it "行き先の件数の表示を確認" do
+        expect(page).to have_content "行き先 (#{user.destination.count})"
+      end
+
+      it "行き先の情報の表示を確認" do
+        Destination.take(5).each do |destination|
+          expect(page).to have_link destination.name
+          expect(page).to have_content destination.user.name
+          expect(page).to have_content destination.description
+          expect(page).to have_content destination.country
+        end
+      end
+
+      it "行き先のページネーションの表示を確認" do
+        expect(page).to have_css "div.pagination"
       end
     end
   end
