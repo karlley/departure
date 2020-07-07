@@ -1,0 +1,9 @@
+<li id="destination-<%= destination.id %>">
+  <%= link_to gravatar_for(destination.user, size: 50), destination.user %>
+  <span class="name"><%= link_to destination.name, "#" %></span>
+  <span class="description"><%= destination.description %></span><br>
+  <span class="country">国: <%= destination.country %></spana<br>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(destination.created_at) %> ago.
+  </span>
+</li>
