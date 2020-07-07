@@ -158,7 +158,7 @@ input {
   }
 }
 
-/* Destination */
+/* destination list */
 .destinations {
   list-style: none;
   padding: 0;
@@ -204,3 +204,18 @@ span.picture {
   }
 }
 
+/* root */
+.btn-record {
+  margin-top: 3em;
+}
+
+/* destination new */
+
+.input-need {
+  color: red;
+  font-size: 13px;
+}
+
+.input-unneed {
+  font-size: 13px;
+}
