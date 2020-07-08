@@ -14,21 +14,29 @@ RSpec.describe "StaticPages", type: :system do
       it "正しいタイトル表示を確認" do
         expect(page).to have_title full_title
       end
+    end
 
-      context "行き先フィード", js: true do
-        let!(:user) { create(:user) }
-        let!(:destination) { create(:destination, user: user) }
+    context "行き先フィード", js: true do
+      let!(:user) { create(:user) }
+      let!(:destination) { create(:destination, user: user) }
 
-        it "行き先のページネーションの表示を確認" do
-          login_for_system(user)
-          create_list(:destination, 6, user: user)
-          visit root_path
-          expect(page).to have_content "All Destination (#{user.destination.count})"
-          expect(page).to have_css "div.pagination"
-          Destination.take(5).each do |d|
-            expect(page).to have_link d.name
-          end
+      before do
+        login_for_system(user)
+      end
+
+      it "行き先のページネーションの表示を確認" do
+        create_list(:destination, 6, user: user)
+        visit root_path
+        expect(page).to have_content "All Destination (#{user.destination.count})"
+        expect(page).to have_css "div.pagination"
+        Destination.take(5).each do |d|
+          expect(page).to have_link d.name
         end
+      end
+
+      it "'New Destination' ボタンの表示を確認" do
+        visit root_path
+        expect(page).to have_link "New Destination", href: new_destination_path
       end
     end
   end
