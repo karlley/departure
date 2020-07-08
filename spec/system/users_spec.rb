@@ -145,7 +145,7 @@ RSpec.describe "Users", type: :system do
       end
 
       it "行き先の件数の表示を確認" do
-        expect(page).to have_content "行き先 (#{user.destination.count})"
+        expect(page).to have_content "行き先 (#{user.destinations.count})"
       end
 
       it "行き先の情報の表示を確認" do

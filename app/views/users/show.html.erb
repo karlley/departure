@@ -21,8 +21,8 @@
   </div>
   <div class="row">
     <div class="col-md-9">
-      <% if @user.destination.any? %>
-        <h3>行き先 (<%= @user.destination.count %>)</h3>
+      <% if @user.destinations.any? %>
+        <h3>行き先 (<%= @user.destinations.count %>)</h3>
         <ol class="destinations">
           <%= render @destinations %>
         </ol>
