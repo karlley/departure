@@ -11,7 +11,13 @@ RSpec.describe Destination, type: :model do
       expect(destination).to be_valid
     end
 
-    it "名前がなければ無効な状態であること" do
+    it "ユーザーID が未入力で無効な状態であること" do
+      destination = build(:destination, user_id: nil)
+      destination.valid?
+      expect(destination.errors[:user_id]).to include("を入力してください")
+    end
+
+    it "名前が未入力で無効な状態であること" do
       destination = build(:destination, name: nil)
       destination.valid?
       expect(destination.errors[:name]).to include("を入力してください")
@@ -23,7 +29,7 @@ RSpec.describe Destination, type: :model do
       expect(destination.errors[:name]).to include("は50文字以内で入力してください")
     end
 
-    it "国名がなければ無効な状態であること" do
+    it "国名が未入力で無効な状態であること" do
       destination = build(:destination, country: nil)
       destination.valid?
       expect(destination.errors[:country]).to include("を入力してください")
@@ -33,6 +39,11 @@ RSpec.describe Destination, type: :model do
       destination = build(:destination, country: "a" * 51)
       destination.valid?
       expect(destination.errors[:country]).to include("は50文字以内で入力してください")
+    end
+
+    it "説明が任意入力になっていること" do
+      destination = build(:destination, description: nil)
+      expect(destination).to be_valid
     end
 
     it "説明が140字以内であること" do
