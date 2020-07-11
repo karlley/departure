@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
+  let!(:destination) { create(:destination, user: user) }
 
   describe "New Destination ページ" do
     before do
@@ -40,6 +41,25 @@ RSpec.describe "Destinations", type: :system do
         fill_in "国", with: "Japan"
         click_button "登録する"
         expect(page).to have_content "行き先名を入力してください"
+      end
+    end
+  end
+
+  describe "Destination ページ" do
+    context "ページレイアウト" do
+      before do
+        login_for_system(user)
+        visit destination_path(destination)
+      end
+
+      it "正しいタイトルが表示されること" do
+        expect(page).to have_title full_title("#{destination.name}")
+      end
+
+      it "行き先情報が表示されること" do
+        expect(page).to have_content destination.name
+        expect(page).to have_content destination.country
+        expect(page).to have_content destination.description
       end
     end
   end
