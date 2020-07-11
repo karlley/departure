@@ -1,0 +1,9 @@
+<% provide(:title, "#{@destination.name}") %>
+<h1>Destination</h1>
+<div class="container">
+  <div class="row">
+    <h2 class="destination-name"><%= @destination.name %></h2>
+    <p class="destination-country">国: <%= @destination.country %></p>
+    <div class="destination-description"><%= @destination.description %></div>
+  </div>
+</div>

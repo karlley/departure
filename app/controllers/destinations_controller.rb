@@ -1,6 +1,10 @@
 class DestinationsController < ApplicationController
   before_action :logged_in_user
 
+  def show
+    @destination = Destination.find(params[:id])
+  end
+
   def new
     @destination = Destination.new
   end
