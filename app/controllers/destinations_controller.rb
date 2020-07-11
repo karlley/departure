@@ -13,7 +13,7 @@ class DestinationsController < ApplicationController
     @destination = current_user.destinations.build(destination_params)
     if @destination.save
       flash[:success] = "Destination added!"
-      redirect_to root_url
+      redirect_to destination_path(@destination)
     else
       render 'destinations/new'
     end

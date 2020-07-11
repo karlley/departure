@@ -24,7 +24,7 @@ RSpec.describe "New Destinations", type: :request do
         } }
       end.to change(Destination, :count).by(1)
       follow_redirect!
-      expect(response).to render_template('static_pages/home')
+      expect(response).to render_template('destinations/show')
     end
 
     it "無効な行き先データで登録できない" do
