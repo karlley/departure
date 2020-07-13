@@ -3,6 +3,11 @@
 <div class="container">
   <div class="row">
     <h2 class="destination-name"><%= @destination.name %></h2>
+    <div class="change-destination">
+      <% if current_user == @destination.user %>
+        <%= link_to "Edit Destination", edit_destination_path(@destination), class: 'edit-destination' %>
+      <% end %>
+    </div>
     <p class="destination-country">国: <%= @destination.country %></p>
     <div class="destination-description"><%= @destination.description %></div>
   </div>

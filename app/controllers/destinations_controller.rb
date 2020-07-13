@@ -19,6 +19,20 @@ class DestinationsController < ApplicationController
     end
   end
 
+  def edit
+    @destination = Destination.find(params[:id])
+  end
+
+  def update
+    @destination = Destination.find(params[:id])
+    if @destination.update_attributes(destination_params)
+      flash[:success] = "Destination updated!"
+      redirect_to @destination
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def destination_params
