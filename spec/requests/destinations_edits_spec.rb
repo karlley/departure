@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Edit Destination ページ", type: :request do
   let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
   let!(:destination) { create(:destination, user: user) }
 
   context "認可されたユーザーの場合" do
@@ -33,6 +34,22 @@ RSpec.describe "Edit Destination ページ", type: :request do
       } }
       expect(response).to have_http_status "302"
       expect(response).to redirect_to login_path
+    end
+  end
+
+  context "別アカウントのユーザーの場合" do
+    it "ホーム画面へリダイレクトすること" do
+      login_for_request(other_user)
+      get edit_destination_path(destination)
+      expect(response).to have_http_status "302"
+      expect(response).to redirect_to root_path
+      patch destination_path(destination), params: { destination: {
+        name: "sample destination",
+        description: "sample description",
+        country: "Japan",
+      } }
+      expect(response).to have_http_status "302"
+      expect(response).to redirect_to root_path
     end
   end
 end

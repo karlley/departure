@@ -1,5 +1,6 @@
 class DestinationsController < ApplicationController
   before_action :logged_in_user
+  before_action :correct_user, only: [:edit, :update]
 
   def show
     @destination = Destination.find(params[:id])
@@ -37,5 +38,11 @@ class DestinationsController < ApplicationController
 
   def destination_params
     params.require(:destination).permit(:name, :description, :country)
+  end
+
+  def correct_user
+    # 現在のユーザーが更新対象の行き先を保有しているか確認
+    @destination = current_user.destinations.find_by(id: params[:id])
+    redirect_to root_url if @destination.nil?
   end
 end
