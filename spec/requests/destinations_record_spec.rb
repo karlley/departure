@@ -6,13 +6,13 @@ RSpec.describe "New Destinations", type: :request do
 
   context "ログインしているユーザーの場合" do
     before do
-      login_for_request(user)
       get new_destination_path
+      login_for_request(user)
     end
 
-    it "レスポンスが正常に表示される" do
-      expect(response).to have_http_status "200"
-      expect(response).to render_template('destinations/new')
+    it "レスポンスが正常に表示される(+フレンドリーフォロワーディング)" do
+      expect(response).to have_http_status "302"
+      expect(response).to redirect_to new_destination_url
     end
 
     it "有効な行き先データで登録できる" do
