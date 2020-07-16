@@ -5,7 +5,10 @@
     <h2 class="destination-name"><%= @destination.name %></h2>
     <div class="change-destination">
       <% if current_user == @destination.user %>
-        <%= link_to "Edit Destination", edit_destination_path(@destination), class: 'edit-destination' %>
+        <%= link_to "Edit", edit_destination_path(@destination), class: 'edit-destination' %>
+      <% end %>
+      <% if current_user.admin? || (current_user == @destination.user) %>
+        <%= link_to "Delete", edit_destination_path(@destination), method: :delete, class: 'delete-destination', data: { confirm: "Are you sure?" } %>
       <% end %>
     </div>
     <p class="destination-country">国: <%= @destination.country %></p>

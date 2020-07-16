@@ -72,7 +72,7 @@ RSpec.describe "Destinations", type: :system do
     before do
       login_for_system(user)
       visit destination_path(destination)
-      click_link "Edit Destination"
+      click_link "Edit"
     end
 
     context "ページレイアウト" do

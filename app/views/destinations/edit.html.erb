@@ -18,6 +18,7 @@
           <%= f.text_field :country, class: 'form-control', id: 'destination_country' %>
         </div>
         <%= f.submit class: "btn btn-primary" %>
+        <%= link_to "行き先を削除する", destination_path(@destination), method: :delete, data: { confirm: "Are you sure?" } %> 
       <% end %>
     </div>
   </div>

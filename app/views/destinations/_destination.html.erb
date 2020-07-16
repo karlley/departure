@@ -6,4 +6,7 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(destination.created_at) %> ago.
   </span>
+  <% if current_user.admin? || (current_user == destination.user) %>
+    <%= link_to "delete", destination_path(destination), method: :delete, data: { confirm: "Are you sure?"} %>
+  <% end %>
 </li>
