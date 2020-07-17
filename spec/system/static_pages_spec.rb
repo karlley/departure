@@ -38,6 +38,13 @@ RSpec.describe "StaticPages", type: :system do
         visit root_path
         expect(page).to have_link "New Destination", href: new_destination_path
       end
+
+      it "行き先削除後、削除成功のフラッシュの表示を確認" do
+        visit root_path
+        click_on "delete"
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content "Destination deleted!"
+      end
     end
   end
 
