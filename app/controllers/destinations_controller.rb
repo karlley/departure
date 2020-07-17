@@ -36,13 +36,14 @@ class DestinationsController < ApplicationController
 
   def destroy
     @destination = Destination.find(params[:id])
-    if current_user.admin? || current_user?(@destinaiton.user)
+    if current_user.admin? || current_user?(@destination.user)
       @destination.destroy
       flash[:success] = "Destination deleted!"
       # admin ユーザーはホーム画面, current ユーザーはユーザー詳細画面へリダイレクト
       redirect_to request.referrer == user_url(@destination.user) ? user_url(@destination.user) : root_url
     else
       flash[:danger] = "You can't delete other user's destination."
+      redirect_to root_url
     end
   end
 
