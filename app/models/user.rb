@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :destinations, dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -36,6 +37,11 @@ class User < ApplicationRecord
   # ユーザーのログイン破棄
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # 行き先一覧を取得
+  def feed
+    Destination.where("user_id = ?", id)
   end
 
   private

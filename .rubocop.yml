@@ -25,3 +25,9 @@ Style/MultilineTernaryOperator:
 
 Lint/AssignmentInCondition:
   Enabled: false
+
+Airbnb/DefaultScope:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false

@@ -19,4 +19,15 @@
       <% end %>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-9">
+      <% if @user.destinations.any? %>
+        <h3>行き先 (<%= @user.destinations.count %>)</h3>
+        <ol class="destinations">
+          <%= render @destinations %>
+        </ol>
+        <%= will_paginate @destinations %>
+      <% end %>
+    </div>
+  </div>
 </div>

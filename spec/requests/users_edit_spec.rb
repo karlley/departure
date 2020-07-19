@@ -8,6 +8,7 @@ RSpec.describe "プロフィール編集", type: :request do
     it "レスポンスが正常に表示される(+フレンドリーフォワーディング)" do
       get edit_user_path(user)
       login_for_request(user)
+      expect(response).to have_http_status "302"
       expect(response).to redirect_to edit_user_url(user)
       patch user_path(user), params: { user: {
         name: "Example User",

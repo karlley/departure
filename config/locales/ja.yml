@@ -9,6 +9,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       user: ユーザー
+      destination: 行き先
     attributes:
       user:
         id: ID
@@ -20,6 +21,11 @@ ja:
         nationality: 国籍
         created_at: 登録日時
         updated_at: 更新日時
+      destination:
+        id: ID
+        name: 行き先名
+        country: 国
+        description: 説明
   date:
     abbr_day_names:
     - 日
@@ -158,6 +164,10 @@ ja:
       create: サインアップ
       submit: ログイン
       update: 更新する
+      destination:
+        create: 登録する
+        submit: 保存する
+        update: 更新する
   number:
     currency:
       format:
