@@ -29,3 +29,6 @@
 # Ignore gems
 /vender
 
+# Ignore pictures
+/public/uploads/*
+

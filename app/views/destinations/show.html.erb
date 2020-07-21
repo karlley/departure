@@ -2,16 +2,23 @@
 <h1>Destination</h1>
 <div class="container">
   <div class="row">
-    <h2 class="destination-name"><%= @destination.name %></h2>
-    <div class="change-destination">
-      <% if current_user == @destination.user %>
-        <%= link_to "Edit", edit_destination_path(@destination), class: 'edit-destination' %>
-      <% end %>
-      <% if current_user.admin? || (current_user == @destination.user) %>
-        <%= link_to "Delete", destination_path(@destination), method: :delete, class: 'delete-destination', data: { confirm: "Are you sure?" } %>
-      <% end %>
+    <div class="col-md-4">
+      <span class="picture">
+        <%= link_to((image_tag @destination.picture.url), destination_path(@destination.id), class: "destination-picture") if @destination.picture.url.present? %>
+      </span>
     </div>
-    <p class="destination-country">国: <%= @destination.country %></p>
-    <div class="destination-description"><%= @destination.description %></div>
+    <div class="col-md-8">
+      <h2 class="destination-name"><%= @destination.name %></h2>
+      <div class="change-destination">
+        <% if current_user == @destination.user %>
+          <%= link_to "Edit", edit_destination_path(@destination), class: 'edit-destination' %>
+        <% end %>
+        <% if current_user.admin? || (current_user == @destination.user) %>
+          <%= link_to "Delete", destination_path(@destination), method: :delete, class: 'delete-destination', data: { confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
+      <p class="destination-country">国: <%= @destination.country %></p>
+      <div class="destination-description"><%= @destination.description %></div>
+    </div>
   </div>
 </div>
