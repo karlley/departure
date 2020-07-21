@@ -6,4 +6,13 @@ class Destination < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :country, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 140 }, allow_nil: true
+  validates :picture_size
+
+  private
+
+  def picture_size
+    if picture.size > 5.megabytes
+      errors.add(:picture, ":Image larger than 5MB cannot be uploaded.")
+    end
+  end
 end
