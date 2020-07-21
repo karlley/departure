@@ -6,7 +6,7 @@ class Destination < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :country, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 140 }, allow_nil: true
-  validates :picture_size
+  validate :picture_size
 
   private
 
