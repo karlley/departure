@@ -33,7 +33,7 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   # index用 200*200, 正方形に切り抜き
   version :thumb200 do
-    process resize_and_fill: [200, 200, "Center"]
+    process resize_to_fill: [200, 200, "Center"]
   end
 
   # 拡張子gif を削除

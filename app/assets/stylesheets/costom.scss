@@ -204,6 +204,12 @@ span.picture {
   }
 }
 
+.destination-picture img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
 /* root */
 .btn-record {
   margin-top: 3em;
