@@ -1,6 +1,9 @@
 <li id="destination-<%= destination.id %>">
   <%= link_to gravatar_for(destination.user, size: 50), destination.user %>
   <span class="name"><%= link_to destination.name, destination_path(destination) %></span>
+  <span class="picture">
+    <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-picture") if destination.picture.url.present? %>
+  </span>
   <span class="description"><%= destination.description %></span><br>
   <span class="country">国: <%= destination.country %></spana<br>
   <span class="timestamp">

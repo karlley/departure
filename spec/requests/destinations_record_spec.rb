@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe "New Destinations", type: :request do
   let!(:user) { create(:user) }
   let!(:destination) { create(:destination, user: user) }
+  let(:picture_path_1) { File.join(Rails.root, "spec/fixtures/test_destination_1.jpg") }
+  let(:picture_1) { Rack::Test::UploadedFile.new(picture_path_1) }
 
   context "ログインしているユーザーの場合" do
     before do
@@ -21,6 +23,7 @@ RSpec.describe "New Destinations", type: :request do
           name: "行き先のサンプル",
           description: "行き先のサンプルの説明",
           country: "日本",
+          picture: picture_1,
         } }
       end.to change(Destination, :count).by(1)
       follow_redirect!
@@ -33,6 +36,7 @@ RSpec.describe "New Destinations", type: :request do
           name: "",
           description: "行き先のサンプルの説明",
           country: "日本",
+          picture: picture_1,
         } }
       end.not_to change(Destination, :count)
       expect(response).to render_template('destinations/new')

@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe "Edit Destination ページ", type: :request do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
-  let!(:destination) { create(:destination, user: user) }
+  let(:destination) { create(:destination, user: user) }
+  let(:picture_path_2) { File.join(Rails.root, "spec/fixtures/test_destination_2.jpg") }
+  let!(:picture_2) { Rack::Test::UploadedFile.new(picture_path_2) }
 
   context "認可されたユーザーの場合" do
     it "レスポンスが正常に表示されること(+フレンドリーフォロワーディング)" do
@@ -15,6 +17,7 @@ RSpec.describe "Edit Destination ページ", type: :request do
         name: "sample destination",
         description: "sample description",
         country: "Japan",
+        picture: picture_2,
       } }
       redirect_to destination
       follow_redirect!

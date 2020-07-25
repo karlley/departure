@@ -1,16 +1,29 @@
 <%= form_with model: @destination, local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+  <span class="picture">
+    <%= f.label :picture %><span class="input-unneed"> *Optional</span>
+    <%= f.file_field :picture, accept: 'image/jpeg, image/png', class: 'form-control', id: 'destination_picture' %>
+  </span>
   <div class="form-group">
-    <%= f.label :name %><span class="input-need">*Required</span>
+    <%= f.label :name %><span class="input-need"> *Required</span>
     <%= f.text_field :name, class: 'form-control', id: 'destination_name' %>
   </div>
   <div class="form-group">
-    <%= f.label :description %><span class="input-unneed">*Optional</span>
+    <%= f.label :description %><span class="input-unneed"> *Optional</span>
     <%= f.text_field :description, size: "60x4", class: 'form-control', id: 'destination_description' %>
   </div>
   <div class="form-group">
-    <%= f.label :country %><span class="input-need">*Required</span>
+    <%= f.label :country %><span class="input-need"> *Required</span>
     <%= f.text_field :country, class: 'form-control', id: 'destination_country' %>
   </div>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
+
+<script type="text/javascript">
+  $('#destination_picture').bind('change', function() {
+    var size_inmegabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('The maximum size of a picture you can update is 5MB.');
+    }
+  });
+</script>
