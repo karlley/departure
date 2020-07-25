@@ -9,8 +9,13 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+  # development時とtest時で画像が保存されるディレクトリを分ける
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    if Rails.env.test?
+      "uploads_#{Rails.env}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    else
+      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
   end
 
   # 画像未設定時のデフォルトの画像のURL
