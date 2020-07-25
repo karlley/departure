@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
-  let!(:destination) { create(:destination, user: user) }
+  let!(:destination) { create(:destination, :picture, user: user) }
 
   describe "New Destination ページ" do
     before do
@@ -31,8 +31,17 @@ RSpec.describe "Destinations", type: :system do
         fill_in "行き先名", with: "サンプルの行き先"
         fill_in "説明", with: "サンプルの行き先の説明です"
         fill_in "国", with: "Japan"
+        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_1.jpg"
         click_button "登録する"
         expect(page).to have_content "Destination added!"
+      end
+
+      it "画像無しの登録はデフォルト画像が設定されること" do
+        fill_in "行き先名", with: "サンプルの行き先"
+        fill_in "説明", with: "サンプルの行き先の説明です"
+        fill_in "国", with: "Japan"
+        click_button "登録する"
+        expect(page).to have_link(href: destination_path(Destination.first))
       end
 
       it "無効なデータで登録処理で失敗のフラッシュが表示されること" do
@@ -64,6 +73,7 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_content destination.name
         expect(page).to have_content destination.country
         expect(page).to have_content destination.description
+        expect(page).to have_link nil, href: destination_path(destination), class: "destination-picture"
       end
     end
 
@@ -108,11 +118,13 @@ RSpec.describe "Destinations", type: :system do
         fill_in "行き先名", with: "Edit destination name"
         fill_in "説明", with: "Edit destination description"
         fill_in "国", with: "Edit country"
+        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_2.jpg"
         click_button "更新する"
         expect(page).to have_content "Destination updated!"
         expect(destination.reload.name).to eq "Edit destination name"
         expect(destination.reload.description).to eq "Edit destination description"
         expect(destination.reload.country).to eq "Edit country"
+        expect(destination.reload.picture.url).to include "test_destination_2.jpg"
       end
 
       it "無効な更新" do
