@@ -20,6 +20,7 @@
           <%= link_to "Edit Profile", edit_user_path(@user) %>
         </div>
       <% end %>
+      <%= render 'follow_form' if logged_in? %>
     </div>
   </div>
   <div class="row">
