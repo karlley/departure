@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_201622) do
+ActiveRecord::Schema.define(version: 2020_08_07_201247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 2020_07_29_201622) do
     t.string "picture"
     t.index ["user_id", "created_at"], name: "index_destinations_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_destinations_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "destination_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "destination_id"], name: "index_favorites_on_user_id_and_destination_id", unique: true
   end
 
   create_table "relationships", force: :cascade do |t|
