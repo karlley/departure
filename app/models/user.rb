@@ -70,6 +70,21 @@ class User < ApplicationRecord
     Destination.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 
+  # お気に入り登録
+  def favorite(destination)
+    Favorite.create!(user_id: id, destination_id: destination.id)
+  end
+
+  # お気に入り解除
+  def unfavorite(destination)
+    Favorite.find_by(user_id: id, destination_id: destination.id).destroy
+  end
+
+  # 現在のユーザーがお気に入り登録済みの場合にtrue を返す
+  def favorite?(destination)
+    !Favorite.find_by(user_id: id, destination_id: destination.id).nil?
+  end
+
   private
 
   def downcase_email
