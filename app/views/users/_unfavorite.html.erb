@@ -1,7 +1,7 @@
 <%= link_to "/favorites/#{@destination.id}/destroy",
-  mithod: :delete,
+  method: :delete,
   class: "unfavorite",
-  remote: :true do %>
+  remote: true do %>
   <div class="favorite-btn-unfavorite"><i class="fa fa-heart"></i> お気に入り登録済み</div>
 <% end %>
 

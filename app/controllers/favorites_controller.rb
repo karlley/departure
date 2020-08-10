@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
 
   def create
     @destination = Destination.find(params[:destination_id])
-    @user = @destinaton.user
+    @user = @destination.user
     current_user.favorite(@destination)
     respond_to do |format|
       format.html { redirect_to request.referrer || root_url }
