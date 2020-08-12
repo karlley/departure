@@ -4,6 +4,7 @@ RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
   let!(:other_user) { create(:user) }
+  let!(:destination) { create(:destination, user: user) }
 
   describe "All Users ページ" do
     context "管理者ユーザーの場合" do
@@ -174,5 +175,30 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_button "Follow"
       end
     end
+
+    context "行き先のお気に入り登録/解除処理" do
+      it "favorite, unfavorite, favorite? メソッドが正常に動作すること" do
+        expect(user.favorite?(destination)).to be_falsey
+        user.favorite(destination)
+        expect(user.favorite?(destination)).to be_truthy
+        user.unfavorite(destination)
+        expect(user.favorite?(destination)).to be_falsey
+      end
+    end
+
+    # 未使用
+    # context "行き先のお気に入り登録/解除処理" do
+    #   it "行き先のお気に入り登録/解除ができること" do
+    #     login_for_system(user)
+    #     visit destination_path(destination)
+    #     expect(page).to have_content destination.name
+    #     # expect(page).to have_css ".favorite"
+    #     # expect(page).not_to have_css ".unfavorite"
+    #     # find(".favorite").click
+    #     # expect(page).to have_css ".unfavorite"
+    #     # find(".unfavorite").click
+    #     # expect(page).to have_css ".favorite"
+    #   end
+    # end
   end
 end
