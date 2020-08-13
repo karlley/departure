@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Favorite (<%= @favorites.count %>)</h1>
+    </div>
+  </div>
+  <% if @favorites.present? %>
+    <ol class="favorites">
+      <%= render @favorites %>
+    </ol>
+  <% end %>
+</div>

@@ -1,6 +1,10 @@
 class FavoritesController < ApplicationController
   before_action :logged_in_user
 
+  def index
+    @favorites = current_user.favorites
+  end
+
   def create
     @destination = Destination.find(params[:destination_id])
     @user = @destination.user
