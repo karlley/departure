@@ -4,6 +4,8 @@ RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
   let!(:other_user) { create(:user) }
+  let!(:destination) { create(:destination, user: user) }
+  let!(:other_destination) { create(:destination, user: other_user) }
 
   describe "All Users ページ" do
     context "管理者ユーザーの場合" do
@@ -162,7 +164,9 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_css "div.pagination"
       end
     end
+  end
 
+  describe "フォロー機能" do
     context "ユーザーのフォロー/アンフォロー処理", js: true do
       it "ユーザーのフォロー/アンフォローができること" do
         login_for_system(user)
@@ -172,6 +176,102 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_button "Followed"
         click_button "Followed"
         expect(page).to have_button "Follow"
+      end
+    end
+  end
+
+  describe "お気に入り機能" do
+    context "行き先のお気に入り登録/解除処理" do
+      before do
+        login_for_system(user)
+      end
+
+      it "favorite, unfavorite, favorite? メソッドが正常に動作すること" do
+        expect(user.favorite?(destination)).to be_falsey
+        user.favorite(destination)
+        expect(user.favorite?(destination)).to be_truthy
+        user.unfavorite(destination)
+        expect(user.favorite?(destination)).to be_falsey
+      end
+
+      it "Home ページからお気に入り登録/解除ができること", js: true do
+        visit root_path
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/create"
+        link.click
+        link = find('.unfavorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/destroy"
+        link.click
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/create"
+      end
+
+      it "User show ページからお気に入り登録/解除ができること", js: true do
+        visit user_path(user)
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/create"
+        link.click
+        link = find('.unfavorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/destroy"
+        link.click
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/create"
+      end
+
+      it "Destination show ページからお気に入り登録/解除ができること", js: true do
+        visit destination_path(destination)
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/create"
+        link.click
+        link = find('.unfavorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/destroy"
+        link.click
+        link = find('.favorite')
+        expect(link[:href]).to include "/favorites/#{destination.id}/create"
+      end
+    end
+
+    describe "Favorites ページ" do
+      before do
+        login_for_system(user)
+      end
+
+      context "ページレイアウト" do
+        before do
+          visit favorites_path
+        end
+
+        it "'Favorites' の文字列の存在を確認" do
+          expect(page).to have_content "Favorites"
+        end
+
+        it "正しいタイトル表示を確認" do
+          expect(page).to have_title full_title("Favorites")
+        end
+      end
+
+      context "お気に入り 一覧表示" do
+        it "お気に入りの行き先の情報が正しく表示されること" do
+          user.favorite(destination)
+          visit favorites_path
+          expect(page).to have_content destination.name
+          expect(page).to have_content destination.description
+          expect(page).to have_content "country: #{destination.country}"
+          expect(page).to have_content "posted by #{user.name}"
+          expect(page).to have_link user.name, href: user_path(user)
+        end
+
+        it "お気に入りの数だけお気に入りの行き先が表示されること" do
+          visit favorites_path
+          expect(page).not_to have_css ".favorite-destination"
+          user.favorite(destination)
+          user.favorite(other_destination)
+          visit favorites_path
+          expect(page).to have_css ".favorite-destination", count: 2
+          user.unfavorite(other_destination)
+          visit favorites_path
+          expect(page).to have_css ".favorite-destination", count: 1
+        end
       end
     end
   end

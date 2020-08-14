@@ -34,3 +34,6 @@ Metrics/LineLength:
 
 Lint/UselessAssignment:
   Enabled: false
+
+Airbnb/RiskyActiverecordInvocation:
+  Enabled: false
