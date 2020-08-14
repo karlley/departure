@@ -53,4 +53,23 @@ RSpec.describe "お気に入り機能", type: :request do
       end
     end
   end
+
+  describe "Favorites ページ" do
+    context "ログイン済みの場合" do
+      it "レスポンスが正常に表示されること" do
+        login_for_request(user)
+        get favorites_path
+        expect(response).to have_http_status "200"
+        expect(response).to render_template("favorites/index")
+      end
+    end
+
+    context "ログインしていない場合" do
+      it "Login ページにリダイレクトすること" do
+        get favorites_path
+        expect(response).to have_http_status "302"
+        expect(response).to redirect_to login_path
+      end
+    end
+  end
 end
