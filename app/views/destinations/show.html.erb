@@ -20,6 +20,9 @@
       </div>
       <p class="destination-country">国: <%= @destination.country %></p>
       <div class="destination-description"><%= @destination.description %></div>
+      <div class="comment">
+        <%= render "comments/new" %>
+      </div>
     </div>
   </div>
 </div>
