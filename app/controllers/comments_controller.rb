@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
     else
       flash[:danger] = "Empty comment can't be posted!"
     end
+    # 遷移前のurl を取得
     redirect_to request.referrer || root_url
   end
 

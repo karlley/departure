@@ -10,6 +10,11 @@ class Destination < ApplicationRecord
   validates :description, length: { maximum: 140 }, allow_nil: true
   validate :picture_size
 
+  # 行き先に付属するコメントのフィードを作成
+  def feed_comment(destination_id)
+    Comment.where("destination_id = ?", destination_id)
+  end
+
   private
 
   def picture_size
