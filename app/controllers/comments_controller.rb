@@ -15,5 +15,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    @destination = @comment.destination
+    if current_user.id == @comment.user_id
+      @comment.destroy
+      flash[:success] = "Deleted a comment!"
+    end
+    redirect_to destination_url(@destination)
   end
 end
