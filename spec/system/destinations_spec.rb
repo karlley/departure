@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
   let!(:destination) { create(:destination, :picture, user: user) }
+  let!(:comment) { create(:comment, user_id: user.id, destination: destination) }
 
   describe "New Destination ページ" do
     before do
@@ -86,6 +88,33 @@ RSpec.describe "Destinations", type: :system do
         end
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'Destination deleted!'
+      end
+    end
+
+    context "コメントの登録/削除" do
+      it "自分の投稿へのコメントの登録/削除ができること" do
+        login_for_system(user)
+        visit destination_path(destination)
+        fill_in "comment_content", with: "This is comment!"
+        click_button "コメント"
+        within("#comment-#{Comment.last.id}") do
+          expect(page).to have_selector "span", text: user.name
+          expect(page).to have_selector "span", text: "This is comment!"
+        end
+        expect(page).to have_content "Added a comment!"
+        click_link "delete", href: comment_path(Comment.last)
+        expect(page).not_to have_selector "span", text: "This is comment!"
+        expect(page).to have_content "Deleted a comment!"
+      end
+
+      it "自分以外の投稿へのコメントには削除ボタンが表示されないこと" do
+        login_for_system(other_user)
+        visit destination_path(destination)
+        within("#comment-#{comment.id}") do
+          expect(page).to have_selector "span", text: user.name
+          expect(page).to have_selector "span", text: comment.content
+          expect(page).not_to have_link "delete", href: destination_path(destination)
+        end
       end
     end
   end
