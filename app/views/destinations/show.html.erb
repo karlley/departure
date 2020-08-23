@@ -1,4 +1,5 @@
 <% provide(:title, "#{@destination.name}") %>
+<% @comments = @destination.feed_comment(@destination.id) %>
 <h1>Destination</h1>
 <div class="container">
   <div class="row">
@@ -20,6 +21,10 @@
       </div>
       <p class="destination-country">国: <%= @destination.country %></p>
       <div class="destination-description"><%= @destination.description %></div>
+      <div class="comment">
+        <%= render "comments/feed_comments" %>
+        <%= render "comments/new" %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 class Destination < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
   default_scope { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
@@ -8,6 +9,11 @@ class Destination < ApplicationRecord
   validates :country, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 140 }, allow_nil: true
   validate :picture_size
+
+  # 行き先に付属するコメントのフィードを作成
+  def feed_comment(destination_id)
+    Comment.where("destination_id = ?", destination_id)
+  end
 
   private
 
