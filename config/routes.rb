@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'notifications/index'
   root "static_pages#home"
   get :about, to: "static_pages#about"
   get :signup, to: "users#new"
@@ -17,4 +16,5 @@ Rails.application.routes.draw do
   post "favorites/:destination_id/create" => "favorites#create"
   delete "favorites/:destination_id/destroy" => "favorites#destroy"
   resources :comments, only: [:create, :destroy]
+  resources :notifications, only: :index
 end
