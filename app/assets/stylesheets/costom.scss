@@ -279,3 +279,8 @@ h2.destination-name {
     border-top: 1px solid #e8e8e8;
   }
 }
+
+/* notification */
+li.new_notification > a {
+  color: red;
+}
