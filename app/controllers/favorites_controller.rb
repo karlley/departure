@@ -15,8 +15,8 @@ class FavoritesController < ApplicationController
     end
     # 自分以外のユーザーからお気に入り登録が発生すると通知を作成
     if @user != current_user
-      # お気に入りはtype 種別は1
-      @user.notifications.create(destination_id: @destination.id, type: 1, from_user_id: current_user.id)
+      # お気に入りはnotification_type の種別は1
+      @user.notifications.create(destination_id: @destination.id, notification_type: 1, from_user_id: current_user.id)
       @user.update_attribute(:notification, true)
     end
   end

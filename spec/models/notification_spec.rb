@@ -22,8 +22,8 @@ RSpec.describe Notification, type: :model do
     expect(notification).not_to be_valid
   end
 
-  it "type がnil の場合, 無効であること" do
-    notification.type = nil
+  it "notification_type がnil の場合, 無効であること" do
+    notification.notification_type = nil
     expect(notification).not_to be_valid
   end
 end

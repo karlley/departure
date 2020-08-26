@@ -4,7 +4,7 @@ FactoryBot.define do
     destination_id 1
     from_user_id 2
     content ""
-    type 1
+    notification_type 1
     association :user
   end
 end
