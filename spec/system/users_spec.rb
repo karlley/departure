@@ -164,6 +164,78 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_css "div.pagination"
       end
     end
+
+    context "通知生成" do
+      before do
+        login_for_system(user)
+      end
+
+      context "自分以外のユーザーの投稿に対して" do
+        before do
+          visit destination_path(other_destination)
+        end
+
+        it "お気に入り登録で通知が作成されること" do
+          find(".favorite").click
+          visit destination_path(other_destination)
+          expect(page).to have_css "li.no_notification"
+          logout
+          login_for_system(other_user)
+          expect(page).to have_css "li.new_notification"
+          visit notifications_path
+          expect(page).to have_css "li.no_notification"
+          expect(page).to have_content "あなたの行き先が#{user.name} さんのFavorite に追加されました"
+          expect(page).to have_content other_destination.name
+          expect(page).to have_content other_destination.description
+          expect(page).to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        end
+
+        it "コメント追加によって通知が作成されること" do
+          fill_in "comment_content", with: "This is comment!"
+          click_button "コメント"
+          expect(page).to have_css "li.no_notification"
+          logout
+          login_for_system(other_user)
+          expect(page).to have_css "li.new_notification"
+          visit notifications_path
+          expect(page).to have_css "li.no_notification"
+          expect(page).to have_content "あなたの行き先に#{user.name} さんがComment しました"
+          expect(page).to have_content "This is comment!"
+          expect(page).to have_content other_destination.name
+          expect(page).to have_content other_destination.description
+          expect(page).to have_content other_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        end
+      end
+
+      context "自分の投稿に対して" do
+        before do
+          visit destination_path(destination)
+        end
+
+        it "お気に入り登録で通知が作成されないこと" do
+          find(".favorite").click
+          visit destination_path(destination)
+          expect(page).to have_css "li.no_notification"
+          visit notifications_path
+          expect(page).not_to have_content "あなたの行き先が#{user.name} さんのFavorite に追加されました"
+          expect(page).not_to have_content destination.name
+          expect(page).not_to have_content destination.description
+          expect(page).not_to have_content destination.created_at
+        end
+
+        it "コメント追加によって通知が作成されないこと" do
+          fill_in "comment_content", with: "Comment to self!"
+          click_button "コメント"
+          expect(page).to have_css "li.no_notification"
+          visit notifications_path
+          expect(page).not_to have_content "あなたの行き先に#{user.name} さんがComment しました"
+          expect(page).not_to have_content "Comment to self!"
+          expect(page).not_to have_content other_destination.name
+          expect(page).not_to have_content other_destination.description
+          expect(page).not_to have_content other_destination.created_at
+        end
+      end
+    end
   end
 
   describe "フォロー機能" do
