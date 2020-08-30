@@ -154,7 +154,7 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray-light;
   }
 }
 
@@ -278,4 +278,28 @@ h2.destination-name {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
   }
+}
+
+/* notification */
+li.new_notification > a {
+  color: red;
+}
+
+.notifications {
+  list-style: none;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .gravatar {
+    margin-right: 10px;
+    margin-top: -5px;
+  }
+}
+
+.notification-timestamp {
+  color: grey;
+}
+.notification-message {
+  font-size: 16px;
 }

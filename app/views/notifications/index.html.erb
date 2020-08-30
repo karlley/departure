@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Notifications</h1>
+    </div>
+  </div>
+  <% if @notifications.present? %>
+    <ol class="notifications">
+      <%= render @notifications %>
+    </ol>
+  <% end %>
+</div>

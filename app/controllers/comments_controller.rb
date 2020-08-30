@@ -7,6 +7,12 @@ class CommentsController < ApplicationController
     @comment = @destination.comments.build(user_id: current_user.id, content: params[:comment][:content])
     if !@destination.nil? && @comment.save
       flash[:success] = "Added a comment!"
+      # 自分以外のユーザーからコメントが発生すると通知を作成
+      if @user != current_user
+        # コメントのnotification_type の種別は2
+        @user.notifications.create(destination_id: @destination.id, notification_type: 2, from_user_id: current_user.id, content: @comment.content)
+        @user.update_attribute(:notification, true)
+      end
     else
       flash[:danger] = "Empty comment can't be posted!"
     end
