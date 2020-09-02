@@ -45,6 +45,7 @@ gem 'carrierwave', '1.2.2'
 gem 'mini_magick', '>= 4.9.4'
 gem 'gmaps4rails'
 gem 'geocoder'
+gem 'dotenv-rails'
 
 group :production do
   # fog のインストールでエラーが出たのでfog-local に変更
