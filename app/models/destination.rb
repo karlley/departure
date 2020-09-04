@@ -10,6 +10,10 @@ class Destination < ApplicationRecord
   validates :description, length: { maximum: 140 }, allow_nil: true
   validate :picture_size
 
+  # geocoder でaddress から経度, 緯度を取得する
+  geocoded_by :address
+  after_validation :geocode
+
   # 行き先に付属するコメントのフィードを作成
   def feed_comment(destination_id)
     Comment.where("destination_id = ?", destination_id)
