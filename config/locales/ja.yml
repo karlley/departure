@@ -25,8 +25,9 @@ ja:
       destination:
         id: ID
         name: 行き先名
-        country: 国
         description: 説明
+        address: 住所
+        country: 国
         picture: 行き先の写真
       comment:
         user_id: コメント投稿者のID
