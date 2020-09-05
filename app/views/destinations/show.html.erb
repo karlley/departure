@@ -27,4 +27,20 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div id="map"></div>
+
+      <script>
+        handler = Gmaps.build("Google");
+        handler.buildMap({ provider: {}, internal: {id: "map"}}, function(){
+          markers = handler.addMarkers(<%= raw @place.to_json %>);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+          handler.getMap().setZoom(16);
+        });
+      </script>
+
+    </div>
+  </div>
 </div>
