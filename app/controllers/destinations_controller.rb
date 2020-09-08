@@ -56,7 +56,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:name, :description, :address, :country, :picture)
+    params.require(:destination).permit(:name, :description, :address, :latitude, :longitude, :country, :picture)
   end
 
   def correct_user
