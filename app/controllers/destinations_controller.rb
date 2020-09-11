@@ -5,6 +5,11 @@ class DestinationsController < ApplicationController
   def show
     @destination = Destination.find(params[:id])
     @comment = Comment.new
+    @marker = Gmaps4rails.build_markers(@destination) do |destination, marker|
+      marker.lat(destination.latitude)
+      marker.lng(destination.longitude)
+      marker.infowindow(destination.name)
+    end
   end
 
   def new
