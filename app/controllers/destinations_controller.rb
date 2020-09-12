@@ -5,10 +5,11 @@ class DestinationsController < ApplicationController
   def show
     @destination = Destination.find(params[:id])
     @comment = Comment.new
+    # GoogleMap 表示用のマーカーを作成
     @marker = Gmaps4rails.build_markers(@destination) do |destination, marker|
       marker.lat(destination.latitude)
       marker.lng(destination.longitude)
-      marker.infowindow(destination.name)
+      marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: {destination: destination})
     end
   end
 
