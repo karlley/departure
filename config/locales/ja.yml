@@ -26,7 +26,7 @@ ja:
         id: ID
         name: 行き先名
         description: 説明
-        address: 住所
+        spot: スポット
         country: 国
         picture: 行き先の写真
       comment:
