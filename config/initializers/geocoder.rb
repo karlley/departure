@@ -35,4 +35,7 @@ Geocoder.configure(
 
   # set default units to kilometers:
   units: :km,
+
+  # for japanese
+  language: :ja,
 )
