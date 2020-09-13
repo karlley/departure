@@ -20,6 +20,8 @@ class DestinationsController < ApplicationController
   def create
     @destination = current_user.destinations.build(destination_params)
     if @destination.save
+      @destination.address = Geocoder.search([@destination.latitude, @destination.longitude]).first.address
+      @destination.save
       flash[:success] = "Destination added!"
       redirect_to destination_path(@destination)
     else
@@ -57,7 +59,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :country, :picture)
+    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture)
   end
 
   def correct_user
