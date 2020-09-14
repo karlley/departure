@@ -8,6 +8,8 @@ class Destination < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :country, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 140 }, allow_nil: true
+  validates :spot, length: { maximum: 50 }
+  validates :address, length: { maximum: 50 }
   validate :picture_size
 
   # geocoder で経度, 緯度を取得する
