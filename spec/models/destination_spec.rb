@@ -51,6 +51,22 @@ RSpec.describe Destination, type: :model do
       destination.valid?
       expect(destination.errors[:description]).to include("は140文字以内で入力してください")
     end
+
+    it "スポットが任意入力になっていること" do
+      destination = build(:destination, spot: nil)
+      expect(destination).to be_valid
+    end
+
+    it "スポットが50文字以内であること" do
+      destination = build(:destination, spot: "a" * 51)
+      destination.valid?
+      expect(destination.errors[:spot]).to include("は50文字以内で入力してください")
+    end
+
+    it "address が50字以上だと無効であること" do
+      destination = build(:destination, address: "a" * 51)
+      expect(destination).not_to be_valid
+    end
   end
 
   context "並び順" do
