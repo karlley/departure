@@ -9,7 +9,7 @@ class DestinationsController < ApplicationController
     @marker = Gmaps4rails.build_markers(@destination) do |destination, marker|
       marker.lat(destination.latitude)
       marker.lng(destination.longitude)
-      marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: {destination: destination})
+      marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
     end
   end
 
@@ -20,8 +20,7 @@ class DestinationsController < ApplicationController
   def create
     @destination = current_user.destinations.build(destination_params)
     if @destination.save
-      @destination.address = Geocoder.search([@destination.latitude, @destination.longitude]).first.address
-      @destination.save
+      @destination.add_address
       flash[:success] = "Destination added!"
       redirect_to destination_path(@destination)
     else

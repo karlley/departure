@@ -21,6 +21,14 @@ class Destination < ApplicationRecord
     [name, country, spot].compact.join(', ')
   end
 
+  # geocode 後の座標からaddress を追加する
+  def add_address
+    if latitude.present?
+      self.address = Geocoder.search([latitude, longitude]).first.address
+      save
+    end
+  end
+
   # 行き先に付属するコメントのフィードを作成
   def feed_comment(destination_id)
     Comment.where("destination_id = ?", destination_id)
