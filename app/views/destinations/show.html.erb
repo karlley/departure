@@ -13,7 +13,7 @@
       <h2 class="destination-name"><%= @destination.name %></h2>
       <div class="change-destination">
         <% if current_user == @destination.user %>
-          <%= link_to "Edit", edit_destination_path(@destination), class: 'edit-destination' %>
+          <%= link_to "Edit", edit_destination_path(@destination), class: "edit-destination" %>
         <% end %>
         <% if current_user.admin? || (current_user == @destination.user) %>
           <%= link_to "Delete", destination_path(@destination), method: :delete, class: 'delete-destination', data: { confirm: "Are you sure?" } %>
@@ -32,8 +32,8 @@
       <div id="map"></div>
 
       <script type="text/javascript">
-        handler = Gmaps.build("Google");
-        handler.buildMap({ provider: { scrollwheel: false }, internal: {id: "map"}}, function(){
+        handler = Gmaps.build('Google');
+        handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
           markers = handler.addMarkers(<%= raw @marker.to_json %>);
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
