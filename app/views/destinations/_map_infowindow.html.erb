@@ -1,5 +1,7 @@
-<h3><%= destination.name %></h3>
-<p><%= destination.spot %></p>
-<p><%= destination.country %></p>
-<p><%= destination.address %></p>
-<p><%= link_to "GoogleMap で見る", "https://maps.google.co.jp/maps?q=loc:#{destination.latitude},#{destination.longitude}&iwloc=J", target: "_blank" %></p>
+<div class="infowindow">
+  <h3><%= destination.name %></h3>
+  <p><%= destination.spot %></p>
+  <p><%= destination.country %></p>
+  <p><%= destination.address %></p>
+  <p><%= link_to "GoogleMap で見る", "https://maps.google.co.jp/maps?q=loc:#{destination.latitude},#{destination.longitude}&iwloc=J", target: "_blank", class: "googlemap-link"%></p>
+</div>
