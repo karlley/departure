@@ -122,7 +122,7 @@ RSpec.describe "Destinations", type: :system do
       it "削除成功のフラッシュが表示されること" do
         login_for_system(user)
         visit destination_path(destination)
-        within find('.change-destination') do
+        within('.change-destination') do
           click_on 'Delete'
         end
         page.driver.browser.switch_to.alert.accept
