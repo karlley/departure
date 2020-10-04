@@ -16,7 +16,7 @@ User.create!(name: "Example User",
                email: email,
                password: password,
                password_confirmation: password,
-               introduction: "My name is Faker!",
+               introduction: "My name is Faker No.#{n+1}!",
                nationality: Faker::Address.country)
 end
 
