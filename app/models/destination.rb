@@ -6,10 +6,10 @@ class Destination < ApplicationRecord
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 50 }
-  validates :country, presence: true, length: { maximum: 50 }
+  validates :country, presence: true, length: { maximum: 100 }
   validates :description, length: { maximum: 140 }, allow_nil: true
-  validates :spot, length: { maximum: 50 }
-  validates :address, length: { maximum: 50 }
+  validates :spot, length: { maximum: 100 }
+  validates :address, length: { maximum: 100 }
   validate :picture_size
 
   # geocoder で経度, 緯度を取得する
