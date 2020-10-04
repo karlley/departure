@@ -35,10 +35,10 @@ RSpec.describe Destination, type: :model do
       expect(destination.errors[:country]).to include("を入力してください")
     end
 
-    it "国名が50字以内であること" do
-      destination = build(:destination, country: "a" * 51)
+    it "国名が100字以内であること" do
+      destination = build(:destination, country: "a" * 101)
       destination.valid?
-      expect(destination.errors[:country]).to include("は50文字以内で入力してください")
+      expect(destination.errors[:country]).to include("は100文字以内で入力してください")
     end
 
     it "説明が任意入力になっていること" do
@@ -57,14 +57,14 @@ RSpec.describe Destination, type: :model do
       expect(destination).to be_valid
     end
 
-    it "スポットが50文字以内であること" do
-      destination = build(:destination, spot: "a" * 51)
+    it "スポットが100文字以内であること" do
+      destination = build(:destination, spot: "a" * 101)
       destination.valid?
-      expect(destination.errors[:spot]).to include("は50文字以内で入力してください")
+      expect(destination.errors[:spot]).to include("は100文字以内で入力してください")
     end
 
-    it "address が50字以上だと無効であること" do
-      destination = build(:destination, address: "a" * 51)
+    it "address が100字以上だと無効であること" do
+      destination = build(:destination, address: "a" * 101)
       expect(destination).not_to be_valid
     end
   end
@@ -76,6 +76,22 @@ RSpec.describe Destination, type: :model do
 
     it "最古の投稿が最後の投稿になっていること" do
       expect(destination_one_month_ago).to eq Destination.last
+    end
+  end
+
+  context "add_keyword メソッド" do
+    it "geocoder で使用する文字列を生成できること" do
+      destination = build(:destination, name: "name", country: "country", spot: "spot")
+      keyword = destination.address_keyword
+      expect(keyword).to eq "name, country, spot"
+    end
+  end
+
+  context "add_address メソッド" do
+    it "address カラムに住所を追加できること" do
+      # destination = build(:destination, latitude: , longitude:)
+      # destination.add_address
+      # expect(destinaton.address).to ""
     end
   end
 end
