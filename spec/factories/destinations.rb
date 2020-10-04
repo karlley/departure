@@ -1,8 +1,13 @@
 FactoryBot.define do
   factory :destination do
     name { Faker::Address.city }
-    country { "Japan" }
-    description { "This is Faker place!" }
+    country { Faker::Address.country }
+    sequence(:description) { |n| "This is Faker Destinaton No.#{n}!" }
+    spot { Faker::Address.street_name }
+    latitude { Faker::Address.latitude }
+    longitude { Faker::Address.longitude }
+    # address { Geocoder.search([latitude, longitude]) }
+    address { Faker::Address.full_address }
     association :user
     created_at { Time.current }
   end

@@ -4,8 +4,8 @@ FactoryBot.define do
     sequence(:email) { |n| "example#{n}@example.com" }
     password { "password" }
     password_confirmation { "password" }
-    introduction { "Hello! My name is Faker!" }
-    nationality { "Japan" }
+    sequence(:introduction) { |n| "Hello! My name is Faker No.#{n}!" }
+    nationality { Faker::Address.country }
 
     trait :admin do
       admin { true }
