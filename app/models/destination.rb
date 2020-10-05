@@ -23,7 +23,7 @@ class Destination < ApplicationRecord
 
   # geocode 後の座標からaddress を追加する
   def add_address
-    if latitude.present?
+    if latitude && longitude.present?
       self.address = Geocoder.search([latitude, longitude]).first.address
       save
     end
