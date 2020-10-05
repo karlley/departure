@@ -30,7 +30,7 @@ RSpec.describe "Destinations", type: :system do
     end
 
     context "行き先 登録処理" do
-      it "有効なデータで登録処理で成功のフラッシュが表示されること" do
+      it "有効なデータの登録処理で成功のフラッシュが表示されること" do
         fill_in "行き先名", with: "サンプルの行き先"
         fill_in "説明", with: "サンプルの行き先の説明です"
         fill_in "スポット", with: "サンプルの行き先のスポット"
@@ -38,6 +38,16 @@ RSpec.describe "Destinations", type: :system do
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_1.jpg"
         click_button "登録する"
         expect(page).to have_content "Destination added!"
+      end
+
+      it "登録後のリダイレクト先でGoogleMap が表示されること", js: true do
+        fill_in "行き先名", with: "サンプルの行き先"
+        fill_in "説明", with: "サンプルの行き先の説明です"
+        fill_in "スポット", with: "サンプルの行き先のスポット"
+        fill_in "国", with: "Japan"
+        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_1.jpg"
+        click_button "登録する"
+        expect(page).to have_css "div.gm-style"
       end
 
       it "画像無しの登録はデフォルト画像が設定されること" do
