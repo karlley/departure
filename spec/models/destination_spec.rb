@@ -79,7 +79,7 @@ RSpec.describe Destination, type: :model do
     end
   end
 
-  context "add_keyword メソッド" do
+  context "address_keyword メソッド" do
     it "geocoder で使用する文字列を生成できること" do
       destination = build(:destination, name: "name", country: "country", spot: "spot")
       keyword = destination.address_keyword
@@ -89,9 +89,22 @@ RSpec.describe Destination, type: :model do
 
   context "add_address メソッド" do
     it "address カラムに住所を追加できること" do
-      # destination = build(:destination, latitude: , longitude:)
-      # destination.add_address
-      # expect(destinaton.address).to ""
+      destination = build(:destination, latitude: 35.658584, longitude: 139.7454316, address: nil)
+      destination.add_address
+      address = destination.address
+      expect(address).to eq "日本、〒105-0011 東京都港区芝公園４丁目２−８"
+      expect(destination).to be_valid
+    end
+  end
+
+  context "geocoder 機能" do
+    it "経度, 緯度が取得できること" do
+      destination = build(:destination, name: "東京", country: "日本", spot: "東京タワー", latitude: nil, longitude: nil)
+      destination.geocode
+      # expect(destination.latitude).to eq 35.6585805
+      # expect(destination.longitude).to eq 139.7454329
+      expect(destination.latitude).to be_within(0.0005).of 35.658584
+      expect(destination.longitude).to be_within(0.0005).of 139.7454316
     end
   end
 end
