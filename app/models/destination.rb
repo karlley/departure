@@ -29,6 +29,14 @@ class Destination < ApplicationRecord
     end
   end
 
+  # 座標が更新されたら再度geocode してaddress を更新する
+  def update_address
+    if saved_change_to_latitude? || saved_change_to_longitude?
+      self.address = Geocoder.search([latitude, longitude]).first.address
+      save
+    end
+  end
+
   # 行き先に付属するコメントのフィードを作成
   def feed_comment(destination_id)
     Comment.where("destination_id = ?", destination_id)

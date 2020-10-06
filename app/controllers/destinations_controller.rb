@@ -35,6 +35,7 @@ class DestinationsController < ApplicationController
   def update
     @destination = Destination.find(params[:id])
     if @destination.update_attributes(destination_params)
+      @destination.update_address
       flash[:success] = "Destination updated!"
       redirect_to @destination
     else
