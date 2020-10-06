@@ -97,6 +97,20 @@ RSpec.describe Destination, type: :model do
     end
   end
 
+  context "update_address メソッド" do
+    it "座標の更新があった場合にaddress カラムを更新できること" do
+      destination.update(latitude: 35.658584, longitude: 139.7454316)
+      destination.update_address
+      expect(destination.address).to eq "日本、〒105-0011 東京都港区芝公園４丁目２−８"
+    end
+
+    it "座標の更新が無い場合はメソッドをパスすること" do
+      destination.update(name: "edit name", spot: "edit spot", country: "edit country")
+      destination.update_address
+      expect(destination.update_address).to eq nil
+    end
+  end
+
   context "geocoder 機能" do
     it "経度, 緯度が取得できること" do
       destination = build(:destination, name: "東京", country: "日本", spot: "東京タワー", latitude: nil, longitude: nil)
