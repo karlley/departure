@@ -91,8 +91,7 @@ RSpec.describe Destination, type: :model do
     it "address カラムに住所を追加できること" do
       destination = build(:destination, latitude: 35.658584, longitude: 139.7454316, address: nil)
       destination.add_address
-      address = destination.address
-      expect(address).to eq "日本、〒105-0011 東京都港区芝公園４丁目２−８"
+      expect(destination.address).to eq "日本、〒105-0011 東京都港区芝公園４丁目２−８"
       expect(destination).to be_valid
     end
   end
@@ -115,8 +114,7 @@ RSpec.describe Destination, type: :model do
     it "経度, 緯度が取得できること" do
       destination = build(:destination, name: "東京", country: "日本", spot: "東京タワー", latitude: nil, longitude: nil)
       destination.geocode
-      # expect(destination.latitude).to eq 35.6585805
-      # expect(destination.longitude).to eq 139.7454329
+      #be_within である程度のゆらぎを許容する
       expect(destination.latitude).to be_within(0.0005).of 35.658584
       expect(destination.longitude).to be_within(0.0005).of 139.7454316
     end
