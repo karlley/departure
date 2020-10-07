@@ -187,6 +187,7 @@ RSpec.describe "Destinations", type: :system do
       it "入力フォームに適切なラベルが表示されること" do
         expect(page).to have_content "行き先名"
         expect(page).to have_content "説明"
+        expect(page).to have_content "スポット"
         expect(page).to have_content "国"
       end
     end
@@ -195,12 +196,14 @@ RSpec.describe "Destinations", type: :system do
       it "有効な更新" do
         fill_in "行き先名", with: "Edit destination name"
         fill_in "説明", with: "Edit destination description"
+        fill_in "スポット", with: "Edit destination spot"
         fill_in "国", with: "Edit country"
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_2.jpg"
         click_button "更新する"
         expect(page).to have_content "Destination updated!"
         expect(destination.reload.name).to eq "Edit destination name"
         expect(destination.reload.description).to eq "Edit destination description"
+        expect(destination.reload.spot).to eq "Edit destination spot"
         expect(destination.reload.country).to eq "Edit country"
         expect(destination.reload.picture.url).to include "test_destination_2.jpg"
       end
