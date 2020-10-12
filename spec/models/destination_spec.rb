@@ -35,10 +35,10 @@ RSpec.describe Destination, type: :model do
       expect(destination.errors[:country]).to include("を入力してください")
     end
 
-    it "国名が50字以内であること" do
-      destination = build(:destination, country: "a" * 51)
+    it "国名が100字以内であること" do
+      destination = build(:destination, country: "a" * 101)
       destination.valid?
-      expect(destination.errors[:country]).to include("は50文字以内で入力してください")
+      expect(destination.errors[:country]).to include("は100文字以内で入力してください")
     end
 
     it "説明が任意入力になっていること" do
@@ -51,6 +51,22 @@ RSpec.describe Destination, type: :model do
       destination.valid?
       expect(destination.errors[:description]).to include("は140文字以内で入力してください")
     end
+
+    it "スポットが任意入力になっていること" do
+      destination = build(:destination, spot: nil)
+      expect(destination).to be_valid
+    end
+
+    it "スポットが100文字以内であること" do
+      destination = build(:destination, spot: "a" * 101)
+      destination.valid?
+      expect(destination.errors[:spot]).to include("は100文字以内で入力してください")
+    end
+
+    it "address が100字以上だと無効であること" do
+      destination = build(:destination, address: "a" * 101)
+      expect(destination).not_to be_valid
+    end
   end
 
   context "並び順" do
@@ -60,6 +76,47 @@ RSpec.describe Destination, type: :model do
 
     it "最古の投稿が最後の投稿になっていること" do
       expect(destination_one_month_ago).to eq Destination.last
+    end
+  end
+
+  context "address_keyword メソッド" do
+    it "geocoder で使用する文字列を生成できること" do
+      destination = build(:destination, name: "name", country: "country", spot: "spot")
+      keyword = destination.address_keyword
+      expect(keyword).to eq "name, country, spot"
+    end
+  end
+
+  context "add_address メソッド" do
+    it "address カラムに住所を追加できること" do
+      destination = build(:destination, latitude: 35.658584, longitude: 139.7454316, address: nil)
+      destination.add_address
+      expect(destination.address).to eq "日本、〒105-0011 東京都港区芝公園４丁目２−８"
+      expect(destination).to be_valid
+    end
+  end
+
+  context "update_address メソッド" do
+    it "座標の更新があった場合にaddress カラムを更新できること" do
+      destination.update(latitude: 35.658584, longitude: 139.7454316)
+      destination.update_address
+      expect(destination.address).to eq "日本、〒105-0011 東京都港区芝公園４丁目２−８"
+    end
+
+    it "座標の更新が無い場合はメソッドをパスすること" do
+      destination.update(name: "edit name", spot: "edit spot", country: "edit country")
+      destination.update_address
+      expect(destination.update_address).to eq nil
+    end
+  end
+
+  context "geocoder 機能" do
+    it "経度, 緯度が取得できること" do
+      destination = build(:destination, name: "東京", country: "日本", spot: "東京タワー", latitude: nil, longitude: nil)
+      destination.geocode
+      #be_within である程度のゆらぎを許容する
+      expect(destination.latitude).to be_within(0.0005).of 35.658584
+      expect(destination.longitude).to be_within(0.0005).of 139.7454316
     end
   end
 end

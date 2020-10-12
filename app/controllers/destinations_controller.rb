@@ -5,6 +5,12 @@ class DestinationsController < ApplicationController
   def show
     @destination = Destination.find(params[:id])
     @comment = Comment.new
+    # GoogleMap 表示用のマーカーを作成
+    @marker = Gmaps4rails.build_markers(@destination) do |destination, marker|
+      marker.lat(destination.latitude)
+      marker.lng(destination.longitude)
+      marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
+    end
   end
 
   def new
@@ -14,6 +20,7 @@ class DestinationsController < ApplicationController
   def create
     @destination = current_user.destinations.build(destination_params)
     if @destination.save
+      @destination.add_address
       flash[:success] = "Destination added!"
       redirect_to destination_path(@destination)
     else
@@ -28,6 +35,7 @@ class DestinationsController < ApplicationController
   def update
     @destination = Destination.find(params[:id])
     if @destination.update_attributes(destination_params)
+      @destination.update_address
       flash[:success] = "Destination updated!"
       redirect_to @destination
     else
@@ -51,7 +59,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:name, :description, :country, :picture)
+    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture)
   end
 
   def correct_user

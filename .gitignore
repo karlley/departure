@@ -33,3 +33,5 @@
 /public/uploads/*
 /public/uploads_test/*
 
+# Ignore .env file
+/.env

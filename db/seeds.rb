@@ -16,15 +16,20 @@ User.create!(name: "Example User",
                email: email,
                password: password,
                password_confirmation: password,
-               introduction: "My name is Faker!",
+               introduction: "My name is Faker No.#{n+1}!",
                nationality: Faker::Address.country)
 end
 
 # Destination
 10.times do |n|
   Destination.create!(name: Faker::Address.city,
-                      description: "This Destination is Faker!",
+                      description: "This is Faker Destination No.#{n+1}!",
                       country: Faker::Address.country,
+                      spot: Faker::Address.street_name,
+                      latitude: Faker::Address.latitude,
+                      longitude: Faker::Address.longitude,
+                      # address: Geocoder.search([:latitude, :longitude]).first.address,
+                      address: Faker::Address.full_address,
                       user_id: 1)
 end
 
