@@ -46,6 +46,7 @@ gem 'mini_magick', '>= 4.9.4'
 gem 'gmaps4rails'
 gem 'geocoder'
 gem 'dotenv-rails'
+gem 'ransack'
 
 group :production do
   # fog のインストールでエラーが出たのでfog-local に変更
