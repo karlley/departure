@@ -1,0 +1,12 @@
+<% provide(:title, "Search") %>
+<div class="container">
+  <% if @search_word.present? %>
+    <h1>"<%= @search_word %>" Search Results : <%= @destinations.count %></h1>
+  <% else %>
+    <h1>All Destinations</h1>
+  <% end %>
+  <ul class="destinations">
+    <%= render @destinations %>
+  </ul>
+  <%= will_paginate %>
+</div>
