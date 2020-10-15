@@ -114,7 +114,7 @@ RSpec.describe Destination, type: :model do
     it "経度, 緯度が取得できること" do
       destination = build(:destination, name: "東京", country: "日本", spot: "東京タワー", latitude: nil, longitude: nil)
       destination.geocode
-      #be_within である程度のゆらぎを許容する
+      # be_within である程度のゆらぎを許容する
       expect(destination.latitude).to be_within(0.0005).of 35.658584
       expect(destination.longitude).to be_within(0.0005).of 139.7454316
     end
