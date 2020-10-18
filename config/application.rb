@@ -26,5 +26,8 @@ module Departure
 
     # timezone 修正
     config.time_zone = "Tokyo"
+
+    # iTerm2 にRSpec のスクリーンショットを表示する為の環境変数
+    ENV["RAILS_SYSTEM_TESTING_SCREENSHOT"] = "inline"
   end
 end
