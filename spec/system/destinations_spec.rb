@@ -168,6 +168,77 @@ RSpec.describe "Destinations", type: :system do
     end
   end
 
+  describe "Destination Search ページ" do
+    context "ページレイアウト" do
+      context "ログインしている場合" do
+        it "各ページに検索バーが表示されていること" do
+          login_for_system(user)
+          visit root_path
+          expect(page).to have_css "form#destination_search"
+          visit about_path
+          expect(page).to have_css "form#destination_search"
+          visit notifications_path
+          expect(page).to have_css "form#destination_search"
+          visit favorites_path
+          expect(page).to have_css "form#destination_search"
+          # user
+          visit users_path
+          expect(page).to have_css "form#destination_search"
+          visit user_path(user)
+          expect(page).to have_css "form#destination_search"
+          visit edit_user_path(user)
+          expect(page).to have_css "form#destination_search"
+          visit following_user_path(user)
+          expect(page).to have_css "form#destination_search"
+          visit followers_user_path(user)
+          expect(page).to have_css "form#destination_search"
+          # destination
+          visit destination_path(destination)
+          expect(page).to have_css "form#destination_search"
+          visit destinations_path
+          expect(page).to have_css "form#destination_search"
+          visit new_destination_path
+          expect(page).to have_css "form#destination_search"
+          visit edit_destination_path(destination)
+          expect(page).to have_css "form#destination_search"
+        end
+      end
+
+      context "未ログインの場合" do
+        it "検索バーが表示されないこと" do
+          visit root_path
+          expect(page).not_to have_css "form#destination_search"
+        end
+      end
+    end
+
+    context "検索機能" do
+      before do
+        login_for_system(user)
+      end
+
+      it "feed から検索ワードに該当する結果が表示されること" do
+        search_word = "東京"
+        create(:destination, name: search_word, user: user)
+        fill_in "q_name_cont", with: search_word
+        click_button "Search"
+        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+        within(".destinations") do
+          expect(page).to have_css "li", count: 1
+        end
+      end
+
+      it "検索ワードを入力しなかった場合は行き先一覧が表示されること" do
+        fill_in "q_name_cont", with: " "
+        click_button "Search"
+        expect(page).to have_css "h1", text: "All Destinations"
+        within(".destinations") do
+          expect(page).to have_css "li", count: Destination.count
+        end
+      end
+    end
+  end
+
   describe "Destination Edit ページ" do
     before do
       login_for_system(user)
