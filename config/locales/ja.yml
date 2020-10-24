@@ -29,6 +29,11 @@ ja:
         spot: スポット
         country: 国
         picture: 行き先の写真
+        expense: 費用
+        season: シーズン
+        experience: 体験
+        airline: 航空会社
+        food: 食べ物
       comment:
         user_id: コメント投稿者のID
         destination_id: コメントされた行き先のID
