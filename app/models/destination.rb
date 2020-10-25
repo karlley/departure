@@ -10,6 +10,8 @@ class Destination < ApplicationRecord
   validates :description, length: { maximum: 140 }, allow_nil: true
   validates :spot, length: { maximum: 100 }
   validates :address, length: { maximum: 100 }
+  validates :experience, length: { maximum: 50 }
+  validates :food, length: { maximum: 50 }
   validate :picture_size
 
   # geocoder で経度, 緯度を取得する
