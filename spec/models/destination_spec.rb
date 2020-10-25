@@ -67,6 +67,18 @@ RSpec.describe Destination, type: :model do
       destination = build(:destination, address: "a" * 101)
       expect(destination).not_to be_valid
     end
+
+    it "体験が50文字以内であること" do
+      destination = build(:destination, experience: "a" * 51)
+      destination.valid?
+      expect(destination.errors[:experience]).to include("は50文字以内で入力してください")
+    end
+
+    it "食べ物が50文字以内であること" do
+      destination = build(:destination, food: "a" * 51)
+      destination.valid?
+      expect(destination.errors[:food]).to include("は50文字以内で入力してください")
+    end
   end
 
   context "並び順" do
