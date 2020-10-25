@@ -30,6 +30,11 @@ end
                       longitude: Faker::Address.longitude,
                       # address: Geocoder.search([:latitude, :longitude]).first.address,
                       address: Faker::Address.full_address,
+                      expense: Faker::Number.between(from:1, to: 100) * 10000,
+                      season: Faker::Number.between(from:1, to: 12),
+                      experience: "Your Experience!",
+                      airline: "Select Airline Company!",
+                      food: Faker::Food.dish,
                       user_id: 1)
 end
 
