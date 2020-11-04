@@ -45,3 +45,13 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# Country CSV
+require "csv"
+
+CSV.foreach("country.csv", headers: true) do |row|
+  Country.create!(
+    country_name: row["国・地域名"],
+    region: row["場所"]
+  )
+end
