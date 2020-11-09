@@ -57,7 +57,6 @@ CSV.foreach("country.csv", headers: true) do |row|
 end
 
 # Airline CSV import
-
 CSV.foreach("airline.csv", headers: true) do |row|
   Airline.create!(
     airline_name: row["航空会社"],
