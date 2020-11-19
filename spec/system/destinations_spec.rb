@@ -26,44 +26,62 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_content "説明"
         expect(page).to have_content "スポット"
         expect(page).to have_content "国"
+        expect(page).to have_content "費用"
+        expect(page).to have_content "シーズン"
+        expect(page).to have_content "体験"
+        expect(page).to have_content "航空会社"
+        expect(page).to have_content "食べ物"
+      end
+
+      it "DB 読み込みのプルダウンリストが正しく表示されること" do
+        # Country
+        country_data = Country.pluck("country_name") # モデルから特定カラムを配列化
+        country_pulldown = nil
+        within find_field("国") do
+          country_pulldown = all("option").map(&:text).to_ary.drop(1) # プルダウンリストのプロンプトを削除して配列化
+        end
+        expect(country_pulldown).to eq country_data
+        # Airline
+        airline_data = Airline.pluck("airline_name")
+        airline_pulldown = nil
+        within find_field("航空会社") do
+          airline_pulldown = all("option").map(&:text).to_ary.drop(1)
+        end
+        expect(airline_pulldown).to eq airline_data
       end
     end
 
     context "行き先 登録処理" do
-      it "有効なデータの登録処理で成功のフラッシュが表示されること" do
+      before do
         fill_in "行き先名", with: "サンプルの行き先"
         fill_in "説明", with: "サンプルの行き先の説明です"
         fill_in "スポット", with: "サンプルの行き先のスポット"
-        fill_in "国", with: "Japan"
+        select "日本", from: "国"
+        select "￥100,000 ~ ￥200,000", from: "費用"
+        select "6月", from: "シーズン"
+        fill_in "体験", with: "観光"
+        select "日本航空", from: "航空会社"
+      end
+
+      it "有効なデータの登録処理で成功のフラッシュが表示されること" do
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_1.jpg"
         click_button "登録する"
         expect(page).to have_content "Destination added!"
       end
 
       it "登録後のリダイレクト先でGoogleMap が表示されること", js: true do
-        fill_in "行き先名", with: "サンプルの行き先"
-        fill_in "説明", with: "サンプルの行き先の説明です"
-        fill_in "スポット", with: "サンプルの行き先のスポット"
-        fill_in "国", with: "Japan"
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_1.jpg"
         click_button "登録する"
         expect(page).to have_css "div.gm-style"
       end
 
       it "画像無しの登録はデフォルト画像が設定されること" do
-        fill_in "行き先名", with: "サンプルの行き先"
-        fill_in "説明", with: "サンプルの行き先の説明です"
-        fill_in "スポット", with: "サンプルの行き先のスポット"
-        fill_in "国", with: "Japan"
         click_button "登録する"
         expect(page).to have_link(href: destination_path(Destination.first))
       end
 
       it "無効なデータで登録処理で失敗のフラッシュが表示されること" do
         fill_in "行き先名", with: ""
-        fill_in "説明", with: "サンプルの行き先の説明です"
-        fill_in "スポット", with: "サンプルの行き先のスポット"
-        fill_in "国", with: "Japan"
         click_button "登録する"
         expect(page).to have_content "行き先名を入力してください"
       end
