@@ -29,18 +29,6 @@ RSpec.describe Destination, type: :model do
       expect(destination.errors[:name]).to include("は50文字以内で入力してください")
     end
 
-    it "国名が未入力で無効な状態であること" do
-      destination = build(:destination, country: nil)
-      destination.valid?
-      expect(destination.errors[:country]).to include("を入力してください")
-    end
-
-    it "国名が100字以内であること" do
-      destination = build(:destination, country: "a" * 101)
-      destination.valid?
-      expect(destination.errors[:country]).to include("は100文字以内で入力してください")
-    end
-
     it "説明が任意入力になっていること" do
       destination = build(:destination, description: nil)
       expect(destination).to be_valid
@@ -63,9 +51,22 @@ RSpec.describe Destination, type: :model do
       expect(destination.errors[:spot]).to include("は100文字以内で入力してください")
     end
 
-    it "address が100字以上だと無効であること" do
-      destination = build(:destination, address: "a" * 101)
-      expect(destination).not_to be_valid
+    it "国名が未選択で無効な状態であること" do
+      destination = build(:destination, country: nil)
+      destination.valid?
+      expect(destination.errors[:country]).to include("を入力してください")
+    end
+
+    it "費用が未選択で無効な状態であること" do
+      destination = build(:destination, expense: nil)
+      destination.valid?
+      expect(destination.errors[:expense]).to include("を入力してください")
+    end
+
+    it "シーズンが未選択で無効な状態であること" do
+      destination = build(:destination, season: nil)
+      destination.valid?
+      expect(destination.errors[:season]).to include("を入力してください")
     end
 
     it "体験が50文字以内であること" do
@@ -74,10 +75,21 @@ RSpec.describe Destination, type: :model do
       expect(destination.errors[:experience]).to include("は50文字以内で入力してください")
     end
 
+    it " 航空会社が未選択で無効な状態であること" do
+      destination = build(:destination, airline: nil)
+      destination.valid?
+      expect(destination.errors[:airline]).to include("を入力してください")
+    end
+
     it "食べ物が50文字以内であること" do
       destination = build(:destination, food: "a" * 51)
       destination.valid?
       expect(destination.errors[:food]).to include("は50文字以内で入力してください")
+    end
+
+    it "address が100字以上だと無効であること" do
+      destination = build(:destination, address: "a" * 101)
+      expect(destination).not_to be_valid
     end
   end
 
