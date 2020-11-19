@@ -13,7 +13,7 @@
     <%= f.text_field :description, size: "60x4", class: 'form-control', id: 'destination_description' %>
   </div>
   <div class="form-group">
-    <%= f.label :spot %><span class="input-unneed"> *Required</span>
+    <%= f.label :spot %><span class="input-unneed"> *Optional</span>
     <%= f.text_field :spot, class: 'form-control', id: 'destination_spot' %>
   </div>
   <div class="form-group">
@@ -29,15 +29,15 @@
     <%= f.select :season, [["1月", 1], ["2月", 2], ["3月", 3], ["4月", 4], ["5月", 5], ["6月", 6], ["7月", 7], ["8月", 8], ["9月", 9], ["10月", 10], ["11月", 11], ["12月", 12]], include_blank: "旅行月を選択してください", class: 'form-control', id: 'destination_season'%>
   </div>
   <div class="form-group">
-    <%= f.label :experience %><span class="input-unneed"> *Required</span>
+    <%= f.label :experience %><span class="input-unneed"> *Optional</span>
     <%= f.text_field :experience, class: 'form-control', id: 'destination_experience' %>
   </div>
   <div class="form-group">
-    <%= f.label :airline %><span class="input-unneed"> *Required</span>
+    <%= f.label :airline %><span class="input-unneed"> *Optional</span>
     <%= f.collection_select :airline, Airline.all, :id, :airline_name, prompt: "航空会社を選択してください", class: 'form-control', id: 'destination_airline' %>
   </div>
   <div class="form-group">
-    <%= f.label :food %><span class="input-unneed"> *Required</span>
+    <%= f.label :food %><span class="input-unneed"> *Optional</span>
     <%= f.text_field :food, class: 'form-control', id: 'destination_food' %>
   </div>
   <%= f.submit class: 'btn btn-primary' %>
