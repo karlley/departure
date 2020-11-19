@@ -7,6 +7,9 @@ class Destination < ApplicationRecord
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 50 }
   validates :country, presence: true, length: { maximum: 100 }
+  validates :expense, presence: true
+  validates :season, presence: true
+  validates :airline, presence: true
   validates :description, length: { maximum: 140 }, allow_nil: true
   validates :spot, length: { maximum: 100 }
   validates :address, length: { maximum: 100 }
