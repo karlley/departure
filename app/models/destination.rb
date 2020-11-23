@@ -47,6 +47,19 @@ class Destination < ApplicationRecord
     Comment.where("destination_id = ?", destination_id)
   end
 
+  # 費用をenum で管理する
+  enum expense:{
+    "費用を選択してください": 0,
+    "￥10,000 ~ ￥50,000": 1,
+    "￥50,000 ~ ￥100,000": 2,
+    "￥100,000 ~ ￥200,000": 3,
+    "￥200,000 ~ ￥300,000": 4,
+    "￥300,000 ~ ￥500,000": 5,
+    "￥500,000 ~ ￥700,000": 6,
+    "￥700,000 ~ ￥1000,000": 7,
+    "￥1000,000 ~": 8
+  }
+
   private
 
   def picture_size
