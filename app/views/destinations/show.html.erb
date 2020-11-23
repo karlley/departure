@@ -19,7 +19,15 @@
           <%= link_to "Delete", destination_path(@destination), method: :delete, class: 'delete-destination', data: { confirm: "Are you sure?" } %>
         <% end %>
       </div>
-      <p class="destination-country">国: <%= @destination.country %></p>
+      <p class="destination-country">国: <%= @country.country_name %></p>
+      <p class="destination-country">エリア: <%= @country.region %></p>
+      <p class="destination-country">スポット: <%= @destination.spot %></p>
+      <p class="destination-country">費用: <%= @destination.expense %></p>
+      <p class="destination-country">シーズン: <%= @destination.season %>月</p>
+      <p class="destination-country">体験: <%= @destination.experience %></p>
+      <p class="destination-country">航空会社: <%= @airline.airline_name %></p>
+      <p class="destination-country">アライアンス: <%= @airline.alliance %></p>
+      <p class="destination-country">食べ物: <%= @destination.food %></p>
       <div class="destination-description"><%= @destination.description %></div>
       <div class="comment">
         <%= render "comments/feed_comments" %>
