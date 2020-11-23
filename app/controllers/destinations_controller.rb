@@ -14,6 +14,8 @@ class DestinationsController < ApplicationController
       marker.lng(destination.longitude)
       marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
     end
+    @country = Country.find_by(id: @destination.country)
+    @airline = Airline.find_by(id: @destination.airline)
   end
 
   def new
