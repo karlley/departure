@@ -64,7 +64,9 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :expense, :season, :experience, :airline, :food)
+    # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :expense, :season, :experience, :airline, :food)
+    # :expense をenum 定義しているのでInt 型に変換して追加
+    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :season, :experience, :airline, :food).merge(expense: params[:destination][:expense].to_i)
   end
 
   def correct_user

@@ -48,7 +48,7 @@ class Destination < ApplicationRecord
   end
 
   # 費用をenum で管理する
-  enum expense:{
+  enum expense: {
     "費用を選択してください": 0,
     "￥10,000 ~ ￥50,000": 1,
     "￥50,000 ~ ￥100,000": 2,

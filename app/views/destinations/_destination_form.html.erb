@@ -22,7 +22,7 @@
   </div>
   <div class="form-group">
     <%= f.label :expense %><span class="input-need"> *Required</span>
-    <%= f.select :expense, Destination.expenses.keys, {}, class: 'form-control', id: 'destination_expense' %>
+    <%= f.select :expense, options_for_select(Destination.expenses), {}, class: 'form-control', id: 'destination_expense' %>
   </div>
   <div class="form-group">
     <%= f.label :season %><span class="input-need"> *Required</span>
