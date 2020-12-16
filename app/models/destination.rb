@@ -9,7 +9,7 @@ class Destination < ApplicationRecord
   validates :country, presence: true, length: { maximum: 100 }
   validates :expense, presence: true
   validates :season, presence: true
-  validates :airline
+  validate :airline
   validates :description, length: { maximum: 140 }, allow_nil: true
   validates :spot, length: { maximum: 100 }
   validates :address, length: { maximum: 100 }
@@ -57,7 +57,7 @@ class Destination < ApplicationRecord
     "￥300,000 ~ ￥500,000": 5,
     "￥500,000 ~ ￥700,000": 6,
     "￥700,000 ~ ￥1000,000": 7,
-    "￥1000,000 ~": 8
+    "￥1000,000 ~": 8,
   }
 
   private
