@@ -24,16 +24,19 @@ end
 10.times do |n|
   Destination.create!(name: Faker::Address.city,
                       description: "This is Faker Destination No.#{n + 1}!",
-                      country: Faker::Address.country,
+                      # :country のCSV 表示に合わせて1-249 の数字を生成
+                      country: Faker::Number.between(from: 1, to: 249),
                       spot: Faker::Address.street_name,
                       latitude: Faker::Address.latitude,
                       longitude: Faker::Address.longitude,
                       # address: Geocoder.search([:latitude, :longitude]).first.address,
                       address: Faker::Address.full_address,
-                      expense: Faker::Number.between(from: 1, to: 100) * 10000,
+                      # :expense のenum 表示に合わせて1-8 の数字を生成,
+                      expense: Faker::Number.between(from: 1, to: 8),
                       season: Faker::Number.between(from: 1, to: 12),
                       experience: "Your Experience!",
-                      airline: "Select Airline Company!",
+                      # :airline のCSV 表示に合わせて1-91 の数字を生成
+                      airline: Faker::Number.between(from: 1, to: 91),
                       food: Faker::Food.dish,
                       user_id: 1)
 end
