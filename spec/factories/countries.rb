@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :country do
-    country_id 1
-    country_name "MyString"
-    region "MyString"
+    country_name "country_name"
+    region "region"
   end
 end

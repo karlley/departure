@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :airline do
-    airline_name "MyString"
+    airline_name "airline_name"
     country_id 1
-    alliance "MyString"
+    alliance "alliance"
     alliance_type 1
   end
 end
