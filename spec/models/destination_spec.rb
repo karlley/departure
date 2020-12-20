@@ -75,11 +75,12 @@ RSpec.describe Destination, type: :model do
       expect(destination.errors[:experience]).to include("は50文字以内で入力してください")
     end
 
-    it " 航空会社が未選択で無効な状態であること" do
-      destination = build(:destination, airline: nil)
-      destination.valid?
-      expect(destination.errors[:airline]).to include("を入力してください")
-    end
+    # 必須選択を解除
+    # it " 航空会社が未選択で無効な状態であること" do
+    #   destination = build(:destination, airline: nil)
+    #   destination.valid?
+    #   expect(destination.errors[:airline]).to include("航空会社を選択してください")
+    # end
 
     it "食べ物が50文字以内であること" do
       destination = build(:destination, food: "a" * 51)

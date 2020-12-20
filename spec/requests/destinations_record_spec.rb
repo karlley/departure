@@ -22,7 +22,9 @@ RSpec.describe "New Destinations", type: :request do
         post destinations_path, params: { destination: {
           name: "行き先のサンプル",
           description: "行き先のサンプルの説明",
-          country: "日本",
+          country: 1,
+          expense: 1,
+          season: 1,
           picture: picture_1,
         } }
       end.to change(Destination, :count).by(1)
