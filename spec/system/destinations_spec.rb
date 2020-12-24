@@ -4,7 +4,10 @@ RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
   let!(:destination) { create(:destination, :picture, user: user) }
+  let!(:destination_airline_unselected) { create(:destination, :airline_unselected) }
   let!(:comment) { create(:comment, user_id: user.id, destination: destination) }
+  let!(:country) { create(:country) }
+  let!(:airline) { create(:airline) }
 
   describe "New Destination ページ" do
     before do
@@ -105,9 +108,32 @@ RSpec.describe "Destinations", type: :system do
 
       it "行き先情報が表示されること" do
         expect(page).to have_content destination.name
-        expect(page).to have_content destination.country
+        # FactroyBot で生成した値から国のデータを取得 > 国名を取得
+        country_name = Country.find_by(id: destination.country).country_name
+        region = Country.find_by(id: destination.country).region
+        expect(page).to have_content country_name
+        expect(page).to have_content region
+        expect(page).to have_content destination.expense
+        expect(page).to have_content destination.season
+        expect(page).to have_content destination.experience
+        expect(page).to have_content destination.food
         expect(page).to have_content destination.description
         expect(page).to have_link nil, href: destination_path(destination), class: "destination-picture"
+      end
+
+      it "航空会社が選択された場合は航空会社とアライアンスが表示される" do
+        airline_name = Airline.find_by(id: destination.airline).airline_name
+        alliance = Airline.find_by(id: destination.airline).alliance
+        expect(page).to have_selector ".destination-airline_name", text: airline_name
+        expect(page).to have_selector ".destination-alliance", text: alliance
+      end
+
+      it "航空会社が未選択の場合には航空会社に'未使用'が表示され, アライアンスは非表示になる" do
+        # 航空会社が選択されていないFactory を使用
+        visit destination_path(destination_airline_unselected)
+        expect(page).to have_selector ".destination-airline_name", text: "未使用"
+        # アライアンスの非表示を確認
+        expect(page).not_to have_css ".destination-alliance"
       end
 
       it "GoogleMap が表示されていること", js: true do
