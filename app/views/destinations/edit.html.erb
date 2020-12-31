@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= form_with model: @destination do |f| %>
+      <%= form_with model: @destination, local: true do |f| %>
         <%= render "shared/error_messages", object: f.object %>
         <span class="picture">
           <%= f.label :picture %><span class="input-unneed"> *Optional</span>
