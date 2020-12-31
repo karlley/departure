@@ -3,7 +3,7 @@ FactoryBot.define do
     name { Faker::Address.city }
     # :country のCSV 用に1-249 の数字を生成
     country { Faker::Number.between(from: 1, to: 249) }
-    sequence(:description) { |n| "This is Faker Destinaton No.#{n}!" }
+    sequence(:description) { |n| "Destinaton No.#{n}!" }
     spot { Faker::Address.street_name }
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
@@ -21,14 +21,17 @@ FactoryBot.define do
   end
 
   trait :yesterday do
+    name { "Yesterday" }
     created_at { 1.day.ago }
   end
 
   trait :one_week_ago do
+    name { "One_Week_Ago" }
     created_at { 1.week.ago }
   end
 
   trait :one_month_ago do
+    name { "One_Month_Ago" }
     created_at { 1.month.ago }
   end
 
@@ -37,6 +40,7 @@ FactoryBot.define do
   end
 
   trait :airline_unselected do
+    name { "Airline_Unselected" }
     airline { nil }
   end
 end
