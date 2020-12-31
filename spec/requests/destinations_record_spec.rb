@@ -37,7 +37,7 @@ RSpec.describe "New Destinations", type: :request do
         post destinations_path, params: { destination: {
           name: "",
           description: "行き先のサンプルの説明",
-          country: "日本",
+          country: 1,
           picture: picture_1,
         } }
       end.not_to change(Destination, :count)

@@ -4,7 +4,7 @@ RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
   let!(:destination) { create(:destination, :picture, user: user) }
-  let!(:destination_airline_unselected) { create(:destination, :airline_unselected) }
+  let(:destination_airline_unselected) { create(:destination, :airline_unselected) }
   let!(:comment) { create(:comment, user_id: user.id, destination: destination) }
   let!(:country) { create(:country) }
   let!(:airline) { create(:airline) }
@@ -309,17 +309,19 @@ RSpec.describe "Destinations", type: :system do
 
     context "行き先 更新処理" do
       it "有効な更新" do
-        fill_in "行き先名", with: "Edit destination name"
-        fill_in "説明", with: "Edit destination description"
-        fill_in "スポット", with: "Edit destination spot"
-        fill_in "国", with: "Edit country"
+        fill_in "行き先名", with: "サンプルの行き先"
+        fill_in "説明", with: "サンプルの行き先の説明"
+        fill_in "スポット", with: "サンプルの行き先のスポット"
+        select "日本", from: "国"
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_2.jpg"
         click_button "更新する"
         expect(page).to have_content "Destination updated!"
-        expect(destination.reload.name).to eq "Edit destination name"
-        expect(destination.reload.description).to eq "Edit destination description"
-        expect(destination.reload.spot).to eq "Edit destination spot"
-        expect(destination.reload.country).to eq "Edit country"
+        expect(destination.reload.name).to eq "サンプルの行き先"
+        expect(destination.reload.description).to eq "サンプルの行き先の説明"
+        expect(destination.reload.spot).to eq "サンプルの行き先のスポット"
+        # 更新された国番号を元にCSV から国名を取得
+        country_name = Country.find_by(id: destination.reload.country).country_name
+        expect(country_name).to eq "日本"
         expect(destination.reload.picture.url).to include "test_destination_2.jpg"
       end
 

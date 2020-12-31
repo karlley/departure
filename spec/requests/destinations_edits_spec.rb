@@ -16,7 +16,7 @@ RSpec.describe "Edit Destination ページ", type: :request do
       patch destination_path(destination), params: { destination: {
         name: "sample destination",
         description: "sample description",
-        country: "Japan",
+        country: 1,
         picture: picture_2,
       } }
       redirect_to destination
