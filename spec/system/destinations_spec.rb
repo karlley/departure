@@ -4,6 +4,7 @@ RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
   let!(:destination) { create(:destination, :picture, user: user) }
+  let(:destination_picture_unselected) { create(:destination, :picture_unselected, user: user) }
   let(:destination_airline_unselected) { create(:destination, :airline_unselected) }
   let!(:comment) { create(:comment, user_id: user.id, destination: destination) }
   let!(:country) { create(:country) }
@@ -57,30 +58,32 @@ RSpec.describe "Destinations", type: :system do
     context "行き先 登録処理" do
       before do
         fill_in "行き先名", with: "サンプルの行き先"
-        fill_in "説明", with: "サンプルの行き先の説明です"
+        fill_in "説明", with: "サンプルの行き先の説明"
         fill_in "スポット", with: "サンプルの行き先のスポット"
         select "日本", from: "国"
         select "￥100,000 ~ ￥200,000", from: "費用"
-        select "6月", from: "シーズン"
-        fill_in "体験", with: "観光"
+        select "1月", from: "シーズン"
+        fill_in "体験", with: "サンプルの体験"
         select "日本航空", from: "航空会社"
+        fill_in "食べ物", with: "サンプルの食べ物"
+        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_1.jpg"
       end
 
       it "有効なデータの登録処理で成功のフラッシュが表示されること" do
-        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_1.jpg"
         click_button "登録する"
         expect(page).to have_content "Destination added!"
       end
 
       it "登録後のリダイレクト先でGoogleMap が表示されること", js: true do
-        attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_1.jpg"
         click_button "登録する"
         expect(page).to have_css "div.gm-style"
       end
 
       it "画像無しの登録はデフォルト画像が設定されること" do
+        attach_file nil
         click_button "登録する"
-        expect(page).to have_link(href: destination_path(Destination.first))
+        # リンクテキスト: nil で画像を指定, class 指定で画像に絞り込み, 登録後のページ(show) で画像リンクを確認
+        expect(page).to have_link nil, href: destination_path(Destination.first), class: "destination-picture"
       end
 
       it "無効なデータで登録処理で失敗のフラッシュが表示されること" do
@@ -118,6 +121,7 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_content destination.experience
         expect(page).to have_content destination.food
         expect(page).to have_content destination.description
+        # リンクテキスト: nil で画像を指定, class 指定で画像に絞り込み, 登録後のページ(show) で画像リンクを確認
         expect(page).to have_link nil, href: destination_path(destination), class: "destination-picture"
       end
 
