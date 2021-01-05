@@ -304,6 +304,11 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_content "説明"
         expect(page).to have_content "スポット"
         expect(page).to have_content "国"
+        expect(page).to have_content "費用"
+        expect(page).to have_content "シーズン"
+        expect(page).to have_content "体験"
+        expect(page).to have_content "航空会社"
+        expect(page).to have_content "食べ物"
       end
     end
 
@@ -313,15 +318,29 @@ RSpec.describe "Destinations", type: :system do
         fill_in "説明", with: "サンプルの行き先の説明"
         fill_in "スポット", with: "サンプルの行き先のスポット"
         select "日本", from: "国"
+        select "￥10,000 ~ ￥50,000", from: "費用"
+        select "1月", from: "シーズン"
+        fill_in "体験", with: "サンプルの体験"
+        select "日本航空", from: "航空会社"
+        fill_in "食べ物", with: "サンプルの食べ物"
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_2.jpg"
         click_button "更新する"
+        # 更新されたcountry を元にCSV から国名を取得
+        country_name = Country.find_by(id: destination.reload.country).country_name
+        # 更新されたexpense を月表示の文字列に変換
+        season = destination.reload.season.to_s + "月"
+        # 更新されたairline を元にCSV から航空会社名を取得
+        airline_name = Airline.find_by(id: destination.reload.airline).airline_name
         expect(page).to have_content "Destination updated!"
         expect(destination.reload.name).to eq "サンプルの行き先"
         expect(destination.reload.description).to eq "サンプルの行き先の説明"
         expect(destination.reload.spot).to eq "サンプルの行き先のスポット"
-        # 更新された国番号を元にCSV から国名を取得
-        country_name = Country.find_by(id: destination.reload.country).country_name
         expect(country_name).to eq "日本"
+        expect(destination.reload.expense).to eq "￥10,000 ~ ￥50,000"
+        expect(season).to eq "1月"
+        expect(destination.reload.experience) .to eq "サンプルの体験"
+        expect(airline_name).to eq "日本航空"
+        expect(destination.reload.food).to eq "サンプルの食べ物"
         expect(destination.reload.picture.url).to include "test_destination_2.jpg"
       end
 
