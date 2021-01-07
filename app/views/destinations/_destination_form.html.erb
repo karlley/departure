@@ -1,53 +1,59 @@
 <%= form_with model: @destination, local: true do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+  <%= render "shared/error_messages", object: f.object %>
   <span class="picture">
     <%= f.label :picture %><span class="input-unneed"> *Optional</span>
-    <%= f.file_field :picture, accept: 'image/jpeg, image/png', class: 'form-control', id: 'destination_picture' %>
+    <%= f.file_field :picture, accept: "image/jpeg, image/png", class: "form-control", id: "destination_picture" %>
+    <% if current_page?("destinations/#{@destination.id}/edit") %>
+      <%= image_tag(@destination.picture.thumb400.url) if @destination.picture.url.present? %>
+    <% end %>
   </span>
   <div class="form-group">
     <%= f.label :name %><span class="input-need"> *Required</span>
-    <%= f.text_field :name, class: 'form-control', id: 'destination_name' %>
+    <%= f.text_field :name, class: "form-control", id: "destination_name" %>
   </div>
   <div class="form-group">
-    <%= f.label :description %><span class="input-unneed"> *Optional</span>
-    <%= f.text_field :description, size: "60x4", class: 'form-control', id: 'destination_description' %>
+    <%=  f.label :description %><span class="input-unneed"> *Optional</span>
+    <%= f.text_field :description, size: "60x4", class: "form-control", id: "destination_description" %>
   </div>
   <div class="form-group">
     <%= f.label :spot %><span class="input-unneed"> *Optional</span>
-    <%= f.text_field :spot, class: 'form-control', id: 'destination_spot' %>
+    <%= f.text_field :spot, class: "form-control", id: "destination_spot" %>
   </div>
   <div class="form-group">
     <%= f.label :country %><span class="input-need"> *Required</span>
-    <%= f.collection_select :country, Country.all, :id, :country_name, prompt: "国を選択してください", class: 'form-control', id: 'destination_country' %>
+    <%= f.collection_select :country, Country.all, :id, :country_name, prompt: "国を選択してください", class: "form-control", id: "destination_country" %>
   </div>
   <div class="form-group">
     <%= f.label :expense %><span class="input-need"> *Required</span>
-    <%= f.select :expense, options_for_select(Destination.expenses), {}, class: 'form-control', id: 'destination_expense' %>
+    <%= f.select :expense, options_for_select(Destination.expenses, @destination.expense_before_type_cast), {}, class: "form-control", id: "destination_expense" %>
   </div>
   <div class="form-group">
     <%= f.label :season %><span class="input-need"> *Required</span>
-    <%= f.select :season, [["1月", 1], ["2月", 2], ["3月", 3], ["4月", 4], ["5月", 5], ["6月", 6], ["7月", 7], ["8月", 8], ["9月", 9], ["10月", 10], ["11月", 11], ["12月", 12]], include_blank: "旅行月を選択してください", class: 'form-control', id: 'destination_season'%>
+    <%= f.select :season, [["1月", 1], ["2月", 2], ["3月", 3], ["4月", 4], ["5月", 5], ["6月", 6], ["7月", 7], ["8月", 8], ["9月", 9], ["10月", 10], ["11月", 11], ["12月", 12]], include_blank: "旅行月を選択してください", class: "form-control", id: "destination_season"%>
   </div>
   <div class="form-group">
     <%= f.label :experience %><span class="input-unneed"> *Optional</span>
-    <%= f.text_field :experience, class: 'form-control', id: 'destination_experience' %>
+    <%= f.text_field :experience, class: "form-control", id: "destination_experience" %>
   </div>
   <div class="form-group">
     <%= f.label :airline %><span class="input-unneed"> *Optional</span>
-    <%= f.collection_select :airline, Airline.all, :id, :airline_name, prompt: "航空会社を選択してください", class: 'form-control', id: 'destination_airline' %>
+    <%= f.collection_select :airline, Airline.all, :id, :airline_name, prompt: "航空会社を選択してください", class: "form-control", id: "destination_airline" %>
   </div>
   <div class="form-group">
     <%= f.label :food %><span class="input-unneed"> *Optional</span>
-    <%= f.text_field :food, class: 'form-control', id: 'destination_food' %>
+    <%= f.text_field :food, class: "form-control", id: "destination_food" %>
   </div>
-  <%= f.submit class: 'btn btn-primary' %>
+  <%= f.submit class: "btn btn-primary" %>
+  <% if current_page?("destinations/#{@destination.id}/edit") %>
+    <%= link_to "行き先を削除する", destination_path(@destination), method: :delete, data: { confirm: "Are you sure?" } %> 
+  <% end %>
 <% end %>
 
 <script type="text/javascript">
-  $('#destination_picture').bind('change', function() {
+  $("#destination_picture").bind("change", function() {
     var size_inmegabytes = this.files[0].size/1024/1024;
     if (size_in_megabytes > 5) {
-      alert('The maximum size of a picture you can update is 5MB.');
+      alert("The maximum size of a picture you can update is 5MB.");
     }
   });
 </script>
