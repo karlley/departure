@@ -3,7 +3,7 @@
   <span class="picture">
     <%= f.label :picture %><span class="input-unneed"> *Optional</span>
     <%= f.file_field :picture, accept: "image/jpeg, image/png", class: "form-control", id: "destination_picture" %>
-    <% if @destination.id.present? && @destination.picture.url.present? %>
+    <% if edit_page? && have_picture? %>
       <%= image_tag(@destination.picture.thumb400.url) %>
     <% end %>
   </span>
@@ -44,7 +44,7 @@
     <%= f.text_field :food, class: "form-control", id: "destination_food" %>
   </div>
   <%= f.submit class: "btn btn-primary" %>
-  <% if @destination.id.present? %>
+  <% if edit_page? %>
     <%= link_to "行き先を削除する", destination_path(@destination), method: :delete, data: { confirm: "Are you sure?" } %> 
   <% end %>
 <% end %>
