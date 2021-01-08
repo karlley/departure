@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-4">
       <span class="picture">
-        <%= link_to((image_tag @destination.picture.thumb400.url), destination_path(@destination.id), class: "destination-picture") if @destination.picture.url.present? %>
+        <%= link_to((image_tag @destination.picture.thumb400.url), destination_path(@destination.id), class: "destination-picture") if have_picture? %>
       </span>
       <%= render "users/favorite_form" %>
     </div>
