@@ -25,6 +25,16 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_title full_title("New Destination")
       end
 
+      it "写真選択フォームが表示されていること" do
+        expect(page).to have_content "行き先の写真"
+      end
+
+      it "写真が非表示であること" do
+        within(".picture") do
+          expect(page).not_to have_selector "img"
+        end
+      end
+
       it "入力フォームに正しいラベルが表示されること" do
         expect(page).to have_content "行き先名"
         expect(page).to have_content "説明"
@@ -107,6 +117,10 @@ RSpec.describe "Destinations", type: :system do
 
       it "'行き先名' の文字列が存在すること" do
         expect(page).to have_content "#{destination.name}"
+      end
+
+      it "行き先の写真が表示されること" do
+        expect(page).to have_selector "img[src$='test_destination_1.jpg']"
       end
 
       it "行き先情報が表示されること" do
@@ -301,6 +315,14 @@ RSpec.describe "Destinations", type: :system do
 
       it "'Edit + 行き先名' の文字列が存在すること" do
         expect(page).to have_content "Edit #{destination.name}"
+      end
+
+      it "写真選択フォームが表示されていること" do
+        expect(page).to have_content "行き先の写真"
+      end
+
+      it "登録済みの画像が表示されること" do
+        expect(page).to have_selector "img[src$='test_destination_1.jpg']"
       end
 
       it "入力フォームに適切なラベルが表示されること" do
