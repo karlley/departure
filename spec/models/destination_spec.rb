@@ -106,9 +106,9 @@ RSpec.describe Destination, type: :model do
 
   context "address_keyword メソッド" do
     it "geocoder で使用する文字列を生成できること" do
-      destination = build(:destination, name: "name", country: "country", spot: "spot")
+      destination = build(:destination, name: "行き先名", country: 153, spot: "スポット")
       keyword = destination.address_keyword
-      expect(keyword).to eq "name, country, spot"
+      expect(keyword).to eq "行き先名, 日本, スポット"
     end
   end
 
@@ -123,13 +123,15 @@ RSpec.describe Destination, type: :model do
 
   context "update_address メソッド" do
     it "座標の更新があった場合にaddress カラムを更新できること" do
-      destination.update(latitude: 35.658584, longitude: 139.7454316)
+      destination = create(:destination)
+      destination.latitude = 35.658584
+      destination.longitude = 139.7454316
       destination.update_address
       expect(destination.address).to eq "日本、〒105-0011 東京都港区芝公園４丁目２−８"
     end
 
     it "座標の更新が無い場合はメソッドをパスすること" do
-      destination.update(name: "edit name", spot: "edit spot", country: "edit country")
+      destination = create(:destination)
       destination.update_address
       expect(destination.update_address).to eq nil
     end
@@ -137,7 +139,7 @@ RSpec.describe Destination, type: :model do
 
   context "geocoder 機能" do
     it "経度, 緯度が取得できること" do
-      destination = build(:destination, name: "東京", country: "日本", spot: "東京タワー", latitude: nil, longitude: nil)
+      destination = build(:destination, name: "東京", country: 153, spot: "東京タワー", latitude: nil, longitude: nil)
       destination.geocode
       # be_within である程度のゆらぎを許容する
       expect(destination.latitude).to be_within(0.0005).of 35.658584
