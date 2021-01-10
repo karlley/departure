@@ -23,7 +23,11 @@ class Destination < ApplicationRecord
 
   # geocoder で使用する文字列を生成
   def address_keyword
-    [name, country, spot].compact.join(', ')
+    # 国名が選択されている場合は国番号から国名を検索
+    if country.present?
+      country_name = Country.find_by(id: country).country_name
+      [name, country_name, spot].compact.join(', ')
+    end
   end
 
   # geocode 後の座標からaddress を追加する
@@ -34,11 +38,12 @@ class Destination < ApplicationRecord
     end
   end
 
-  # 座標が更新されたら再度geocode してaddress を更新する
+  # 座標が更新された場合のみgeocode してaddress を更新する
   def update_address
-    if saved_change_to_latitude? || saved_change_to_longitude?
+    # if saved_change_to_latitude? || saved_change_to_longitude?
+    if will_save_change_to_attribute?("latitude") || will_save_change_to_attribute?("longitude")
       self.address = Geocoder.search([latitude, longitude]).first.address
-      save
+      update!(address: address)
     end
   end
 
