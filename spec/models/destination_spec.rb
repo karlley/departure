@@ -133,7 +133,8 @@ RSpec.describe Destination, type: :model do
     it "座標の更新が無い場合はメソッドをパスすること" do
       destination = create(:destination)
       destination.update_address
-      expect(destination.update_address).to eq nil
+      # 住所が更新されていない事を確認
+      expect(destination.address).to eq destination.address
     end
   end
 
