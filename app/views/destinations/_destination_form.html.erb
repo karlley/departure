@@ -25,7 +25,7 @@
   </div>
   <div class="form-group">
     <%= f.label :expense %><span class="input-need"> *Required</span>
-    <%= f.select :expense, options_for_select(Destination.expenses, @destination.expense_before_type_cast), {}, class: "form-control", id: "destination_expense" %>
+    <%= f.select :expense, options_for_select(Destination.expenses, @destination.expense_before_type_cast), { prompt: "費用を選択してください" }, { class: "form-control", id: "destination_expense" } %>
   </div>
   <div class="form-group">
     <%= f.label :season %><span class="input-need"> *Required</span>
