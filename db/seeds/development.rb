@@ -1,3 +1,24 @@
+# Country CSV import
+# Destination のseed が作成できないので先にCountry, Airline を作成
+require "csv"
+
+CSV.foreach("country.csv", headers: true) do |row|
+  Country.create!(
+    country_name: row["国・地域名"],
+    region: row["場所"]
+  )
+end
+
+# Airline CSV import
+CSV.foreach("airline.csv", headers: true) do |row|
+  Airline.create!(
+    airline_name: row["航空会社"],
+    country_id: row["国番号"],
+    alliance: row["アライアンス"],
+    alliance_type: row["アライアンス種別"]
+  )
+end
+
 # Admin User
 User.create!(name: "Example User",
              email: "sample@example.com",
@@ -48,23 +69,3 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
-
-# Country CSV import
-require "csv"
-
-CSV.foreach("country.csv", headers: true) do |row|
-  Country.create!(
-    country_name: row["国・地域名"],
-    region: row["場所"]
-  )
-end
-
-# Airline CSV import
-CSV.foreach("airline.csv", headers: true) do |row|
-  Airline.create!(
-    airline_name: row["航空会社"],
-    country_id: row["国番号"],
-    alliance: row["アライアンス"],
-    alliance_type: row["アライアンス種別"]
-  )
-end
