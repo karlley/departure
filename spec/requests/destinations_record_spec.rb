@@ -38,6 +38,8 @@ RSpec.describe "New Destinations", type: :request do
           name: "",
           description: "行き先のサンプルの説明",
           country: 1,
+          expense: 1,
+          season: 1,
           picture: picture_1,
         } }
       end.not_to change(Destination, :count)

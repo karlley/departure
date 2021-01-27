@@ -17,6 +17,7 @@ RSpec.describe "Edit Destination ページ", type: :request do
         name: "sample destination",
         description: "sample description",
         country: 1,
+        expense: 1,
         picture: picture_2,
       } }
       redirect_to destination
@@ -33,7 +34,9 @@ RSpec.describe "Edit Destination ページ", type: :request do
       patch destination_path(destination), params: { destination: {
         name: "sample destination",
         description: "sample description",
-        country: "Japan",
+        country: 1,
+        expense: 1,
+        picture: picture_2,
       } }
       expect(response).to have_http_status "302"
       expect(response).to redirect_to login_path
@@ -49,7 +52,9 @@ RSpec.describe "Edit Destination ページ", type: :request do
       patch destination_path(destination), params: { destination: {
         name: "sample destination",
         description: "sample description",
-        country: "Japan",
+        country: 1,
+        expense: 1,
+        picture: picture_2,
       } }
       expect(response).to have_http_status "302"
       expect(response).to redirect_to root_path
