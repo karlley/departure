@@ -25,6 +25,7 @@ class Destination < ApplicationRecord
   def address_keyword
     # 国名が選択されている場合は国番号から国名を検索
     if country.present?
+      # Country の中からself のcountry をもとにcountry_name を探してcountry_name に代入
       country_name = Country.find_by(id: country).country_name
       [name, country_name, spot].compact.join(', ')
     end
