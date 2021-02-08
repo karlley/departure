@@ -1,12 +1,31 @@
 <div class="container search-bar">
   <div class="row">
     <%= search_form_for @q do |f| %>
-      <div class="col-md-9">
+      <div class="col-md-5">
         <div class="form-group">
-          <%= f.search_field :name_cont, placeholder: "Search for Destination...", class: "form-control font-awesome" %>
+          <%= f.label :keyword_refind %>
+          <%= f.search_field :name_or_spot_or_address_cont, placeholder: "Refine Search for Destination...", class: "form-control font-awesome" %>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :country_refind %>
+          <%= f.collection_select :country_eq, Country.all, :id, :country_name, prompt: "どこの国ですか?", class: "form-control", id: "destination_country" %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :expense_refind %>
+          <%= f.select :expense_eq, options_for_select(Destination.expenses, 0), { prompt: "費用はいくらですか?"}, { class: "form-control", id: "destination_expense" } %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :season_refind %>
+          <%= f.select :season_eq, [["1月", 1], ["2月", 2], ["3月", 3], ["4月", 4], ["5月", 5], ["6月", 6], ["7月", 7], ["8月", 8], ["9月", 9], ["10月", 10], ["11月", 11], ["12月", 12]], include_blank: "何月ですか?", class: "form-control", id: "destination_season"%>
+        </div>
+      </div>
+      <div class="col-md-1">
         <div class="form-group">
           <%= f.submit "Search", class: "btn btn-primary" %>
         </div>

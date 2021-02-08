@@ -34,6 +34,10 @@ ja:
         experience: 体験
         airline: 航空会社
         food: 食べ物
+        keyword_refind: キーワード
+        country_refind: ロケーション
+        expense_refind: 費用
+        season_refind: シーズン
       comment:
         user_id: コメント投稿者のID
         destination_id: コメントされた行き先のID
