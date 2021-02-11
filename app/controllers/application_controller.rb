@@ -12,11 +12,14 @@ class ApplicationController < ActionController::Base
   def set_search
     if logged_in?
       if have_search_word?
+        search_word = params[:q][:name_or_spot_or_address_cont]
         # 検索ワードからスペース区切りで配列を作成
         # 検索ワードの数だけ検索ワードをkey にしたハッシュを作成
-        grouping_hash = params[:q][:name_or_spot_or_address_cont].split(/[\p{blank}\s]+/).reduce({}) { |hash, word| hash.merge(word => { name_or_spot_or_address_cont: word }) }
+        grouping_hash = search_word.split(/[\p{blank}\s]+/).reduce({}) { |hash, word| hash.merge(word => { name_or_spot_or_address_cont: word }) }
         # view h1 表示用にインスタンス変数化
-        @search_word = params[:q][:name_or_spot_or_address_cont]
+        @search_word = search_word
+      else
+        grouping_hash = nil
       end
       # ユーザのフィードから検索ワード検索/全件取得
       @q = current_user.feed.paginate(page: params[:page], per_page: 5).ransack({ combinator: 'or', groupings: grouping_hash })
