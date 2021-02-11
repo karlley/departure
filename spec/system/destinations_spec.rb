@@ -282,7 +282,7 @@ RSpec.describe "Destinations", type: :system do
       it "feed から検索ワードに該当する結果が表示されること" do
         search_word = "東京"
         create(:destination, name: search_word, user: user)
-        fill_in "q_name_cont", with: search_word
+        fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         within(".destinations") do
@@ -291,7 +291,7 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "検索ワードを入力しなかった場合は行き先一覧が表示されること" do
-        fill_in "q_name_cont", with: " "
+        fill_in "q[name_or_spot_or_address_cont]", with: ""
         click_button "Search"
         expect(page).to have_css "h1", text: "All Destinations"
         within(".destinations") do
