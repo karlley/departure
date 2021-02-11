@@ -279,9 +279,42 @@ RSpec.describe "Destinations", type: :system do
         login_for_system(user)
       end
 
-      it "feed から検索ワードに該当する結果が表示されること" do
+      it "検索ワードから行き先名 にマッチする結果が表示されること" do
         search_word = "東京"
         create(:destination, name: search_word, user: user)
+        fill_in "q[name_or_spot_or_address_cont]", with: search_word
+        click_button "Search"
+        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+        within(".destinations") do
+          expect(page).to have_css "li", count: 1
+        end
+      end
+
+      it "検索ワードからスポット にマッチする結果が表示されること" do
+        search_word = "タワー"
+        create(:destination, spot: search_word, user: user)
+        fill_in "q[name_or_spot_or_address_cont]", with: search_word
+        click_button "Search"
+        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+        within(".destinations") do
+          expect(page).to have_css "li", count: 1
+        end
+      end
+
+      it "検索ワードから住所 にマッチする結果が表示されること" do
+        search_word = "東京都"
+        create(:destination, address: search_word, user: user)
+        fill_in "q[name_or_spot_or_address_cont]", with: search_word
+        click_button "Search"
+        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+        within(".destinations") do
+          expect(page).to have_css "li", count: 1
+        end
+      end
+
+      it "複数の検索ワードでマッチする結果が表示されること" do
+        search_word = "東京 タワー"
+        create(:destination, name: "東京", spot: "タワー", user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
