@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   # have_search_word? を使えるようにする
   include ApplicationHelper
 
+  # TODO: 条件検索も追加
   # feed から検索条件に該当する行き先を検索
   def set_search
     if logged_in?

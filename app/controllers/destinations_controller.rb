@@ -20,6 +20,9 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
+    # TODO: インスタンス変数化
+    # @country = Country.all
+    # @airline = Airline.all
   end
 
   def create
