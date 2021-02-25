@@ -10,6 +10,17 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+ * app/assets/stylesheets/ ディレクトリのファイルを読み込まない
+ * Bootstrap テンプレート読み込み
+ * Bootstrap 読み込み
+ * カスタムCSS 読み込み
+ *
+ * require_tree .
+ * require_self
+ *= require paper-kit.min.css
+ *= require bootstrap.min.css
  */
+@import "paper-kit.scss";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "costom.scss";
