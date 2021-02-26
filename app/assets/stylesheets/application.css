@@ -15,12 +15,6 @@
  * Bootstrap 読み込み
  * カスタムCSS 読み込み
  *
- * require_tree .
- * require_self
- *= require paper-kit.min.css
- *= require bootstrap.min.css
+ *= require_tree .
+ *= require_self
  */
-@import "paper-kit.scss";
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "costom.scss";
