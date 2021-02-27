@@ -10,11 +10,22 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- * app/assets/stylesheets/ ディレクトリのファイルを読み込まない
+ * app/assets/stylesheets/ ディレクトリのファイルを自動で読み込まない
  * Bootstrap テンプレート読み込み
  * Bootstrap 読み込み
  * カスタムCSS 読み込み
  *
- *= require_tree .
- *= require_self
+ * require_tree .
+ * require_self
+ *= require animate.css
+ *= require bootstrap.css
+ *= require flexslider.css
+ *= require icomoon.css
+ *= require magnific-popup.css
+ *= require style.css
+ *= require themify-icons.css
  */
+@import "style.scss";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "costom.scss";
