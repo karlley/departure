@@ -11,4 +11,28 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-# Rails.application.config.assets.precompile += %w( admin.js admin.css )
+Rails.application.config.assets.precompile += %w(
+animate.css \
+bootstrap-datepicker.min.css \
+bootstrap.css \
+flexslider.css \
+icomoon.css \
+magnific-popup.css \
+owl.carousel.min.css \
+owl.theme.default.min.css \
+style.css themify-icons.css \
+bootstrap-datepicker.min.js \
+bootstrap.min.js \
+google_map.js \
+jquery.countTo.js \
+jquery.easing.1.3.js \
+jquery.easypiechart.min.js \
+jquery.magnific-popup.min.js \
+jquery.min.js \
+jquery.stellar.min.js \
+jquery.waypoints.min.js \
+magnific-popup-options.js \
+main.js \
+modernizr-2.6.2.min.js \
+owl.carousel.min.js \
+respond.min.js)
