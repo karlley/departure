@@ -19,8 +19,10 @@
  *= require magnific-popup.css
  *= require style.css
  */
- @import "icomoon/style";
  @import "bootstrap-sprockets";
+ // assets/stylesheets/ にbootstrap.scss, bootstrap.css の2つのファイルがある為拡張子が必要
  @import "bootstrap.scss";
  @import "style.scss";
  @import "custom.scss";
+ // 最後に読込しないとエラー発生
+ @import "icomoon/style";
