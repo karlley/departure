@@ -13,6 +13,11 @@ RSpec.describe "Sessions", type: :system do
         expect(page).to have_content "Login"
       end
 
+      it "ヘッダーメニューが正しく表示される " do
+        expect(page).not_to have_link "Login", href: login_path
+        expect(page).to have_link "Signup", href: signup_path
+      end
+
       it "正しいタイトル表示を確認" do
         expect(page).to have_title full_title("Login")
       end
@@ -36,9 +41,6 @@ RSpec.describe "Sessions", type: :system do
         expect(page).to have_button "ログイン"
       end
 
-      it "ヘッダーにLogin ページのリンクを確認" do
-        expect(page).to have_link "Login", href: login_path
-      end
     end
 
     context "ログイン処理" do
@@ -55,7 +57,7 @@ RSpec.describe "Sessions", type: :system do
       it "有効なユーザーでログイン時に正しいヘッダーの表示を確認" do
         expect(page).to have_link "What's Departure?", href: about_path
         expect(page).to have_link "Signup", href: signup_path
-        expect(page).to have_link "Login", href: login_path
+        expect(page).not_to have_link "Login", href: login_path
         expect(page).not_to have_link "Logout", href: logout_path
 
         fill_in "user_email", with: user.email
