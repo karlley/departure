@@ -3,11 +3,14 @@
     <div class="row">
       <div class="col-md-9">
         <h3>All Destination (<%= @feed_items.count %>)</h3>
-        <%= render 'shared/feed' %>
       </div>
       <div class="col-md-3">
         <p><%= link_to "New Destination", new_destination_path, class: "btn btn-primary btn-lg btn-record" %></p>
       </div>
+    </div>
+    <div class="row">
+      <%# <%= render 'shared/feed' %1> %>
+      <%= render 'destinations/flex' %>
     </div>
   </div>
 <% else %>
