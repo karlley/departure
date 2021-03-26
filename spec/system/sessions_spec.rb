@@ -40,7 +40,6 @@ RSpec.describe "Sessions", type: :system do
       it "ログインボタンが表示される" do
         expect(page).to have_button "ログイン"
       end
-
     end
 
     context "ログイン処理" do
