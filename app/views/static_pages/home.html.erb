@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="row">
-      <%# <%= render 'shared/feed' %1> %>
-      <%= render 'destinations/flex' %>
+      <%# FIXME: locals 指定を=>で記述しないとシンタックスエラーになるので要修正 %>
+      <%= render partial: 'destinations/destination', locals: { :@destinations => @feed_items } %>
     </div>
   </div>
 <% else %>

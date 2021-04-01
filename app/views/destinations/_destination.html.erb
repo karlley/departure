@@ -1,18 +1,37 @@
-<% @destination = destination %>
+<% if @destinations.any? %>
 
-<li id="destination-<%= destination.id %>">
-  <%= link_to gravatar_for(destination.user, size: 50), destination.user %>
-  <span class="name"><%= link_to destination.name, destination_path(destination) %></span>
-  <span class="picture">
-    <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-picture") if destination.picture.url.present? %>
-  </span>
-  <%= render "users/favorite_form" %>
-  <span class="description"><%= destination.description %></span><br>
-  <span class="country">国: <%= destination.country %></span><br>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(destination.created_at) %> ago.
-  </span>
-  <% if current_user.admin? || (current_user == destination.user) %>
-    <%= link_to "delete", destination_path(destination), method: :delete, data: { confirm: "Are you sure?"} %>
-  <% end %>
-</li>
+  <div class="row">
+    <% @destinations.each do |destination| %>
+      <%# render "users/favorite_form で@destination の為の代入" %>
+      <% @destination = destination %>
+      <div class="col-md-3 destination-<%= destination.id %>">
+        <div class="fh5co-portfolio">
+          <%= link_to destination_path(destination.id) do %>
+            <div class="portfolio-entry destination-picture-frame">
+              <%= image_tag(destination.picture.thumb200.url) if destination.picture.url.present? %>
+            </div>
+          <% end %>
+          <div class="portfolio-text destination-text">
+            <div class="destination-title">
+              <%= link_to destination.user, class: "user-icon" do %>
+                <%= gravatar_for(destination.user, size: 50) %>
+              <% end %>
+              <div class="destination-name-user-name">
+                <h3><%= link_to destination.name, destination_path(destination) %></h3>
+                <span><%= link_to destination.user.name, destination.user %></span>
+              </div>
+            </div>
+            <span class="country"><i class="fa fa-map-marker"></i> <%= get_country_name(destination) %></span>
+            <div class="destination-favorite-timestamp">
+              <%= render "users/favorite_form" %>
+              <span class="timestamp"><%= time_ago_in_words(destination.created_at) %>前</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= will_paginate @destinations %>
+
+<% end %>

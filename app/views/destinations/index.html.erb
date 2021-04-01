@@ -5,8 +5,8 @@
   <% else %>
     <h1>All Destinations</h1>
   <% end %>
-  <ul class="destinations">
-    <%= render @destinations %>
-  </ul>
-  <%= will_paginate %>
+  <div class="row">
+    <%# FIXME: collection オプションを使った書き方に要修正 %>
+    <%= render partial: "destination" %>
+  </div>
 </div>
