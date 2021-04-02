@@ -6,14 +6,14 @@
       <% @destination = destination %>
       <div class="col-md-3 destination-<%= destination.id %>">
         <div class="fh5co-portfolio">
-          <%= link_to destination_path(destination.id) do %>
+          <%= link_to destination_path(destination.id), class: "destination-picture-link" do %>
             <div class="portfolio-entry destination-picture-frame">
               <%= image_tag(destination.picture.thumb200.url) if destination.picture.url.present? %>
             </div>
           <% end %>
           <div class="portfolio-text destination-text">
             <div class="destination-title">
-              <%= link_to destination.user, class: "user-icon" do %>
+              <%= link_to destination.user, class: "user-icon-link" do %>
                 <%= gravatar_for(destination.user, size: 50) %>
               <% end %>
               <div class="destination-name-user-name">
