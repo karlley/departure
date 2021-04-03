@@ -3,9 +3,7 @@ class DestinationsController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    if logged_in?
-      @destinations = Destination.paginate(page: params[:page], per_page: 12)
-    end
+    # set_search メソッドで検索結果/全件取得 を表示
   end
 
   def show

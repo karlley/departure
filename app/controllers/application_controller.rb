@@ -20,10 +20,11 @@ class ApplicationController < ActionController::Base
         # view h1 表示用にインスタンス変数化
         @search_word = search_word
       else
+        # 検索ワードがない場合は全件取得
         grouping_hash = nil
       end
       # ユーザのフィードから検索ワード検索/全件取得
-      @q = current_user.feed.paginate(page: params[:page], per_page: 5).ransack({ combinator: 'or', groupings: grouping_hash })
+      @q = current_user.feed.paginate(page: params[:page], per_page: 12).ransack({ combinator: 'or', groupings: grouping_hash })
       # 検索結果(distinct: true で重複除外)
       @destinations = @q.result(distinct: true)
     end
