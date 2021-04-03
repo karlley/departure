@@ -285,8 +285,8 @@ RSpec.describe "Destinations", type: :system do
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: 1
         end
       end
 
@@ -296,8 +296,8 @@ RSpec.describe "Destinations", type: :system do
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: 1
         end
       end
 
@@ -307,8 +307,8 @@ RSpec.describe "Destinations", type: :system do
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: 1
         end
       end
 
@@ -318,8 +318,8 @@ RSpec.describe "Destinations", type: :system do
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: 1
         end
       end
 
@@ -327,8 +327,8 @@ RSpec.describe "Destinations", type: :system do
         fill_in "q[name_or_spot_or_address_cont]", with: ""
         click_button "Search"
         expect(page).to have_css "h1", text: "All Destinations"
-        within(".destinations") do
-          expect(page).to have_css "li", count: Destination.count
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: Destination.count
         end
       end
     end
