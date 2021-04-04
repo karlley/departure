@@ -23,15 +23,9 @@
       <%= render 'follow_form' if logged_in? %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-9">
-      <% if @user.destinations.any? %>
-        <p>行き先 (<%= @user.destinations.count %>)</p>
-        <ol class="destinations">
-          <%= render @destinations %>
-        </ol>
-        <%= will_paginate @destinations %>
-      <% end %>
-    </div>
-  </div>
+  <% if @user.destinations.any? %>
+    <p>投稿した行き先 (<%= @user.destinations.count %>)</p>
+    <%# FIXME: collection オプションを使った呼び出しに変更する %>
+    <%= render partial: "destinations/destination" %>
+  <% end %>
 </div>
