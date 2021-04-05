@@ -123,9 +123,10 @@ RSpec.describe "Users", type: :system do
 
   describe "Profile ページ" do
     context "ページレイアウト" do
+      let!(:destination) { create(:destination, :picture, user: user) }
+
       before do
         login_for_system(user)
-        create_list(:destination, 10, user: user)
         visit user_path(user)
       end
 
@@ -152,16 +153,27 @@ RSpec.describe "Users", type: :system do
       end
 
       it "行き先の情報の表示を確認" do
-        Destination.take(5).each do |destination|
-          expect(page).to have_link destination.name
-          expect(page).to have_content destination.user.name
-          expect(page).to have_content destination.description
-          expect(page).to have_content destination.country
-        end
+        expect(page).to have_selector "img[src$='test_destination_1.jpg']"
+        expect(page).to have_link nil, href: destination_path(destination), class: "destination-picture-link"
+        expect(page).to have_css "img.gravatar"
+        expect(page).to have_link nil, href: user_path(user), class: "user-icon-link"
+        expect(page).to have_link destination.name, href: destination_path(destination)
+        expect(page).to have_link destination.user.name, href: user_path(user)
+        # 国名を取得
+        country_name = get_country_name(destination)
+        expect(page).to have_content country_name
+        expect(page).to have_css ".fa-heart"
+        expect(page).to have_content "いいね!"
+        expect(page).to have_css "span.timestamp"
       end
 
       it "行き先のページネーションの表示を確認" do
+        create_list(:destination, 13, user: user)
+        visit user_path(user)
         expect(page).to have_css "div.pagination"
+        Destination.take(12).each do |destination|
+          expect(page).to have_link destination.name
+        end
       end
     end
 
