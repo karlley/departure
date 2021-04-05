@@ -26,15 +26,8 @@ RSpec.describe "StaticPages", type: :system do
           visit root_path
         end
 
-        it "行き先のページネーションの表示を確認" do
-          # 行き先を13件作成
-          create_list(:destination, 13, user: user)
-          visit root_path
+        it "All Destination の文字列を確認" do
           expect(page).to have_content "All Destination (#{user.destinations.count})"
-          expect(page).to have_css "div.pagination"
-          Destination.take(12).each do |destination|
-            expect(page).to have_link destination.name
-          end
         end
 
         it "'New Destination' ボタンの表示を確認" do
@@ -54,6 +47,16 @@ RSpec.describe "StaticPages", type: :system do
           expect(page).to have_css ".fa-heart"
           expect(page).to have_content "いいね!"
           expect(page).to have_css "span.timestamp"
+        end
+
+        it "行き先のページネーションの表示を確認" do
+          # 行き先を13件作成
+          create_list(:destination, 13, user: user)
+          visit root_path
+          expect(page).to have_css "div.pagination"
+          Destination.take(12).each do |destination|
+            expect(page).to have_link destination.name
+          end
         end
       end
     end
