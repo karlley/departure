@@ -1,10 +1,14 @@
 <% provide(:title, "Search") %>
 <div class="container">
-  <% if @search_word.present? %>
-    <h1>"<%= @search_word %>" Search Results : <%= @destinations.count %></h1>
-  <% else %>
-    <h1>All Destinations</h1>
-  <% end %>
-  <%# FIXME: collection オプションを使った書き方に要修正 %>
-  <%= render partial: "destination" %>
+  <div class="row">
+    <% if @search_word.present? %>
+      <h1>"<%= @search_word %>" 検索結果: <%= @destinations.count %>件</h1>
+    <% else %>
+      <h1>"" 検索結果: <%= @destinations.count %>件</h1>
+    <% end %>
+  </div>
+  <div class="row">
+    <%# FIXME: collection オプションを使った書き方に要修正 %>
+    <%= render partial: "destination" %>
+  </div>
 </div>

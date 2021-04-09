@@ -1,7 +1,7 @@
 <% provide(:title, "Profile") %>
-<h1>Profile</h1>
 <div class="container">
   <div class="row">
+    <h1>Profile</h1>
     <div class="col-md-4">
       <div class="user-picture-box">
         <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
@@ -24,8 +24,10 @@
     </div>
   </div>
   <% if @user.destinations.any? %>
-    <p>投稿した行き先 (<%= @user.destinations.count %>)</p>
-    <%# FIXME: collection オプションを使った呼び出しに変更する %>
-    <%= render partial: "destinations/destination" %>
+    <div class="row user-destinations">
+      <h2>投稿 (<%= @user.destinations.count %>)</h2>
+      <%# FIXME: collection オプションを使った呼び出しに変更する %>
+      <%= render partial: "destinations/destination" %>
+    </div>
   <% end %>
 </div>

@@ -152,6 +152,13 @@ input {
   margin-top: 20px;
 }
 
+.user-destinations {
+  margin-top: 30px;
+  h2 {
+    text-align: left;
+  }
+}
+
 /* user edit */
 .gravatar_edit {
   margin-bottom: 20px;
@@ -222,6 +229,8 @@ aside {
   margin-top: 3em;
 }
 
+/* _destination */
+
 .destination-picture-frame {
   position: relative;
   overflow: hidden;
@@ -238,13 +247,12 @@ aside {
   object-fit: cover;
 }
 
-.fh5co-portfolio .destination-text {
-  padding: 0;
+.fh5co-portfolio .portfolio-text {
+  padding: 20px 10px 0 10px;
 }
 
 .destination-title {
   display: flex;
-  padding-top: 20px;
 }
 
 .destination-name-user-name h3 {
@@ -269,7 +277,7 @@ aside {
 
 .destination-text .country {
   font-size: 14px;
-  color: rgba(232, 230, 227, 0.7);
+  color: $gray-light;
 }
 
 .destination-favorite-timestamp .timestamp {
