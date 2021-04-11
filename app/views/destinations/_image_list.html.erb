@@ -1,0 +1,20 @@
+<% if @destinations.any? %>
+
+  <div class="row destination-image-list">
+    <% @destinations.each do |destination| %>
+      <div class="col-md-3 destination-<%= destination.id %>">
+        <div class="fh5co-portfolio">
+          <%= link_to destination_path(destination.id), class: "destination-picture-link" do %>
+            <div class="portfolio-entry destination-picture-frame resize-to-parent">
+              <%= image_tag(destination.picture.thumb200.url) if destination.picture.url.present? %>
+            </div>
+        </div>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= will_paginate @destinations %>
+
+<% end %>
+
