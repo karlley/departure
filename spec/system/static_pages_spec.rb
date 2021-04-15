@@ -54,6 +54,7 @@ RSpec.describe "StaticPages", type: :system do
           create_list(:destination, 13, user: user)
           visit root_path
           expect(page).to have_css "div.pagination"
+          # FIXME: Destination でのインスタンスの呼び出し方を修正
           Destination.take(12).each do |destination|
             expect(page).to have_link destination.name
           end
