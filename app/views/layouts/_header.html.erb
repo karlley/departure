@@ -9,49 +9,49 @@
 
         <div class="col-xs-10 text-right menu-1">
           <ul>
-            <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to "What's Departure?", about_path %></li>
+            <li class="<%= "active" if current_page?(root_path) %>"><%= link_to "ホーム", root_path %></li>
+            <li class="<%= "active" if current_page?(about_path) %>"><%= link_to "Departureとは?", about_path %></li>
             <% if logged_in? %>
-              <% if current_user.notification == true %>
-                <li class="new_notification header-link">
-                <% else %>
-                  <li class="no_notification header-link">
-                  <% end %>
-                  <li class="<%= 'active' if current_page?(notifications_path) %>"><%= link_to 'Notifications', notifications_path %></li>
-                  <li class="<%= 'active' if current_page?(favorites_path) %>"><%= link_to 'Favorites', favorites_path %></li>
-                  <li class="<%= 'active' if current_page?(users_path) %>"><%= link_to 'All Users', users_path %></li>
-                  <li class="has-dropdown">
-                    <a href="#">My Page</a>
-                    <ul class="dropdown">
-                      <li><%= link_to "Profile", current_user %></li>
-                      <li><%= link_to "Logout", logout_path, method: :delete %></li>
-                    </ul>
-                  </li>
-                <% else %>
-                  <% if current_page?(signup_path) %>
-                    <li class="btn-cta">
-                      <%= link_to login_path do %>
-                        <span>Login</span>
-                      <% end %>
-                    </li>
-                  <% elsif current_page?(login_path) %>
-                    <li class="btn-cta">
-                      <%= link_to signup_path do %>
-                        <span>Signup</span>
-                      <% end %>
-                    </li>
+              <li class="<%= "active" if current_page?(favorites_path) %>"><%= link_to "お気に入り", favorites_path %></li>
+              <li class="<%= "active" if current_page?(new_destination_path) %>"><%= link_to "シェアする", new_destination_path %></li>
+              <li class="has-dropdown">
+                <a href="#">マイページ</a>
+                <ul class="dropdown">
+                  <li><%= link_to "プロフィール", current_user %></li>
+                  <% if current_user.notification == true %>
+                    <li class="new_notification header-link"><%= link_to "受信トレイ", notifications_path %></li>
                   <% else %>
-                    <li class="btn-cta">
-                      <%= link_to signup_path do %>
-                        <span>Signup</span>
-                      <% end %>
-                    </li>
-                    <li class="btn-cta">
-                      <%= link_to login_path do %>
-                        <span>Login</span>
-                      <% end %>
-                    </li>
+                    <li class="no_notification header-link"><%= link_to "受信トレイ", notifications_path %></li>
                   <% end %>
-                <% end %>
+                  <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+                </ul>
+              </li>
+            <% else %>
+              <% if current_page?(signup_path) %>
+                <li class="btn-cta">
+                  <%= link_to login_path do %>
+                    <span>ログイン</span>
+                  <% end %>
+                </li>
+              <% elsif current_page?(login_path) %>
+                <li class="btn-cta">
+                  <%= link_to signup_path do %>
+                    <span>サインアップ</span>
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="btn-cta">
+                  <%= link_to signup_path do %>
+                    <span>サインアップ</span>
+                  <% end %>
+                </li>
+                <li class="btn-cta">
+                  <%= link_to login_path do %>
+                    <span>ログイン</span>
+                  <% end %>
+                </li>
+              <% end %>
+            <% end %>
           </ul>
         </div><!-- .col-xs-10 .text-right menu-1 -->
 
