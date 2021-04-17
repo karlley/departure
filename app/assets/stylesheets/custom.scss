@@ -1,6 +1,5 @@
-// application.scss でインポートするので不要
-// @import "bootstrap-sprockets";
-// @import "bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 /* mixin  */
 @mixin box-sizing {

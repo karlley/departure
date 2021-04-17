@@ -10,19 +10,6 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- * require_tree .
- * require_self
- *= require animate.css
- *= require icomoon.css
- *= require bootstrap.css
- *= require flexslider.css
- *= require magnific-popup.css
- *= require style.css
+ *= require_tree .
+ *= require_self
  */
- @import "bootstrap-sprockets";
- // assets/stylesheets/ にbootstrap.scss, bootstrap.css の2つのファイルがある為拡張子が必要
- @import "bootstrap.scss";
- @import "style.scss";
- @import "custom.scss";
- // 最後に読込しないとエラー発生
- @import "icomoon/style";

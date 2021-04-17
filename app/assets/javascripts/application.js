@@ -11,9 +11,10 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require modernizr-2.6.2.min
+//= require jquery //Bootstrap で使用
+//= require bootstrap //Bootstrap で使用
 //= require activestorage
 //= require turbolinks
-//= require underscore
+//= require underscore //GoogleMap で使用
 //= require gmaps/google
-// require_tree .
+//= require_tree .
