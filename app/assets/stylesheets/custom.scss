@@ -90,6 +90,61 @@ footer {
   }
 }
 
+/* static page */
+.background-black {
+  background: black;
+}
+
+.hero-center {
+  text-align: center;
+}
+
+.hero-image {
+  display: inline-block;
+  width: 100%;
+  margin: 100px 0;
+}
+
+.jumbotron-extend {
+  position: relative;
+  height: 100vh;
+  min-height: 350px;
+  background-image: image-url("hero.jpg");
+  background-size: cover;
+}
+
+@media (max-width: 767px) {
+  .jumbotron-extend {
+    height: 300px;
+    // height: 100%; 画像高さが100% じゃないので画像のセンタリングができない
+    min-height: 0;
+  }
+}
+
+.jumbotron-container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  h1 {
+    font-size: 400px;
+    color: white;
+  }
+  p {
+    text-align: center;
+  }
+  a:hover {
+    color: black;
+    background-color: white;
+    border-color: white;
+  }
+}
+
+.btn-outline {
+  color: white;
+  font-size: 20px;
+  border: 3px solid white;
+}
+
 /* user forms */
 .checkbox {
   margin: -10px;

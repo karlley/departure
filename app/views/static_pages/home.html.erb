@@ -1,12 +1,22 @@
 <% if logged_in? %>
-  <div class="container">
-    <div class="row">
-      <h1>All Destination (<%= @feed_items.count %>)</h1>
-      <p><%= link_to "New Destination", new_destination_path, class: "btn btn-primary btn-lg btn-record" %></p>
+  <%# <div class="cover-container background-black hero-center"> %>
+  <%#   <div class="hero-image"> %>
+  <%#     <%= image_tag "hero.jpg", alt: "hero image" %1> %>
+  <%#   </div> %>
+  <%# </div> %>
+  <div class="jumbotron jumbotron-extend">
+    <div class="container-fluid jumbotron-container">
+      <h1>さあ、どこに行こう？</h1>
+      <p></p>
+      <p><a class="btn btn-lg btn-outline" href="#" role="button">行き先を探す</a></p>
     </div>
-    <div class="row">
-      <%# FIXME: locals 指定を=>で記述しないとシンタックスエラーになるので要修正 %>
-      <%= render partial: 'destinations/destination', locals: { :@destinations => @feed_items } %>
+  </div>
+  <div class="container">
+        <h1>All Destination (<%= @feed_items.count %>)</h1> <%# <p><%= link_to "New Destination", new_destination_path, class: "btn btn-primary btn-lg btn-record" %1></p> %>
+      <%# <div class="row"> %>
+        <%# FIXME: locals 指定を=>で記述しないとシンタックスエラーになるので要修正 %>
+        <%= render partial: 'destinations/destination', locals: { :@destinations => @feed_items } %>
+        <%# </div> %>
     </div>
   </div>
 <% else %>

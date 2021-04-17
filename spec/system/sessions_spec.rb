@@ -67,9 +67,9 @@ RSpec.describe "Sessions", type: :system do
         expect(page).to have_link "ホーム", href: root_path
         expect(page).to have_link "Departureとは?", href: about_path
         expect(page).to have_link "お気に入り", href: favorites_path
-        expect(page).to have_link "シェアする", href:new_destination_path
+        expect(page).to have_link "シェアする", href: new_destination_path
         expect(page).to have_content "マイページ"
-        expect(page).not_to have_link "プロフィール", href: user_path(user)
+        expect(page).to have_link "プロフィール", href: user_path(user)
         expect(page).to have_link "受信トレイ", href: notifications_path
         expect(page).to have_link "ログアウト", href: logout_path
         expect(page).not_to have_link "ログイン", href: login_path

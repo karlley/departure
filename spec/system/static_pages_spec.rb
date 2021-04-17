@@ -30,9 +30,9 @@ RSpec.describe "StaticPages", type: :system do
           expect(page).to have_content "All Destination (#{user.destinations.count})"
         end
 
-        it "'New Destination' ボタンの表示を確認" do
-          expect(page).to have_link "New Destination", href: new_destination_path
-        end
+        # it "'シェアする'ボタンの表示を確認" do
+        #   expect(page).to have_link "シェアする", href: new_destination_path
+        # end
 
         it "行き先の情報が正しく表示されている事を確認" do
           expect(page).to have_selector "img[src$='test_destination_1.jpg']"

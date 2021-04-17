@@ -326,7 +326,7 @@ RSpec.describe "Destinations", type: :system do
       it "検索ワードを入力しなかった場合は行き先一覧が表示されること" do
         fill_in "q[name_or_spot_or_address_cont]", with: ""
         click_button "Search"
-        expect(page).to have_css "h1", text: "\"\" 検索結果: #{Destination.count}"
+        expect(page).to have_css "h1", text: "行き先一覧: #{Destination.count}件"
         within("div.destinations-list") do
           expect(page).to have_css "div.col-md-3", count: Destination.count
         end

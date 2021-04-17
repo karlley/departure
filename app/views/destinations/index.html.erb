@@ -3,12 +3,13 @@
   <div class="row">
     <% if @search_word.present? %>
       <h1>"<%= @search_word %>" 検索結果: <%= @destinations.count %>件</h1>
+      <%# FIXME: collection オプションを使った書き方に要修正 %>
+      <%= render partial: "destination" %>
+      <%# <%= render partial: "destinations/image_list" %1> %>
     <% else %>
-      <h1>"" 検索結果: <%= @destinations.count %>件</h1>
+      <h1>行き先一覧: <%= @destinations.count %>件</h1>
+      <%# FIXME: collection オプションを使った書き方に要修正 %>
+      <%= render partial: "destination" %>
     <% end %>
-  </div>
-  <div class="row">
-    <%# FIXME: collection オプションを使った書き方に要修正 %>
-    <%= render partial: "destination" %>
   </div>
 </div>
