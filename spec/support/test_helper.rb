@@ -37,3 +37,8 @@ def current_user
     end
   end
 end
+
+# 国番号から国名を取得
+def get_country_name(destination)
+  Country.find_by(id: destination.country).country_name
+end

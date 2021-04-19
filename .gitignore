@@ -27,7 +27,7 @@
 /config/master.key
 
 # Ignore gems
-/vender
+/vendor
 
 # Ignore pictures
 /public/uploads/*

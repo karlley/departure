@@ -30,7 +30,7 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "写真が非表示であること" do
-        within(".picture") do
+        within(".picture-select") do
           expect(page).not_to have_selector "img"
         end
       end
@@ -284,9 +284,9 @@ RSpec.describe "Destinations", type: :system do
         create(:destination, name: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
-        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
+        expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果: 1"
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: 1
         end
       end
 
@@ -295,9 +295,9 @@ RSpec.describe "Destinations", type: :system do
         create(:destination, spot: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
-        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
+        expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果: 1"
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: 1
         end
       end
 
@@ -306,9 +306,9 @@ RSpec.describe "Destinations", type: :system do
         create(:destination, address: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
-        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
+        expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果: 1"
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: 1
         end
       end
 
@@ -317,18 +317,18 @@ RSpec.describe "Destinations", type: :system do
         create(:destination, name: "東京", spot: "タワー", user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
         click_button "Search"
-        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
+        expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果: 1"
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: 1
         end
       end
 
       it "検索ワードを入力しなかった場合は行き先一覧が表示されること" do
         fill_in "q[name_or_spot_or_address_cont]", with: ""
         click_button "Search"
-        expect(page).to have_css "h1", text: "All Destinations"
-        within(".destinations") do
-          expect(page).to have_css "li", count: Destination.count
+        expect(page).to have_css "h1", text: "行き先一覧: #{Destination.count}件"
+        within("div.destinations-list") do
+          expect(page).to have_css "div.col-md-3", count: Destination.count
         end
       end
     end
