@@ -1,32 +1,32 @@
 <div class="container search-bar">
   <div class="row">
     <%= search_form_for @q do |f| %>
-      <div class="col-md-5">
+      <div class="col-md-4">
         <div class="form-group">
           <%= f.label :keyword_refind %>
-          <%= f.search_field :name_or_spot_or_address_cont, placeholder: "Refine Search for Destination...", class: "form-control font-awesome", id: "destination_keyword_search" %>
+          <%= f.search_field :name_or_spot_or_address_cont, placeholder: "行き先はどちらですか?", class: "form-control font-awesome", id: "destination_keyword_search" %>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <%= f.label :country_refind %>
-          <%= f.collection_select :country_eq, Country.all, :id, :country_name, prompt: "どこの国ですか?", class: "form-control", id: "destination_country_search" %>
+          <%= f.collection_select :country_eq, Country.all, :id, :country_name,  { prompt: "国を選択" }, { class: "form-control", id: "destination_country_search" } %>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <%= f.label :expense_refind %>
-          <%= f.select :expense_eq, options_for_select(Destination.expenses, 0), { prompt: "費用はいくらですか?"}, { class: "form-control", id: "destination_expense_search" } %>
+          <%= f.select :expense_eq, options_for_select(Destination.expenses, 0), { prompt: "費用を選択" }, { class: "form-control", id: "destination_expense_search" } %>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <%= f.label :season_refind %>
-          <%= f.select :season_eq, [["1月", 1], ["2月", 2], ["3月", 3], ["4月", 4], ["5月", 5], ["6月", 6], ["7月", 7], ["8月", 8], ["9月", 9], ["10月", 10], ["11月", 11], ["12月", 12]], include_blank: "何月ですか?", class: "form-control", id: "destination_season_search"%>
+          <%= f.select :season_eq, [["1月", 1], ["2月", 2], ["3月", 3], ["4月", 4], ["5月", 5], ["6月", 6], ["7月", 7], ["8月", 8], ["9月", 9], ["10月", 10], ["11月", 11], ["12月", 12]], { include_blank: "月を選択" }, { class: "form-control", id: "destination_season_search" } %>
         </div>
       </div>
       <div class="col-md-1">
-        <div class="form-group">
+        <div class="form-group search-button">
           <%= f.submit "Search", class: "btn btn-primary" %>
         </div>
       </div>
