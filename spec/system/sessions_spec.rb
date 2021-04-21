@@ -7,7 +7,7 @@ RSpec.describe "Sessions", type: :system do
     visit login_path
   end
 
-  describe "Login ページ" do
+  describe "sessions#new" do
     context "ページレイアウト" do
       it "Login の文字列の存在を確認" do
         expect(page).to have_content "Login"

@@ -104,7 +104,7 @@ RSpec.describe "Destinations", type: :system do
     end
   end
 
-  describe "Destination ページ" do
+  describe "destinations#show" do
     context "ページレイアウト" do
       before do
         login_for_system(user)
@@ -230,7 +230,7 @@ RSpec.describe "Destinations", type: :system do
     end
   end
 
-  describe "Destination Search ページ" do
+  describe "destinations#index" do
     context "ページレイアウト" do
       context "ログインしている場合" do
         it "各ページに検索バーが表示されていること" do
@@ -334,7 +334,7 @@ RSpec.describe "Destinations", type: :system do
     end
   end
 
-  describe "Destination Edit ページ" do
+  describe "destinations#edit" do
     before do
       login_for_system(user)
       visit destination_path(destination)

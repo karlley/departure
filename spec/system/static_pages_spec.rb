@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :system do
-  describe "Home ページ" do
+  describe "static_pages#home" do
     context "ページ全体" do
       before do
         visit root_path
@@ -48,7 +48,7 @@ RSpec.describe "StaticPages", type: :system do
     end
   end
 
-  describe "About ページ" do
+  describe "static_pages#about" do
     before do
       visit about_path
     end

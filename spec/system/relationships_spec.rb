@@ -9,7 +9,7 @@ RSpec.describe "Relationships", type: :system do
   let!(:destination2) { create(:destination, user: user2) }
   let!(:destination3) { create(:destination, user: user3) }
 
-  describe "Following ページ" do
+  describe "users#following" do
     before do
       create(:relationship, follower_id: user1.id, followed_id: user2.id)
       create(:relationship, follower_id: user1.id, followed_id: user3.id)
@@ -45,7 +45,7 @@ RSpec.describe "Relationships", type: :system do
     end
   end
 
-  describe "Followers ページ" do
+  describe "users#followers" do
     before do
       create(:relationship, follower_id: user2.id, followed_id: user1.id)
       create(:relationship, follower_id: user3.id, followed_id: user1.id)

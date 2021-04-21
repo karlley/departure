@@ -7,7 +7,7 @@ RSpec.describe "Users", type: :system do
   let!(:destination) { create(:destination, user: user) }
   let!(:other_destination) { create(:destination, user: other_user) }
 
-  describe "All Users ページ" do
+  describe "users#index" do
     context "管理者ユーザーの場合" do
       it "ページネーション機能, 自分以外のユーザーの削除ボタンが表示される" do
         create_list(:user, 30)
@@ -39,7 +39,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "Signup ページ" do
+  describe "users#new" do
     before do
       visit signup_path
     end
@@ -76,7 +76,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "Edit Profile ページ" do
+  describe "users#edit" do
     before do
       login_for_system(user)
       visit user_path(user)
@@ -121,7 +121,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "Profile ページ" do
+  describe "users#index" do
     context "ページレイアウト" do
       before do
         login_for_system(user)
@@ -238,7 +238,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "フォロー機能" do
+  describe "users#following" do
     context "ユーザーのフォロー/アンフォロー処理", js: true do
       it "ユーザーのフォロー/アンフォローができること" do
         login_for_system(user)
@@ -252,7 +252,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "お気に入り機能" do
+  describe "favorites#create, destroy" do
     context "行き先のお気に入り登録/解除処理" do
       before do
         login_for_system(user)
@@ -303,7 +303,7 @@ RSpec.describe "Users", type: :system do
       end
     end
 
-    describe "Favorites ページ" do
+    describe "favorites#index" do
       before do
         login_for_system(user)
       end
