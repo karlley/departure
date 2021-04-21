@@ -1,12 +1,12 @@
 <%= form_with model: @destination, local: true do |f| %>
   <%= render "shared/error_messages", object: f.object %>
-  <span class="picture">
+  <div class="picture-select">
     <%= f.label :picture %><span class="input-unneed"> *Optional</span>
     <%= f.file_field :picture, accept: "image/jpeg, image/png", class: "form-control", id: "destination_picture" %>
     <% if edit_page? && have_picture? %>
       <%= image_tag(@destination.picture.thumb400.url) %>
     <% end %>
-  </span>
+  </div>
   <div class="form-group">
     <%= f.label :name %><span class="input-need"> *Required</span>
     <%= f.text_field :name, class: "form-control", id: "destination_name" %>
@@ -21,15 +21,15 @@
   </div>
   <div class="form-group">
     <%= f.label :country %><span class="input-need"> *Required</span>
-    <%= f.collection_select :country, Country.all, :id, :country_name, prompt: "国を選択してください", class: "form-control", id: "destination_country" %>
+    <%= f.collection_select :country, Country.all, :id, :country_name, { prompt: "国を選択" }, { class: "form-control", id: "destination_country" } %>
   </div>
   <div class="form-group">
     <%= f.label :expense %><span class="input-need"> *Required</span>
-    <%= f.select :expense, options_for_select(Destination.expenses, @destination.expense_before_type_cast), { prompt: "費用を選択してください" }, { class: "form-control", id: "destination_expense" } %>
+    <%= f.select :expense, options_for_select(Destination.expenses, @destination.expense_before_type_cast), { prompt: "費用を選択" }, { class: "form-control", id: "destination_expense" } %>
   </div>
   <div class="form-group">
     <%= f.label :season %><span class="input-need"> *Required</span>
-    <%= f.select :season, [["1月", 1], ["2月", 2], ["3月", 3], ["4月", 4], ["5月", 5], ["6月", 6], ["7月", 7], ["8月", 8], ["9月", 9], ["10月", 10], ["11月", 11], ["12月", 12]], include_blank: "旅行月を選択してください", class: "form-control", id: "destination_season"%>
+    <%= f.select :season, [["1月", 1], ["2月", 2], ["3月", 3], ["4月", 4], ["5月", 5], ["6月", 6], ["7月", 7], ["8月", 8], ["9月", 9], ["10月", 10], ["11月", 11], ["12月", 12]], { include_blank: "旅行月を選択" }, { class: "form-control", id: "destination_season" } %>
   </div>
   <div class="form-group">
     <%= f.label :experience %><span class="input-unneed"> *Optional</span>
@@ -37,7 +37,7 @@
   </div>
   <div class="form-group">
     <%= f.label :airline %><span class="input-unneed"> *Optional</span>
-    <%= f.collection_select :airline, Airline.all, :id, :airline_name, prompt: "航空会社を選択してください", class: "form-control", id: "destination_airline" %>
+    <%= f.collection_select :airline, Airline.all, :id, :airline_name, { prompt: "航空会社を選択" }, { class: "form-control", id: "destination_airline" } %>
   </div>
   <div class="form-group">
     <%= f.label :food %><span class="input-unneed"> *Optional</span>
@@ -45,7 +45,7 @@
   </div>
   <%= f.submit class: "btn btn-primary" %>
   <% if edit_page? %>
-    <%= link_to "行き先を削除する", destination_path(@destination), method: :delete, data: { confirm: "Are you sure?" } %> 
+    <%= link_to "行き先を削除する", destination_path(@destination), method: :delete, data: { confirm: "削除してよろしいですか?" } %> 
   <% end %>
 <% end %>
 

@@ -10,19 +10,19 @@ RSpec.describe "Destinations", type: :system do
   let!(:country) { create(:country) }
   let!(:airline) { create(:airline) }
 
-  describe "New Destination ページ" do
+  describe "destinations#new" do
     before do
       login_for_system(user)
       visit new_destination_path
     end
 
     context "ページレイアウト" do
-      it "'New Destination' の文字列が存在すること" do
-        expect(page).to have_content "New Destination"
+      it "'シェア' の文字列が存在すること" do
+        expect(page).to have_content "シェア"
       end
 
       it "正しいタイトルが表示されること" do
-        expect(page).to have_title full_title("New Destination")
+        expect(page).to have_title full_title("シェア")
       end
 
       it "写真選択フォームが表示されていること" do
@@ -30,7 +30,7 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "写真が非表示であること" do
-        within(".picture") do
+        within(".picture-select") do
           expect(page).not_to have_selector "img"
         end
       end
