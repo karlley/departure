@@ -121,7 +121,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "users#index" do
+  describe "users#show" do
     context "ページレイアウト" do
       before do
         login_for_system(user)
@@ -156,7 +156,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_link destination.name
           expect(page).to have_content destination.user.name
           expect(page).to have_content destination.description
-          expect(page).to have_content destination.country
+          expect(page).to have_content get_country_name(destination)
         end
       end
 
@@ -328,7 +328,8 @@ RSpec.describe "Users", type: :system do
           visit favorites_path
           expect(page).to have_content destination.name
           expect(page).to have_content destination.description
-          expect(page).to have_content "country: #{destination.country}"
+          country_name = get_country_name(destination)
+          expect(page).to have_content country_name
           expect(page).to have_content "posted by #{user.name}"
           expect(page).to have_link user.name, href: user_path(user)
         end
