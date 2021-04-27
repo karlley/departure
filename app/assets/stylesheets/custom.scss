@@ -8,6 +8,18 @@
   box-sizing: border-box;
 }
 
+/* media query */
+$media-sp: 768px;
+
+@mixin sp {
+  @media only screen and (max-width: $media-sp) {
+    @content;
+  }
+}
+
+/* color */
+$white: white;
+
 /* common */
 body {
   padding-top: 60px;
@@ -35,14 +47,12 @@ h1, h1,  h3, h4, h5, h6 {
 
 h1 {
   font-size: 3em;
-  letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
 }
 
 h2 {
   font-size: 1.2em;
-  letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
@@ -223,9 +233,40 @@ span.picture {
   box-sizing: border-box;
 }
 
-/* root */
+/* static_pages home */
 .btn-record {
   margin-top: 3em;
+}
+
+.hero-image {
+  height: 100vh;
+  @include sp {
+    height: 0;
+  }
+  min-height: 300px;
+  background-image: image-url("hero.jpg");
+  background-position: center;
+  background-size: auto 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .hero-image-text {
+  }
+  h1 {
+    color: $white;
+    font-size: 300px;
+    @include sp {
+      font-size: 70px;
+      margin-bottom: 0;
+    }
+  }
+  p {
+    color: $white;
+    font-size: 60px;
+    @include sp {
+      font-size: 25px;
+    }
+  }
 }
 
 /* destination new */

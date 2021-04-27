@@ -1,17 +1,36 @@
 <% if logged_in? %>
+  <%# <div class="container"> %>
+  <%#   <div> %>
+  <%#     <p><%= link_to "New Destination", new_destination_path, class: "btn btn-primary btn-lg btn-record" %1></p> %>
+  <%#   </div> %>
+  <%# </div><!-- .container --> %>
+
+<div class="jumbotron hero-image">
+  <div class="container-fluid hero-image-text">
+      <h1>Departure</h1>
+      <p>人生を変える旅先を探そう</p>
+  </div><!-- .container-fluid .jumbotron-container -->
+</div><!-- .jumbotron .jumbotron-extend -->
+
   <div class="container">
     <div class="row">
-      <div class="col-md-9">
-        <h3>All Destination (<%= @feed_items.count %>)</h3>
+      <div class="col-md-12">
         <%= render 'shared/feed' %>
-      </div>
-      <div class="col-md-3">
-        <p><%= link_to "New Destination", new_destination_path, class: "btn btn-primary btn-lg btn-record" %></p>
-      </div>
+      </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+
+  <div class="row">
+  </div>
+  <div class="row">
+  </div>
+  <div class="row">
+  </div>
+
+<% else %>
+  <div class="container">
+    <div class="row">
+      <h1>Welcome to Departure!</h1>
     </div>
   </div>
-<% else %>
-  <center>
-    <h1>Welcome to Departure!</h1>
-  </center>
 <% end %>
