@@ -21,8 +21,9 @@ $media-sp: 768px;
 $white: white;
 
 /* common */
+/* navbar をfixed-top に設定している為追加 */
 body {
-  padding-top: 60px;
+  padding-top: 50px;
 }
 
 section {
@@ -68,19 +69,10 @@ a:hover {
   text-decoration: none;
 }
 
-/* header */
-.navbar ul {
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
+/* navbar */
 
-#logo {
-  float: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  img {
-    width: 150px;
-  }
+.navbar-form input {
+  margin-bottom: 0;
 }
 
 /* search bar */
@@ -254,7 +246,7 @@ span.picture {
   }
   h1 {
     color: $white;
-    font-size: 300px;
+    font-size: 200px;
     @include sp {
       font-size: 70px;
       margin-bottom: 0;
