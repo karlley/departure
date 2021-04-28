@@ -230,10 +230,10 @@ RSpec.describe "Destinations", type: :system do
     end
   end
 
-  describe "destinations#index" do
-    context "ページレイアウト" do
+  describe "destination 検索フォーム" do
+    context "ログイン状態での検索フォームの表示確認" do
       context "ログインしている場合" do
-        it "各ページに検索バーが表示されていること" do
+        it "各ページに検索フォームが表示されていること" do
           login_for_system(user)
           visit root_path
           expect(page).to have_css "form#destination_search"
@@ -266,66 +266,71 @@ RSpec.describe "Destinations", type: :system do
         end
       end
 
-      context "未ログインの場合" do
-        it "検索バーが表示されないこと" do
+      context "未ログイン時の検索フォームの表示" do
+        it "検索フォームが表示されないこと" do
           visit root_path
           expect(page).not_to have_css "form#destination_search"
         end
       end
     end
 
-    context "検索機能" do
+    context "検索結果の検証" do
       before do
         login_for_system(user)
       end
 
-      it "検索ワードから行き先名 にマッチする結果が表示されること" do
+      it "検索ワードから行き先名 にマッチする結果が表示されること", js: true do
         search_word = "東京"
         create(:destination, name: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         within(".destinations") do
           expect(page).to have_css "li", count: 1
         end
       end
 
-      it "検索ワードからスポット にマッチする結果が表示されること" do
+      it "検索ワードからスポット にマッチする結果が表示されること", js: true do
         search_word = "タワー"
         create(:destination, spot: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         within(".destinations") do
           expect(page).to have_css "li", count: 1
         end
       end
 
-      it "検索ワードから住所 にマッチする結果が表示されること" do
+      it "検索ワードから住所 にマッチする結果が表示されること", js: true do
         search_word = "東京都"
         create(:destination, address: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         within(".destinations") do
           expect(page).to have_css "li", count: 1
         end
       end
 
-      it "複数の検索ワードでマッチする結果が表示されること" do
+      it "複数の検索ワードでマッチする結果が表示されること", js: true do
         search_word = "東京 タワー"
         create(:destination, name: "東京", spot: "タワー", user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         within(".destinations") do
           expect(page).to have_css "li", count: 1
         end
       end
 
-      it "検索ワードを入力しなかった場合は行き先一覧が表示されること" do
+      it "検索ワードを入力しなかった場合は行き先一覧が表示されること", js: true do
         fill_in "q[name_or_spot_or_address_cont]", with: ""
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "All Destinations"
         within(".destinations") do
           expect(page).to have_css "li", count: Destination.count

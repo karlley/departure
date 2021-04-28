@@ -37,7 +37,7 @@ RSpec.describe "Sessions", type: :system do
       end
 
       it "ヘッダーにLogin ページのリンクを確認" do
-        expect(page).to have_link "Login", href: login_path
+        expect(page).to have_link "ログイン", href: login_path
       end
     end
 
@@ -52,21 +52,28 @@ RSpec.describe "Sessions", type: :system do
         expect(page).not_to have_content "メールアドレスとパスワードの組み合わせが誤っています"
       end
 
-      it "有効なユーザーでログイン時に正しいヘッダーの表示を確認" do
-        expect(page).to have_link "What's Departure?", href: about_path
-        expect(page).to have_link "Signup", href: signup_path
-        expect(page).to have_link "Login", href: login_path
-        expect(page).not_to have_link "Logout", href: logout_path
+      it "有効なユーザーでログイン時に正しいメニューバーの表示を確認" do
+        expect(page).to have_link "ホーム", href: root_path
+        expect(page).to have_link "Departure とは?", href: about_path
+        expect(page).not_to have_link "ログアウト", href: logout_path
+        expect(page).to have_link "サインアップ", href: signup_path
+        expect(page).to have_link "ログイン", href: login_path
+        expect(page).not_to have_css "form#destination_search"
 
         fill_in "user_email", with: user.email
         fill_in "user_password", with: user.password
         click_button "ログイン"
 
-        expect(page).to have_link "What's Departure?", href: about_path
-        expect(page).to have_link "All Users", href: users_path
-        expect(page).to have_content "My Page"
-        expect(page).to have_link "Logout", href: logout_path
-        expect(page).not_to have_link "Login", href: login_path
+        expect(page).to have_link "ホーム", href: root_path
+        expect(page).to have_link "Departure とは?", href: about_path
+        expect(page).to have_link "お気に入り", href: favorites_path
+        expect(page).to have_link "シェア", href: new_destination_path
+        expect(page).to have_content "マイページ"
+        expect(page).to have_link "プロフィール", href: user_path(user)
+        expect(page).to have_link "ログアウト", href: logout_path
+        expect(page).not_to have_link "サインアップ", href: signup_path
+        expect(page).not_to have_link "ログイン", href: login_path
+        expect(page).to have_css "form#destination_search"
       end
     end
   end
