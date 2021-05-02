@@ -1,12 +1,14 @@
 <% provide(:title, "Search") %>
-<div class="container">
+<div class="container-fluid">
   <% if @search_word.present? %>
     <h1>"<%= @search_word %>" Search Results : <%= @destinations.count %></h1>
   <% else %>
     <h1>All Destinations</h1>
   <% end %>
-  <ul class="destinations">
-    <%= render @destinations %>
-  </ul>
+  <%# <ul class="destinations"> %>
+    <%# <%= render @destinations %1> %>
+    <%# TODO: _list_with_map 作成後に削除 %>
+    <%= render "destinations/list_with_map" %>
+  <%# </ul> %>
   <%= will_paginate %>
 </div>
