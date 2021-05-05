@@ -18,7 +18,12 @@ $media-sp: 768px;
 }
 
 /* color */
-$white: white;
+$black-text: #333333;
+$white-text: white;
+$gray-text: gray;
+$gray-border: $gray-light;
+$pink-favorite: pink;
+$red-error: red;
 
 /* common */
 /* navbar をfixed-top に設定している為追加 */
@@ -56,8 +61,6 @@ h2 {
   font-size: 1.2em;
   margin-bottom: 30px;
   text-align: center;
-  font-weight: normal;
-  color: #777;
 }
 
 p {
@@ -84,14 +87,54 @@ a:hover {
   margin-top: 24px;
 }
 
+nav.no-border {
+  border: none;
+}
+
 /* footer */
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
+  border-top: 1px solid $gray-border;
+  color: $gray-text;
   small {
     floar: center;
+  }
+}
+
+/* static_pages home */
+.btn-record {
+  margin-top: 3em;
+}
+
+.hero-image {
+  height: 100vh;
+  @include sp {
+    height: 0;
+  }
+  min-height: 300px;
+  background-image: image-url("hero.jpg");
+  background-position: center;
+  background-size: auto 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .hero-image-text {
+  }
+  h1 {
+    color: $white-text;
+    font-size: 200px;
+    @include sp {
+      font-size: 70px;
+      margin-bottom: 0;
+    }
+  }
+  p {
+    color: $white-text;
+    font-size: 60px;
+    @include sp {
+      font-size: 25px;
+    }
   }
 }
 
@@ -111,8 +154,9 @@ footer {
 }
 
 /* user new */
+/* FIXME: margin-bottom が他に影響があるので要修正 */
 input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
+  border: 1px solid $gray-border;
   width: 100%;
   margin-bottom: 15px;
   @include box_sizing;
@@ -123,9 +167,9 @@ input {
 }
 
 #error_explanation {
-  color: red;
+  color: $red-error;
   ul {
-    color: red;
+    color: $red-error;
     margin: 0 0 30px 0;
   }
 }
@@ -133,7 +177,7 @@ input {
 .field_with_errors {
   @extend .has-error;
   .form-control {
-    color: $state-danger-text;
+    color: $red-error;
   }
 }
 
@@ -169,102 +213,98 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-border;
   }
 }
 
 /* destination list */
-.destinations {
-  list-style: none;
-  padding: 0;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+
+.destination-list {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-right: 15px;
+  margin-left: 15px;
+  border-bottom: 1px solid $gray-border;
+}
+
+.destination-list-picture-wrapper {
+  .destination-list-picture {
+    text-align: center;
   }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-  .description {
-    display: block;
-    margin-left: 60px;
-    img {
-      display: block;
-      padding: 5px 0;
-    }
-  }
-  .timestamp {
-    color: $gray-light;
-    display: block;
-    margin-left: 60px;
-  }
-  .gravatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
+  .destination-list-picture img {
+    width: 100%;
   }
 }
 
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
-}
-
-span.picture {
-  margin-top: 10px;
-  input {
-    border: 0;
-  }
-}
-
-.destination-picture img {
-  max-width: 100%;
-  height: auto;
-  box-sizing: border-box;
-}
-
-/* static_pages home */
-.btn-record {
-  margin-top: 3em;
-}
-
-.hero-image {
-  height: 100vh;
+.destination-list-info-wrapper {
+  //.destination-list-picture-wrapper に合わせて高さ指定
+  height: 304px;
   @include sp {
-    height: 0;
+    height: 200px;
   }
-  min-height: 300px;
-  background-image: image-url("hero.jpg");
-  background-position: center;
-  background-size: auto 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .hero-image-text {
-  }
-  h1 {
-    color: $white;
-    font-size: 200px;
+  position: relative;
+  //sp のみ上部にマージン
+  .destination-list-title {
+    display: flex;
     @include sp {
-      font-size: 70px;
+      margin-top: 15px;
+    }
+    .destination-list-icon {
+      .user-icon img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+    h3 {
+      font-size: 30px;
+      margin-top: 0;
       margin-bottom: 0;
+      margin-left: 15px;
+      display: flex;
+      align-items: center;
+      a {
+        color: $black-text;
+      }
     }
   }
-  p {
-    color: $white;
-    font-size: 60px;
-    @include sp {
-      font-size: 25px;
+  .destination-list-user {
+    a {
+      color: $black-text;
+    }
+  }
+  .destination-list-description {
+    //後方互換も考慮して両方指定
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  .destination-list-lower-end {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    //ネガティブマージンで左右位置調整
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-left: -15px;
+    .destination-list-country-name {
+      color: $gray-text;
+    }
+    .destination-list-favorite-timestamp {
+      display: flex;
+      justify-content: space-between;
+      .destination-list-timestamp {
+        color: $gray-text;
+      }
     }
   }
 }
+
 
 /* destination new */
 
 .input-need {
-  color: red;
+  color: $red-error;
   font-size: 13px;
 }
 
@@ -293,7 +333,7 @@ h2.destination-name {
   li {
     font-size: 14px;
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid $gray-border;
     .comment {
       font-size: 16px
     }
@@ -305,7 +345,7 @@ h2.destination-name {
 }
 
 .comment-create-at {
-  color: grey;
+  color: $gray-text;
 }
 
 /* follow */
@@ -315,31 +355,31 @@ h2.destination-name {
 
 /* favorite */
 .favorite-btn-unfavorite {
-  color: red;
+  color: $pink-favorite;
 }
 
 .favorite-btn-favorite {
-  color: grey;
+  color: $gray-text;
 }
  
 .favorites {
   list-style: none;
   li {
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid $gray-border;
   }
 }
 
 /* notification */
 li.new_notification > a {
-  color: red;
+  color: $red-error;
 }
 
 .notifications {
   list-style: none;
   li {
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid $gray-border;
   }
   .gravatar {
     margin-right: 10px;
@@ -348,7 +388,7 @@ li.new_notification > a {
 }
 
 .notification-timestamp {
-  color: grey;
+  color: $gray-border;
 }
 .notification-message {
   font-size: 16px;
