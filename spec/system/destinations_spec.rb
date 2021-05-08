@@ -104,6 +104,43 @@ RSpec.describe "Destinations", type: :system do
     end
   end
 
+  describe "destinations#index" do
+    context "ページレイアウト" do
+      before do
+        login_for_system(user)
+      end
+
+      it "旅先の情報が正しく表示されている事を確認" do
+        visit destinations_path
+        expect(page).to have_css "div.destination-list-picture img"
+        # 旅先画像の表示を確認
+        expect(page).to have_link nil, href: destination_path(destination), class: "destination-list-picture-link"
+        # アイコンの表示を確認
+        expect(page).to have_css "div.destination-list-icon img.gravatar"
+        expect(page).to have_link nil, href: user_path(destination.user), class: "destination-list-icon-link"
+        expect(page).to have_link destination.name, href: destination_path(destination)
+        expect(page).to have_link destination.user.name, href: user_path(destination.user)
+        # 50文字以上を省略しているのも検証
+        expect(page).to have_content destination.description.truncate(50)
+        country_name = get_country_name(destination)
+        expect(page).to have_content country_name
+        expect(page).to have_content "いいね!"
+        expect(page).to have_css "div.destination-list-timestamp"
+      end
+
+      it "ページネーションの表示を確認" do
+        # per_page が5件なので6件のテストデータを作成
+        create_list(:destination, 6, user: user)
+        visit destinations_path
+        expect(page).to have_content "All Destinations"
+        expect(page).to have_css "div.pagination"
+        Destination.take(5).each do |d|
+          expect(page).to have_link d.name
+        end
+      end
+    end
+  end
+
   describe "destinations#show" do
     context "ページレイアウト" do
       before do
@@ -286,9 +323,7 @@ RSpec.describe "Destinations", type: :system do
         # Enter キー押下
         find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
-        end
+        expect(page).to have_css "div.destination-list ", count: 1
       end
 
       it "検索ワードからスポット にマッチする結果が表示されること", js: true do
@@ -298,9 +333,7 @@ RSpec.describe "Destinations", type: :system do
         # Enter キー押下
         find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
-        end
+        expect(page).to have_css "div.destination-list", count: 1
       end
 
       it "検索ワードから住所 にマッチする結果が表示されること", js: true do
@@ -310,9 +343,7 @@ RSpec.describe "Destinations", type: :system do
         # Enter キー押下
         find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
-        end
+        expect(page).to have_css "div.destination-list", count: 1
       end
 
       it "複数の検索ワードでマッチする結果が表示されること", js: true do
@@ -322,9 +353,7 @@ RSpec.describe "Destinations", type: :system do
         # Enter キー押下
         find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
-        end
+        expect(page).to have_css "div.destination-list", count: 1
       end
 
       it "検索ワードを入力しなかった場合は行き先一覧が表示されること", js: true do
@@ -332,9 +361,7 @@ RSpec.describe "Destinations", type: :system do
         # Enter キー押下
         find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "All Destinations"
-        within(".destinations") do
-          expect(page).to have_css "li", count: Destination.count
-        end
+        expect(page).to have_css "div.destination-list", count: 1
       end
     end
   end

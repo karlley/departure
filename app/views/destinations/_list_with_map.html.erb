@@ -10,16 +10,14 @@
           <div class="destination-list destination-<%= destination.id %>">
             <div class="row">
                 <div class="col-md-4 destination-list-picture-wrapper">
-                  <%= link_to destination_path(destination.id) do %>
                     <div class="destination-list-picture">
-                      <%= image_tag(destination.picture.thumb200.url) if destination.picture.url.present? %>
+                  <%= link_to((image_tag @destination.picture.thumb200.url), destination_path(destination.id), class: "destination-list-picture-link") if destination.picture.url.present? %>
                     </div><!-- destination-list-picture -->
-                  <% end %>
                 </div><!-- .col-md-4 .destination-list-picture-wrapper-->
                 <div class="col-md-8 destination-list-info-wrapper">
                   <div class="destination-list-title">
                     <div class="destination-list-icon">
-                      <%= link_to destination.user, class: "user-icon" do %>
+                      <%= link_to destination.user, class: "destination-list-icon-link" do %>
                         <%= gravatar_for(destination.user, size: 50) %>
                       <% end %>
                     </div><!-- .destination-list-icon -->
