@@ -3,10 +3,7 @@ class DestinationsController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    # TODO: _list_with_map 作成後に削除
-    if logged_in?
-      @destinations = Destination.paginate(page: params[:page], per_page: 12)
-    end
+    # application_controller#set_search を実行
   end
 
   def show
