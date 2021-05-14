@@ -217,89 +217,107 @@ input {
   }
 }
 
-/* destination list */
-
-.destination-list {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-right: 15px;
-  margin-left: 15px;
-  border-bottom: 1px solid $gray-border;
+/* destination index */
+.list-with-map-wrapper {
+  padding: 0;
 }
 
-.destination-list-picture-wrapper {
-  .destination-list-picture {
-    text-align: center;
+/* destination list */
+.destination-list-map-wrapper {
+  //sp のみ地図下にマージン
+  @include sp {
+    margin-bottom: 15px;
   }
-  .destination-list-picture img {
+  #map {
+    height: 50vh;
+  }
+}
+
+.destination-list-wrapper {
+  //.row のmargin-15px の打ち消し
+  margin: 0;
+}
+.destination-list-post {
+  padding: 15px;
+  //sp のみ画像を横幅一杯に広げる
+  @include sp {
+    padding: 0;
+  }
+}
+
+.destination-list-picture {
+  text-align: center;
+  img {
     width: 100%;
   }
 }
 
 .destination-list-info-wrapper {
-  //.destination-list-picture-wrapper に合わせて高さ指定
-  height: 304px;
+  margin-top: 15px;
+  //sp のみテキスト部に左右パディング
   @include sp {
-    height: 200px;
+    padding-right: 15px;
+    padding-left: 15px;
   }
-  position: relative;
-  //sp のみ上部にマージン
-  .destination-list-title {
+}
+
+.destination-list-title {
+  display: flex;
+  margin-bottom: 15px;
+  .destination-list-icon {
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  h3 {
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 15px;
     display: flex;
-    @include sp {
-      margin-top: 15px;
-    }
-    .destination-list-icon {
-        img {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 50%;
-      }
-    }
-    h3 {
-      font-size: 30px;
-      margin-top: 0;
-      margin-bottom: 0;
-      margin-left: 15px;
-      display: flex;
-      align-items: center;
-      a {
-        color: $black-text;
-      }
-    }
-  }
-  .destination-list-user {
+    align-items: center;
     a {
       color: $black-text;
     }
   }
-  .destination-list-description {
-    //後方互換も考慮して両方指定
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+}
+
+.destination-list-user {
+  a {
+    color: $black-text;
   }
-  .destination-list-lower-end {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    //ネガティブマージンで左右位置調整
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-left: -15px;
-    .destination-list-country-name {
+}
+
+.destination-list-description {
+  //後方互換も考慮して両方指定
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  //description 無し時のカラム崩れ防止
+  height: 52px;
+  color: $gray-text;
+}
+
+.destination-list-lower-end {
+  width: 100%;
+  .destination-list-country-name {
+    color: $gray-text;
+  }
+  .destination-list-favorite-timestamp {
+    display: flex;
+    justify-content: space-between;
+    .destination-list-timestamp {
       color: $gray-text;
-    }
-    .destination-list-favorite-timestamp {
-      display: flex;
-      justify-content: space-between;
-      .destination-list-timestamp {
-        color: $gray-text;
-      }
     }
   }
 }
 
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+}
 
 /* destination new */
 
@@ -340,6 +358,7 @@ h2.destination-name {
   }
 }
 
+/* FIXME: 高さをviewport 指定 */
 #map {
   height: 600px;
 }
@@ -361,7 +380,7 @@ h2.destination-name {
 .favorite-btn-favorite {
   color: $gray-text;
 }
- 
+
 .favorites {
   list-style: none;
   li {
