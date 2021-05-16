@@ -22,7 +22,7 @@
       <div class="col-md-2 destination-list-post destination-<%= destination.id %>">
 
         <div class="destination-list-picture">
-          <%= link_to((image_tag @destination.picture.thumb200.url), destination_path(destination.id), class: "destination-list-picture-link") if destination.picture.url.present? %>
+          <%= link_to((image_tag destination.picture.thumb200.url), destination_path(destination.id), class: "destination-list-picture-link") %>
         </div><!-- destination-list-picture -->
 
         <div class="destination-list-info-wrapper">
@@ -59,7 +59,7 @@
   </div><!-- .row .destination-list-wrapper -->
 
   <div class="pagination-wrapper">
-    <%= will_paginate %>
+    <%= will_paginate @destinations %>
   </div>
 
 <% end %>
