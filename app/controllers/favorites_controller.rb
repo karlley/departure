@@ -3,6 +3,9 @@ class FavoritesController < ApplicationController
 
   def index
     @favorites = current_user.favorites
+    # いいね!したdestinations を取得
+    # applications_controller#set_search @destinations の値を上書き
+    @destinations = current_user.favorite_destinations.paginate(page: params[:page], per_page: 12)
   end
 
   def create

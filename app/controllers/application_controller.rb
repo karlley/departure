@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # 全てのアクションで下記メソッドを実行
+  # 各コントローラの全アクションが実行される前に下記メソッドを実行
   before_action :set_search
   before_action :set_markers
   # CSRF対策
