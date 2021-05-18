@@ -308,8 +308,9 @@ RSpec.describe "Users", type: :system do
         login_for_system(user)
       end
 
-      context "ページレイアウト" do
+      context "お気に入り済みの表示確認" do
         before do
+          user.favorite(destination)
           visit favorites_path
         end
 
@@ -317,33 +318,58 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_content "Favorites"
         end
 
+        it "お気に入りの件数の表示を確認" do
+          expect(page).to have_content "(1)"
+        end
+
         it "正しいタイトル表示を確認" do
           expect(page).to have_title full_title("Favorites")
         end
-      end
 
-      context "お気に入り 一覧表示" do
         it "お気に入りの行き先の情報が正しく表示されること" do
-          user.favorite(destination)
-          visit favorites_path
-          expect(page).to have_content destination.name
-          expect(page).to have_content destination.description
+          expect(page).to have_css "div.destination-list-picture img"
+          # 旅先画像の表示を確認
+          expect(page).to have_link nil, href: destination_path(destination), class: "destination-list-picture-link"
+          # アイコンの表示を確認
+          expect(page).to have_css "div.destination-list-icon img.gravatar"
+          expect(page).to have_link nil, href: user_path(destination.user), class: "destination-list-icon-link"
+          expect(page).to have_link destination.name, href: destination_path(destination)
+          expect(page).to have_link destination.user.name, href: user_path(destination.user)
+          # 50文字以上を省略しているのも検証
+          expect(page).to have_content destination.description.truncate(50)
           country_name = get_country_name(destination)
           expect(page).to have_content country_name
-          expect(page).to have_content "posted by #{user.name}"
-          expect(page).to have_link user.name, href: user_path(user)
+          expect(page).to have_content "いいね!"
+          expect(page).to have_css "div.destination-list-timestamp"
         end
+      end
 
-        it "お気に入りの数だけお気に入りの行き先が表示されること" do
+      context "お気に入りが複数有る場合の表示確認" do
+        it "ページネーション、お気に入りの件数が表示されること" do
+          # 12 件以上表示でpaginate が機能するので13件生成
+          destinations = create_list(:destination, 13)
+          # 生成した行き先をuser が全件いいね!
+          destinations.each do |destination|
+            # ここでのuser はcrate_list で生成した行き先のuser とは別のuser
+            user.favorite(destination)
+          end
           visit favorites_path
-          expect(page).not_to have_css ".favorite-destination"
+          expect(page).to have_css "div.pagination"
+          expect(page).to have_content "(13)"
+        end
+      end
+
+      context "お気に入りの表示件数の確認" do
+        it "お気に入りに行き先の数が正しく表示されること" do
+          visit favorites_path
+          expect(page).not_to have_css ".destination-list-post"
           user.favorite(destination)
           user.favorite(other_destination)
           visit favorites_path
-          expect(page).to have_css ".favorite-destination", count: 2
+          expect(page).to have_css ".destination-list-post", count: 2
           user.unfavorite(other_destination)
           visit favorites_path
-          expect(page).to have_css ".favorite-destination", count: 1
+          expect(page).to have_css ".destination-list-post", count: 1
         end
       end
     end
