@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # 各コントローラの全アクションが実行される前に下記メソッドを実行
-  before_action :set_search
-  before_action :set_markers
+  before_action :search_result
+  before_action :search_result_markers
   # CSRF対策
   protect_from_forgery with: :exception
   # logged_in? を使えるようにする
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   # TODO: 条件検索も追加
   # フィード から検索条件に該当する行き先を検索
-  def set_search
+  def search_result
     if logged_in?
       if have_search_word?
         search_word = params[:q][:name_or_spot_or_address_cont]
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   # 検索結果からGoogleMap 表示用のマーカーを作成
-  def set_markers
+  def search_result_markers
     @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
       marker.lat(destination.latitude)
       marker.lng(destination.longitude)

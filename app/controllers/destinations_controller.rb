@@ -3,7 +3,7 @@ class DestinationsController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    # application_controller#set_search を実行
+    # application_controller#search_result を表示
   end
 
   def show

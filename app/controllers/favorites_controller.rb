@@ -4,8 +4,14 @@ class FavoritesController < ApplicationController
   def index
     @favorites = current_user.favorites
     # いいね!したdestinations を取得
-    # applications_controller#set_search @destinations の値を上書き
+    # applications_controller#search_result @destinations をお気に入りの値に上書き
     @destinations = current_user.favorite_destinations.paginate(page: params[:page], per_page: 12)
+    # applications_controler#search_result @markers をお気に入りの値に上書き
+    @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
+      marker.lat(destination.latitude)
+      marker.lng(destination.longitude)
+      marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
+    end
   end
 
   def create

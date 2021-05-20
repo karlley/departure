@@ -5,11 +5,11 @@
 
     <script type="text/javascript">
       handler = Gmaps.build('Google');
-      handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
+      handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
         markers = handler.addMarkers(<%= raw @markers.to_json %>);
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
-        handler.getMap().setZoom(16);
+        handler.getMap().setZoom(3);
       });
     </script>
 
