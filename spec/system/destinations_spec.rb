@@ -118,7 +118,7 @@ RSpec.describe "Destinations", type: :system do
         # アイコンの表示を確認
         expect(page).to have_css "div.destination-list-icon img.gravatar"
         expect(page).to have_link nil, href: user_path(destination.user), class: "destination-list-icon-link"
-        expect(page).to have_link destination.name, href: destination_path(destination)
+        expect(page).to have_link destination.name.truncate(30), href: destination_path(destination)
         expect(page).to have_link destination.user.name, href: user_path(destination.user)
         # 50文字以上を省略しているのも検証
         expect(page).to have_content destination.description.truncate(50)

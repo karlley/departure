@@ -32,7 +32,7 @@
                 <%= gravatar_for(destination.user, size: 50) %>
               <% end %>
             </div><!-- .destination-list-icon -->
-            <h3><%= link_to destination.name, destination_path(destination) %></h3>
+            <h3><%= link_to destination.name.truncate(30), destination_path(destination) %></h3>
           </div><!-- .destination-list-title -->
 
           <div class="destination-list-user">

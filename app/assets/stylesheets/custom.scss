@@ -273,7 +273,9 @@ input {
     }
   }
   h3 {
-    font-size: 30px;
+    //強制折返し
+    word-break: break-word;
+    font-size: 25px;
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 15px;
