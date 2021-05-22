@@ -27,6 +27,7 @@ class DestinationsController < ApplicationController
   end
 
   def create
+    # TODO: enum のAugumentError 対策
     @destination = current_user.destinations.build(destination_params)
     if @destination.save
       @destination.add_address
