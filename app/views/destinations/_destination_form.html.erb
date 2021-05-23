@@ -3,7 +3,7 @@
   <div class="picture-select">
     <%= f.label :picture %><span class="input-unneed"> *Optional</span>
     <%= f.file_field :picture, accept: "image/jpeg, image/png", class: "form-control", id: "destination_picture" %>
-    <% if edit_page? && have_picture? %>
+    <% if edit_page_and_have_picture? %>
       <%= image_tag(@destination.picture.thumb400.url) %>
     <% end %>
   </div>
