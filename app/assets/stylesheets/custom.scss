@@ -21,7 +21,7 @@ $media-sp: 768px;
 $black-text: #333333;
 $white-text: white;
 $gray-text: gray;
-$gray-border: $gray-light;
+$gray-border: #dedede;
 $pink-favorite: pink;
 $red-error: red;
 
@@ -53,12 +53,6 @@ h1, h1,  h3, h4, h5, h6 {
 
 h1 {
   font-size: 3em;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2 {
-  font-size: 1.2em;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -333,40 +327,151 @@ input {
 }
 
 /* destination show */
-h2.destination-name {
-  font-size: 30px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: inline-block;
+.destination-show-wrapper {
+  padding: 0;
 }
 
-.change-destination {
-  display: inline-block;
+.destination-show-map-wrapper {
+  #map {
+    height: 50vh;
+  }
 }
 
-.edit-destination .delete-destination {
-  font-size: 15px;
+.destination-show-info-detail-wrapper {
+  //.row のmargin-15px の打ち消し
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.comments {
-  list-style: none;
-  li {
-    font-size: 14px;
-    padding: 10px 0;
-    border-top: 1px solid $gray-border;
-    .comment {
-      font-size: 16px
+.destination-show-info {
+  padding: 0;
+}
+
+.destination-show-picture {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+.destination-show-info-text {
+  margin-top: 15px;
+  //sp のみ左右にパディング, 下部マージン
+  @include sp {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+.destination-show-user {
+  display: flex;
+  margin-bottom: 15px;
+  .destination-show-icon {
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  h3 {
+    //強制折返し
+    word-break: break-word;
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    a {
+      color: $black-text;
     }
   }
 }
 
-/* FIXME: 高さをviewport 指定 */
-#map {
-  height: 600px;
+.destination-show-favorite-timestamp {
+  display: flex;
+  justify-content: space-between;
+  .destination-show-timestamp {
+    color: $gray-text;
+  }
 }
 
-.comment-create-at {
-  color: $gray-text;
+.destination-show-description {
+  border-top: 1px solid $gray-border;
+  border-bottom: 1px solid $gray-border;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* comment */
+
+.destination-comment-wrapper {
+  border-top: 1px solid $gray-border;
+  @include sp {
+    border: none;
+  }
+  h2 {
+    text-align: center;
+  }
+}
+
+.destination-comment-list-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  //.row のmargin: -15px; を打ち消してsp 時の左右はみ出しを防止
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.destination-comment-list {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  @include sp {
+    border-top: 1px solid $gray-border;
+  }
+}
+
+.destination-comment-header {
+  //icon の横にuser を表示
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.destination-comment-icon {
+  margin-right: 15px;
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.destination-comment-user {
+  a {
+    font-size: 18px;
+    color: $black-text;
+  }
+}
+
+.destination-comment-time-delete {
+  //time の横にdelete を表示
+  display: flex;
+  justify-content: space-between;
+  .destination-comment-time {
+    color: $gray-text;
+  }
+}
+
+.destination-comment-new-wrapper {
+  //.row のmargin: -15px; を打ち消してsp 時の左右のはみ出し防止
+  margin: 0;
 }
 
 /* follow */

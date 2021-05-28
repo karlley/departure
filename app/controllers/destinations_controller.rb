@@ -9,6 +9,7 @@ class DestinationsController < ApplicationController
   def show
     @destination = Destination.find(params[:id])
     @comment = Comment.new
+    @comments = @destination.feed_comment(@destination.id)
     # GoogleMap 表示用のマーカーを作成
     @marker = Gmaps4rails.build_markers(@destination) do |destination, marker|
       marker.lat(destination.latitude)
