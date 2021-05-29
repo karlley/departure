@@ -327,42 +327,23 @@ input {
 }
 
 /* destination show */
-.destination-show-wrapper {
-  padding: 0;
-}
-
-.destination-show-map-wrapper {
-  #map {
-    height: 50vh;
-  }
-}
-
-.destination-show-info-detail-wrapper {
-  //.row のmargin-15px の打ち消し
-  margin-right: 0;
-  margin-left: 0;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.destination-show-info {
-  padding: 0;
-}
-
-.destination-show-picture {
-  text-align: center;
-  img {
-    width: 100%;
-  }
-}
-
-.destination-show-info-text {
-  margin-top: 15px;
+.destination-show-user-dropdown {
+  display: flex;
+  justify-content: space-between;
   //sp のみ左右にパディング, 下部マージン
   @include sp {
     padding-right: 15px;
     padding-left: 15px;
-    margin-bottom: 15px;
+  }
+  .destination-show-dropdown-menu {
+    //ドットを上下中心に配置
+    margin: auto 0;
+    //dropdown ボタンの背景を削除
+    .destination-show-dropdown-toggle {
+      border: none;
+      background: none;
+      font-size: 24px;
+    }
   }
 }
 
@@ -392,7 +373,43 @@ input {
   }
 }
 
+.destination-show-wrapper {
+  padding: 0;
+}
+
+.destination-show-map-wrapper {
+  #map {
+    height: 50vh;
+  }
+}
+
+.destination-show-info-detail-wrapper {
+  //.row のmargin-15px の打ち消し
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.destination-show-info-wrapper {
+  padding: 0;
+}
+
+.destination-show-picture {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
 .destination-show-favorite-timestamp {
+   margin-top: 15px;
+  //sp のみ左右にパディング, 下部マージン
+  @include sp {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+  }
   display: flex;
   justify-content: space-between;
   .destination-show-timestamp {

@@ -2,18 +2,34 @@
 <div class="container destination-show-wrapper">
   <h1><%= @destination.name %></h1>
 
-  <div class="destination-show-edit-delete">
-    <% if current_user == @destination.user %>
-      <div class="destination-show-edit">
-        <%= link_to "Edit", edit_destination_path(@destination), class: "btn btn-primary" %>
-      </div><!-- .destination-show-edit -->
-    <% end %>
-    <% if current_user.admin? || (current_user == @destination.user) %>
-      <div class="destination-show-delete">
-        <%= link_to "Delete", destination_path(@destination), method: :delete, class: 'btn btn-primary', data: { confirm: "Are you sure?" } %>
-      </div><!-- .destination-show-delete -->
-    <% end %>
-  </div>
+  <div class="destination-show-user-dropdown">
+    <div class="destination-show-user">
+      <div class="destination-show-icon">
+        <%= link_to @destination.user, class: "destination-list-icon-link" do %>
+          <%= gravatar_for(@destination.user, size: 50) %>
+        <% end %>
+      </div><!-- .destination-show-icon -->
+      <h3><%= link_to @destination.user.name, @destination.user %></h3>
+    </div><!-- .destination-show-user -->
+
+    <div class="dropdown destination-show-dropdown-menu">
+      <button class="dropdown-toggle destination-show-dropdown-toggle" data-toggle="dropdown">
+        <i class="fas fa-ellipsis-h"></i>
+      </button>
+      <ul class="dropdown-menu destination-show-edit-delete" role="menu">
+        <% if current_user == @destination.user %>
+          <li class="destination-show-edit">
+            <%= link_to "旅先を編集する", edit_destination_path(@destination) %>
+          </li><!-- .destination-show-edit -->
+        <% end %>
+        <% if current_user.admin? || (current_user == @destination.user) %>
+          <li class="destination-show-delete">
+            <%= link_to " 旅先を削除する", destination_path(@destination), method: :delete, data: { confirm: "Are you sure?" } %>
+          </li><!-- .destination-show-delete -->
+        <% end %>
+      </ul><!-- .destination-show-edit-delete -->
+    </div><!-- .dropdown .destination-show-dropdown-menu -->
+  </div><!-- .destination-show-user-dropdown -->
 
   <div class="destination-show-map-wrapper">
     <div id="map"></div>
@@ -30,29 +46,18 @@
   </div><!-- .destination-show-map-wrapper -->
 
   <div class="row destination-show-info-detail-wrapper">
-    <div class="col-md-4 destination-show-info">
+    <div class="col-md-4 destination-show-info-wrapper">
       <div class="destination-show-picture">
         <%= image_tag @destination.picture.thumb400.url %>
       </div><!-- .destination-show-picture -->
 
-      <div class="destination-show-info-text">
-        <div class="destination-show-user">
-          <div class="destination-show-icon">
-            <%= link_to @destination.user, class: "destination-list-icon-link" do %>
-              <%= gravatar_for(@destination.user, size: 50) %>
-            <% end %>
-          </div><!-- .destination-show-icon -->
-          <h3><%= link_to @destination.user.name, @destination.user %></h3>
-        </div><!-- .destination-show-user -->
-
-        <div class="destination-show-favorite-timestamp">
-          <%= render "users/favorite_form" %>
-          <div class="destination-show-timestamp">
-            <%= time_ago_in_words(@destination.created_at) %>前
-          </div><!-- .dextination-show-timestamp -->
-        </div><!-- .destination-show-favorite-timestamp -->
-      </div><!-- .destination-show-info-text -->
-    </div><!-- .col-md-4 .destination-show-picture -->
+      <div class="destination-show-favorite-timestamp">
+        <%= render "users/favorite_form" %>
+        <div class="destination-show-timestamp">
+          <%= time_ago_in_words(@destination.created_at) %>前
+        </div><!-- .dextination-show-timestamp -->
+      </div><!-- .destination-show-favorite-timestamp -->
+    </div><!-- .col-md-4 .destination-show-info-wrapper -->
 
     <div class="col-md-8 destination-show-detail">
       <div class="destination-show-description">
