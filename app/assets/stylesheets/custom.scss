@@ -330,6 +330,8 @@ input {
 .destination-show-user-dropdown {
   display: flex;
   justify-content: space-between;
+  //削除/編集ボタンの位置調整用の親要素指定
+  position: relative;
   //sp のみ左右にパディング, 下部マージン
   @include sp {
     padding-right: 15px;
@@ -344,8 +346,16 @@ input {
       background: none;
       font-size: 24px;
     }
+    .destination-show-edit-delete {
+      //削除/編集ボタンの位置調整
+      position: absolute;
+      right: 50%;
+      //Bootstrap のleft 指定を初期値にリセット
+      left: initial;
+    }
   }
 }
+
 
 .destination-show-user {
   display: flex;
