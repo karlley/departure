@@ -287,6 +287,7 @@ input {
   }
 }
 
+//FIXME: flexbox で下端揃え
 .destination-list-description {
   //後方互換も考慮して両方指定
   overflow-wrap: break-word;
@@ -427,6 +428,15 @@ input {
   }
 }
 
+.destination-show-detail {
+  padding-right: 30px;
+  padding-left: 30px;
+  @include sp {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
 .destination-show-description {
   border-top: 1px solid $gray-border;
   border-bottom: 1px solid $gray-border;
@@ -459,6 +469,9 @@ input {
 .destination-comment-list {
   padding-top: 20px;
   padding-bottom: 20px;
+  //後方互換も考慮して2つのプロパティを指定
+  overflow-wrap: break-word;
+  word-wrap: break-word;
   @include sp {
     border-top: 1px solid $gray-border;
   }
