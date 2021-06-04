@@ -12,17 +12,20 @@
       <h3><%= link_to @destination.user.name, @destination.user %></h3>
     </div><!-- .destination-show-user -->
 
+    <% #FIXME: 投稿者、管理者でellipsis の表示/非表示を切り替える %>
     <div class="dropdown destination-show-dropdown-menu">
       <button class="dropdown-toggle destination-show-dropdown-toggle" data-toggle="dropdown">
         <i class="fas fa-ellipsis-h"></i>
       </button>
       <ul class="dropdown-menu destination-show-edit-delete" role="menu">
+        <% # ログイン済みで編集ボタン表示 %>
         <% if current_user == @destination.user %>
           <li class="destination-show-edit">
             <%= link_to "旅先を編集する", edit_destination_path(@destination) %>
           </li><!-- .destination-show-edit -->
         <% end %>
-        <% if current_user.admin? || (current_user == @destination.user) %>
+        <% # 管理者でログインした場合に削除ボタン表示 %>
+        <% if current_user.admin? && (current_user == @destination.user) %>
           <li class="destination-show-delete">
             <%= link_to " 旅先を削除する", destination_path(@destination), method: :delete, data: { confirm: "Are you sure?" } %>
           </li><!-- .destination-show-delete -->
@@ -54,7 +57,7 @@
       <div class="destination-show-favorite-timestamp">
         <%= render "users/favorite_form" %>
         <div class="destination-show-timestamp">
-          <%= time_ago_in_words(@destination.created_at) %>前
+          <%= time_ago_in_words(@destination.created_at) %>
         </div><!-- .dextination-show-timestamp -->
       </div><!-- .destination-show-favorite-timestamp -->
     </div><!-- .col-md-4 .destination-show-info-wrapper -->
@@ -63,23 +66,23 @@
       <div class="destination-show-description">
         <p><%= @destination.description %></p>
       </div>
-      <p class="destination-list-country-name"><i class="fa fa-map-marker"></i> <%= @country.country_name %></p>
-      <p class="destination-region"><i class="fas fa-globe"></i> <%= @country.region %></p>
-      <p class="destination-spot"><i class="far fa-flag"></i> <%= @destination.spot %></p>
-      <p class="destination-expense"><i class="fas fa-calculator"></i> <%= @destination.expense %></p>
-      <p class="destination-season"><i class="fas fa-suitcase-rolling"></i> <%= @destination.season %>月</p>
-      <p class="destination-experience"><i class="fas fa-hiking"></i> 体験: <%= @destination.experience %></p>
+      <p class="destination-show-country-name"><i class="fa fa-map-marker"></i> <%= @country.country_name %></p>
+      <p class="destination-show-region"><i class="fas fa-globe"></i> <%= @country.region %></p>
+      <p class="destination-show-spot"><i class="far fa-flag"></i> <%= @destination.spot %></p>
+      <p class="destination-show-expense"><i class="fas fa-calculator"></i> <%= @destination.expense %></p>
+      <p class="destination-show-season"><i class="fas fa-suitcase-rolling"></i> <%= @destination.season %>月</p>
+      <p class="destination-show-experience"><i class="fas fa-hiking"></i> 体験: <%= @destination.experience %></p>
       <% if @airline.nil? %>
-        <p class="destination-airline_name"><i class="fas fa-plane"></i> 航空会社: 未使用</p>
+        <p class="destination-show-airline-name"><i class="fas fa-plane"></i> 航空会社: 未使用</p>
       <% else %>
-        <p class="destination-airline_name"><i class="fas fa-plane"></i> 航空会社: <%= @airline.airline_name %></p>
-        <p class="destination-alliance"><i class="far fa-handshake"></i> アライアンス: <%= @airline.alliance %></p>
+        <p class="destination-show-airline-name"><i class="fas fa-plane"></i> 航空会社: <%= @airline.airline_name %></p>
+        <p class="destination-show-alliance"><i class="far fa-handshake"></i> アライアンス: <%= @airline.alliance %></p>
       <% end %>
-      <p class="destination-food"><i class="fas fa-utensils"></i> 食べ物: <%= @destination.food %></p>
+      <p class="destination-show-food"><i class="fas fa-utensils"></i> 食べ物: <%= @destination.food %></p>
     </div><!-- .col-md-8 .destination-show-detail -->
   </div><!-- .row .destination-show-picture-info-wrapper -->
 
-  <div class="destination-comment-wrapper">
+  <div class="destination-show-comment-wrapper">
     <%= render "comments/feed_comments" %>
     <%= render "comments/new" %>
   </div><!-- .destination-comment-wrapper -->

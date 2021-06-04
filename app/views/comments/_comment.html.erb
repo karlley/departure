@@ -18,7 +18,7 @@
           </div>
           <div class="destination-comment-time-delete">
             <div class="destination-comment-time">
-              <%= time_ago_in_words(comment.created_at) %>前
+              <%= time_ago_in_words(comment.created_at) %>
             </div><!-- .destination-comment-time -->
             <% if current_user.id == comment.user_id %>
               <div class="destination-comment-delete">
