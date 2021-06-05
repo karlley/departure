@@ -447,7 +447,9 @@ RSpec.describe "Destinations", type: :system do
     before do
       login_for_system(user)
       visit destination_path(destination)
-      click_link "Edit"
+      button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
+      button.click
+      click_link "旅先を編集する"
     end
 
     context "ページレイアウト" do
@@ -456,7 +458,7 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "'Edit + 行き先名' の文字列が存在すること" do
-        expect(page).to have_content "Edit #{destination.name}"
+        expect(page).to have_content "#{destination.name}"
       end
 
       it "写真選択フォームが表示されていること" do
@@ -522,7 +524,7 @@ RSpec.describe "Destinations", type: :system do
 
     context "行き先 削除処理", js: true do
       it "削除成功のフラッシュが表示されること" do
-        click_on '行き先を削除する'
+        click_on "削除する"
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'Destination deleted!'
       end
