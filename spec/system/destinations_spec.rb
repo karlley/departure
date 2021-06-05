@@ -36,7 +36,7 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "写真が非表示であること" do
-        within(".picture-select") do
+        within(".destination-form-picture-select") do
           expect(page).not_to have_selector "img"
         end
       end

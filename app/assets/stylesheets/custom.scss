@@ -233,9 +233,10 @@ input {
 }
 .destination-list-post {
   padding: 15px;
-  //sp のみ画像を横幅一杯に広げる
+  //sp のみ画像を横幅一杯に広げて下部マージン
   @include sp {
     padding: 0;
+    margin-top: 30px;
   }
 }
 
@@ -325,6 +326,18 @@ input {
 
 .input-unneed {
   font-size: 13px;
+}
+
+.destination-form-picture-select {
+  margin-bottom: 15px;
+}
+
+.destination-form-picture {
+  //画像を横幅いっぱい
+  text-align: center;
+  img {
+    width: 100%;
+  }
 }
 
 .destination-form-submit-btn {

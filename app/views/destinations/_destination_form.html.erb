@@ -1,12 +1,14 @@
 <%= form_with model: @destination, local: true do |f| %>
   <%= render "shared/error_messages", object: f.object %>
-  <div class="picture-select">
+  <div class="destination-form-picture-select">
     <%= f.label :picture %><span class="input-unneed"> *Optional</span>
     <%= f.file_field :picture, accept: "image/jpeg, image/png", class: "form-control", id: "destination_picture" %>
     <% if edit_page_and_have_picture? %>
-      <%= image_tag(@destination.picture.thumb400.url) %>
+      <div class="destination-form-picture">
+        <%= image_tag(@destination.picture.thumb400.url) %>
+      </div><!-- .destination-form-picture-wrapper -->
     <% end %>
-  </div>
+  </div><!-- .destination-form-picture-select -->
   <div class="form-group">
     <%= f.label :name %><span class="input-need"> *Required</span>
     <%= f.text_field :name, class: "form-control", id: "destination_name" %>
