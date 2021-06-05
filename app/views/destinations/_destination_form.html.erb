@@ -43,10 +43,12 @@
     <%= f.label :food %><span class="input-unneed"> *Optional</span>
     <%= f.text_field :food, class: "form-control", id: "destination_food" %>
   </div>
-  <%= f.submit class: "btn btn-primary" %>
+  <%= f.submit class: "btn btn-primary destination-form-submit-btn" %>
   <% if edit_page? %>
-    <%= link_to "行き先を削除する", destination_path(@destination), method: :delete, data: { confirm: "削除してよろしいですか?" } %> 
+    <div class="destination-form-delete-wrapper">
+    <%= link_to "削除する", destination_path(@destination), method: :delete, data: { confirm: "削除してよろしいですか?" }, class: "btn btn-danger destination-form-delete-btn" %> 
   <% end %>
+    </div>
 <% end %>
 
 <script type="text/javascript">

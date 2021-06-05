@@ -132,7 +132,7 @@ footer {
   }
 }
 
-/* user forms */
+/* user form */
 .checkbox {
   margin: -10px;
   margin-bottom: 10px;
@@ -316,7 +316,7 @@ input {
   justify-content: center;
 }
 
-/* destination new */
+/* destination form */
 
 .input-need {
   color: $red-error;
@@ -325,6 +325,15 @@ input {
 
 .input-unneed {
   font-size: 13px;
+}
+
+.destination-form-submit-btn {
+  margin-bottom: 15px;
+}
+
+.destination-form-delete-btn {
+  //delete をsubmit のスタイルに合わせる
+  width: 100%;
 }
 
 /* destination show */
@@ -356,7 +365,6 @@ input {
     }
   }
 }
-
 
 .destination-show-user {
   display: flex;
@@ -446,7 +454,7 @@ input {
   margin-bottom: 15px;
 }
 
-/* comment */
+/* destination comment */
 
 .destination-comment-wrapper {
   border-top: 1px solid $gray-border;
