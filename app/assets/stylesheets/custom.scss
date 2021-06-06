@@ -176,24 +176,125 @@ input {
 }
 
 /* user show */
-.user-picture img {
-  max-width: 100%;
-  height: auto;
-  box-sizing: border-box;
+.user-show-wrapper {
+  padding-top: 15px;
 }
 
-.user-picture-box {
-  margin-top: 0.5em;
-  margin-left: 1em;
+.user-show-icon-name-edit-stats-wrapper {
+  display: flex;
 }
 
-.show-user-name {
-  display: inline-box;
+.user-show-icon {
+  //flex の幅を指定
+  flex: 1;
+  //アイコンの上下左右中央配置
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 200px;
+    height: 200px;
+    @include sp {
+      width: 80px;
+      height: 80px;
+    }
+    object-fit: cover;
+    border-radius: 50%;
+  }
 }
 
-.account-edit {
-  margin-top: 20px;
+.user-show-name-edit-stats {
+  //flex の幅を指定
+  flex: 4;
 }
+
+.user-show-name-edit {
+  display: flex;
+  justify-content: space-between;
+  //編集ボタンの位置調整用の親要素指定
+  position: relative;
+  h1 {
+    flex: 1;
+  }
+  @include sp {
+    h1 {
+      font-size: 24px;
+    }
+  }
+  .user-show-dropdown-menu {
+    //ドットを上下中心に配置
+    margin: auto 0;
+    //dropdown ボタンの背景を削除
+    .user-show-dropdown-toggle {
+      border: none;
+      background: none;
+      font-size: 24px;
+    }
+    .user-show-edit-list {
+      //編集ボタンの位置調整
+      position: absolute;
+      right: 50%;
+      //Bootstrap のleft 指定を初期値にリセット
+      left: initial;
+    }
+  }
+}
+
+.user-stats-list-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 100px;
+  a {
+    color: $black-text;
+    text-decoration: none;
+    //投稿、フォロー、フォロワーの幅を揃える
+    flex: 1;
+  }
+}
+@include sp {
+  .user-stats-list-wrapper {
+    margin: 0;
+  }
+}
+
+.user-stats-flex {
+  display: flex;
+  font-size: 24px;
+  //投稿、フォロー、フォロワーの幅を揃える
+  flex: 1;
+  .user-stats-bold {
+    font-weight: bold;
+  }
+}
+@include sp {
+  .user-stats-flex {
+    font-size: 12px;
+    //sp 時のみflexbox を縦積み
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+
+// .user-picture img {
+//   max-width: 100%;
+//   height: auto;
+//   box-sizing: border-box;
+// }
+
+// .user-picture-box {
+//   margin-top: 0.5em;
+//   margin-left: 1em;
+// }
+
+// .show-user-name {
+//   display: inline-box;
+// }
+
+// .account-edit {
+//   margin-top: 20px;
+// }
 
 /* user edit */
 .gravatar_edit {
