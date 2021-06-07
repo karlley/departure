@@ -22,6 +22,7 @@ $black-text: #333333;
 $white-text: white;
 $gray-text: gray;
 $gray-border: #dedede;
+$white-border: white;
 $pink-favorite: pink;
 $red-error: red;
 
@@ -182,6 +183,7 @@ input {
 
 .user-show-icon-name-edit-stats-wrapper {
   display: flex;
+  margin-bottom: 30px;
 }
 
 .user-show-icon {
@@ -192,6 +194,7 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
   img {
     width: 200px;
     height: 200px;
@@ -263,6 +266,9 @@ input {
   font-size: 24px;
   //投稿、フォロー、フォロワーの幅を揃える
   flex: 1;
+  div {
+    letter-spacing: 0.1em;
+  }
   .user-stats-bold {
     font-weight: bold;
   }
@@ -276,25 +282,45 @@ input {
   }
 }
 
+.user-show-nationality-introduction-wrapper {
+  margin-bottom: 30px;
+  .user-show-nationality {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  @include sp {
+    .user-show-nationality {
+      font-size: 16px;
+    }
+  }
+  .user-show-introduction {
+    font-size: 20px;
+  }
+  @include sp {
+    .user-show-introduction {
+      font-size: 16px;
+    }
+  }
+}
 
-// .user-picture img {
-//   max-width: 100%;
-//   height: auto;
-//   box-sizing: border-box;
-// }
+.users-picture-list-wrapper {
+  //横幅を広げて画面一杯にする
+  margin-right: -15px;
+  margin-left: -15px;
+}
 
-// .user-picture-box {
-//   margin-top: 0.5em;
-//   margin-left: 1em;
-// }
+.users-picture-post {
+  padding: 0;
+  border: solid 1px $white-border;
+}
 
-// .show-user-name {
-//   display: inline-box;
-// }
-
-// .account-edit {
-//   margin-top: 20px;
-// }
+.users-picture {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
 
 /* user edit */
 .gravatar_edit {
