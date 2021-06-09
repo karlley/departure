@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   # TODO: 条件検索も追加
-  # フィード から検索条件に該当する行き先を検索
+  # 検索ワード有りで検索結果、検索ワード取得/検索ワード無しで全投稿取得
   def search_result
     if logged_in?
       if have_search_word?
@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
       else
         grouping_hash = nil
       end
-      # ユーザのフィードから検索ワード検索/全件取得
-      @q = current_user.feed.paginate(page: params[:page], per_page: 12).ransack({ combinator: 'or', groupings: grouping_hash })
+      # 全投稿から検索ワード検索
+      @q = Destination.paginate(page: params[:page], per_page: 12).ransack({ combinator: 'or', groupings: grouping_hash })
       # 検索結果(distinct: true で重複除外)
       @destinations = @q.result(distinct: true)
     end
@@ -32,10 +32,12 @@ class ApplicationController < ActionController::Base
 
   # 検索結果からGoogleMap 表示用のマーカーを作成
   def search_result_markers
-    @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
-      marker.lat(destination.latitude)
-      marker.lng(destination.longitude)
-      marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
+    if logged_in?
+      @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
+        marker.lat(destination.latitude)
+        marker.lng(destination.longitude)
+        marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
+      end
     end
   end
 
