@@ -11,7 +11,7 @@ RSpec.describe "Destinations", type: :system do
   let(:destination_airline_unselected) { create(:destination, :airline_unselected) }
   let(:destination_picture_unselected) { create(:destination, :picture_unselected, user: user) }
   let!(:comment) { create(:comment, user_id: user.id, destination: destination) }
-  # 自分以外の投稿に自分が投稿
+  # 自分以外の投稿に自分がコメント
   let!(:comment_add_other_user_destination) { create(:comment, user_id: user.id, destination: destination_other_user) }
   let!(:country) { create(:country) }
   let!(:airline) { create(:airline) }
@@ -112,9 +112,31 @@ RSpec.describe "Destinations", type: :system do
   end
 
   describe "destinations#index" do
+    context "ユーザ毎の行き先表示を確認" do
+      before do
+        login_for_system(user)
+        visit destinations_path
+      end
+
+      it "自分の行き先の表示を確認" do
+        expect(page).to have_content destination.name
+        expect(page).to have_content destination.user.name
+      end
+
+      it "自分以外のユーザの行き先の表示を確認" do
+        expect(page).to have_content destination_other_user.name
+        expect(page).to have_content destination_other_user.user.name
+      end
+    end
+
     context "ページレイアウト" do
       before do
         login_for_system(user)
+      end
+
+      it "GoogleMap が表示されていること", js: true do
+        visit destinations_path
+        expect(page).to have_css "div.gm-style"
       end
 
       it "旅先の情報が正しく表示されている事を確認" do
@@ -434,11 +456,13 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "検索ワードを入力しなかった場合は行き先一覧が表示されること", js: true do
+        # 全投稿数を取得
+        post_count = Destination.count
         fill_in "q[name_or_spot_or_address_cont]", with: ""
         # Enter キー押下
         find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "All Destinations"
-        expect(page).to have_css "div.destination-list-post", count: 1
+        expect(page).to have_css "div.destination-list-post", count: post_count
       end
     end
   end
