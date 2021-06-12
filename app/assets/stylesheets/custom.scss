@@ -21,8 +21,10 @@ $media-sp: 768px;
 $black-text: #333333;
 $white-text: white;
 $gray-text: gray;
+$blue-text: #337ab7;
 $gray-border: #dedede;
 $white-border: white;
+$blue-border: #337ab7;
 $pink-favorite: pink;
 $red-error: red;
 
@@ -279,6 +281,24 @@ input {
     //sp 時のみflexbox を縦積み
     flex-direction: column;
     text-align: center;
+  }
+}
+
+.follow-form-wrapper {
+  margin-bottom: 30px;
+  .follow-button {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    color: $blue-text;
+    background: none;
+    border: solid 3px $blue-border;
+  }
+  .unfollow-button {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    border: solid 3px $blue-border;
   }
 }
 
