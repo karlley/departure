@@ -132,15 +132,20 @@ RSpec.describe "Destinations", type: :system do
     context "ページレイアウト" do
       before do
         login_for_system(user)
+        visit destinations_path
       end
 
       it "GoogleMap が表示されていること", js: true do
-        visit destinations_path
         expect(page).to have_css "div.gm-style"
       end
 
+      # FIXME: ピンが表示されないことがあるのでfactorybot 要修正
+      # it "GoogleMap のピンが行き先の件数分表示されていること",js: true do
+      #   post_count = Destination.count
+      #   expect(page).to have_css "img[src$='spotlight-poi2_hdpi.png']", count: post_count
+      # end
+
       it "旅先の情報が正しく表示されている事を確認" do
-        visit destinations_path
         expect(page).to have_css "div.destination-list-picture img"
         # 旅先画像の表示を確認
         expect(page).to have_link nil, href: destination_path(destination), class: "destination-list-picture-link"
@@ -156,8 +161,11 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_content "いいね!"
         expect(page).to have_css "div.destination-list-timestamp"
       end
+    end
 
+    context "行き先が複数ある場合の表示" do
       it "ページネーションの表示を確認" do
+        login_for_system(user)
         # per_page が12件なので13件のテストデータを作成
         create_list(:destination, 13, user: user)
         visit destinations_path
@@ -193,7 +201,6 @@ RSpec.describe "Destinations", type: :system do
         pin.click
         expect(page).to have_content destination.name
         expect(page).to have_content destination.spot
-        expect(page).to have_content destination.country
         expect(page).to have_content destination.address
         expect(page).to have_link "GoogleMap で見る", href: "https://maps.google.co.jp/maps?q=loc:#{destination.latitude},#{destination.longitude}&iwloc=J", class: "googlemap-link"
         link = find(".googlemap-link")

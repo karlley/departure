@@ -326,6 +326,16 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_title full_title("Favorites")
         end
 
+        it "GoogleMap の表示を確認",js: true do
+          expect(page).to have_css "div.gm-style"
+        end
+
+        # FIXME: ピンが表示されないことがあるのでfactorybot 要修正
+        # it "GoogleMap のピンがお気に入りの件数分表示されていること",js: true do
+        #   favorite_count = Favorite.count
+        #   expect(page).to have_css "img[src$='spotlight-poi2_hdpi.png']", count: favorite_count
+        # end
+
         it "お気に入りの行き先の情報が正しく表示されること" do
           expect(page).to have_css "div.destination-list-picture img"
           # 旅先画像の表示を確認
