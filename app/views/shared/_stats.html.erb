@@ -2,20 +2,20 @@
 <div class="user-stats-list-wrapper">
   <div class="user-stats-flex">
     <div>投稿</div>
-    <div class="user-stats-bold"><%= @user.destinations.count %></div>
+    <div class="user-stats-destinations user-stats-bold"><%= @user.destinations.count %></div>
     <div>件</div>
   </div><!-- .user.stats-post-count -->
   <%= link_to followers_user_path(@user) do %>
-    <div class="user-stats-flex">
+    <div class="user-stats-followers user-stats-flex">
       <div>フォロワー</div>
-      <div class="user-stats-bold"><%= @user.followers.count %></div>
+      <div class="user-stats-bold" id="followers"><%= @user.followers.count %></div>
       <div>人</div>
     </div><!-- .usre-stats-followers -->
   <% end %>
   <%= link_to following_user_path(@user) do %>
-    <div class="user-stats-flex">
+    <div class="user-stats-following user-stats-flex">
       <div>フォロー</div>
-      <div class="user-stats-bold"><%= @user.following.count %></div>
+      <div class="user-stats-bold" id="following"><%= @user.following.count %></div>
       <div>人</div>
     </div><!-- .user-stats-following -->
   <% end %>
