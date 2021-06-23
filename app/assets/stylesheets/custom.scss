@@ -358,6 +358,15 @@ input {
   }
 }
 
+/* user following, followers */
+.user-follow-wrapper h1 {
+  font-size: 30px;
+  a {
+   text-decoration: none;
+   color: $gray-text;
+  }
+}
+
 /* destination index */
 .list-with-map-wrapper {
   padding: 0;
@@ -680,11 +689,6 @@ input {
 .destination-comment-new-wrapper {
   //.row のmargin: -15px; を打ち消してsp 時の左右のはみ出し防止
   margin: 0;
-}
-
-/* follow */
-.stats {
-  margin: 5px 0;
 }
 
 /* favorite */

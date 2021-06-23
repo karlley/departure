@@ -1,6 +1,10 @@
 <% provide(:title, @title) %>
-<h1><%= @title %></h1>
-<div class="container">
+<div class="container user-follow-wrapper">
+  <% if controller.action_name == "following" %>
+    <h1>Following / <%= link_to "Followers", followers_user_path %></h1>
+  <% elsif controller.action_name == "followers" %>
+    <h1><%= link_to "Followings", following_user_path %> / Followers</h1>
+  <% end %>
 
   <% if @following_follower_users.any? %>
     <ul class="users follow">
@@ -10,4 +14,4 @@
     <%= will_paginate @following_follower_users %>
   <% end %>
 
-</div><!-- .container -->
+</div><!-- .container .user-follow-wrapper -->
