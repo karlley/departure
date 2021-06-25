@@ -1,17 +1,19 @@
 <% provide(:title, @title) %>
 <div class="container user-follow-wrapper">
   <% if controller.action_name == "following" %>
-    <h1>Following / <%= link_to "Followers", followers_user_path %></h1>
+    <h1>Following / <%= link_to "Followers", followers_user_path(@user) %></h1>
   <% elsif controller.action_name == "followers" %>
-    <h1><%= link_to "Followings", following_user_path %> / Followers</h1>
+    <h1><%= link_to "Followings", following_user_path(@user) %> / Followers</h1>
   <% end %>
 
   <% if @following_follower_users.any? %>
-    <ul class="users follow">
-      <% #@following_follower_users をパーシャルにローカル変数following_follower_user で渡してループを回す %>
-      <%= render partial: "users/following_follower_user", collection: @following_follower_users %>
-    </ul>
+    <ul class="user-follow-list-wrapper">
+      <% #@following_follower_users を変数following_follow_user としてfollowing_follower_userに渡してループを回す %>
+      <%= render partial: "following_follower_user", collection: @following_follower_users %>
+    </ul><!-- .user-follow-list-wrapper -->
+    <div class="pagination-wrapper">
     <%= will_paginate @following_follower_users %>
+    </div><!-- .pagination-wrapper -->
   <% end %>
 
 </div><!-- .container .user-follow-wrapper -->

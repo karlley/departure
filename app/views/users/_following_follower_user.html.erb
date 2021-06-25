@@ -1,7 +1,35 @@
-<li>
-  <%= gravatar_for following_follower_user, size: 50 %>
-  <%= link_to following_follower_user.name, following_follower_user %>
-  <% if (current_user.admin? && current_user != following_follower_user) || (!current_user.admin? && current_user == following_follower_user) %>
-  | <%= link_to "削除", user_path(following_follower_user), method: :delete, data: {confirm: "本当に削除しますか？" } %>
-  <% end %>
-</li>
+<li class="user-follow-list-user">
+  <div class="user-follow-icon">
+    <%= link_to user_path(following_follower_user), class: "user-follow-icon-link" do %>
+      <%= gravatar_for(following_follower_user, size: 50) %>
+    <% end %>
+  </div><!-- .user-follow-icon -->
+
+  <div class="user-follow-neme-relationship-introduction-wrapper">
+    <div class="user-follow-name-relationship-wrapper">
+      <div class="user-follow-name">
+        <p><%= link_to following_follower_user.name, user_path(following_follower_user) %></p>
+      </div><!-- .user-follow-name -->
+      <div class="user-follow-relationship">
+        <%= link_to "フォロー中", "http://example.com", class: "follow-button btn btn-primary" %>
+        <%= link_to "フォローする", "http://example.com", class: "unfollow-button btn btn-primary" %>
+      </div><!-- .user-follow-relationship -->
+
+      <%# <div class="user-follow-relationship" id="follow_form"> %>
+      <%#   <% # render "unfollow/follow" に値を渡す為の代入 %1> %>
+      <%#   <% @following_follower_user = following_follower_user %1> %>
+      <%#   <% # ログインユーザが選択したユーザのフォロー中のユーザをフォローしている場合 %1> %>
+      <%#   <% if current_user.following?(following_follower_user) %1> %>
+      <%#     <%= render "unfollow" %1> %>
+      <%#     <% # ログインユーザが選択したユーザのフォロー中のユーザをフォローしていない場合 %1> %>
+      <%#   <% else %1> %>
+      <%#     <%= render "follow" %1> %>
+      <%#   <% end %1> %>
+      <%# </div><!-- .user-follow-relationship #follow_form --> %>
+
+    </div><!-- .user-follow-relationship-wrapper -->
+    <div class="user-follow-introduction">
+      <p><%= following_follower_user.introduction %></p>
+    </div><!-- .user-follow-introduction -->
+  </div><!-- .user-follow-name-relationship-introduction-wrapper -->
+</li><!-- .user-follow-list-user -->

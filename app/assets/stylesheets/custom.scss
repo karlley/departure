@@ -29,6 +29,12 @@ $pink-favorite: pink;
 $red-error: red;
 
 /* common */
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 /* navbar をfixed-top に設定している為追加 */
 body {
   padding-top: 50px;
@@ -367,6 +373,80 @@ input {
   }
 }
 
+.user-follow-list-wrapper {
+  list-style: none;
+  padding: 0;
+  .user-follow-list-user {
+    margin: 15px 0;
+    border-bottom: 1px solid $gray-border;
+  }
+}
+
+.user-follow-list-user {
+  display: flex;
+}
+
+.user-follow-icon {
+  margin-right: 15px;
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.user-follow-neme-relationship-introduction-wrapper {
+  width: 100%;
+}
+
+.user-follow-name-relationship-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-follow-name p {
+  margin-bottom: 0px;
+  margin-right: 15px;
+  font-size: 24px;
+  @include sp {
+    font-size: 20px;
+  }
+  a {
+    text-decoration: none;
+    color: $black-text;
+  }
+}
+
+.user-follow-relationship {
+  .follow-button {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    color: $blue-text;
+    background: none;
+    border: solid 3px $blue-border;
+  }
+  .unfollow-button {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    border: solid 3px $blue-border;
+  }
+}
+
+.user-follow-introduction {
+  margin-top: 15px;
+  p {
+    color: $gray-text;
+    font-size: 20px;
+    @include sp {
+      font-size: 16px;
+    }
+  }
+}
+
 /* destination index */
 .list-with-map-wrapper {
   padding: 0;
@@ -466,11 +546,6 @@ input {
       color: $gray-text;
     }
   }
-}
-
-.pagination-wrapper {
-  display: flex;
-  justify-content: center;
 }
 
 /* destination form */
