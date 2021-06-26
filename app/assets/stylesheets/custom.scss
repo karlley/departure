@@ -373,6 +373,51 @@ input {
   }
 }
 
+.user-follow-stats-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  border-bottom: 1px solid $gray-border;
+}
+
+.user-follow-stats-flex {
+  /* sp 時のみ左右100% に伸ばす */
+  @include sp {
+    flex: 1;
+  }
+}
+
+.user-follow-stats-name {
+  display: flex;
+  justify-content: center;
+  p {
+    font-size: 24px;
+  }
+}
+
+.user-follow-stats-count {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  @include sp {
+    width: 100%;
+  }
+  .user-follow-stats-following p {
+    color: $gray-text;
+    font-size: 20px;
+    @include sp {
+      font-size: 16px;
+    }
+  }
+  .user-follow-stats-followers p {
+    color: $gray-text;
+    font-size: 20px;
+    @include sp {
+      font-size: 16px;
+    }
+  }
+}
+
 .user-follow-list-wrapper {
   list-style: none;
   padding: 0;
