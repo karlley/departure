@@ -1,5 +1,8 @@
-<% user = User.find(notification.from_user_id) %>
-<% destination = Destination.find(notification.destination_id) %>
+<% # TODO: ユーザと旅先の取得処理をcontroller にまとめる %>
+<% # 通知毎のユーザと旅先を取得 %>
+<% user = get_user_for_notification(notification) %>
+<% destination = get_destination_for_notification(notification) %>
+
 <li id="notification-<%= notification.id %>">
 <div>
   <% if notification.notification_type == 1 %>
