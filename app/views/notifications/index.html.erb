@@ -1,13 +1,13 @@
 <% provide(:title, "Notifications") %>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>Notifications</h1>
-    </div>
-  </div>
+<div class="container notification-index-wrapper">
+  <h1>通知 (<%= @notifications.count %>)</h1>
   <% if @notifications.present? %>
-    <ol class="notifications">
-      <%= render @notifications %>
-    </ol>
+    <div class="notification-index-item-wrapper">
+      <%# <ul class="notifications"> %>
+      <ul class="notification-index-item">
+        <% # @notifications を_notification パーシャルに渡してローカル変数notification でループを回す %>
+        <%= render partial: "notifications/notification", collection: @notifications %>
+      </ul>
+    </div><!-- .notification-index-item-wrapper -->
   <% end %>
-</div>
+</div><!-- .container .notification-index-wrapper -->
