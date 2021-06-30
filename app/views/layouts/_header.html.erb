@@ -25,9 +25,9 @@
                 <li><%= link_to "プロフィール", current_user %></li>
                 <li class="divider"></li>
                 <% if current_user.notification == true %>
-                  <li class="new_notification header-link"><%= link_to notifications_path do %>受信トレイ<% end %></li>
+                  <li class="new_notification header-link"><%= link_to notifications_path do %>通知<% end %></li>
                 <% else %>
-                  <li class="no_notification header-link"><%= link_to notifications_path do %>受信トレイ<% end %></li>
+                  <li class="no_notification header-link"><%= link_to notifications_path do %>通知<% end %></li>
                 <% end %>
                 <li class="divider"></li>
                 <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
