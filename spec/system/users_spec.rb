@@ -512,7 +512,7 @@ RSpec.describe "Users", type: :system do
   end
 
   describe "通知生成" do
-    context "他ユーザーの投稿した行き先の場合" do
+    context "他ユーザの投稿した行き先に自分がいいね!した場合" do
       let(:user) { create(:user) }
       let(:other_user) { create(:user) }
       let(:other_user_destination) { create(:destination, user: other_user) }
@@ -520,41 +520,84 @@ RSpec.describe "Users", type: :system do
       before do
         login_for_system(user)
         visit destination_path(other_user_destination)
-      end
-
-      it "自分がいいね!すると投稿したユーザーに通知が作成される" do
         find(".favorite").click
-        visit destination_path(other_user_destination)
-        expect(page).to have_css "li.no_notification"
         logout
         login_for_system(other_user)
-        expect(page).to have_css "li.new_notification"
-        visit notifications_path
-        expect(page).to have_css "li.no_notification"
-        expect(page).to have_content "あなたの行き先が#{user.name} さんのFavorite に追加されました"
-        expect(page).to have_content other_user_destination.name
-        expect(page).to have_content other_user_destination.description
-        expect(page).to have_content other_user_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
       end
 
-      it "自分がコメントすると投稿したユーザーに通知が作成される" do
-        fill_in "comment_content", with: "This is comment!"
-        click_button "コメント"
-        expect(page).to have_css "li.no_notification"
-        logout
-        login_for_system(other_user)
+      it "投稿ユーザに通知が作成/通知を閲覧するとメニューバーのスタイルがリセットされる" do
         expect(page).to have_css "li.new_notification"
+        # 通知を閲覧
         visit notifications_path
         expect(page).to have_css "li.no_notification"
-        expect(page).to have_content "あなたの行き先に#{user.name} さんがComment しました"
-        expect(page).to have_content "This is comment!"
+      end
+
+      it "他ユーザの通知に行き先とユーザ情報が正しく表示される" do
+        visit notifications_path
+        # expect(page).to have_content other_user_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        # 最初の通知を取得
+        notification = other_user.notifications.first
+        expect(page).to have_content notification.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        expect(page).to have_content "あなたの旅先が #{user.name} さんのいいね!一覧に追加されました"
+        # いいね!元のユーザの名前のリンク確認
+        expect(page).to have_link user.name, href: user_path(user)
+        # いいね!アイコンの表示を確認
+        expect(page).to have_css "span.notification-index-favorite-icon i.fas.fa-heart"
+        # いいね!元のユーザアイコンの表示/リンクを確認
+        expect(page).to have_css "div.notification-index-user-icon img.user-picture"
+        expect(page).to have_link nil, href: user_path(user), class: "notification-index-user-icon-link"
+        # 画像表示確認
+        expect(page).to have_css "div.notification-index-picture img"
+        expect(page).to have_link nil, href: destination_path(other_user_destination)
         expect(page).to have_content other_user_destination.name
         expect(page).to have_content other_user_destination.description
-        expect(page).to have_content other_user_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
       end
     end
 
-    context "自分の投稿した行き先の場合" do
+    context "他ユーザの投稿した行き先に自分がコメントした場合" do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
+      let(:other_user_destination) { create(:destination, user: other_user) }
+
+      before do
+        login_for_system(user)
+        visit destination_path(other_user_destination)
+        fill_in "comment_content", with: "This is comment!"
+        click_button "コメント"
+        logout
+        login_for_system(other_user)
+      end
+
+      it "投稿ユーザに通知が作成/通知を閲覧するとメニューバーのスタイルがリセットされる" do
+        expect(page).to have_css "li.new_notification"
+        visit notifications_path
+        expect(page).to have_css "li.no_notification"
+      end
+
+      it "他ユーザの通知に行き先とユーザ情報が正しく表示される" do
+        visit notifications_path
+        # expect(page).to have_content other_user_destination.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        # 最初の通知を取得
+        notification = other_user.notifications.first
+        expect(page).to have_content notification.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+        expect(page).to have_content "あなたの旅先に #{user.name} さんがコメントしました"
+        expect(page).to have_content notification.content
+        # コメント元のユーザの名前のリンク確認
+        expect(page).to have_link user.name, href: user_path(user)
+        # コメントアイコンの表示を確認
+        expect(page).to have_css "span.notification-index-comment-icon i.far.fa-comment-dots"
+        # コメント元のユーザアイコンの表示/リンクを確認
+        expect(page).to have_css "div.notification-index-user-icon img.user-picture"
+        expect(page).to have_link nil, href: user_path(user), class: "notification-index-user-icon-link"
+        # 画像表示確認
+        expect(page).to have_css "div.notification-index-picture img"
+        expect(page).to have_link nil, href: destination_path(other_user_destination)
+        expect(page).to have_content other_user_destination.name
+        expect(page).to have_content other_user_destination.description
+      end
+    end
+
+    context "自分の投稿した行き先に自分自身で通知アクションを起こした場合" do
       let(:user) { create(:user) }
       let(:destination) { create(:destination) }
 
@@ -563,27 +606,22 @@ RSpec.describe "Users", type: :system do
         visit destination_path(destination)
       end
 
-      it "自分がいいね!しても通知が作成されない" do
+      it "いいね!しても通知が作成されない" do
         find(".favorite").click
         visit destination_path(destination)
         expect(page).to have_css "li.no_notification"
         visit notifications_path
-        expect(page).not_to have_content "あなたの行き先が#{user.name} さんのFavorite に追加されました"
-        expect(page).not_to have_content destination.name
-        expect(page).not_to have_content destination.description
-        expect(page).not_to have_content destination.created_at
+        expect(page).to have_content "通知 (0)"
+        expect(page).not_to have_css "ul.notification-index-item li"
       end
 
-      it "自分がコメントしても通知が作成されない" do
+      it "コメントしても通知が作成されない" do
         fill_in "comment_content", with: "Comment to self!"
         click_button "コメント"
         expect(page).to have_css "li.no_notification"
         visit notifications_path
-        expect(page).not_to have_content "あなたの行き先に#{user.name} さんがComment しました"
-        expect(page).not_to have_content "Comment to self!"
-        expect(page).not_to have_content destination.name
-        expect(page).not_to have_content destination.description
-        expect(page).not_to have_content destination.created_at
+        expect(page).to have_content "通知 (0)"
+        expect(page).not_to have_css "ul.notification-index-item li"
       end
     end
   end
