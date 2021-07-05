@@ -1,3 +1,4 @@
+<% # ログインユーザ以外のページで表示 %>
 <% unless current_user?(@user) %>
   <div class="follow-form-wrapper" id="follow_form">
     <% if current_user.following?(@user) %>
