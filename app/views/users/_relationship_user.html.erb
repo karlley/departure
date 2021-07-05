@@ -1,0 +1,24 @@
+<li class="user-follow-list-user">
+  <div class="user-follow-icon">
+    <%= link_to user_path(relationship_user), class: "user-follow-icon-link" do %>
+      <%= gravatar_for(relationship_user, size: 50) %>
+    <% end %>
+  </div><!-- .user-follow-icon -->
+
+  <div class="user-follow-neme-relationship-introduction-wrapper">
+    <div class="user-follow-name-relationship-wrapper">
+      <div class="user-follow-name">
+        <p><%= link_to relationship_user.name, user_path(relationship_user) %></p>
+      </div><!-- .user-follow-name -->
+
+      <div class="user-follow-relationship">
+        <% # パーシャルlist_follow_form ローカル変数relationship_user を明示的に渡す %>
+        <%= render partial: "users/list_follow_form", locals: { relationship_user: relationship_user } if logged_in? %>
+      </div><!-- .user-follow-relationship -->
+
+    </div><!-- .user-follow-relationship-wrapper -->
+    <div class="user-follow-introduction">
+      <p><%= relationship_user.introduction %></p>
+    </div><!-- .user-follow-introduction -->
+  </div><!-- .user-follow-name-relationship-introduction-wrapper -->
+</li><!-- .user-follow-list-user -->

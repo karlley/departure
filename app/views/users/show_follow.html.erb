@@ -12,23 +12,23 @@
         <p><%= @user.name %></p>
       </div><!-- .user-follow-stats-name -->
       <div class="user-follow-stats-count">
-        <div class="user-follow-stats-following">
-          <p>フォロー中 <%= @user.following.count %>人</p>
-        </div><!-- .user-follow-stats-following -->
         <div class="user-follow-stats-followers">
-          <p>フォロワー <%= @user.followers.count %>人</p>
+          <p id="followers">フォロワー <%= @user.followers.count %>人</p>
         </div><!-- .user-follow-stats-followers -->
+        <div class="user-follow-stats-following">
+          <p id="following">フォロー <%= @user.following.count %>人</p>
+        </div><!-- .user-follow-stats-following -->
       </div><!-- .user-follow-stats-count -->
     </div><!-- .user-follow-stats-flex -->
   </div><!-- .user-follow-stats-wrapper -->
 
-  <% if @following_follower_users.any? %>
+  <% if @relationship_users.any? %>
     <ul class="user-follow-list-wrapper">
-      <% #@following_follower_users を変数following_follow_user としてfollowing_follower_userに渡してループを回す %>
-      <%= render partial: "following_follower_user", collection: @following_follower_users %>
+      <% #@relationship_users を変数relationship_user としてパーシャル_relationship_userに渡してループを回す %>
+      <%= render partial: "users/relationship_user", collection: @relationship_users %>
     </ul><!-- .user-follow-list-wrapper -->
     <div class="pagination-wrapper">
-    <%= will_paginate @following_follower_users %>
+    <%= will_paginate @relationship_users %>
     </div><!-- .pagination-wrapper -->
   <% end %>
 
