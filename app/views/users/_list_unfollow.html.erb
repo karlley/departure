@@ -1,0 +1,13 @@
+<%= form_for(current_user.active_relationships.find_by(followed_id: relationship_user.id), html: { method: :delete }, remote: true) do |f| %>
+  <%= f.submit "フォロー中", class: "unfollow-button btn btn-primary" %>
+<% end %>
+
+<%# <% if controller.action_name == "show" %1> %>
+<%#   <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }, remote: true) do |f| %1> %>
+<%#     <%= f.submit "フォロー中", class: "unfollow-button btn btn-primary" %1> %>
+<%#   <% end %1> %>
+<%# <% elsif controller.action_name == "following" || controller.action_name == "followers" %1> %>
+<%#   <%= form_for(current_user.active_relationships.find_by(followed_id: @following_follower_user.id), html: { method: :delete }, remote: true) do |f| %1> %>
+<%#     <%= f.submit "フォロー中", class: "unfollow-button btn btn-primary" %1> %>
+<%#   <% end %1> %>
+<%# <% end %1> %>

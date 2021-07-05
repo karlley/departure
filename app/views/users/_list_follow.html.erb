@@ -1,0 +1,18 @@
+<%= form_for(current_user.active_relationships.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :followed_id, relationship_user.id %></div>
+  <%= f.submit "フォローする", class: "follow-button btn" %>
+<% end %>
+
+
+<%# <% if controller.action_name == "show" %1> %>
+<%#   <%= form_for(current_user.active_relationships.build, remote: true) do |f| %1> %>
+<%#     <div><%= hidden_field_tag :followed_id, @user.id %1></div> %>
+<%#     <%= f.submit "フォローする", class: "follow-button btn" %1> %>
+<%#   <% end %1> %>
+<%# <% elsif controller.action_name == "following" || controller.action_name == "followers" %1> %>
+<%#   <%= form_for(current_user.active_relationships.build, remote: true) do |f| %1> %>
+<%#     <div><%= hidden_field_tag :followed_id, @following_follower_user.id %1></div> %>
+<%#     <%= f.submit "フォローする", class: "follow-button btn" %1> %>
+<%#   <% end %1> %>
+<%# <% end %1> %>
+
