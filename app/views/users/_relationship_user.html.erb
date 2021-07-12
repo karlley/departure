@@ -11,10 +11,8 @@
         <p><%= link_to relationship_user.name, user_path(relationship_user) %></p>
       </div><!-- .user-follow-name -->
 
-      <div class="user-follow-relationship">
-        <% # フォロー中/フォロワーのユーザ情報、表示ページのユーザ情報をパーシャルに渡す %>
-        <%= render partial: "users/list_follow_form", locals: { relationship_user: relationship_user } if logged_in? %>
-      </div><!-- .user-follow-relationship -->
+      <% # フォロー中/フォロワーのユーザ情報、表示ページのユーザ情報をパーシャルに渡す %>
+      <%= render partial: "users/list_follow_form", locals: { relationship_user: relationship_user } if logged_in? %>
 
     </div><!-- .user-follow-relationship-wrapper -->
     <div class="user-follow-introduction">

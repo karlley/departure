@@ -13,6 +13,7 @@
       <% #@relationship_users を変数relationship_user としてパーシャル_relationship_userに渡してループを回す %>
       <%= render partial: "users/relationship_user", collection: @relationship_users %>
     </ul><!-- .user-follow-list-wrapper -->
+
     <div class="pagination-wrapper">
     <%= will_paginate @relationship_users %>
     </div><!-- .pagination-wrapper -->
