@@ -1,7 +1,7 @@
   <div class="user-follow-stats-wrapper">
     <div class="user-follow-stats-flex">
       <div class="user-follow-stats-name">
-        <p><%= user.name %></p>
+        <p><%= link_to user.name, user_path(user) %></p>
       </div><!-- .user-follow-stats-name -->
       <div class="user-follow-stats-count">
         <div class="user-follow-stats-followers">

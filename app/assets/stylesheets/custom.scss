@@ -393,6 +393,10 @@ input {
   p {
     font-size: 24px;
   }
+  a {
+    text-decoration: none;
+    color: $black-text;
+  }
 }
 
 .user-follow-stats-count {
