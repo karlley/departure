@@ -62,6 +62,7 @@ class UsersController < ApplicationController
   def following
     @title = "Following"
     @user = User.find(params[:id])
+    # カレントページユーザのフォロー中ユーザ一覧
     @relationship_users = @user.following.paginate(page: params[:page])
     render "show_follow"
   end
@@ -69,6 +70,7 @@ class UsersController < ApplicationController
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
+    # カレントページユーザのフォロワーのユーザ一覧
     @relationship_users = @user.followers.paginate(page: params[:page])
     render "show_follow"
   end

@@ -1,8 +1,9 @@
 <%= form_for(current_user.active_relationships.build, remote: true) do |f| %>
+  <% # フォロー中/フォロワーのユーザ情報、表示ページのユーザ情報をrelationships#create に送信 %>
   <div><%= hidden_field_tag :followed_id, relationship_user.id %></div>
+  <div><%= hidden_field_tag :current_page_user_id, @user.id %></div>
   <%= f.submit "フォローする", class: "follow-button btn" %>
 <% end %>
-
 
 <%# <% if controller.action_name == "show" %1> %>
 <%#   <%= form_for(current_user.active_relationships.build, remote: true) do |f| %1> %>

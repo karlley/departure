@@ -12,7 +12,7 @@
       </div><!-- .user-follow-name -->
 
       <div class="user-follow-relationship">
-        <% # パーシャルlist_follow_form ローカル変数relationship_user を明示的に渡す %>
+        <% # フォロー中/フォロワーのユーザ情報、表示ページのユーザ情報をパーシャルに渡す %>
         <%= render partial: "users/list_follow_form", locals: { relationship_user: relationship_user } if logged_in? %>
       </div><!-- .user-follow-relationship -->
 
