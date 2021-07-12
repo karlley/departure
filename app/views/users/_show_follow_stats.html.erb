@@ -1,0 +1,17 @@
+  <div class="user-follow-stats-wrapper">
+    <div class="user-follow-stats-flex">
+      <div class="user-follow-stats-name">
+        <p><%= user.name %></p>
+      </div><!-- .user-follow-stats-name -->
+      <div class="user-follow-stats-count">
+        <div class="user-follow-stats-followers">
+          <p id="followers">フォロワー <%= user.followers.count %>人</p>
+        </div><!-- .user-follow-stats-followers -->
+        <div class="user-follow-stats-following">
+          <p id="following">フォロー <%= user.following.count %>人</p>
+        </div><!-- .user-follow-stats-following -->
+      </div><!-- .user-follow-stats-count -->
+    </div><!-- .user-follow-stats-flex -->
+  </div><!-- .user-follow-stats-wrapper -->
+
+
