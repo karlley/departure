@@ -1,9 +1,12 @@
-<div class="user-follow-relationship" id="list_follow_form_<%= relationship_user.id %>">
-  <% if current_user.following?(relationship_user) %>
-    <% # フォロー中/フォロワーのユーザ情報、表示ページのユーザ情報をパーシャルに渡す %>
-    <%= render partial: "users/list_unfollow", locals: { relationship_user: relationship_user } %>
-  <% else %>
-    <% # フォロー中/フォロワーのユーザ情報、表示ページのユーザ情報をパーシャルに渡す %>
-    <%= render partial: "users/list_follow", locals: { relationship_user: relationship_user } %>
-  <% end %>
-</div><!-- .user-follow-relationship #list_follow_form -->
+<% # ログインユーザ以外のページで表示 %>
+<% unless current_user?(relationship_user) %>
+  <div class="user-follow-relationship" id="list_follow_form_<%= relationship_user.id %>">
+    <% if current_user.following?(relationship_user) %>
+      <% # フォロー中/フォロワーのユーザ情報、表示ページのユーザ情報をパーシャルに渡す %>
+      <%= render partial: "users/list_unfollow", locals: { relationship_user: relationship_user } %>
+    <% else %>
+      <% # フォロー中/フォロワーのユーザ情報、表示ページのユーザ情報をパーシャルに渡す %>
+      <%= render partial: "users/list_follow", locals: { relationship_user: relationship_user } %>
+    <% end %>
+  </div><!-- .user-follow-relationship #list_follow_form -->
+<% end %>
