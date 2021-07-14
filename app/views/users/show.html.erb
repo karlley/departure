@@ -30,7 +30,7 @@
     </div><!-- .user-show-name-edit-stats -->
   </div><!-- .user-show-icon-name-edit-stats-wrapper -->
 
-  <%= render "follow_form" if logged_in? %>
+  <%= render partial: "users/follow_form", locals: { user: @user } if logged_in? %>
 
   <div class="user-show-nationality-introduction-wrapper">
     <p class="user-show-nationality"><i class="fas fa-globe"></i> <%= @user.nationality%></p>

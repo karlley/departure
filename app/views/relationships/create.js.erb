@@ -1,3 +1,2 @@
-$("#list_follow_form_<%= @follow_user.id %>").html("<%= escape_javascript(render('users/list_unfollow', relationship_user: @follow_user)) %>");
-$("#followers").html('フォロワー <%= @user.followers.count %>人');
-$("#following").html('フォロー <%= @user.following.count %>人');
+$("#follow_form").html("<%= escape_javascript(render partial: 'users/unfollow', locals: { user: @user }) %>");
+$("#followers").html('<%= @user.followers.count %>');
