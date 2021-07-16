@@ -45,6 +45,8 @@
         <% #destinations/_users_picture_list.html.erb に@destinations を渡して変数picture でループを回す %>
         <%= render partial: "destinations/users_picture_list", collection: @destinations, as: :users_picture %>
       </div><!-- .row .users-picture-list-wrapper -->
+    <% else %>
+      <p class="user-show-no-destination">投稿がありません</p>
     <% end %>
   </div><!-- .user-show-destinations-wrapper -->
 

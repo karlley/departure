@@ -288,9 +288,11 @@ RSpec.describe "Users", type: :system do
           visit user_path(user)
         end
 
-        it "行き先リストが表示されない" do
+        it "行き先リストが非表示で代替テキストが表示される" do
           expect(page).not_to have_css "div.users-picture-list-wrapper"
           expect(page).not_to have_css "div.user-picture img"
+          expect(page).to have_content "投稿がありません"
+          expect(page).to have_css "p.user-show-no-destination"
         end
       end
     end
