@@ -7,6 +7,7 @@ RSpec.describe "Relationships", type: :system do
       let(:user2) { create(:user) }
 
       before do
+        # user1 がuser2 をフォロー > user1 のフォロー一覧
         create(:relationship, follower_id: user1.id, followed_id: user2.id)
         login_for_system(user1)
         visit following_user_path(user1)
@@ -26,8 +27,8 @@ RSpec.describe "Relationships", type: :system do
 
       it "ユーザー名、フォロー数、フォロワー数が表示される" do
         expect(page).to have_content user1.name
-        expect(page).to have_content "フォロー中 #{user1.following.count}人"
         expect(page).to have_content "フォロワー #{user1.followers.count}人"
+        expect(page).to have_content "フォロー #{user1.following.count}人"
       end
 
       it "フォロー中のユーザの表示件数が正しく表示される" do
@@ -42,6 +43,22 @@ RSpec.describe "Relationships", type: :system do
           expect(page).to have_content u.introduction
         end
       end
+
+      it "フォローする/フォロー中のボタンがAjax で表示される", js: true do
+        expect(page).to have_css "div.user-follow-relationship"
+        expect(page).to have_css "input.unfollow-button"
+        expect(page).to have_button "フォロー中"
+        click_button "フォロー中"
+        expect(page).to have_css "div.user-follow-relationship"
+        expect(page).to have_css "input.follow-button"
+        expect(page).to have_button "フォローする"
+      end
+
+      it "フォローする/フォロー中のボタンが自分のアカウントには表示されない" do
+        # フォローしたuser2のフォロワー一覧でuser1のアカウントのボタン表示を確認
+        visit followers_user_path(user2)
+        expect(page).not_to have_css "div.user-follow-relationship"
+      end
     end
   end
 
@@ -51,6 +68,7 @@ RSpec.describe "Relationships", type: :system do
       let(:user2) { create(:user) }
 
       before do
+        # user2 がuser1 をフォロー > user1 のフォロワー一覧
         create(:relationship, follower_id: user2.id, followed_id: user1.id)
         login_for_system(user1)
         visit followers_user_path(user1)
@@ -70,8 +88,8 @@ RSpec.describe "Relationships", type: :system do
 
       it "ユーザー名、フォロー数、フォロワー数が表示される" do
         expect(page).to have_content user1.name
-        expect(page).to have_content "フォロー中 #{user1.following.count}人"
         expect(page).to have_content "フォロワー #{user1.followers.count}人"
+        expect(page).to have_content "フォロー #{user1.following.count}人"
       end
 
       it "フォロワーのユーザの表示件数が正しく表示される" do
@@ -85,6 +103,22 @@ RSpec.describe "Relationships", type: :system do
           expect(page).to have_link u.name, href: user_path(u)
           expect(page).to have_content u.introduction
         end
+      end
+
+      it "フォローする/フォロー中のボタンがAjax で表示される", js: true do
+        expect(page).to have_css "div.user-follow-relationship"
+        expect(page).to have_css "input.follow-button"
+        expect(page).to have_button "フォローする"
+        click_button "フォローする"
+        expect(page).to have_css "div.user-follow-relationship"
+        expect(page).to have_css "input.unfollow-button"
+        expect(page).to have_button "フォロー中"
+      end
+
+      it "フォローする/フォロー中のボタンが自分のアカウントには表示されない" do
+        # user2 のフォロー一覧でuser1のアカウントのボタン表示を確認
+        visit following_user_path(user2)
+        expect(page).not_to have_css "div.user-follow-relationship"
       end
     end
   end

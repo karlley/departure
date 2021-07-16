@@ -179,8 +179,8 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_css ".user-stats-followers"
         expect(page).to have_css ".user-stats-following"
         expect(page).to have_content "投稿\n#{user.destinations.count}\n件"
-        expect(page).to have_content "フォロワー\n#{user.followers.count}\n人"
-        expect(page).to have_content "フォロー\n#{user.following.count}\n人"
+        expect(page).to have_link "フォロワー #{user.followers.count} 人", href: followers_user_path(user), class: "user-stats-followers-link"
+        expect(page).to have_link "フォロー #{user.following.count} 人", href: following_user_path(user), class: "user-stats-following-link"
       end
 
       it "ユーザーの国籍/紹介文が表示される" do
@@ -189,7 +189,7 @@ RSpec.describe "Users", type: :system do
       end
     end
 
-    context "フォローする/フォロー中 の表示/非表示" do
+    context "フォローする/フォロー中 のボタンの表示/非表示" do
       context "有効なユーザーが自分以外のユーザーをフォローしている場合" do
         let(:user) { create(:user) }
         let(:other_user) { create(:user) }
