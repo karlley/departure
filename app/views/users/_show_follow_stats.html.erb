@@ -1,8 +1,15 @@
   <div class="user-follow-stats-wrapper">
     <div class="user-follow-stats-flex">
-      <div class="user-follow-stats-name">
-        <p><%= link_to user.name, user_path(user) %></p>
-      </div><!-- .user-follow-stats-name -->
+      <div class="user-follow-stats-user">
+        <div class="user-follow-stats-icon">
+          <%= link_to user_path(user), class: "user-follow-stats-icon-link" do %>
+            <%= gravatar_for(user, size: 50) %>
+          <% end %>
+        </div><!-- .user-follow-stats-icont -->
+        <div class="user-follow-stats-name">
+          <%= link_to user.name, user_path(user), class: "user-follow-stats-name-link" %>
+        </div><!-- .user-follow-stats-name -->
+      </div><!-- .user-follow-stats-user -->
       <div class="user-follow-stats-count">
         <div class="user-follow-stats-followers">
           <p id="followers">フォロワー <%= user.followers.count %>人</p>
