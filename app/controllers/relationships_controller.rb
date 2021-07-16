@@ -11,7 +11,7 @@ class RelationshipsController < ApplicationController
         format.html { redirect_to @follow_user }
         format.js
       end
-    elsif
+    else
       # users/show_follow
       # :followed_id からフォローするユーザを取得
       @follow_user = User.find(params[:followed_id])
@@ -35,7 +35,7 @@ class RelationshipsController < ApplicationController
         format.html { redirect_to @unfollow_user }
         format.js
       end
-    elsif
+    else
       # users/show_follow
       # フォロー済みデータからアンフォローするユーザを取得
       @unfollow_user = Relationship.find(params[:id]).followed
