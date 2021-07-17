@@ -12,25 +12,25 @@
       <h3><%= link_to @destination.user.name, @destination.user %></h3>
     </div><!-- .destination-show-user -->
 
-    <% #FIXME: 投稿者、管理者でellipsis の表示/非表示を切り替える %>
     <div class="dropdown destination-show-dropdown-menu">
-      <button class="dropdown-toggle destination-show-dropdown-toggle" data-toggle="dropdown">
-        <i class="fas fa-ellipsis-h"></i>
-      </button>
-      <ul class="dropdown-menu destination-show-edit-delete" role="menu">
-        <% # ログイン済みで編集ボタン表示 %>
-        <% if current_user == @destination.user %>
-          <li class="destination-show-edit">
-            <%= link_to "旅先を編集する", edit_destination_path(@destination) %>
-          </li><!-- .destination-show-edit -->
-        <% end %>
-        <% # 管理者でログインした場合に削除ボタン表示 %>
-        <% if current_user.admin? && (current_user == @destination.user) %>
+      <% # 投稿者、管理者のみ3点リーダ表示 %>
+      <% if current_user.admin? || (current_user == @destination.user) %>
+        <button class="dropdown-toggle destination-show-dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+        <ul class="dropdown-menu destination-show-edit-delete" role="menu">
+          <% # 投稿者のみ編集ボタン表示 %>
+          <% if current_user == @destination.user %>
+            <li class="destination-show-edit">
+              <%= link_to "旅先を編集する", edit_destination_path(@destination) %>
+            </li><!-- .destination-show-edit -->
+          <% end %>
           <li class="destination-show-delete">
             <%= link_to " 旅先を削除する", destination_path(@destination), method: :delete, data: { confirm: "Are you sure?" } %>
           </li><!-- .destination-show-delete -->
-        <% end %>
-      </ul><!-- .destination-show-edit-delete -->
+        </ul><!-- .destination-show-edit-delete -->
+      <% end %>
+
     </div><!-- .dropdown .destination-show-dropdown-menu -->
   </div><!-- .destination-show-user-dropdown -->
 
