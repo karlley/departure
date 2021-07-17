@@ -209,38 +209,37 @@ RSpec.describe "Destinations", type: :system do
       end
     end
 
-    context "行き先の編集/削除ボタンがユーザ毎に正しく表示される" do
-      it "ellipsis(3点リーダ)が表示されること" do
+    context "行き先の編集/削除ボタンがユーザ毎の表示" do
+      it "投稿者、管理者のみ3点リーダが表示される" do
         login_for_system(user)
         visit destination_path(destination)
-        within('.destination-show-dropdown-toggle') do
-          expect(page).to have_selector "i.fas.fa-ellipsis-h"
-        end
+        expect(page).to have_css "button.dropdown-toggle.destination-show-dropdown-toggle"
+        logout
+        login_for_system(admin_user)
+        visit destination_path(destination_admin_user)
+        expect(page).to have_css "button.dropdown-toggle.destination-show-dropdown-toggle"
       end
 
-      it "投稿者かつ管理者の場合は編集/削除ボタンが表示されること" do
+      it "投稿者のみ編集ボタンが表示される" do
+        login_for_system(user)
+        visit destination_path(destination)
+        button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
+        button.click
+        expect(page).to have_link "旅先を編集する", href: edit_destination_path(destination)
+      end
+
+      it "投稿者、管理者のみ削除ボタンが表示される" do
+        login_for_system(user)
+        visit destination_path(destination)
+        button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
+        button.click
+        expect(page).to have_link "旅先を削除する", href: destination_path(destination)
+        logout
         login_for_system(admin_user)
         visit destination_path(destination_admin_user)
         button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
         button.click
-        expect(page).to have_link "旅先を編集する", href: edit_destination_path(destination_admin_user)
         expect(page).to have_link "旅先を削除する", href: destination_path(destination_admin_user)
-      end
-
-      it "投稿者でない場合は編集ボタンを非表示になること" do
-        login_for_system(user)
-        visit destination_path(destination_other_user)
-        button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
-        button.click
-        expect(page).not_to have_link "旅先を編集する", href: edit_destination_path(destination_other_user)
-      end
-
-      it "管理者でない場合は削除ボタンが非表示になること" do
-        login_for_system(user)
-        visit destination_path(destination)
-        button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
-        button.click
-        expect(page).not_to have_link "旅先を削除する", href: destination_path(destination)
       end
     end
 
