@@ -1,0 +1,9 @@
+<% #render as: オプションでローカル変数名をusers_picture に指定 %>
+
+<div class="col-xs-4 users-picture-post destination-<%= users_picture.id %>">
+  <div class="users-picture">
+    <%= link_to destination_path(users_picture.id), class: "destination-list-picture-link" do %>
+      <%= image_tag users_picture.picture.thumb200.url %>
+    <% end %>
+  </div><!-- users-picture -->
+</div><!-- .col-md-2 .users-picture-post -->

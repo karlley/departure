@@ -8,7 +8,7 @@
     <div class="col-md-10">
       <p class="favorite-user"><%= link_to @destination.name, destination_path(@destination) %></p>
       <p class="favorite-description"><%= @destination.description %></p>
-      <p class="favorite-country">country: <%= @destination.country %><p>
+      <p class="favorite-country">country: <%= get_country_name(@destination) %><p>
       <p class="destination-user">posted by <%= link_to user.name, user_path(user) %></p>
     </div>
   </div>

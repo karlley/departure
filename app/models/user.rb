@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :favorites, dependent: :destroy
+  # destinations テーブルからfavorite 済みのデータを取得
+  has_many :favorite_destinations, through: :favorites, source: :destination
   has_many :notifications, dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
@@ -67,7 +69,9 @@ class User < ApplicationRecord
 
   # ユーザーのステータスフィードを返す
   def feed
+    # フォロー中のuser_id を取得
     following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+    # フォロー中のユーザ、自分の投稿を検索
     Destination.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 

@@ -3,11 +3,13 @@ class DestinationsController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
+    # application_controller#search_result を表示
   end
 
   def show
     @destination = Destination.find(params[:id])
     @comment = Comment.new
+    @comments = @destination.feed_comment(@destination.id)
     # GoogleMap 表示用のマーカーを作成
     @marker = Gmaps4rails.build_markers(@destination) do |destination, marker|
       marker.lat(destination.latitude)
@@ -26,6 +28,7 @@ class DestinationsController < ApplicationController
   end
 
   def create
+    # TODO: enum のAugumentError 対策
     @destination = current_user.destinations.build(destination_params)
     if @destination.save
       @destination.add_address

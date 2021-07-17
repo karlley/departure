@@ -1,58 +1,90 @@
 <% provide(:title, "#{@destination.name}") %>
-<% @comments = @destination.feed_comment(@destination.id) %>
-<h1>Destination</h1>
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <span class="picture">
-        <%= link_to((image_tag @destination.picture.thumb400.url), destination_path(@destination.id), class: "destination-picture") if have_picture? %>
-      </span>
-      <%= render "users/favorite_form" %>
-    </div>
-    <div class="col-md-8">
-      <h2 class="destination-name"><%= @destination.name %></h2>
-      <div class="change-destination">
-        <% if current_user == @destination.user %>
-          <%= link_to "Edit", edit_destination_path(@destination), class: "edit-destination" %>
+<div class="container destination-show-wrapper">
+  <h1><%= @destination.name %></h1>
+
+  <div class="destination-show-user-dropdown">
+    <div class="destination-show-user">
+      <div class="destination-show-icon">
+        <%= link_to @destination.user, class: "destination-list-icon-link" do %>
+          <%= gravatar_for(@destination.user, size: 50) %>
         <% end %>
-        <% if current_user.admin? || (current_user == @destination.user) %>
-          <%= link_to "Delete", destination_path(@destination), method: :delete, class: 'delete-destination', data: { confirm: "Are you sure?" } %>
-        <% end %>
-      </div>
-      <p class="destination-country">国: <%= @country.country_name %></p>
-      <p class="destination-region">エリア: <%= @country.region %></p>
-      <p class="destination-spot">スポット: <%= @destination.spot %></p>
-      <p class="destination-expense">費用: <%= @destination.expense %></p>
-      <p class="destination-season">シーズン: <%= @destination.season %>月</p>
-      <p class="destination-experience">体験: <%= @destination.experience %></p>
-      <% if @airline.nil? %>
-        <p class="destination-airline_name">航空会社: 未使用</p>
-      <% else %>
-        <p class="destination-airline_name">航空会社: <%= @airline.airline_name %></p>
-        <p class="destination-alliance">アライアンス: <%= @airline.alliance %></p>
+      </div><!-- .destination-show-icon -->
+      <h3><%= link_to @destination.user.name, @destination.user %></h3>
+    </div><!-- .destination-show-user -->
+
+    <div class="dropdown destination-show-dropdown-menu">
+      <% # 投稿者、管理者のみ3点リーダ表示 %>
+      <% if current_user.admin? || (current_user == @destination.user) %>
+        <button class="dropdown-toggle destination-show-dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+        <ul class="dropdown-menu destination-show-edit-delete" role="menu">
+          <% # 投稿者のみ編集ボタン表示 %>
+          <% if current_user == @destination.user %>
+            <li class="destination-show-edit">
+              <%= link_to "旅先を編集する", edit_destination_path(@destination) %>
+            </li><!-- .destination-show-edit -->
+          <% end %>
+          <li class="destination-show-delete">
+            <%= link_to " 旅先を削除する", destination_path(@destination), method: :delete, data: { confirm: "Are you sure?" } %>
+          </li><!-- .destination-show-delete -->
+        </ul><!-- .destination-show-edit-delete -->
       <% end %>
-      <p class="destination-food">食べ物: <%= @destination.food %></p>
-      <div class="destination-description"><%= @destination.description %></div>
-      <div class="comment">
-        <%= render "comments/feed_comments" %>
-        <%= render "comments/new" %>
+
+    </div><!-- .dropdown .destination-show-dropdown-menu -->
+  </div><!-- .destination-show-user-dropdown -->
+
+  <div class="destination-show-map-wrapper">
+    <div id="map"></div>
+
+    <script type="text/javascript">
+      handler = Gmaps.build('Google');
+      handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers(<%= raw @marker.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(16);
+      });
+    </script>
+  </div><!-- .destination-show-map-wrapper -->
+
+  <div class="row destination-show-info-detail-wrapper">
+    <div class="col-md-4 destination-show-info-wrapper">
+      <div class="destination-show-picture">
+        <%= image_tag @destination.picture.thumb400.url %>
+      </div><!-- .destination-show-picture -->
+
+      <div class="destination-show-favorite-timestamp">
+        <%= render "users/favorite_form" %>
+        <div class="destination-show-timestamp">
+          <%= time_ago_in_words(@destination.created_at) %>
+        </div><!-- .dextination-show-timestamp -->
+      </div><!-- .destination-show-favorite-timestamp -->
+    </div><!-- .col-md-4 .destination-show-info-wrapper -->
+
+    <div class="col-md-8 destination-show-detail">
+      <div class="destination-show-description">
+        <p><%= @destination.description %></p>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div id="map"></div>
+      <p class="destination-show-country-name"><i class="fa fa-map-marker"></i> <%= @country.country_name %></p>
+      <p class="destination-show-region"><i class="fas fa-globe"></i> <%= @country.region %></p>
+      <p class="destination-show-spot"><i class="far fa-flag"></i> <%= @destination.spot %></p>
+      <p class="destination-show-expense"><i class="fas fa-calculator"></i> <%= @destination.expense %></p>
+      <p class="destination-show-season"><i class="fas fa-suitcase-rolling"></i> <%= @destination.season %>月</p>
+      <p class="destination-show-experience"><i class="fas fa-hiking"></i> 体験: <%= @destination.experience %></p>
+      <% if @airline.nil? %>
+        <p class="destination-show-airline-name"><i class="fas fa-plane"></i> 航空会社: 未使用</p>
+      <% else %>
+        <p class="destination-show-airline-name"><i class="fas fa-plane"></i> 航空会社: <%= @airline.airline_name %></p>
+        <p class="destination-show-alliance"><i class="far fa-handshake"></i> アライアンス: <%= @airline.alliance %></p>
+      <% end %>
+      <p class="destination-show-food"><i class="fas fa-utensils"></i> 食べ物: <%= @destination.food %></p>
+    </div><!-- .col-md-8 .destination-show-detail -->
+  </div><!-- .row .destination-show-picture-info-wrapper -->
 
-      <script type="text/javascript">
-        handler = Gmaps.build('Google');
-        handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
-          markers = handler.addMarkers(<%= raw @marker.to_json %>);
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-          handler.getMap().setZoom(16);
-        });
-      </script>
+  <div class="destination-show-comment-wrapper">
+    <%= render "comments/feed_comments" %>
+    <%= render "comments/new" %>
+  </div><!-- .destination-comment-wrapper -->
 
-    </div>
-  </div>
-</div>
+</div><!-- container .destination-show-wrapper -->

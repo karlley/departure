@@ -1,10 +1,6 @@
-<div class="row">
-  <div class="col-md-12">
-    <h3 class="title-comment">Comments (<%= "#{@destination.comments.count}" %>)</h3>
-  </div>
-</div>
+<h2>コメント (<%= "#{@destination.comments.count}" %>)</h2>
 <% if @comments.any? %>
-  <ul class="comments">
+  <div class="row destination-comment-list-wrapper">
     <%= render @comments %>
-  </ul>
+  </div><!-- .row .destination-comment-list-wrapper -->
 <% end %>

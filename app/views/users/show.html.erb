@@ -1,37 +1,53 @@
 <% provide(:title, "Profile") %>
-<h1>Profile</h1>
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="user-picture-box">
-        <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <p class="show-user-name"><%= @user.name %></p><p class="show-user-nationality"><%= @user.nationality %></p>
-      <div>
-        <%= @user.introduction %>
-      </div>
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
-      <% if current_user == @user %>
-        <div class="edit-profile">
-          <%= link_to "Edit Profile", edit_user_path(@user) %>
-        </div>
-      <% end %>
-      <%= render 'follow_form' if logged_in? %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-9">
-      <% if @user.destinations.any? %>
-        <p>行き先 (<%= @user.destinations.count %>)</p>
-        <ol class="destinations">
-          <%= render @destinations %>
-        </ol>
-        <%= will_paginate @destinations %>
-      <% end %>
-    </div>
-  </div>
-</div>
+<div class="container user-show-wrapper">
+
+  <div class="user-show-icon-name-edit-stats-wrapper">
+    <div class="user-show-icon">
+      <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
+    </div><!-- .user-show-icon -->
+
+    <div class="user-show-name-edit-stats">
+      <div class="user-show-name-edit">
+        <h1><%= @user.name %></h1>
+        <div class="dropdown user-show-dropdown-menu">
+          <% # 自分の投稿のみ編集ボタン表示 %>
+          <% if current_user == @user %>
+            <button class="dropdown-toggle user-show-dropdown-toggle" data-toggle="dropdown">
+              <i class="fas fa-ellipsis-h"></i>
+            </button>
+            <ul class="dropdown-menu user-show-edit-list" role="menu">
+              <li class="user-show-edit">
+                <%= link_to "プロフィールを編集する", edit_user_path(@user) %>
+              </li><!-- .user-show-edit -->
+            </ul><!-- .dropdown-menu .user-show-edit-list -->
+          <% end %>
+        </div><!-- .dropdown .user-show-dropdown-menu -->
+      </div><!-- .user-show-name-edit -->
+
+      <div class="user-show-stats">
+        <%= render 'users/stats' %>
+      </div><!-- .user-show-stats -->
+    </div><!-- .user-show-name-edit-stats -->
+  </div><!-- .user-show-icon-name-edit-stats-wrapper -->
+
+  <%= render partial: "users/follow_form", locals: { user: @user } if logged_in? %>
+
+  <div class="user-show-nationality-introduction-wrapper">
+    <p class="user-show-nationality"><i class="fas fa-globe"></i> <%= @user.nationality%></p>
+    <div class="user-show-introduction">
+      <%= @user.introduction %>
+    </div><!-- .user-show-introduction -->
+  </div><!-- .user-show-nationality-introduction-wrapper -->
+
+  <div class="user-show-destinations-wrapper">
+    <% if @user.destinations.any? %>
+      <div class="row users-picture-list-wrapper">
+        <% #destinations/_users_picture_list.html.erb に@destinations を渡して変数picture でループを回す %>
+        <%= render partial: "destinations/users_picture_list", collection: @destinations, as: :users_picture %>
+      </div><!-- .row .users-picture-list-wrapper -->
+    <% else %>
+      <p class="user-show-no-destination">投稿がありません</p>
+    <% end %>
+  </div><!-- .user-show-destinations-wrapper -->
+
+</div><!-- .container .user-show-wrapper -->

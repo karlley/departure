@@ -1,14 +1,12 @@
 <%= form_for(@comment) do |f| %>
   <%= render "shared/error_messages", object: f.object %>
   <%= hidden_field_tag :destination_id, @destination.id %>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-1">
-      <div class="field">
-        <%= f.text_area :content, placeholder: "Add comments ..." %>
-      </div>
-    </div>
-    <div class="col-md-3">
+  <div class="row destination-comment-new-wrapper">
+    <div class="col-md-10 destination-comment-new-field">
+        <%= f.text_area :content, placeholder: "コメントを追加 ..." %>
+    </div><!-- .col-md-10 destination-comment-new-field -->
+    <div class="col-md-2 destination-comment-new-button">
       <%= f.submit class: "btn btn-primary" %>
-    </div>
-  </div>
+    </div><!-- .col-md-2 .destination-comment-new-button -->
+  </div><!-- .row .destination-comment-new-wrapper -->
 <% end %>

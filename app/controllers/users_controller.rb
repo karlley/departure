@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @destinations = @user.destinations.paginate(page: params[:page], per_page: 5)
+    @destinations = @user.destinations
   end
 
   def index
@@ -62,14 +62,16 @@ class UsersController < ApplicationController
   def following
     @title = "Following"
     @user = User.find(params[:id])
-    @users = @user.following.paginate(page: params[:page])
+    # カレントページユーザのフォロー中ユーザ一覧
+    @relationship_users = @user.following.paginate(page: params[:page])
     render "show_follow"
   end
 
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
+    # カレントページユーザのフォロワーのユーザ一覧
+    @relationship_users = @user.followers.paginate(page: params[:page])
     render "show_follow"
   end
 

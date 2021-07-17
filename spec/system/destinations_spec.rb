@@ -3,26 +3,32 @@ require 'rails_helper'
 RSpec.describe "Destinations", type: :system do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
+  let!(:admin_user) { create(:user, :admin) }
   let!(:destination) { create(:destination, :picture, user: user) }
+  let!(:destination_admin_user) { create(:destination, :picture, user: admin_user) }
+  let!(:destination_other_user) { create(:destination, :picture, user: other_user) }
   let(:destination_picture_unselected) { create(:destination, :picture_unselected, user: user) }
   let(:destination_airline_unselected) { create(:destination, :airline_unselected) }
+  let(:destination_picture_unselected) { create(:destination, :picture_unselected, user: user) }
   let!(:comment) { create(:comment, user_id: user.id, destination: destination) }
+  # 自分以外の投稿に自分がコメント
+  let!(:comment_add_other_user_destination) { create(:comment, user_id: user.id, destination: destination_other_user) }
   let!(:country) { create(:country) }
   let!(:airline) { create(:airline) }
 
-  describe "New Destination ページ" do
+  describe "destinations#new" do
     before do
       login_for_system(user)
       visit new_destination_path
     end
 
     context "ページレイアウト" do
-      it "'New Destination' の文字列が存在すること" do
-        expect(page).to have_content "New Destination"
+      it "'シェア' の文字列が存在すること" do
+        expect(page).to have_content "シェア"
       end
 
       it "正しいタイトルが表示されること" do
-        expect(page).to have_title full_title("New Destination")
+        expect(page).to have_title full_title("シェア")
       end
 
       it "写真選択フォームが表示されていること" do
@@ -30,7 +36,7 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "写真が非表示であること" do
-        within(".picture") do
+        within(".destination-form-picture-select") do
           expect(page).not_to have_selector "img"
         end
       end
@@ -92,8 +98,9 @@ RSpec.describe "Destinations", type: :system do
       it "画像無しの登録はデフォルト画像が設定されること" do
         attach_file nil
         click_button "登録する"
-        # リンクテキスト: nil で画像を指定, class 指定で画像に絞り込み, 登録後のページ(show) で画像リンクを確認
-        expect(page).to have_link nil, href: destination_path(Destination.first), class: "destination-picture"
+        # リンクテキスト: nil で画像を指定, class 指定で画像に絞り込み, destinations#show ページで画像リンクを確認
+        # expect(page).to have_link nil, href: destination_path(Destination.first), class: "destination-show-picture"
+        expect(page).to have_selector ".destination-show-picture img"
       end
 
       it "無効なデータで登録処理で失敗のフラッシュが表示されること" do
@@ -104,61 +111,74 @@ RSpec.describe "Destinations", type: :system do
     end
   end
 
-  describe "Destination ページ" do
+  describe "destinations#index" do
+    context "ユーザ毎の行き先表示を確認" do
+      before do
+        login_for_system(user)
+        visit destinations_path
+      end
+
+      it "自分の行き先の表示を確認" do
+        expect(page).to have_content destination.name
+        expect(page).to have_content destination.user.name
+      end
+
+      it "自分以外のユーザの行き先の表示を確認" do
+        expect(page).to have_content destination_other_user.name
+        expect(page).to have_content destination_other_user.user.name
+      end
+    end
+
     context "ページレイアウト" do
       before do
         login_for_system(user)
-        visit destination_path(destination)
-      end
-
-      it "正しいタイトルが表示されること" do
-        expect(page).to have_title full_title("#{destination.name}")
-      end
-
-      it "'行き先名' の文字列が存在すること" do
-        expect(page).to have_content "#{destination.name}"
-      end
-
-      it "行き先の写真が表示されること" do
-        expect(page).to have_selector "img[src$='test_destination_1.jpg']"
-      end
-
-      it "行き先情報が表示されること" do
-        expect(page).to have_content destination.name
-        # FactroyBot で生成した値から国のデータを取得 > 国名を取得
-        country_name = Country.find_by(id: destination.country).country_name
-        region = Country.find_by(id: destination.country).region
-        expect(page).to have_content country_name
-        expect(page).to have_content region
-        expect(page).to have_content destination.expense
-        expect(page).to have_content destination.season
-        expect(page).to have_content destination.experience
-        expect(page).to have_content destination.food
-        expect(page).to have_content destination.description
-        # リンクテキスト: nil で画像を指定, class 指定で画像に絞り込み, 登録後のページ(show) で画像リンクを確認
-        expect(page).to have_link nil, href: destination_path(destination), class: "destination-picture"
-      end
-
-      it "航空会社が選択された場合は航空会社とアライアンスが表示される" do
-        airline_name = Airline.find_by(id: destination.airline).airline_name
-        alliance = Airline.find_by(id: destination.airline).alliance
-        expect(page).to have_selector ".destination-airline_name", text: airline_name
-        expect(page).to have_selector ".destination-alliance", text: alliance
-      end
-
-      it "航空会社が未選択の場合には航空会社に'未使用'が表示され, アライアンスは非表示になる" do
-        # 航空会社が選択されていないFactory を使用
-        visit destination_path(destination_airline_unselected)
-        expect(page).to have_selector ".destination-airline_name", text: "未使用"
-        # アライアンスの非表示を確認
-        expect(page).not_to have_css ".destination-alliance"
+        visit destinations_path
       end
 
       it "GoogleMap が表示されていること", js: true do
         expect(page).to have_css "div.gm-style"
       end
+
+      # FIXME: ピンが表示されないことがあるのでfactorybot 要修正
+      # it "GoogleMap のピンが行き先の件数分表示されていること",js: true do
+      #   post_count = Destination.count
+      #   expect(page).to have_css "img[src$='spotlight-poi2_hdpi.png']", count: post_count
+      # end
+
+      it "旅先の情報が正しく表示されている事を確認" do
+        expect(page).to have_css "div.destination-list-picture img"
+        # 旅先画像の表示を確認
+        expect(page).to have_link nil, href: destination_path(destination), class: "destination-list-picture-link"
+        # アイコンの表示を確認
+        expect(page).to have_css "div.destination-list-icon img.gravatar"
+        expect(page).to have_link nil, href: user_path(destination.user), class: "destination-list-icon-link"
+        expect(page).to have_link destination.name.truncate(30), href: destination_path(destination)
+        expect(page).to have_link destination.user.name, href: user_path(destination.user)
+        # 50文字以上を省略しているのも検証
+        expect(page).to have_content destination.description.truncate(50)
+        country_name = get_country_name(destination)
+        expect(page).to have_content country_name
+        expect(page).to have_content "いいね!"
+        expect(page).to have_css "div.destination-list-timestamp"
+      end
     end
 
+    context "行き先が複数ある場合の表示" do
+      it "ページネーションの表示を確認" do
+        login_for_system(user)
+        # per_page が12件なので13件のテストデータを作成
+        create_list(:destination, 13, user: user)
+        visit destinations_path
+        expect(page).to have_content "All Destinations"
+        expect(page).to have_css "div.pagination"
+        Destination.take(12).each do |d|
+          expect(page).to have_link d.name
+        end
+      end
+    end
+  end
+
+  describe "destinations#show" do
     context "GoogleMap 表示内容", js: true do
       before do
         login_for_system(user)
@@ -181,7 +201,6 @@ RSpec.describe "Destinations", type: :system do
         pin.click
         expect(page).to have_content destination.name
         expect(page).to have_content destination.spot
-        expect(page).to have_content destination.country
         expect(page).to have_content destination.address
         expect(page).to have_link "GoogleMap で見る", href: "https://maps.google.co.jp/maps?q=loc:#{destination.latitude},#{destination.longitude}&iwloc=J", class: "googlemap-link"
         link = find(".googlemap-link")
@@ -190,15 +209,130 @@ RSpec.describe "Destinations", type: :system do
       end
     end
 
-    context "行き先 削除処理", js: true do
-      it "削除成功のフラッシュが表示されること" do
+    context "行き先の編集/削除ボタンがユーザ毎の表示" do
+      it "投稿者、管理者のみ3点リーダが表示される" do
         login_for_system(user)
         visit destination_path(destination)
-        within('.change-destination') do
-          click_on 'Delete'
+        expect(page).to have_css "button.dropdown-toggle.destination-show-dropdown-toggle"
+        logout
+        login_for_system(admin_user)
+        visit destination_path(destination_admin_user)
+        expect(page).to have_css "button.dropdown-toggle.destination-show-dropdown-toggle"
+      end
+
+      it "投稿者のみ編集ボタンが表示される" do
+        login_for_system(user)
+        visit destination_path(destination)
+        button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
+        button.click
+        expect(page).to have_link "旅先を編集する", href: edit_destination_path(destination)
+      end
+
+      it "投稿者、管理者のみ削除ボタンが表示される" do
+        login_for_system(user)
+        visit destination_path(destination)
+        button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
+        button.click
+        expect(page).to have_link "旅先を削除する", href: destination_path(destination)
+        logout
+        login_for_system(admin_user)
+        visit destination_path(destination_admin_user)
+        button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
+        button.click
+        expect(page).to have_link "旅先を削除する", href: destination_path(destination_admin_user)
+      end
+    end
+
+    context "行き先 削除処理", js: true do
+      it "削除成功のフラッシュが表示されること" do
+        login_for_system(admin_user)
+        visit destination_path(destination_admin_user)
+        button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
+        button.click
+        within('ul.dropdown-menu.destination-show-edit-delete') do
+          click_on '旅先を削除する'
         end
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'Destination deleted!'
+      end
+    end
+
+    context "ページレイアウト" do
+      before do
+        login_for_system(user)
+        visit destination_path(destination)
+      end
+
+      it "正しいタイトルが表示されること" do
+        expect(page).to have_title full_title("#{destination.name}")
+      end
+
+      it "'行き先名' の文字列が存在すること" do
+        expect(page).to have_content "#{destination.name}"
+      end
+
+      it "行き先の投稿者の情報が表示されること" do
+        expect(page).to have_link nil, href: user_path(destination.user), class: "destination-list-icon-link"
+        expect(page).to have_link destination.user.name, href: user_path(destination.user)
+      end
+
+      it "GoogleMap が表示されていること", js: true do
+        expect(page).to have_css "div.gm-style"
+      end
+
+      it "行き先の写真が表示されること" do
+        expect(page).to have_selector "img[src$='test_destination_1.jpg']"
+      end
+
+      it "いいね! ボタンが表示されること" do
+        expect(page).to have_link, href: "/favorites/destination.id/create"
+        expect(page).to have_selector "span.favorite-btn-favorite"
+        expect(page).to have_selector "i.far.fa-heart"
+        expect(page).to have_content "いいね!"
+      end
+
+      it "行き先投稿のタイムスタンプが表示されること" do
+        expect(page).to have_selector "div.destination-show-timestamp", text: "1分以内"
+      end
+
+      it "行き先情報が表示されること" do
+        expect(page).to have_selector "div.destination-show-description p", text: destination.description
+        # FactroyBot で生成した値から国のデータを取得 > 国名を取得
+        country_name = Country.find_by(id: destination.country).country_name
+        region = Country.find_by(id: destination.country).region
+        expect(page).to have_selector "p.destination-show-country-name", text: country_name
+        expect(page).to have_selector "p.destination-show-region", text: region
+        expect(page).to have_selector "p.destination-show-spot", text: destination.spot
+        expect(page).to have_selector "p.destination-show-expense", text: destination.expense
+        expect(page).to have_selector "p.destination-show-season", text: destination.season
+        expect(page).to have_selector "p.destination-show-experience", text: destination.experience
+        airline_name = Airline.find_by(id: destination.airline).airline_name
+        alliance = Airline.find_by(id: destination.airline).alliance
+        expect(page).to have_selector ".destination-show-airline-name", text: airline_name
+        expect(page).to have_selector ".destination-show-alliance", text: alliance
+        expect(page).to have_selector "p.destination-show-food", text: destination.food
+      end
+
+      it "コメントの情報が表示されること" do
+        expect(page).to have_selector "div.destination-show-comment-wrapper"
+        expect(page).to have_selector "h2", text: "コメント (1)"
+        expect(page).to have_link nil, href: user_path(comment.user_id), class: "destination-comment-icon-link"
+        # コメント投稿者の名前を取得
+        comment_user = User.find(comment.user_id).name
+        expect(page).to have_link comment_user, href: user_path(comment.user_id)
+        expect(page).to have_selector "div.destination-comment-time", text: "1分以内"
+        expect(page).to have_selector "div.destination-comment-content p", text: comment.content
+      end
+    end
+
+    context "アライアンスの表示/非表示" do
+      it "航空会社が未選択の場合には航空会社に'未使用'が表示され, アライアンスは非表示になること" do
+        login_for_system(user)
+        # 航空会社が選択されていないFactory を使用
+        visit destination_path(destination_airline_unselected)
+        expect(page).to have_selector ".destination-show-airline-name", text: "未使用"
+        # アライアンスの非表示を確認
+        expect(page).not_to have_css ".destination-show-alliance"
       end
     end
 
@@ -209,31 +343,39 @@ RSpec.describe "Destinations", type: :system do
         fill_in "comment_content", with: "This is comment!"
         click_button "コメント"
         within("#comment-#{Comment.last.id}") do
-          expect(page).to have_selector "span", text: user.name
-          expect(page).to have_selector "span", text: "This is comment!"
+          expect(page).to have_selector "div.destination-comment-content p", text: "This is comment!"
         end
         expect(page).to have_content "Added a comment!"
         click_link "delete", href: comment_path(Comment.last)
-        expect(page).not_to have_selector "span", text: "This is comment!"
+        expect(page).not_to have_selector "div.destination-comment-content p", text: "This is comment!"
         expect(page).to have_content "Deleted a comment!"
       end
 
-      it "自分以外の投稿へのコメントには削除ボタンが表示されないこと" do
-        login_for_system(other_user)
-        visit destination_path(destination)
-        within("#comment-#{comment.id}") do
-          expect(page).to have_selector "span", text: user.name
-          expect(page).to have_selector "span", text: comment.content
-          expect(page).not_to have_link "delete", href: destination_path(destination)
+      it "自分以外の投稿へのコメントができること" do
+        login_for_system(user)
+        visit destination_path(destination_other_user)
+        fill_in "comment_content", with: "This is comment!"
+        click_button "コメント"
+        within("#comment-#{Comment.last.id}") do
+          expect(page).to have_selector "div.destination-comment-content p", text: "This is comment!"
+        end
+      end
+
+      it "自分以外の投稿へのコメントには削除ボタンが表示されないこと(自分の投稿のみコメント削除できる)" do
+        login_for_system(user)
+        visit destination_path(destination_other_user)
+        # 自分以外の投稿のコメントの中から自分のコメントに絞り込み
+        within("#comment-#{comment_add_other_user_destination.id}") do
+          expect(page).not_to have_link "delete", href: destination_path(destination_other_user)
         end
       end
     end
   end
 
-  describe "Destination Search ページ" do
-    context "ページレイアウト" do
+  describe "destination 検索フォーム" do
+    context "ログイン状態での検索フォームの表示確認" do
       context "ログインしている場合" do
-        it "各ページに検索バーが表示されていること" do
+        it "各ページに検索フォームが表示されていること" do
           login_for_system(user)
           visit root_path
           expect(page).to have_css "form#destination_search"
@@ -266,79 +408,78 @@ RSpec.describe "Destinations", type: :system do
         end
       end
 
-      context "未ログインの場合" do
-        it "検索バーが表示されないこと" do
+      context "未ログイン時の検索フォームの表示" do
+        it "検索フォームが表示されないこと" do
           visit root_path
           expect(page).not_to have_css "form#destination_search"
         end
       end
     end
 
-    context "検索機能" do
+    context "検索結果の検証" do
       before do
         login_for_system(user)
       end
 
-      it "検索ワードから行き先名 にマッチする結果が表示されること" do
+      it "検索ワードから行き先名 にマッチする結果が表示されること", js: true do
         search_word = "東京"
         create(:destination, name: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
-        end
+        expect(page).to have_css "div.destination-list-post", count: 1
       end
 
-      it "検索ワードからスポット にマッチする結果が表示されること" do
+      it "検索ワードからスポット にマッチする結果が表示されること", js: true do
         search_word = "タワー"
         create(:destination, spot: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
-        end
+        expect(page).to have_css "div.destination-list-post", count: 1
       end
 
-      it "検索ワードから住所 にマッチする結果が表示されること" do
+      it "検索ワードから住所 にマッチする結果が表示されること", js: true do
         search_word = "東京都"
         create(:destination, address: search_word, user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
-        end
+        expect(page).to have_css "div.destination-list-post", count: 1
       end
 
-      it "複数の検索ワードでマッチする結果が表示されること" do
+      it "複数の検索ワードでマッチする結果が表示されること", js: true do
         search_word = "東京 タワー"
         create(:destination, name: "東京", spot: "タワー", user: user)
         fill_in "q[name_or_spot_or_address_cont]", with: search_word
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
-        within(".destinations") do
-          expect(page).to have_css "li", count: 1
-        end
+        expect(page).to have_css "div.destination-list-post", count: 1
       end
 
-      it "検索ワードを入力しなかった場合は行き先一覧が表示されること" do
+      it "検索ワードを入力しなかった場合は行き先一覧が表示されること", js: true do
+        # 全投稿数を取得
+        post_count = Destination.count
         fill_in "q[name_or_spot_or_address_cont]", with: ""
-        click_button "Search"
+        # Enter キー押下
+        find("#destination_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "All Destinations"
-        within(".destinations") do
-          expect(page).to have_css "li", count: Destination.count
-        end
+        expect(page).to have_css "div.destination-list-post", count: post_count
       end
     end
   end
 
-  describe "Destination Edit ページ" do
+  describe "destinations#edit" do
     before do
       login_for_system(user)
       visit destination_path(destination)
-      click_link "Edit"
+      button = find "button.dropdown-toggle.destination-show-dropdown-toggle"
+      button.click
+      click_link "旅先を編集する"
     end
 
     context "ページレイアウト" do
@@ -347,7 +488,7 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "'Edit + 行き先名' の文字列が存在すること" do
-        expect(page).to have_content "Edit #{destination.name}"
+        expect(page).to have_content "#{destination.name}"
       end
 
       it "写真選択フォームが表示されていること" do
@@ -413,7 +554,7 @@ RSpec.describe "Destinations", type: :system do
 
     context "行き先 削除処理", js: true do
       it "削除成功のフラッシュが表示されること" do
-        click_on '行き先を削除する'
+        click_on "削除する"
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'Destination deleted!'
       end

@@ -1,23 +1,45 @@
-<% user = User.find(notification.from_user_id) %>
-<% destination = Destination.find(notification.destination_id) %>
+<% # TODO: ユーザと旅先の取得処理をcontroller にまとめる %>
+<% # 通知毎のユーザと旅先を取得 %>
+<% user = get_user_for_notification(notification) %>
+<% destination = get_destination_for_notification(notification) %>
+
 <li id="notification-<%= notification.id %>">
-<div>
-  <% if notification.notification_type == 1 %>
-    <p class="notification-timestamp"><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
-    <p class="notification-message">あなたの行き先が<%= link_to user.name, user_path(user) %> さんのFavorite に追加されました</p>
-  <% elsif notification.notification_type == 2 %>
-    <p class="notification-timestamp"><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
-    <p class="notification-message">あなたの行き先に<%= link_to user.name, user_path(user) %> さんがComment しました</p>
-    <p class="notification-content"><%= notification.content %></p>
-  <% end %>
-</div>
-<div class="row">
-  <div class="col-md-2">
-    <%= link_to((image_tag destination.picture.url), destination_path(destination), class: "destination-picture") %>
+  <div class="notification-index-timestamp-icon-wrapper">
+    <p class="notification-index-timestamp"><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %></p>
+    <div class="notification-index-icon-flex">
+      <div class="notification-index-type-icon">
+        <% if notification.notification_type == 1 %>
+          <span class="notification-index-favorite-icon"><i class="fas fa-heart"></i></span>
+        <% elsif notification.notification_type == 2 %>
+          <span class="notification-index-comment-icon"><i class="far fa-comment-dots"></i></span>
+        <% end %>
+      </div><!-- .notification-index-type-icon -->
+      <div class="notification-index-user-icon">
+        <%= link_to user_path(user), class: "notification-index-user-icon-link" do %>
+          <%= gravatar_for user, size: 50, cl: "gravatar user-picture" %>
+        <% end %>
+      </div><!-- .notification-index-icon -->
+    </div><!-- .notification-index-icon-flex -->
+  </div><!-- .notification-index-timestamp-icon-wrapper -->
+
+  <div class="notification-index-message-wrapper">
+    <% if notification.notification_type == 1 %>
+      <p class="notification-index-message">あなたの旅先が <%= link_to user.name, user_path(user) %> さんのいいね!一覧に追加されました</p>
+    <% elsif notification.notification_type == 2 %>
+      <p class="notification-index-message">あなたの旅先に <%= link_to user.name, user_path(user) %> さんがコメントしました</p>
+      <p class="notification-index-content"><%= notification.content %></p>
+    <% end %>
+  </div><!-- .notification-index-message-wrapper -->
+
+  <div class="row">
+    <div class="col-md-2">
+      <div class="notification-index-picture">
+        <%= link_to((image_tag destination.picture.url), destination_path(destination), class: "notificationindex-picture-link") %>
+      </div><!-- .notification-index-picture -->
+    </div><!-- .col-md-2 -->
+    <div class="col-md-10">
+      <h3 class="notification-index-destination-name"><%= link_to destination.name, destination_path(destination) %></h3>
+      <p class="notification-index-destination-description"><%= destination.description %></p>
+    </div><!-- .col-md-10 -->
   </div>
-  <div class="col-md-7">
-    <p><%= link_to destination.name, destination_path(destination) %></p>
-    <p><%= destination.description %></p>
-  </div>
-</div>
 </li>

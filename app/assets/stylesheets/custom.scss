@@ -1,0 +1,944 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixin  */
+@mixin box-sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* media query */
+$media-sp: 768px;
+
+@mixin sp {
+  @media only screen and (max-width: $media-sp) {
+    @content;
+  }
+}
+
+/* color */
+$black-text: #333333;
+$white-text: white;
+$gray-text: gray;
+$blue-text: #337ab7;
+$gray-border: #dedede;
+$white-border: white;
+$blue-border: #337ab7;
+$pink-favorite: pink;
+$red-error: red;
+
+/* common */
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* navbar をfixed-top に設定している為追加 */
+body {
+  padding-top: 50px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* text */
+h1, h1,  h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* navbar */
+
+.navbar-current-user-name {
+  font-size: 10px;
+  color: $gray-text;
+}
+
+.navbar-form input {
+  margin-bottom: 0;
+}
+
+/* search bar */
+.search-bar {
+  margin-top: 50px;
+}
+
+.search-button {
+  margin-top: 24px;
+}
+
+nav.no-border {
+  border: none;
+}
+
+/* footer */
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $gray-border;
+  color: $gray-text;
+  small {
+    floar: center;
+  }
+}
+
+/* static_pages home */
+.btn-record {
+  margin-top: 3em;
+}
+
+.hero-image {
+  height: 100vh;
+  @include sp {
+    height: 0;
+  }
+  min-height: 300px;
+  background-image: image-url("hero.jpg");
+  background-position: center;
+  background-size: auto 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .hero-image-text {
+  }
+  h1 {
+    color: $white-text;
+    font-size: 200px;
+    @include sp {
+      font-size: 70px;
+      margin-bottom: 0;
+    }
+  }
+  p {
+    color: $white-text;
+    font-size: 60px;
+    @include sp {
+      font-size: 25px;
+    }
+  }
+}
+
+/* user form */
+.checkbox {
+  margin: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+/* user new */
+/* FIXME: margin-bottom が他に影響があるので要修正 */
+input, textarea, select, .uneditable-input {
+  border: 1px solid $gray-border;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: $red-error;
+  ul {
+    color: $red-error;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $red-error;
+  }
+}
+
+/* user show */
+.user-show-wrapper {
+  padding-top: 15px;
+}
+
+.user-show-icon-name-edit-stats-wrapper {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.user-show-icon {
+  //flex の幅を指定
+  flex: 1;
+  //アイコンの上下左右中央配置
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  img {
+    width: 200px;
+    height: 200px;
+    @include sp {
+      width: 80px;
+      height: 80px;
+    }
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.user-show-name-edit-stats {
+  //flex の幅を指定
+  flex: 4;
+}
+
+.user-show-name-edit {
+  display: flex;
+  justify-content: space-between;
+  //編集ボタンの位置調整用の親要素指定
+  position: relative;
+  h1 {
+    flex: 1;
+  }
+  @include sp {
+    h1 {
+      font-size: 24px;
+    }
+  }
+  .user-show-dropdown-menu {
+    //ドットを上下中心に配置
+    margin: auto 0;
+    //dropdown ボタンの背景を削除
+    .user-show-dropdown-toggle {
+      border: none;
+      background: none;
+      font-size: 24px;
+    }
+    .user-show-edit-list {
+      //編集ボタンの位置調整
+      position: absolute;
+      right: 50%;
+      //Bootstrap のleft 指定を初期値にリセット
+      left: initial;
+    }
+  }
+}
+
+.user-stats-list-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 100px;
+  a {
+    color: $black-text;
+    text-decoration: none;
+    //投稿、フォロー、フォロワーの幅を揃える
+    flex: 1;
+  }
+}
+@include sp {
+  .user-stats-list-wrapper {
+    margin: 0;
+  }
+}
+
+.user-stats-flex {
+  display: flex;
+  font-size: 24px;
+  //投稿、フォロー、フォロワーの幅を揃える
+  flex: 1;
+  div {
+    letter-spacing: 0.1em;
+  }
+  .user-stats-bold {
+    font-weight: bold;
+  }
+}
+@include sp {
+  .user-stats-flex {
+    font-size: 12px;
+    //sp 時のみflexbox を縦積み
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.follow-form-wrapper {
+  margin-bottom: 30px;
+  .follow-button {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    color: $blue-text;
+    background: none;
+    border: solid 3px $blue-border;
+  }
+  .unfollow-button {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    border: solid 3px $blue-border;
+  }
+}
+
+.user-show-nationality-introduction-wrapper {
+  margin-bottom: 30px;
+  .user-show-nationality {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  @include sp {
+    .user-show-nationality {
+      font-size: 16px;
+    }
+  }
+  .user-show-introduction {
+    font-size: 20px;
+  }
+  @include sp {
+    .user-show-introduction {
+      font-size: 16px;
+    }
+  }
+}
+
+.users-picture-list-wrapper {
+  //横幅を広げて画面一杯にする
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.user-show-no-destination {
+  font-size: 24px;
+  text-align: center;
+  color: $gray-text;
+}
+
+.users-picture-post {
+  padding: 0;
+  border: solid 1px $white-border;
+}
+
+.users-picture {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+/* user edit */
+.gravatar_edit {
+  margin-bottom: 20px;
+}
+
+/* user index */
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-border;
+  }
+}
+
+/* user following, followers */
+.user-follow-wrapper h1 {
+  font-size: 30px;
+  a {
+   text-decoration: none;
+   color: $gray-text;
+  }
+}
+
+.user-follow-stats-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  border-bottom: 1px solid $gray-border;
+}
+
+.user-follow-stats-flex {
+  /* sp 時のみ左右100% に伸ばす */
+  @include sp {
+    flex: 1;
+  }
+}
+
+.user-follow-stats-user {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.user-follow-stats-icon {
+  margin-right: 15px;
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.user-follow-stats-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  a {
+    font-size: 24px;
+    text-decoration: none;
+    color: $black-text;
+  }
+}
+
+.user-follow-stats-count {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  @include sp {
+    width: 100%;
+  }
+  .user-follow-stats-following p {
+    color: $gray-text;
+    font-size: 20px;
+    @include sp {
+      font-size: 16px;
+    }
+  }
+  .user-follow-stats-followers p {
+    color: $gray-text;
+    font-size: 20px;
+    @include sp {
+      font-size: 16px;
+    }
+  }
+}
+
+.user-follow-list-wrapper {
+  list-style: none;
+  padding: 0;
+  .user-follow-list-user {
+    margin: 15px 0;
+    border-bottom: 1px solid $gray-border;
+  }
+}
+
+.user-follow-list-user {
+  display: flex;
+}
+
+.user-follow-icon {
+  margin-right: 15px;
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.user-follow-neme-relationship-introduction-wrapper {
+  width: 100%;
+}
+
+.user-follow-name-relationship-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-follow-name p {
+  margin-bottom: 0px;
+  margin-right: 15px;
+  font-size: 24px;
+  @include sp {
+    font-size: 20px;
+  }
+  a {
+    text-decoration: none;
+    color: $black-text;
+  }
+}
+
+.user-follow-relationship {
+  .follow-button {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    color: $blue-text;
+    background: none;
+    border: solid 3px $blue-border;
+  }
+  .unfollow-button {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    border: solid 3px $blue-border;
+  }
+}
+
+.user-follow-introduction {
+  margin-top: 15px;
+  p {
+    color: $gray-text;
+    font-size: 20px;
+    @include sp {
+      font-size: 16px;
+    }
+  }
+}
+
+/* destination index */
+.list-with-map-wrapper {
+  padding: 0;
+}
+
+/* destination list */
+.destination-list-map-wrapper {
+  //sp のみ地図下にマージン
+  @include sp {
+    margin-bottom: 15px;
+  }
+  #map {
+    height: 50vh;
+  }
+}
+
+.destination-list-wrapper {
+  //.row のmargin-15px の打ち消し
+  margin: 0;
+}
+.destination-list-post {
+  padding: 15px;
+  //sp のみ画像を横幅一杯に広げて下部マージン
+  @include sp {
+    padding: 0;
+    margin-top: 30px;
+  }
+}
+
+.destination-list-picture {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+.destination-list-info-wrapper {
+  margin-top: 15px;
+  //sp のみテキスト部に左右パディング
+  @include sp {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+.destination-list-title {
+  display: flex;
+  margin-bottom: 15px;
+  .destination-list-icon {
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  h3 {
+    //強制折返し
+    word-break: break-word;
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    a {
+      color: $black-text;
+    }
+  }
+}
+
+.destination-list-user {
+  a {
+    color: $black-text;
+  }
+}
+
+//FIXME: flexbox で下端揃え
+.destination-list-description {
+  //後方互換も考慮して両方指定
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  //description 無し時のカラム崩れ防止
+  height: 52px;
+  color: $gray-text;
+}
+
+.destination-list-lower-end {
+  width: 100%;
+  .destination-list-country-name {
+    color: $gray-text;
+  }
+  .destination-list-favorite-timestamp {
+    display: flex;
+    justify-content: space-between;
+    .destination-list-timestamp {
+      color: $gray-text;
+    }
+  }
+}
+
+/* destination form */
+
+.input-need {
+  color: $red-error;
+  font-size: 13px;
+}
+
+.input-unneed {
+  font-size: 13px;
+}
+
+.destination-form-picture-select {
+  margin-bottom: 15px;
+}
+
+.destination-form-picture {
+  //画像を横幅いっぱい
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+.destination-form-submit-btn {
+  margin-bottom: 15px;
+}
+
+.destination-form-delete-btn {
+  //delete をsubmit のスタイルに合わせる
+  width: 100%;
+}
+
+/* destination show */
+.destination-show-user-dropdown {
+  display: flex;
+  justify-content: space-between;
+  //削除/編集ボタンの位置調整用の親要素指定
+  position: relative;
+  //sp のみ左右にパディング, 下部マージン
+  @include sp {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .destination-show-dropdown-menu {
+    //ドットを上下中心に配置
+    margin: auto 0;
+    //dropdown ボタンの背景を削除
+    .destination-show-dropdown-toggle {
+      border: none;
+      background: none;
+      font-size: 24px;
+    }
+    .destination-show-edit-delete {
+      //削除/編集ボタンの位置調整
+      position: absolute;
+      right: 50%;
+      //Bootstrap のleft 指定を初期値にリセット
+      left: initial;
+    }
+  }
+}
+
+.destination-show-user {
+  display: flex;
+  margin-bottom: 15px;
+  .destination-show-icon {
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  h3 {
+    //強制折返し
+    word-break: break-word;
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    a {
+      color: $black-text;
+    }
+  }
+}
+
+.destination-show-wrapper {
+  padding: 0;
+}
+
+.destination-show-map-wrapper {
+  #map {
+    height: 50vh;
+  }
+}
+
+.destination-show-info-detail-wrapper {
+  //.row のmargin-15px の打ち消し
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.destination-show-info-wrapper {
+  padding: 0;
+}
+
+.destination-show-picture {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+.destination-show-favorite-timestamp {
+   margin-top: 15px;
+  //sp のみ左右にパディング, 下部マージン
+  @include sp {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+  }
+  display: flex;
+  justify-content: space-between;
+  .destination-show-timestamp {
+    color: $gray-text;
+  }
+}
+
+.destination-show-detail {
+  padding-right: 30px;
+  padding-left: 30px;
+  @include sp {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+.destination-show-description {
+  border-top: 1px solid $gray-border;
+  border-bottom: 1px solid $gray-border;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* destination comment */
+
+.destination-comment-wrapper {
+  border-top: 1px solid $gray-border;
+  @include sp {
+    border: none;
+  }
+  h2 {
+    text-align: center;
+  }
+}
+
+.destination-comment-list-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  //.row のmargin: -15px; を打ち消してsp 時の左右はみ出しを防止
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.destination-comment-list {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  //後方互換も考慮して2つのプロパティを指定
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  @include sp {
+    border-top: 1px solid $gray-border;
+  }
+}
+
+.destination-comment-header {
+  //icon の横にuser を表示
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.destination-comment-icon {
+  margin-right: 15px;
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.destination-comment-user {
+  a {
+    font-size: 18px;
+    color: $black-text;
+  }
+}
+
+.destination-comment-time-delete {
+  //time の横にdelete を表示
+  display: flex;
+  justify-content: space-between;
+  .destination-comment-time {
+    color: $gray-text;
+  }
+}
+
+.destination-comment-new-wrapper {
+  //.row のmargin: -15px; を打ち消してsp 時の左右のはみ出し防止
+  margin: 0;
+}
+
+/* favorite */
+.favorite-btn-unfavorite {
+  color: $pink-favorite;
+}
+
+.favorite-btn-favorite {
+  color: $gray-text;
+}
+
+.favorites {
+  list-style: none;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid $gray-border;
+  }
+}
+
+/* notification */
+//メニューバーの通知表示
+li.new_notification > a {
+  color: $red-error;
+}
+
+ul.notification-index-item {
+  list-style: none;
+  padding-left: 0;
+  li {
+    padding: 15px 0;
+    border-top: 1px solid $gray-border;
+  }
+}
+
+.notification-index-icon-flex {
+  display: flex;
+}
+
+.notification-index-timestamp {
+}
+
+.notification-index-icon-flex {
+  margin-bottom: 10px;
+}
+
+.notification-index-type-icon {
+  margin-right: 10px;
+  .notification-index-favorite-icon {
+    font-size: 20px;
+    color: $pink-favorite;
+  }
+  .notification-index-comment-icon {
+    font-size: 20px;
+    color: $gray-text;
+  }
+}
+
+.notification-index-user-icon {
+  // 上下中央に配置
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.notification-index-message {
+  font-size: 18px;
+  a {
+    text-decoration: none;
+    color: $black-text;
+    font-weight: bold;
+  }
+}
+
+.notification-index-content {
+  font-size: 18px;
+  color: $gray-text;
+}
+
+.notification-index-destination-name {
+  font-size: 24px;
+  margin-top: 0;
+  a {
+    text-decoration: none;
+    color: $black-text;
+  }
+}
+
+.notification-index-picture {
+  text-align: center;
+  img {
+    width: 100%;
+  }
+  @include sp {
+    margin-bottom: 15px;
+  }
+}
+

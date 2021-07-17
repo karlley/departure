@@ -1,2 +1,10 @@
-$("#follow_form").html("<%= escape_javascript(render('users/follow')) %>");
-$("#followers").html('<%= @user.followers.count %>');
+<% if @user.blank? %>
+  <% # users/show %>
+  $("#follow_form").html("<%= escape_javascript(render partial: 'users/follow', locals: { user: @unfollow_user }) %>");
+  $("#followers").html('<%= @unfollow_user.followers.count %>');
+<% else %>
+  <% # users/show_follow %>
+  $("#list_follow_form_<%= @unfollow_user.id %>").html("<%= escape_javascript(render partial: 'users/list_follow', locals: { relationship_user: @unfollow_user }) %>");
+  $("#followers").html('フォロワー <%= @user.followers.count %>人');
+  $("#following").html('フォロー <%= @user.following.count %>人');
+<% end %>
