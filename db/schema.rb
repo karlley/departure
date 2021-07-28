@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_202106) do
+ActiveRecord::Schema.define(version: 2021_07_27_212335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2021_01_22_202106) do
     t.string "experience"
     t.string "airline"
     t.string "food"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_destinations_on_country_id"
     t.index ["user_id", "created_at"], name: "index_destinations_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_destinations_on_user_id"
   end
@@ -105,5 +107,6 @@ ActiveRecord::Schema.define(version: 2021_01_22_202106) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "destinations", "countries"
   add_foreign_key "destinations", "users"
 end
