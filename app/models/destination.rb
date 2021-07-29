@@ -26,11 +26,6 @@ class Destination < ApplicationRecord
   # geocoder で使用する文字列を生成
   def address_keyword
     # 国名が選択されている場合は国番号から国名を検索
-    # if country_.present?
-    #   # Country の中からself のcountry をもとにcountry_name を探してcountry_name に代入
-    #   country_name = Country.find_by(id: country).country_name
-    #   [name, country_name, spot].compact.join(', ')
-    # end
     if country_id.present?
       # Country の中からself のcountry_id をもとにcountry_name を探してcountry_name に代入
       country_name = Country.find_by(id: country_id).country_name

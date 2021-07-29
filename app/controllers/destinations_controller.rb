@@ -9,13 +9,13 @@ class DestinationsController < ApplicationController
 
   def index
     # application_controller#search_result を表示
-    if params[:region] != nil
+    if !params[:region].nil?
       region = params[:region]
       destinations = Destination.where('region LIKE?', "%#{region}%")
-    elsif params[:experience] != nil
+    elsif !params[:experience].nil?
       experience = params[:experience]
       destinations = Destination.where('experience LIKE?', "%#{experience}%")
-    elsif params[:alliance] != nil
+    elsif !params[:alliance].nil?
       alliance = params[:alliance]
       destinations = Destination.where('alliance LIKE?', "%#{alliance}%")
     end
@@ -38,7 +38,6 @@ class DestinationsController < ApplicationController
       marker.lng(destination.longitude)
       marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
     end
-    # @country = Country.find_by(id: @destination.country)
     @country = Country.find_by(id: @destination.country_id)
     @airline = Airline.find_by(id: @destination.airline)
   end
@@ -95,7 +94,6 @@ class DestinationsController < ApplicationController
   def destination_params
     # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :expense, :season, :experience, :airline, :food)
     # :expense をenum 定義しているのでInt 型に変換して追加
-    # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :season, :experience, :airline, :food).merge(expense: params[:destination][:expense].to_i)
     params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline, :food).merge(expense: params[:destination][:expense].to_i)
   end
 

@@ -1,9 +1,6 @@
 FactoryBot.define do
   factory :destination do
     name { Faker::Address.city }
-    # :country のCSV 用に1-249 の数字を生成
-    # country { Faker::Number.between(from: 1, to: 249) }
-    # country_id 1
     # seed で作成したCountry オブジェクトの中からランダムに国を選択
     country_id { Country.find(Faker::Number.between(from: 1, to: 249)).id }
     sequence(:description) { |n| "Destinaton No.#{n}!" }
