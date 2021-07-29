@@ -45,10 +45,8 @@ end
 10.times do |n|
   Destination.create!(name: Faker::Address.city,
                       description: "This is Faker Destination No.#{n + 1}!",
-                      # :country のCSV 表示に合わせて1-249 の数字を生成
-                      country: Faker::Number.between(from: 1, to: 249),
-                      # foreign key
-                      country_id: Faker::Number.between(from: 1, to: 249),
+                      # seed で作成したCountry オブジェクトの中からランダムに国を選択
+                      country_id: Country.find(Faker::Number.between(from: 1, to: 249)).id,
                       spot: Faker::Address.street_name,
                       latitude: Faker::Address.latitude,
                       longitude: Faker::Address.longitude,
