@@ -27,7 +27,7 @@ ja:
         name: 行き先名
         description: 説明
         spot: スポット
-        country: 国
+        country_id: 国
         picture: 行き先の写真
         expense: 費用
         season: シーズン

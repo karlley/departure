@@ -1,9 +1,31 @@
 class DestinationsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update]
+  # 検索ワード無しでキーワード検索, マーカー取得をスキップ
+  # skip_before_action :search_result, only: :index, unless: :have_search_word?
+  # skip_before_action :search_result_markers, only: :index, unless: :have_search_word?
+  # index アクション後にマーカー取得を実行
+  # after_action :search_result_markers, only: :index
 
   def index
     # application_controller#search_result を表示
+    if params[:region] != nil
+      region = params[:region]
+      destinations = Destination.where('region LIKE?', "%#{region}%")
+    elsif params[:experience] != nil
+      experience = params[:experience]
+      destinations = Destination.where('experience LIKE?', "%#{experience}%")
+    elsif params[:alliance] != nil
+      alliance = params[:alliance]
+      destinations = Destination.where('alliance LIKE?', "%#{alliance}%")
+    end
+    @destinations = destinations.paginate(page: params[:page])
+
+    @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
+      marker.lat(destination.latitude)
+      marker.lng(destination.longitude)
+      marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
+    end
   end
 
   def show
@@ -16,7 +38,8 @@ class DestinationsController < ApplicationController
       marker.lng(destination.longitude)
       marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
     end
-    @country = Country.find_by(id: @destination.country)
+    # @country = Country.find_by(id: @destination.country)
+    @country = Country.find_by(id: @destination.country_id)
     @airline = Airline.find_by(id: @destination.airline)
   end
 
@@ -72,7 +95,8 @@ class DestinationsController < ApplicationController
   def destination_params
     # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :expense, :season, :experience, :airline, :food)
     # :expense をenum 定義しているのでInt 型に変換して追加
-    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :season, :experience, :airline, :food).merge(expense: params[:destination][:expense].to_i)
+    # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :season, :experience, :airline, :food).merge(expense: params[:destination][:expense].to_i)
+    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline, :food).merge(expense: params[:destination][:expense].to_i)
   end
 
   def correct_user

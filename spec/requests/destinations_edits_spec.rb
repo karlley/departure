@@ -16,7 +16,7 @@ RSpec.describe "Edit Destination ページ", type: :request do
       patch destination_path(destination), params: { destination: {
         name: "sample destination",
         description: "sample description",
-        country: 1,
+        country_id: 1,
         expense: 1,
         picture: picture_2,
       } }
@@ -34,7 +34,7 @@ RSpec.describe "Edit Destination ページ", type: :request do
       patch destination_path(destination), params: { destination: {
         name: "sample destination",
         description: "sample description",
-        country: 1,
+        country_id: 1,
         expense: 1,
         picture: picture_2,
       } }
@@ -52,7 +52,7 @@ RSpec.describe "Edit Destination ページ", type: :request do
       patch destination_path(destination), params: { destination: {
         name: "sample destination",
         description: "sample description",
-        country: 1,
+        country_id: 1,
         expense: 1,
         picture: picture_2,
       } }
