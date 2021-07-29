@@ -32,7 +32,7 @@ ja:
         expense: 費用
         season: シーズン
         experience: 体験
-        airline: 航空会社
+        airline_id: 航空会社
         food: 食べ物
         keyword_refind: キーワード
         country_refind: ロケーション

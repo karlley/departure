@@ -1,7 +1,8 @@
 class Destination < ApplicationRecord
   belongs_to :user
   belongs_to :country
-  belongs_to :airline
+  # optionnal: ture でairline 未選択も許可する
+  belongs_to :airline, optional: true
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   default_scope { order(created_at: :desc) }
@@ -13,6 +14,7 @@ class Destination < ApplicationRecord
   validates :expense, presence: true
   validates :season, presence: true
   validate :airline
+  validate :airline_id
   validates :description, length: { maximum: 140 }, allow_nil: true
   validates :spot, length: { maximum: 100 }
   validates :address, length: { maximum: 100 }

@@ -13,8 +13,8 @@ FactoryBot.define do
     expense { Faker::Number.between(from: 1, to: 8) }
     season { Faker::Number.between(from: 1, to: 12) }
     experience { "Your Experience!" }
-    # :airline のCSV 用に1-91 の数字を生成
-    airline { Faker::Number.between(from: 1, to: 91) }
+    # seed で作成したAirline オブジェクトの中からランダムに国を選択
+    airline_id { Airline.find(Faker::Number.between(from: 1, to: 90)).id }
     food { Faker::Food.dish }
     association :user
     created_at { Time.current }
@@ -41,6 +41,6 @@ FactoryBot.define do
 
   trait :airline_unselected do
     name { "Airline_Unselected" }
-    airline { nil }
+    airline_id { nil }
   end
 end

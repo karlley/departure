@@ -56,8 +56,6 @@ end
                       expense: Faker::Number.between(from: 1, to: 8),
                       season: Faker::Number.between(from: 1, to: 12),
                       experience: "Your Experience!",
-                      # :airline のCSV 表示に合わせて1-91 の数字を生成
-                      airline: Faker::Number.between(from: 1, to: 91),
                       # seed で作成したAirline オブジェクトの中からランダムに国を選択
                       airline_id: Airline.find(Faker::Number.between(from: 1, to: 90)).id,
                       food: Faker::Food.dish,

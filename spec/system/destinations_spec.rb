@@ -306,8 +306,8 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_selector "p.destination-show-expense", text: destination.expense
         expect(page).to have_selector "p.destination-show-season", text: destination.season
         expect(page).to have_selector "p.destination-show-experience", text: destination.experience
-        airline_name = Airline.find_by(id: destination.airline).airline_name
-        alliance = Airline.find_by(id: destination.airline).alliance
+        airline_name = Airline.find_by(id: destination.airline_id).airline_name
+        alliance = Airline.find_by(id: destination.airline_id).alliance
         expect(page).to have_selector ".destination-show-airline-name", text: airline_name
         expect(page).to have_selector ".destination-show-alliance", text: alliance
         expect(page).to have_selector "p.destination-show-food", text: destination.food
@@ -530,7 +530,7 @@ RSpec.describe "Destinations", type: :system do
         # 更新されたexpense を月表示の文字列に変換
         season = destination.reload.season.to_s + "月"
         # 更新されたairline を元にCSV から航空会社名を取得
-        airline_name = Airline.find_by(id: destination.reload.airline).airline_name
+        airline_name = Airline.find_by(id: destination.reload.airline_id).airline_name
         expect(page).to have_content "Destination updated!"
         expect(destination.reload.name).to eq "サンプルの行き先"
         expect(destination.reload.description).to eq "サンプルの行き先の説明"

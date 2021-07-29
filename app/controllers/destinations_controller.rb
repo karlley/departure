@@ -39,7 +39,7 @@ class DestinationsController < ApplicationController
       marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
     end
     @country = Country.find_by(id: @destination.country_id)
-    @airline = Airline.find_by(id: @destination.airline)
+    @airline = Airline.find_by(id: @destination.airline_id)
   end
 
   def new
@@ -94,7 +94,7 @@ class DestinationsController < ApplicationController
   def destination_params
     # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :expense, :season, :experience, :airline, :food)
     # :expense をenum 定義しているのでInt 型に変換して追加
-    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline, :food).merge(expense: params[:destination][:expense].to_i)
+    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline_id, :food).merge(expense: params[:destination][:expense].to_i)
   end
 
   def correct_user
