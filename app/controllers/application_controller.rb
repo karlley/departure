@@ -6,14 +6,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # logged_in? を使えるようにする
   include SessionsHelper
-  # have_search_word? を使えるようにする
+  # search_query? を使えるようにする
   include ApplicationHelper
 
   # TODO: 条件検索も追加
   # 検索ワード有りで検索結果、検索ワード取得/検索ワード無しで全投稿取得
   def search_result
     if logged_in?
-      if have_search_word?
+      if search_query?
         search_word = params[:q][:name_or_spot_or_address_cont]
         # 検索ワードからスペース区切りで配列を作成
         # 検索ワードの数だけ検索ワードをkey にしたハッシュを作成
