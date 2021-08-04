@@ -1,30 +1,33 @@
 class DestinationsController < ApplicationController
+  # search_query? を使えるようにする
+  include ApplicationHelper
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update]
-  # 検索ワード無しでキーワード検索, マーカー取得をスキップ
-  # skip_before_action :search_result, only: :index, unless: :have_search_word?
-  # skip_before_action :search_result_markers, only: :index, unless: :have_search_word?
-  # index アクション後にマーカー取得を実行
-  # after_action :search_result_markers, only: :index
 
   def index
-    # application_controller#search_result を表示
-    if !params[:region].nil?
-      region = params[:region]
-      destinations = Destination.where('region LIKE?', "%#{region}%")
-    elsif !params[:experience].nil?
-      experience = params[:experience]
-      destinations = Destination.where('experience LIKE?', "%#{experience}%")
-    elsif !params[:alliance].nil?
-      alliance = params[:alliance]
-      destinations = Destination.where('alliance LIKE?', "%#{alliance}%")
-    end
-    @destinations = destinations.paginate(page: params[:page])
-
-    @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
-      marker.lat(destination.latitude)
-      marker.lng(destination.longitude)
-      marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
+    # 検索バーからの検索以外で実行
+    unless search_query?
+      if !params[:region].nil?
+        destination_ids = Country.joins(:destinations).select("destinations.id").where("region = ?", params[:region])
+        @search_word = params[:region]
+      elsif !params[:experience].nil?
+        destination_ids = Destination.where("experience = ?", params[:experience])
+        @search_word = params[:experience]
+      elsif !params[:alliance].nil?
+        destination_ids = Airline.joins(:destinations).select("destinations.id").where("alliance = ?", params[:alliance])
+        @search_word = params[:alliance]
+      else
+        destination_ids = Country.joins(:destinations).select("destinations.id")
+        # @search_word = "書き換えられた"
+      end
+      destinations = Destination.where(id: destination_ids)
+      @destinations = destinations.paginate(page: params[:page])
+      # GoogleMap 表示用マーカー
+      @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
+        marker.lat(destination.latitude)
+        marker.lng(destination.longitude)
+        marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
+      end
     end
   end
 
