@@ -25,6 +25,7 @@ $blue-text: #337ab7;
 $gray-border: #dedede;
 $white-border: white;
 $blue-border: #337ab7;
+$black-border: #333333;
 $pink-favorite: pink;
 $red-error: red;
 
@@ -141,9 +142,57 @@ footer {
     color: $white-text;
     font-size: 60px;
     @include sp {
-      font-size: 25px;
+      font-size: 24px;
     }
   }
+}
+
+.static-page-home-keyword-wrapper {
+  //.row のmargin-15px の打消しで左右のはみ出し修正
+  margin-right: 0;
+  margin-left: 0;
+  h2 {
+    margin-bottom: 24px;
+  }
+}
+
+.static-page-home-category-wrapper {
+  //.row のmargin-15px の打消しで左右のはみ出し修正
+  margin-right: 0;
+  margin-left: 0;
+  h2 {
+    margin-bottom: 24px;
+  }
+}
+
+.static-page-home-category-item {
+  @include sp {
+  //sp 時の画像両端の隙間を無くす
+    padding-right: 0;
+    padding-left: 0;
+    margin-bottom: 32px;
+  }
+}
+
+.static-page-home-category-image {
+  margin-bottom: 8px;
+  img {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+.only-alliance {
+  img {
+    //アライアンスのロゴのみ縦横比を維持したままリサイズ
+    object-fit: contain;
+    border: 1px solid $black-border;
+  }
+}
+
+.static-page-home-category-text {
+  color: $black-text;
+  font-size: 24px;
 }
 
 /* user form */

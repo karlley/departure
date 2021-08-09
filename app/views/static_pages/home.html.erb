@@ -1,33 +1,131 @@
 <% if logged_in? %>
-  <%# <div class="container"> %>
-  <%#   <div> %>
-  <%#     <p><%= link_to "New Destination", new_destination_path, class: "btn btn-primary btn-lg btn-record" %1></p> %>
-  <%#   </div> %>
-  <%# </div><!-- .container --> %>
 
-<div class="jumbotron hero-image">
-  <div class="container-fluid hero-image-text">
+  <div class="jumbotron hero-image">
+    <div class="container-fluid hero-image-text">
       <h1>Departure</h1>
       <p>人生を変える旅先を探そう</p>
-  </div><!-- .container-fluid .jumbotron-container -->
-</div><!-- .jumbotron .jumbotron-extend -->
+    </div><!-- .container-fluid .hero-image-text -->
+  </div><!-- .jumbotron .hero-image -->
 
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <%= render 'shared/feed' %>
-      </div><!-- .col-md-12 -->
-    </div><!-- .row -->
-  </div><!-- .container -->
+    <div class="row static-page-home-keyword-wrapper">
+      <h2>キーワードで探す</h2>
+      <div class="static-page-home-search-form">
+        <%= search_form_for @q, html: { class: "input-group" }  do |f| %>
+          <%= f.search_field :name_or_spot_or_address_cont, placeholder: "旅先を探す", class: "form-control", id: "destination_keyword_search" %>
+          <span class="input-group-btn">
+            <%= button_tag type: "submit", class: "btn btn-default" do %>
+              <i class="fas fa-search"></i>
+            <% end %>
+          </span><!-- .input-group-btn -->
+        <% end %>
+      </div><!-- .static-page-home-search-form -->
+    </div><!-- .row .static-page-home-keyword -->
 
-  <div class="row">
-  </div>
-  <div class="row">
-  </div>
-  <div class="row">
-  </div>
+    <div class="row static-page-home-category-wrapper">
+      <h2>エリアで探す</h2>
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(region: "アジア"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image">
+            <%= image_tag "region/asia.jpg", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            アジア
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(region: "アメリカ"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image">
+            <%= image_tag "region/america.jpg", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            アメリカ
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(region: "ヨーロッパ"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image">
+            <%= image_tag "region/europe.jpg", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            ヨーロッパ
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+    </div><!-- .row .static-page-home-category-wrapper -->
+
+    <div class="row static-page-home-category-wrapper">
+      <h2>体験で探す</h2>
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(experience: "アクティビティ"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image">
+            <%= image_tag "experience/activity.jpg", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            アクティビティ
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(experience: "歴史"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image">
+            <%= image_tag "experience/history.jpg", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            歴史
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(experience: "一人旅"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image">
+            <%= image_tag "experience/solo_travel.jpg", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            一人旅
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+    </div><!-- .row .static-page-home-category-wrapper -->
+
+    <div class="row static-page-home-category-wrapper">
+      <h2>航空会社で探す</h2>
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(alliance: "スターアライアンス"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image only-alliance">
+            <%= image_tag "alliance/star_alliance.png", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            スターアライアンス
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(alliance: "ワンワールド"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image only-alliance">
+            <%= image_tag "alliance/one_world.png", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            ワンワールド
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+      <div class="col-md-4 static-page-home-category-item">
+        <%= link_to destinations_path(alliance: "スカイチーム"), class: "static-page-home-category-link" do %>
+          <div class="static-page-home-category-image only-alliance">
+            <%= image_tag "alliance/sky_team.png", size: "360x300" %>
+          </div><!-- .static-page-home-category-image -->
+          <div class="static-page-home-category-text">
+            スカイチーム
+          </div><!-- static-page-home-category-text -->
+        <% end %>
+      </div><!-- .col-md-4 .static-page-home-category-item -->
+    </div><!-- .row .static-page-home-category-wrapper -->
 
 <% else %>
+
   <div class="container">
     <div class="row">
       <h1>Welcome to Departure!</h1>
