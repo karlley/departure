@@ -1,5 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+//Roboto(100, 100italic,  300), Noto sans JP(100, 300, 500)
+// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300&family=Roboto:ital,wght@0,100;0,300;1,100&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;700&family=Roboto:ital,wght@0,100;0,300;1,100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;500&family=Roboto:ital,wght@0,100;0,300;1,100&display=swap');
 
 /* mixin  */
 @mixin box-sizing {
@@ -17,6 +21,33 @@ $media-sp: 768px;
   }
 }
 
+/* font */
+body {
+font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+font-weight: 300;
+}
+
+/* text */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 /* color */
 $black-text: #333333;
 $white-text: white;
@@ -30,7 +61,6 @@ $pink-favorite: pink;
 $red-error: red;
 
 /* common */
-
 .pagination-wrapper {
   display: flex;
   justify-content: center;
@@ -56,28 +86,10 @@ textarea {
   }
 }
 
-/* text */
-h1, h1,  h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  font-size: 3em;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
 /* navbar */
-
+.navbar-brand {
+  font-style: italic;
+}
 .navbar-current-user-name {
   font-size: 10px;
   color: $gray-text;
@@ -132,17 +144,22 @@ footer {
   }
   h1 {
     color: $white-text;
-    font-size: 200px;
+    font-size: 300px;
+    font-style: italic;
     @include sp {
-      font-size: 70px;
-      margin-bottom: 0;
+      font-size: 80px;
+      margin-bottom: 8px;
     }
   }
   p {
     color: $white-text;
-    font-size: 60px;
+    font-size: 100px;
+    font-weight: 300;
+    letter-spacing: 20px;
+    text-align: center;
     @include sp {
       font-size: 24px;
+      letter-spacing: 8px;
     }
   }
 }
@@ -201,7 +218,6 @@ footer {
   margin-bottom: 10px;
   span {
     margin-left: 20px;
-    font-weight: normal;
   }
 }
 
@@ -331,9 +347,6 @@ input {
   div {
     letter-spacing: 0.1em;
   }
-  .user-stats-bold {
-    font-weight: bold;
-  }
 }
 @include sp {
   .user-stats-flex {
@@ -348,7 +361,7 @@ input {
   margin-bottom: 30px;
   .follow-button {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 300;
     letter-spacing: 0.2em;
     color: $blue-text;
     background: none;
@@ -356,7 +369,7 @@ input {
   }
   .unfollow-button {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 300;
     letter-spacing: 0.2em;
     border: solid 3px $blue-border;
   }
@@ -366,7 +379,6 @@ input {
   margin-bottom: 30px;
   .user-show-nationality {
     font-size: 24px;
-    font-weight: bold;
     margin-bottom: 30px;
   }
   @include sp {
@@ -546,7 +558,7 @@ input {
 .user-follow-relationship {
   .follow-button {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 300;
     letter-spacing: 0.2em;
     color: $blue-text;
     background: none;
@@ -554,7 +566,7 @@ input {
   }
   .unfollow-button {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 300;
     letter-spacing: 0.2em;
     border: solid 3px $blue-border;
   }
@@ -963,7 +975,7 @@ ul.notification-index-item {
   a {
     text-decoration: none;
     color: $black-text;
-    font-weight: bold;
+    font-weight: 300;
   }
 }
 
