@@ -5,23 +5,25 @@ class DestinationsController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
+    # カテゴリ検索
     # 検索バーからの検索以外で実行
     unless search_query?
       if !params[:region].nil?
-        destination_ids = Country.joins(:destinations).select("destinations.id").where("region = ?", params[:region])
+        destination_ids = Country.joins(:destinations).select("destinations.id").where("region LIKE ?", "%#{params[:region]}%")
+        destinations = Destination.where(id: destination_ids)
         @search_word = params[:region]
       elsif !params[:experience].nil?
         destination_ids = Destination.where("experience = ?", params[:experience])
+        destinations = Destination.where(id: destination_ids)
         @search_word = params[:experience]
       elsif !params[:alliance].nil?
         destination_ids = Airline.joins(:destinations).select("destinations.id").where("alliance = ?", params[:alliance])
+        destinations = Destination.where(id: destination_ids)
         @search_word = params[:alliance]
       else
-        destination_ids = Country.joins(:destinations).select("destinations.id")
-        # @search_word = "書き換えられた"
+        destinations = Destination.all
       end
-      destinations = Destination.where(id: destination_ids)
-      @destinations = destinations.paginate(page: params[:page])
+      @destinations = destinations.paginate(page: params[:page], per_page: 12)
       # GoogleMap 表示用マーカー
       @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
         marker.lat(destination.latitude)
