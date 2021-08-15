@@ -25,7 +25,7 @@
     <div class="row static-page-home-category-wrapper">
       <h2>エリアで探す</h2>
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(region: "アジア"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(region: "アジア"), class: "static-page-home-category-link region-asia" do %>
           <div class="static-page-home-category-image">
             <%= image_tag "region/asia.jpg", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
@@ -35,7 +35,7 @@
         <% end %>
       </div><!-- .col-md-4 .static-page-home-category-item -->
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(region: "アメリカ"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(region: "アメリカ"), class: "static-page-home-category-link region-america" do %>
           <div class="static-page-home-category-image">
             <%= image_tag "region/america.jpg", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
@@ -45,7 +45,7 @@
         <% end %>
       </div><!-- .col-md-4 .static-page-home-category-item -->
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(region: "ヨーロッパ"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(region: "ヨーロッパ"), class: "static-page-home-category-link region-europe" do %>
           <div class="static-page-home-category-image">
             <%= image_tag "region/europe.jpg", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
@@ -59,7 +59,7 @@
     <div class="row static-page-home-category-wrapper">
       <h2>体験で探す</h2>
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(experience: "アクティビティ"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(experience: "アクティビティ"), class: "static-page-home-category-link experience-activity" do %>
           <div class="static-page-home-category-image">
             <%= image_tag "experience/activity.jpg", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
@@ -69,7 +69,7 @@
         <% end %>
       </div><!-- .col-md-4 .static-page-home-category-item -->
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(experience: "歴史"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(experience: "歴史"), class: "static-page-home-category-link experience-history" do %>
           <div class="static-page-home-category-image">
             <%= image_tag "experience/history.jpg", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
@@ -79,7 +79,7 @@
         <% end %>
       </div><!-- .col-md-4 .static-page-home-category-item -->
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(experience: "一人旅"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(experience: "一人旅"), class: "static-page-home-category-link experience-solo-travel" do %>
           <div class="static-page-home-category-image">
             <%= image_tag "experience/solo_travel.jpg", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
@@ -93,7 +93,7 @@
     <div class="row static-page-home-category-wrapper">
       <h2>航空会社で探す</h2>
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(alliance: "スターアライアンス"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(alliance: "スターアライアンス"), class: "static-page-home-category-link alliance-star-alliance" do %>
           <div class="static-page-home-category-image only-alliance">
             <%= image_tag "alliance/star_alliance.png", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
@@ -103,7 +103,7 @@
         <% end %>
       </div><!-- .col-md-4 .static-page-home-category-item -->
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(alliance: "ワンワールド"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(alliance: "ワンワールド"), class: "static-page-home-category-link alliance-one-world" do %>
           <div class="static-page-home-category-image only-alliance">
             <%= image_tag "alliance/one_world.png", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
@@ -113,7 +113,7 @@
         <% end %>
       </div><!-- .col-md-4 .static-page-home-category-item -->
       <div class="col-md-4 static-page-home-category-item">
-        <%= link_to destinations_path(alliance: "スカイチーム"), class: "static-page-home-category-link" do %>
+        <%= link_to destinations_path(alliance: "スカイチーム"), class: "static-page-home-category-link alliance-sky-team" do %>
           <div class="static-page-home-category-image only-alliance">
             <%= image_tag "alliance/sky_team.png", size: "360x300" %>
           </div><!-- .static-page-home-category-image -->
