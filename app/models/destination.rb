@@ -1,5 +1,8 @@
 class Destination < ApplicationRecord
   belongs_to :user
+  belongs_to :country
+  # optionnal: ture でairline 未選択も許可する
+  belongs_to :airline, optional: true
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   default_scope { order(created_at: :desc) }
@@ -7,9 +10,11 @@ class Destination < ApplicationRecord
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 50 }
   validates :country, presence: true, length: { maximum: 100 }
+  validates :country_id, presence: true
   validates :expense, presence: true
   validates :season, presence: true
   validate :airline
+  validate :airline_id
   validates :description, length: { maximum: 140 }, allow_nil: true
   validates :spot, length: { maximum: 100 }
   validates :address, length: { maximum: 100 }
@@ -24,9 +29,9 @@ class Destination < ApplicationRecord
   # geocoder で使用する文字列を生成
   def address_keyword
     # 国名が選択されている場合は国番号から国名を検索
-    if country.present?
-      # Country の中からself のcountry をもとにcountry_name を探してcountry_name に代入
-      country_name = Country.find_by(id: country).country_name
+    if country_id.present?
+      # Country の中からself のcountry_id をもとにcountry_name を探してcountry_name に代入
+      country_name = Country.find_by(id: country_id).country_name
       [name, country_name, spot].compact.join(', ')
     end
   end

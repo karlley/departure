@@ -298,16 +298,16 @@ RSpec.describe "Destinations", type: :system do
       it "行き先情報が表示されること" do
         expect(page).to have_selector "div.destination-show-description p", text: destination.description
         # FactroyBot で生成した値から国のデータを取得 > 国名を取得
-        country_name = Country.find_by(id: destination.country).country_name
-        region = Country.find_by(id: destination.country).region
+        country_name = Country.find_by(id: destination.country_id).country_name
+        region = Country.find_by(id: destination.country_id).region
         expect(page).to have_selector "p.destination-show-country-name", text: country_name
         expect(page).to have_selector "p.destination-show-region", text: region
         expect(page).to have_selector "p.destination-show-spot", text: destination.spot
         expect(page).to have_selector "p.destination-show-expense", text: destination.expense
         expect(page).to have_selector "p.destination-show-season", text: destination.season
         expect(page).to have_selector "p.destination-show-experience", text: destination.experience
-        airline_name = Airline.find_by(id: destination.airline).airline_name
-        alliance = Airline.find_by(id: destination.airline).alliance
+        airline_name = Airline.find_by(id: destination.airline_id).airline_name
+        alliance = Airline.find_by(id: destination.airline_id).alliance
         expect(page).to have_selector ".destination-show-airline-name", text: airline_name
         expect(page).to have_selector ".destination-show-alliance", text: alliance
         expect(page).to have_selector "p.destination-show-food", text: destination.food
@@ -525,12 +525,12 @@ RSpec.describe "Destinations", type: :system do
         fill_in "食べ物", with: "サンプルの食べ物"
         attach_file "destination[picture]", "#{Rails.root}/spec/fixtures/test_destination_2.jpg"
         click_button "更新する"
-        # 更新されたcountry を元にCSV から国名を取得
-        country_name = Country.find_by(id: destination.reload.country).country_name
+        # 更新されたcountry_id を元にCSV から国名を取得
+        country_name = Country.find_by(id: destination.reload.country_id).country_name
         # 更新されたexpense を月表示の文字列に変換
         season = destination.reload.season.to_s + "月"
         # 更新されたairline を元にCSV から航空会社名を取得
-        airline_name = Airline.find_by(id: destination.reload.airline).airline_name
+        airline_name = Airline.find_by(id: destination.reload.airline_id).airline_name
         expect(page).to have_content "Destination updated!"
         expect(destination.reload.name).to eq "サンプルの行き先"
         expect(destination.reload.description).to eq "サンプルの行き先の説明"

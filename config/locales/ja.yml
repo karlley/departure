@@ -27,12 +27,12 @@ ja:
         name: 行き先名
         description: 説明
         spot: スポット
-        country: 国
+        country_id: 国
         picture: 行き先の写真
         expense: 費用
         season: シーズン
         experience: 体験
-        airline: 航空会社
+        airline_id: 航空会社
         food: 食べ物
         keyword_refind: キーワード
         country_refind: ロケーション

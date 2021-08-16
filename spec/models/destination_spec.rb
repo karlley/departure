@@ -52,9 +52,9 @@ RSpec.describe Destination, type: :model do
     end
 
     it "国名が未選択で無効な状態であること" do
-      destination = build(:destination, country: nil)
+      destination = build(:destination, country_id: nil)
       destination.valid?
-      expect(destination.errors[:country]).to include("を入力してください")
+      expect(destination.errors[:country_id]).to include("を入力してください")
     end
 
     it "費用が未選択で無効な状態であること" do
@@ -106,7 +106,7 @@ RSpec.describe Destination, type: :model do
 
   context "address_keyword メソッド" do
     it "geocoder で使用する文字列を生成できること" do
-      destination = build(:destination, name: "行き先名", country: 153, spot: "スポット")
+      destination = build(:destination, name: "行き先名", country_id: 153, spot: "スポット")
       keyword = destination.address_keyword
       expect(keyword).to eq "行き先名, 日本, スポット"
     end
@@ -140,7 +140,7 @@ RSpec.describe Destination, type: :model do
 
   context "geocoder 機能" do
     it "経度, 緯度が取得できること" do
-      destination = build(:destination, name: "東京", country: 153, spot: "東京タワー", latitude: nil, longitude: nil)
+      destination = build(:destination, name: "東京", country_id: 153, spot: "東京タワー", latitude: nil, longitude: nil)
       destination.geocode
       # be_within である程度のゆらぎを許容する
       expect(destination.latitude).to be_within(0.0005).of 35.658584

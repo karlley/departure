@@ -1,9 +1,36 @@
 class DestinationsController < ApplicationController
+  # search_query? を使えるようにする
+  include ApplicationHelper
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    # application_controller#search_result を表示
+    # カテゴリ検索
+    # 検索バーからの検索以外で実行
+    unless search_query?
+      if !params[:region].nil?
+        destination_ids = Country.joins(:destinations).select("destinations.id").where("region LIKE ?", "%#{params[:region]}%")
+        destinations = Destination.where(id: destination_ids)
+        @search_word = params[:region]
+      elsif !params[:experience].nil?
+        destination_ids = Destination.where("experience = ?", params[:experience])
+        destinations = Destination.where(id: destination_ids)
+        @search_word = params[:experience]
+      elsif !params[:alliance].nil?
+        destination_ids = Airline.joins(:destinations).select("destinations.id").where("alliance = ?", params[:alliance])
+        destinations = Destination.where(id: destination_ids)
+        @search_word = params[:alliance]
+      else
+        destinations = Destination.all
+      end
+      @destinations = destinations.paginate(page: params[:page], per_page: 12)
+      # GoogleMap 表示用マーカー
+      @markers = Gmaps4rails.build_markers(@destinations) do |destination, marker|
+        marker.lat(destination.latitude)
+        marker.lng(destination.longitude)
+        marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
+      end
+    end
   end
 
   def show
@@ -16,8 +43,8 @@ class DestinationsController < ApplicationController
       marker.lng(destination.longitude)
       marker.infowindow render_to_string(partial: "destinations/map_infowindow", locals: { destination: destination })
     end
-    @country = Country.find_by(id: @destination.country)
-    @airline = Airline.find_by(id: @destination.airline)
+    @country = Country.find_by(id: @destination.country_id)
+    @airline = Airline.find_by(id: @destination.airline_id)
   end
 
   def new
@@ -72,7 +99,7 @@ class DestinationsController < ApplicationController
   def destination_params
     # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :expense, :season, :experience, :airline, :food)
     # :expense をenum 定義しているのでInt 型に変換して追加
-    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :season, :experience, :airline, :food).merge(expense: params[:destination][:expense].to_i)
+    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline_id, :food).merge(expense: params[:destination][:expense].to_i)
   end
 
   def correct_user
