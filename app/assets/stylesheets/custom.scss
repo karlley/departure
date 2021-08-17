@@ -66,6 +66,11 @@ $red-error: red;
   justify-content: center;
 }
 
+// flash 下部の余白
+.alert {
+  margin-bottom: 0px;
+}
+
 /* navbar をfixed-top に設定している為追加 */
 body {
   padding-top: 50px;
@@ -421,8 +426,38 @@ input {
 }
 
 /* user edit */
-.gravatar_edit {
-  margin-bottom: 20px;
+
+.user-edit-gravatar-name {
+  margin-bottom: 15px;
+}
+
+.gravatar.user-picture {
+  margin-right: 15px;
+  width: 100px;
+  height: 100px;
+  @include sp {
+    width: 80px;
+    height: 80px;
+  }
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-edit-user-name {
+  font-size: 24px;
+}
+
+.user-edit-gravatar-link {
+  margin-bottom: 15px;
+}
+
+.user-edit-submit-btn {
+  margin-bottom: 15px;
+}
+
+.user-edit-delete-btn {
+  //delete をsubmit のスタイルに合わせる
+  width: 100%;
 }
 
 /* user index */

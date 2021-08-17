@@ -1,32 +1,42 @@
 <% provide(:title, "Edit Profile") %>
-<h1>Edit Profile</h1>
-<div class="row">
-  <div class= "col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <div class="gravatar_edit">
-        <%= gravatar_for(@user, size: 40) %>
-        <%= @user.name %>
-        <a href="http://gravatar.com/emails" target="_blank">プロフィール写真を変更</a>
-      </div>
-      <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: 'form-control', id: 'user_name' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, class: 'form-control', id: 'user_email' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :introduction %>
-        <%= f.text_area :introduction, size: "60*4", class: 'form-control', id: 'user_introduction' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :nationality %>
-        <%= f.text_field :nationality, class: 'form-control', id: 'user_nationality' %>
-      </div>
-      <%= f.submit class: 'btn btn-primary' %>
-      <%= link_to "アカウントを削除する", user_path(@user), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-    <% end %>
-  </div>
-</div>
+<div class="container">
+  <h1>Edit Profile</h1>
+  <div class="row">
+    <div class= "col-md-6 col-md-offset-3">
+      <%= form_for(@user) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="user-edit-gravatar-name">
+          <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
+          <span class="user-edit-user-name">
+            <%= @user.name %>
+          </span><!-- .user-edit-user-name -->
+        </div><!-- .user-edit-gravatar-name -->
+        <div class="user-edit-gravatar-link">
+          <a href="http://gravatar.com/emails" target="_blank">アイコンを変更</a>
+        </div><!-- .user-edit-gravatar-link -->
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control', id: 'user_name', readonly: guest_user? %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control', id: 'user_email', readonly: guest_user? %>
+        </div>
+        <div class="form-group">
+          <%= f.label :introduction %>
+          <%= f.text_area :introduction, size: "60*4", class: 'form-control', id: 'user_introduction' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :nationality %>
+          <%= f.text_field :nationality, class: 'form-control', id: 'user_nationality' %>
+        </div>
+        <%= f.submit class: 'btn btn-primary user-edit-submit-btn' %>
+        <% unless guest_user? %>
+          <div class="user-edit-delete-wrapper">
+            <%= link_to "アカウントを削除する", user_path(@user), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger user-edit-delete-btn" %>
+          </div><!-- .user-edit-delete-wrapper -->
+        <% end %>
+      <% end %>
+    </div><!-- .col-md-6.col-md-offset-3 -->
+  </div><!-- .row -->
+</div><!-- .container -->
