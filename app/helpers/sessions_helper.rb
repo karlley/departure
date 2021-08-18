@@ -32,6 +32,12 @@ module SessionsHelper
     end
   end
 
+  # ゲストユーザーならtrue
+  def guest_user?
+    guest_user = User.find_by(email: "guest@example.com")
+    current_user == guest_user
+  end
+
   # 永続的セッションを破棄する
   def forget(user)
     user.forget

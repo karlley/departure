@@ -217,6 +217,34 @@ footer {
   font-size: 24px;
 }
 
+.static-page-home-welcome {
+  font-size: 64px;
+  @include sp {
+    font-size: 32px;
+  }
+}
+
+.static-page-home-login-signup-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.static-page-home-login-signup-btn {
+  margin-bottom: 32px;
+  width: 50%;
+  @include sp {
+    width: 80%;
+  }
+  p {
+    text-align: center;
+  }
+  .btn {
+    //ボタン幅を揃える
+    width: 100%;
+  }
+}
+
 /* session new */
 .checkbox {
   margin-bottom: 10px;
