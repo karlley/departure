@@ -36,7 +36,7 @@ RSpec.describe "永続セッション機能", type: :request do
   context "ログアウトする" do
     it "ログイン中のみログアウトすることを確認" do
       login_for_request(user)
-      expect(response).to redirect_to user_path(user)
+      expect(response).to redirect_to root_path
       # ログアウト
       delete logout_path
       expect(response).to redirect_to root_path
