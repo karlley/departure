@@ -424,9 +424,10 @@ RSpec.describe "Destinations", type: :system do
       it "検索ワードから行き先名 にマッチする結果が表示されること", js: true do
         search_word = "東京"
         create(:destination, name: search_word, user: user)
-        fill_in "q[name_or_spot_or_address_cont]", with: search_word
+        # id に#header_keyword_search を指定
+        fill_in "header_keyword_search", with: search_word
         # Enter キー押下
-        find("#destination_keyword_search").send_keys :return
+        find("#header_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         expect(page).to have_css "div.destination-list-post", count: 1
       end
@@ -434,9 +435,10 @@ RSpec.describe "Destinations", type: :system do
       it "検索ワードからスポット にマッチする結果が表示されること", js: true do
         search_word = "タワー"
         create(:destination, spot: search_word, user: user)
-        fill_in "q[name_or_spot_or_address_cont]", with: search_word
+        # id に#header_keyword_search を指定
+        fill_in "header_keyword_search", with: search_word
         # Enter キー押下
-        find("#destination_keyword_search").send_keys :return
+        find("#header_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         expect(page).to have_css "div.destination-list-post", count: 1
       end
@@ -444,9 +446,10 @@ RSpec.describe "Destinations", type: :system do
       it "検索ワードから住所 にマッチする結果が表示されること", js: true do
         search_word = "東京都"
         create(:destination, address: search_word, user: user)
-        fill_in "q[name_or_spot_or_address_cont]", with: search_word
+        # id に#header_keyword_search を指定
+        fill_in "header_keyword_search", with: search_word
         # Enter キー押下
-        find("#destination_keyword_search").send_keys :return
+        find("#header_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         expect(page).to have_css "div.destination-list-post", count: 1
       end
@@ -454,9 +457,10 @@ RSpec.describe "Destinations", type: :system do
       it "複数の検索ワードでマッチする結果が表示されること", js: true do
         search_word = "東京 タワー"
         create(:destination, name: "東京", spot: "タワー", user: user)
-        fill_in "q[name_or_spot_or_address_cont]", with: search_word
+        # id に#header_keyword_search を指定
+        fill_in "header_keyword_search", with: search_word
         # Enter キー押下
-        find("#destination_keyword_search").send_keys :return
+        find("#header_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
         expect(page).to have_css "div.destination-list-post", count: 1
       end
@@ -464,9 +468,10 @@ RSpec.describe "Destinations", type: :system do
       it "検索ワードを入力しなかった場合は行き先一覧が表示されること", js: true do
         # 全投稿数を取得
         post_count = Destination.count
-        fill_in "q[name_or_spot_or_address_cont]", with: ""
+        # id に#header_keyword_search を指定
+        fill_in "header_keyword_search", with: ""
         # Enter キー押下
-        find("#destination_keyword_search").send_keys :return
+        find("#header_keyword_search").send_keys :return
         expect(page).to have_css "h1", text: "All Destinations"
         expect(page).to have_css "div.destination-list-post", count: post_count
       end
