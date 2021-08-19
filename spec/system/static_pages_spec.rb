@@ -2,17 +2,37 @@ require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :system do
   describe "static_pages#home" do
+    context "ページレイアウト" do
+      before do
+        visit root_path
+      end
+
+      it "ヒーローイメージが表示される" do
+        expect(page).to have_css ".hero-image"
+        expect(page).to have_content "Departure"
+        expect(page).to have_content "自分を探す旅に出よう"
+      end
+
+      it "正しいタイトルが表示される" do
+        expect(page).to have_title full_title
+      end
+    end
+
     context "ログインしていない場合" do
       before do
         visit root_path
       end
 
-      it "Departure の文字列のが表示される" do
-        expect(page).to have_content "Departure"
+      it "ゲストログインボタンが表示される" do
+        expect(page).to have_link "ゲストログイン", href: guest_login_path
       end
 
-      it "正しいタイトルが表示される" do
-        expect(page).to have_title full_title
+      it "サインアップボタンが表示される" do
+        expect(page).to have_link "サインアップ", href: signup_path
+      end
+
+      it "ログインボタンが表示される" do
+        expect(page).to have_link "ログイン", href: login_path
       end
     end
 
@@ -23,12 +43,6 @@ RSpec.describe "StaticPages", type: :system do
       before do
         login_for_system(user)
         visit root_path
-      end
-
-      it "ヒーローイメージが表示される" do
-        expect(page).to have_css ".hero-image"
-        expect(page).to have_content "Departure"
-        expect(page).to have_content "自分を探す旅に出よう"
       end
 
       it "キーワード検索エリアが表示される" do
@@ -44,7 +58,74 @@ RSpec.describe "StaticPages", type: :system do
         expect(page).to have_content "航空会社で探す"
       end
 
-      context "カテゴリ検索での表示結果を動作確認" do
+      context "キーワード検索での検索結果の動作確認" do
+        context "キーワード検索エリアに各検索ワードで検索した場合" do
+          let(:user) { create(:user) }
+          let(:destination) { create(:destination, user: user) }
+
+          before do
+            login_for_system(user)
+            visit root_path
+          end
+
+          it "行き先名 にマッチする結果が表示される", js: true do
+            search_word = "東京"
+            create(:destination, name: search_word, user: user)
+            # id に#home_keyword_search を指定
+            fill_in "home_keyword_search", with: search_word
+            # Enter キー押下
+            find("#home_keyword_search").send_keys :return
+            expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+            expect(page).to have_css "div.destination-list-post", count: 1
+          end
+
+          it "スポット にマッチする結果が表示される", js: true do
+            search_word = "タワー"
+            create(:destination, spot: search_word, user: user)
+            # id に#home_keyword_search を指定
+            fill_in "home_keyword_search", with: search_word
+            # Enter キー押下
+            find("#home_keyword_search").send_keys :return
+            expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+            expect(page).to have_css "div.destination-list-post", count: 1
+          end
+
+          it "住所 にマッチする結果が表示される", js: true do
+            search_word = "東京都"
+            create(:destination, address: search_word, user: user)
+            # id に#home_keyword_search を指定
+            fill_in "home_keyword_search", with: search_word
+            # Enter キー押下
+            find("#home_keyword_search").send_keys :return
+            expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+            expect(page).to have_css "div.destination-list-post", count: 1
+          end
+
+          it "複数の検索ワードでマッチする結果が表示される", js: true do
+            search_word = "東京 タワー"
+            create(:destination, name: "東京", spot: "タワー", user: user)
+            # id に#home_keyword_search を指定
+            fill_in "home_keyword_search", with: search_word
+            # Enter キー押下
+            find("#home_keyword_search").send_keys :return
+            expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+            expect(page).to have_css "div.destination-list-post", count: 1
+          end
+
+          it "検索ワード未入力で行き先一覧が表示される", js: true do
+            # 全投稿数を取得
+            post_count = Destination.count
+            # id に#home_keyword_search を指定
+            fill_in "home_keyword_search", with: ""
+            # Enter キー押下
+            find("#home_keyword_search").send_keys :return
+            expect(page).to have_css "h1", text: "All Destinations"
+            expect(page).to have_css "div.destination-list-post", count: post_count
+          end
+        end
+      end
+
+      context "カテゴリ検索での検索結果の動作確認" do
         context "エリア検索のリンクをクリックした場合" do
           let(:user) { create(:user) }
           let!(:destination_region_asia) { create(:destination, :region_asia, user: user) }
