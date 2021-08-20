@@ -19,7 +19,8 @@ class SessionsController < ApplicationController
     # フラッシュ表示用
     log_out_user = current_user
     log_out if logged_in?
-    flash[:danger] = "#{log_out_user.name} からログアウトしました"
+    # unless で2重ログアウト対策
+    flash[:danger] = "#{log_out_user.name} からログアウトしました" unless log_out_user.nil?
     redirect_to root_url
   end
 end
