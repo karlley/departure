@@ -255,6 +255,7 @@ footer {
   margin-bottom: 10px;
   span {
     margin-left: 20px;
+    font-weight: 300;
   }
 }
 
@@ -266,6 +267,14 @@ footer {
 .session-new-submit-btn {
   margin-bottom: 15px;
 }
+
+.session-new-guest-login {
+  margin-bottom: 15px;
+  .btn {
+    width: 100%;
+  }
+}
+
 
 /* user new */
 /* FIXME: margin-bottom が他に影響があるので要修正 */
