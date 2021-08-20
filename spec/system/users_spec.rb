@@ -89,63 +89,85 @@ RSpec.describe "Users", type: :system do
   end
 
   describe "users#edit" do
-    let(:user) { create(:user) }
-
-    before do
-      login_for_system(user)
-      visit user_path(user)
-      button = find "button.dropdown-toggle.user-show-dropdown-toggle"
-      button.click
-      click_link "プロフィールを編集する"
-    end
-
     context "有効なユーザーの場合" do
-      it "正しいタイトルが表示される" do
-        expect(page).to have_title full_title('Edit Profile')
+      let(:user) { create(:user) }
+
+      before do
+        login_for_system(user)
+        visit user_path(user)
+        button = find "button.dropdown-toggle.user-show-dropdown-toggle"
+        button.click
+        click_link "プロフィールを編集する"
+      end
+
+      context "プロフィール編集ページにアクセスした場合" do
+        it "正しいタイトルが表示される" do
+          expect(page).to have_title full_title('Edit Profile')
+        end
+      end
+
+      context "有効なプロフィール更新を行った場合" do
+        before do
+          fill_in "ユーザー名", with: "Edit Example User"
+          fill_in "メールアドレス", with: "edit-user@example.com"
+          fill_in "自己紹介", with: "My Introduction!"
+          fill_in "国籍", with: "Japan"
+          click_button "更新する"
+        end
+
+        it "成功のフラッシュが表示される" do
+          expect(page).to have_content "Your Profile has been updated!"
+          expect(user.reload.name).to eq "Edit Example User"
+          expect(user.reload.email).to eq "edit-user@example.com"
+          expect(user.reload.introduction).to eq "My Introduction!"
+          expect(user.reload.nationality).to eq "Japan"
+        end
+      end
+
+      context "無効なプロフィール更新を行った場合" do
+        before do
+          fill_in "ユーザー名", with: ""
+          fill_in "メールアドレス", with: ""
+          click_button "更新する"
+        end
+
+        it "適切なエラーメッセージが表示される" do
+          expect(page).to have_content "ユーザー名を入力してください"
+          expect(page).to have_content "メールアドレスを入力してください"
+          expect(page).to have_content "メールアドレスは不正な値です"
+          expect(user.reload.email).not_to eq ""
+        end
+      end
+
+      context "アカウント削除処理を行った場合", js: true do
+        before do
+          click_link "アカウントを削除する"
+          page.driver.browser.switch_to.alert.accept
+        end
+
+        it "正常に削除できる" do
+          expect(page).to have_content "Your Account has been deleted!"
+        end
       end
     end
 
-    context "有効なユーザーが有効なプロフィール更新を行った場合" do
+    context "ゲストユーザーの場合" do
+      let(:guest_user) { create(:user, :guest) }
+
       before do
-        fill_in "ユーザー名", with: "Edit Example User"
-        fill_in "メールアドレス", with: "edit-user@example.com"
-        fill_in "自己紹介", with: "My Introduction!"
-        fill_in "国籍", with: "Japan"
-        click_button "更新する"
+        login_for_system(guest_user)
+        visit user_path(guest_user)
+        button = find "button.dropdown-toggle.user-show-dropdown-toggle"
+        button.click
+        click_link "プロフィールを編集する"
       end
 
-      it "成功のフラッシュが表示される" do
-        expect(page).to have_content "Your Profile has been updated!"
-        expect(user.reload.name).to eq "Edit Example User"
-        expect(user.reload.email).to eq "edit-user@example.com"
-        expect(user.reload.introduction).to eq "My Introduction!"
-        expect(user.reload.nationality).to eq "Japan"
-      end
-    end
-
-    context "有効なユーザーが無効なプロフィール更新を行った場合" do
-      before do
-        fill_in "ユーザー名", with: ""
-        fill_in "メールアドレス", with: ""
-        click_button "更新する"
-      end
-
-      it "適切なエラーメッセージが表示される" do
-        expect(page).to have_content "ユーザー名を入力してください"
-        expect(page).to have_content "メールアドレスを入力してください"
-        expect(page).to have_content "メールアドレスは不正な値です"
-        expect(user.reload.email).not_to eq ""
-      end
-    end
-
-    context "有効なユーザーがアカウント削除処理を行った場合", js: true do
-      before do
-        click_link "アカウントを削除する"
-        page.driver.browser.switch_to.alert.accept
-      end
-
-      it "正常に削除できる" do
-        expect(page).to have_content "Your Account has been deleted!"
+      it "ユーザー名とメールアドレスが編集できない" do
+        user_name = find "#user_name"
+        user_email = find "#user_email"
+        # readonly 属性の有無をテスト
+        expect(user_name.disabled?).to be_truthy 
+        expect(user_email.disabled?).to be_truthy 
       end
     end
   end
