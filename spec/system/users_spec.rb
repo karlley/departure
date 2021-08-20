@@ -166,8 +166,8 @@ RSpec.describe "Users", type: :system do
         user_name = find "#user_name"
         user_email = find "#user_email"
         # readonly 属性の有無をテスト
-        expect(user_name.disabled?).to be_truthy 
-        expect(user_email.disabled?).to be_truthy 
+        expect(user_name.disabled?).to be_truthy
+        expect(user_email.disabled?).to be_truthy
       end
     end
   end
