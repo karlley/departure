@@ -16,12 +16,10 @@
         </div><!-- .user-edit-gravatar-link -->
         <div class="form-group">
           <%= f.label :name %>
-          <%# <%= f.text_field :name, class: 'form-control', id: 'user_name', readonly: guest_user? %1> %>
           <%= f.text_field :name, class: 'form-control', id: 'user_name', disabled: guest_user? %>
         </div>
         <div class="form-group">
           <%= f.label :email %>
-          <%# <%= f.email_field :email, class: 'form-control', id: 'user_email', readonly: guest_user? %1> %>
           <%= f.email_field :email, class: 'form-control', id: 'user_email', disabled: guest_user? %>
         </div>
         <div class="form-group">
