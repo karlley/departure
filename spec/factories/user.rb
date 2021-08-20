@@ -10,5 +10,10 @@ FactoryBot.define do
     trait :admin do
       admin { true }
     end
+
+    trait :guest do
+      email { "guest@example.com" }
+      introduction { "Hello! I am Guest User!" }
+    end
   end
 end

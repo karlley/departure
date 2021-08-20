@@ -1,18 +1,18 @@
-<% if logged_in? %>
+<div class="jumbotron hero-image">
+  <div class="container-fluid hero-image-text">
+    <h1>Departure</h1>
+    <p>自分を探す旅に出よう</p>
+  </div><!-- .container-fluid .hero-image-text -->
+</div><!-- .jumbotron .hero-image -->
 
-  <div class="jumbotron hero-image">
-    <div class="container-fluid hero-image-text">
-      <h1>Departure</h1>
-      <p>自分を探す旅に出よう</p>
-    </div><!-- .container-fluid .hero-image-text -->
-  </div><!-- .jumbotron .hero-image -->
+<% if logged_in? %>
 
   <div class="container">
     <div class="row static-page-home-keyword-wrapper">
       <h2>キーワードで探す</h2>
       <div class="static-page-home-search-form">
         <%= search_form_for @q, html: { class: "input-group" }  do |f| %>
-          <%= f.search_field :name_or_spot_or_address_cont, placeholder: "旅先を探す", class: "form-control", id: "destination_keyword_search" %>
+          <%= f.search_field :name_or_spot_or_address_cont, placeholder: "旅先を探す", class: "form-control", id: "home_keyword_search" %>
           <span class="input-group-btn">
             <%= button_tag type: "submit", class: "btn btn-default" do %>
               <i class="fas fa-search"></i>
@@ -124,11 +124,27 @@
       </div><!-- .col-md-4 .static-page-home-category-item -->
     </div><!-- .row .static-page-home-category-wrapper -->
 
-<% else %>
+  <% else %>
 
-  <div class="container">
-    <div class="row">
-      <h1>Welcome to Departure!</h1>
-    </div>
-  </div>
-<% end %>
+    <div class="container">
+      <h1 class="static-page-home-welcome">Welcome to Departure!</h1>
+      <div class="row">
+        <div class= "col-md-6 col-md-offset-3">
+          <div class="static-page-home-login-signup-wrapper">
+            <div class="static-page-home-login-signup-btn">
+              <p>ゲストユーザでログインします</p>
+              <%= link_to "ゲストログイン", guest_login_path, method: :post, class: "btn btn-danger" %>
+            </div><!-- .static-page-home-login-signup-btn -->
+            <div class="static-page-home-login-signup-btn">
+              <p>アカウントを作成してはじめる</p>
+              <%= link_to "サインアップ", signup_path, class: "btn btn-warning" %>
+            </div><!-- .static-page-home-login-signup-btn -->
+            <div class="static-page-home-login-signup-btn">
+              <p>アカウントをお持ちの方はこちら</p>
+              <%= link_to "ログイン", login_path, class: "btn btn-primary" %>
+            </div><!-- .static-page-home-login-signup-btn -->
+          </div><!-- .static-page-home-login-signup-wrapper -->
+        </div><!-- .col-md-6.col-md-offset-3 -->
+      </div><!-- .row -->
+    </div><!-- .container -->
+  <% end %>

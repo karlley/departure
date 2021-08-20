@@ -66,6 +66,11 @@ $red-error: red;
   justify-content: center;
 }
 
+// flash 下部の余白
+.alert {
+  margin-bottom: 0px;
+}
+
 /* navbar をfixed-top に設定している為追加 */
 body {
   padding-top: 50px;
@@ -173,6 +178,11 @@ footer {
   }
 }
 
+.static-page-home-search-form {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .static-page-home-category-wrapper {
   //.row のmargin-15px の打消しで左右のはみ出し修正
   margin-right: 0;
@@ -212,12 +222,40 @@ footer {
   font-size: 24px;
 }
 
-/* user form */
+.static-page-home-welcome {
+  font-size: 64px;
+  @include sp {
+    font-size: 32px;
+  }
+}
+
+.static-page-home-login-signup-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.static-page-home-login-signup-btn {
+  margin-bottom: 32px;
+  width: 50%;
+  @include sp {
+    width: 80%;
+  }
+  p {
+    text-align: center;
+  }
+  .btn {
+    //ボタン幅を揃える
+    width: 100%;
+  }
+}
+
+/* session new */
 .checkbox {
-  margin: -10px;
   margin-bottom: 10px;
   span {
     margin-left: 20px;
+    font-weight: 300;
   }
 }
 
@@ -225,6 +263,18 @@ footer {
   width: auto;
   margin-left: 0;
 }
+
+.session-new-submit-btn {
+  margin-bottom: 15px;
+}
+
+.session-new-guest-login {
+  margin-bottom: 15px;
+  .btn {
+    width: 100%;
+  }
+}
+
 
 /* user new */
 /* FIXME: margin-bottom が他に影響があるので要修正 */
@@ -421,8 +471,38 @@ input {
 }
 
 /* user edit */
-.gravatar_edit {
-  margin-bottom: 20px;
+
+.user-edit-gravatar-name {
+  margin-bottom: 15px;
+}
+
+.gravatar.user-picture {
+  margin-right: 15px;
+  width: 100px;
+  height: 100px;
+  @include sp {
+    width: 80px;
+    height: 80px;
+  }
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-edit-user-name {
+  font-size: 24px;
+}
+
+.user-edit-gravatar-link {
+  margin-bottom: 15px;
+}
+
+.user-edit-submit-btn {
+  margin-bottom: 15px;
+}
+
+.user-edit-delete-btn {
+  //delete をsubmit のスタイルに合わせる
+  width: 100%;
 }
 
 /* user index */
