@@ -1,24 +1,66 @@
-# README
+<img width="2349" alt="departure" src="https://user-images.githubusercontent.com/48541378/130327642-20b3ff37-6479-4df2-97f5-b06dc7bdaf39.png">
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 概要
 
-Things you may want to cover:
+旅先を気軽に探せる情報共有アプリ
 
-* Ruby version
+* URL: https://karlley-departure.herokuapp.com/
+* サービス名: Departure
+* テーマ: 旅行の行き先はもっと気軽に探そう
+* 目的: 旅行を通じた新しい経験や出会いで人生を豊かにするきっかけを作りたい
+* 想定したユーザー1: 旅行に行きたいけど計画を立てるのがめんどくさい人
+* 想定したユーザー2: 旅行先のリアルな情報が知りたい人
 
-* System dependencies
+# 主な機能
 
-* Configuration
+## ユーザー機能
 
-* Database creation
+* ログイン/ログアウト
+* ログイン保持
+* 簡単ログイン
+* フォロー
+* 通知(フォロー、お気に入り、コメント)
 
-* Database initialization
+## 投稿
 
-* How to run the test suite
+* 旅先の投稿
+* 投稿画像の最適化
+* 旅先の情報から住所検索してGoogleMap で表示
 
-* Services (job queues, cache servers, search engines, etc.)
+## 閲覧
 
-* Deployment instructions
+* キーワード検索
+* カテゴリ検索
+* お気に入り
+* コメント
 
-* ...
+# こだわったポイント
+
+* 投稿者とメッセージでリアルな情報交換が可能
+* キーワード, 国名, 旅行会社などを手軽に検索できる
+* 気に入った行き先をお気に入りに登録できる
+* 旅先が住所入力無しでGoogleMap で表示される
+* Ajax 化によるユーザビリティの向上
+* RSpec によるコード品質の担保
+* レスポンシブ対応
+* Rubocop によるコード規約の遵守
+
+# 実装できていないこと
+
+* タグ機能
+* 旅先の詳細検索
+* Twitter等のSNS でお気に入りの旅先を共有
+* Twitter, Facebook, Google等のアカウント連携でのログイン
+* パスワードを忘れた際の再設定
+* セレクトボックスをAjax で動的に表示
+* AWS へのデプロイ 
+
+# 使用技術
+
+* Ruby 2.5.7
+* Ruby on Rails 5.2.3
+* RSpec
+* PostgreSQL
+* Maps Javascript API
+* Geocoding API
+
