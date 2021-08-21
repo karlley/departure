@@ -23,8 +23,8 @@ $media-sp: 768px;
 
 /* font */
 body {
-font-family: 'Roboto', 'Noto Sans JP', sans-serif;
-font-weight: 300;
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+  font-weight: 300;
 }
 
 /* text */
@@ -109,7 +109,7 @@ textarea {
   margin-bottom: 0;
 }
 
-.dropdown-menu {
+.nav .dropdown-menu {
   font-family: 'Roboto';
   background-color: $navbar-background;
   li a {
@@ -226,7 +226,7 @@ footer {
 
 .static-page-home-category-item {
   @include sp {
-  //sp 時の画像両端の隙間を無くす
+    //sp 時の画像両端の隙間を無くす
     padding-right: 0;
     padding-left: 0;
     margin-bottom: 32px;
@@ -291,8 +291,21 @@ footer {
     margin-top: 40px;
     margin-bottom: 40px;
   }
+  .col-md-3 {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+  .col-md-4 {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+  //sp 時の左右の隙間調整
   @include sp {
     //sp 時の左右の隙間調整
+    .col-md-3 {
+      padding-right: 0;
+      padding-left: 0;
+    }
     .col-md-4 {
       padding-right: 0;
       padding-left: 0;
@@ -326,6 +339,7 @@ footer {
   }
   p {
     font-size: 18px;
+    margin-bottom: 48px;
   }
   ol {
     margin-bottom: 0;
@@ -335,11 +349,26 @@ footer {
     padding-top: 8px;
     padding-bottom: 8px;
   }
+  ul {
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+  ul li {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
 }
 
 .static-page-about-header {
   margin-top: 40px;
   margin-bottom: 40px;
+}
+
+.static-page-about-search {
+  p {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
 }
 
 .static-page-about-header-text {
@@ -366,6 +395,7 @@ footer {
   height: 80%;
   img {
     width: 100%;
+    border: 1px solid $gray-border;
   }
 }
 
@@ -639,8 +669,8 @@ input {
 .user-follow-wrapper h1 {
   font-size: 30px;
   a {
-   text-decoration: none;
-   color: $gray-text;
+    text-decoration: none;
+    color: $gray-text;
   }
 }
 
@@ -1001,7 +1031,7 @@ input {
 }
 
 .destination-show-favorite-timestamp {
-   margin-top: 15px;
+  margin-top: 15px;
   //sp のみ左右にパディング, 下部マージン
   @include sp {
     padding-right: 15px;
@@ -1031,6 +1061,14 @@ input {
   padding-bottom: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.destination-show-comment-wrapper h2 {
+  margin-bottom: 20px;
+  @include sp {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
 }
 
 /* destination comment */
