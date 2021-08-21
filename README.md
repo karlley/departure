@@ -4,7 +4,7 @@
 
 旅先を気軽に探せる情報共有アプリ
 
-* URL: [Departure](https://karlley-departure.herokuapp.com/)
+* URL: https://karlley-departure.herokuapp.com/
 * サービス名: Departure
 * テーマ: 旅行の行き先はもっと気軽に探そう
 * 目的: 旅行を通じた新しい経験や出会いで人生を豊かにするきっかけを作りたい
@@ -53,6 +53,7 @@
 * Twitter, Facebook, Google等のアカウント連携でのログイン
 * パスワードを忘れた際の再設定
 * セレクトボックスをAjax で動的に表示
+* AWS へのデプロイ 
 
 # 使用技術
 
