@@ -30,6 +30,7 @@ font-weight: 300;
 /* text */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
   font-weight: 300;
 }
 
@@ -59,6 +60,10 @@ $blue-border: #337ab7;
 $black-border: #333333;
 $pink-favorite: pink;
 $red-error: red;
+$navbar-background: #222;
+$navbar-gray-text: #9d9d9d;
+$navbar-white-text: #fff;
+$navbar-gray-border: #9d9d9d;
 
 /* common */
 .pagination-wrapper {
@@ -102,6 +107,29 @@ textarea {
 
 .navbar-form input {
   margin-bottom: 0;
+}
+
+.dropdown-menu {
+  font-family: 'Roboto';
+  background-color: $navbar-background;
+  li a {
+    color: $navbar-gray-text;
+  }
+  li a:hover {
+    color: $navbar-white-text;
+    background-color: transparent;
+  }
+  li a:focus {
+    background-color: transparent;
+  }
+  .divider {
+    background-color: $navbar-gray-border;
+  }
+}
+
+//マイページの矢印
+.fas.fa-angle-down {
+  margin-left: 5px;
 }
 
 /* search bar */
@@ -181,6 +209,10 @@ footer {
 .static-page-home-search-form {
   padding-right: 15px;
   padding-left: 15px;
+  @include sp {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 .static-page-home-category-wrapper {
@@ -246,6 +278,93 @@ footer {
   }
   .btn {
     //ボタン幅を揃える
+    width: 100%;
+  }
+}
+
+/* static about */
+.static-page-about-wrapper {
+  //sp 時の左右はみ出し防止
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  @include sp {
+    //sp 時の左右の隙間調整
+    .col-md-4 {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+.static-page-about-wrapper {
+  h2 {
+    font-size: 32px;
+    border-bottom: 1px solid $gray-border;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+  h3 {
+    font-size: 32px;
+    border-bottom: 1px solid $gray-border;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+  h4 {
+    font-size: 24px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 3px dashed $gray-border;
+    @include sp {
+      margin-left: 0;
+    }
+  }
+  p {
+    font-size: 18px;
+  }
+  ol {
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+  ol li {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+.static-page-about-header {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.static-page-about-header-text {
+  width: 60%;
+  margin: 0 auto;
+  @include sp {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.static-page-about-list-wrapper {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.static-page-about-list-text {
+  height: 20%;
+}
+
+.static-page-about-list-image {
+  height: 80%;
+  img {
     width: 100%;
   }
 }

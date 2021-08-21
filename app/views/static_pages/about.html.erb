@@ -1,2 +1,226 @@
 <% provide(:title, "About") %>
-<h1>What's Departure?</h1>
+<div class="container static-page-about-wrapper">
+  <div class="static-page-about-header">
+    <h1>Departureとは？</h1>
+    <div class="static-page-about-header-text">
+      <p>旅行の旅先を気軽に探せる情報共有アプリです。<br>
+        キーワード検索、エリア検索、航空会社別などで旅先を探せるので旅行の計画に役立ちます。</p>
+    </div><!-- .static-page-about-header-text -->
+  </div><!-- .static-page-about-header -->
+
+  <div class="row static-page-about-overview">
+    <h2>概要</h2>
+    <p>当アプリケーションは転職活動用のポートフォリオとして作成しました。<br>
+      初めて作ったアプリケーションなので不具合やアドバイスがあればTwitter 等で教えて頂けると嬉しいです。</p>
+    <div class="static-page-about-overview-list">
+      <ul>
+        <li><%= link_to "GitHub", "https://github.com/karlley/departure", target: :_blank, rel: "noopener noreferrer" %></li>
+        <li><%= link_to "Qiita", " https://qiita.com/karlley", target: :_blank, rel: "noopener noreferrer" %></li>
+        <li><%= link_to "Twitter", "https://twitter.com/karlley_jp", target: :_blank, rel: "noopener noreferrer" %></li>
+      </ul>
+    </div><!-- .static-page-about-overview-list -->
+
+  </div><!-- .row.static-page-about-overview -->
+
+  <div class="row static-page-about-purpose">
+    <h2>使い方</h2>
+    <div class="static-page-about-purpose-list">
+      <ol>
+        <li>旅行の旅先を探す</li>
+        <li>旅行のログをシェアする</li>
+        <li>気になる旅先をお気に入りに登録する</li>
+        <li>気になる旅先コメントでリアルな情報を集める</li>
+        <li>気になるユーザーをフォローする</li>
+      </ol>
+    </div><!-- .static-page-about-purpose-list -->
+  </div><!-- .row.static-page-about-purpose -->
+
+  <div class="static-page-about-search">
+    <h3>1. 旅行の旅先を探す</h3>
+    <p>シェアされた旅先を下記の方法で探すことができます。</p>
+
+    <div class="row static-page-about-keyword-search">
+      <h4>A. キーワード検索</h4>
+      <div class="col-md-4 static-page-about-list-wrapper">
+        <div class="static-page-about-list-text">
+          <p>(1) メニューバー、またはホーム画面の検索バーをクリック</p>
+        </div><!-- .static-page-about-list-text -->
+        <div class="static-page-about-list-image">
+          <%= image_tag "region/asia.jpg", size: "360x300" %>
+        </div><!-- .static-page-about-list-image -->
+      </div><!-- .col-md-4. static-page-about-list-wrapper -->
+      <div class="col-md-4 static-page-about-list-wrapper">
+        <div class="static-page-about-list-text">
+          <p>(2) 検索バーに気になるワードを入力<br>(例) 東京、東京タワー</p>
+        </div><!-- .static-page-about-list-text -->
+        <div class="static-page-about-list-image">
+          <%= image_tag "region/asia.jpg", size: "360x300" %>
+        </div><!-- .static-page-about-list-image -->
+      </div><!-- .col-md-4. static-page-about-list-wrapper -->
+      <div class="col-md-4 static-page-about-list-wrapper">
+        <div class="static-page-about-list-text">
+          <p>(3) 検索結果が表示されます</p>
+        </div><!-- .static-page-about-list-text -->
+        <div class="static-page-about-list-image">
+          <%= image_tag "region/asia.jpg", size: "360x300" %>
+        </div><!-- .static-page-about-list-image -->
+      </div><!-- .col-md-4. static-page-about-list-wrapper -->
+    </div><!-- .row.static-page-about-keyword-search -->
+
+    <div class="row static-page-about-keyword-category-search">
+      <h4>B. カテゴリ検索</h4>
+      <div class="col-md-4 static-page-about-list-wrapper">
+        <div class="static-page-about-list-text">
+          <p>(1) ホーム画面にアクセス</p>
+        </div><!-- .static-page-about-list-text -->
+        <div class="static-page-about-list-image">
+          <%= image_tag "region/asia.jpg", size: "360x300" %>
+        </div><!-- .static-page-about-list-image -->
+      </div><!-- .col-md-4. static-page-about-list-wrapper -->
+      <div class="col-md-4 static-page-about-list-wrapper">
+        <div class="static-page-about-list-text">
+          <p>(2) エリア、体験、航空会社を選択</p>
+        </div><!-- .static-page-about-list-text -->
+        <div class="static-page-about-list-image">
+          <%= image_tag "region/asia.jpg", size: "360x300" %>
+        </div><!-- .static-page-about-list-image -->
+      </div><!-- .col-md-4. static-page-about-list-wrapper -->
+      <div class="col-md-4 static-page-about-list-wrapper">
+        <div class="static-page-about-list-text">
+          <p>(3) 検索結果が表示されます</p>
+        </div><!-- .static-page-about-list-text -->
+        <div class="static-page-about-list-image">
+          <%= image_tag "region/asia.jpg", size: "360x300" %>
+        </div><!-- .static-page-about-list-image -->
+      </div><!-- .col-md-4. static-page-about-list-wrapper -->
+    </div><!-- .row.static-page-about-keyword-category-search -->
+  </div><!-- .static-page-about-search -->
+
+  <div class="row static-page-about-share">
+    <h3> 2. 旅行のログをシェアする</h3>
+    <p>行ったことのある旅先をシェアできます。</p>
+
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(1) メニューバーのシェアをクリック</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(2) 画像や旅先名など必要事項を入力後、登録するをクリック</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(3) 入力された内容から住所が検索されGoogleMap と旅先の情報がシェアされます</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+  </div><!-- .row.static-page-about-share -->
+
+  <div class="row static-page-about-favorite">
+    <h3>3. 気になる旅先をお気に入りに登録する</h3>
+    <p>気になる旅先を見つけたらお気に入りリストに登録できます。</p>
+
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(1) 旅先一覧ページ、または旅先詳細ページで<span class="favorite-btn-favorite"><i class="far fa-heart"></i></i> いいね!</span> ボタンをクリック</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(2) メニューバーのお気に入りをクリック</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(3) <span class="favorite-btn-unfavorite"><i class="fas fa-heart"></i> いいね!</span> した旅先一覧とGoogleMap が表示されます</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+  </div><!-- .row.static-page-about-favorite -->
+
+  <div class="row static-page-about-comment">
+    <h3>4. 気になる旅先コメントでリアルな情報を集める</h3>
+    <p>旅先にコメントする事でユーザー間でのコミュニケーションが可能です。</p>
+
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(1) 旅先詳細ページにアクセス</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(2) ページ下部のコメント欄にメッセージを入力してコメントボタンをクリック</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+    <div class="col-md-4 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(3) コメント内でメッセージのやり取りができます</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-4. static-page-about-list-wrapper -->
+  </div><!-- .row.static-page-about-comment -->
+
+  <div class="row static-page-about-follow">
+    <h3>5. 気になるユーザーをフォローする</h3>
+    <p>ユーザーをフォローする事でフォローリストに登録できます。</p>
+
+    <div class="col-md-3 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(1) ユーザーページにアクセス</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-3.static-page-about-list-wrapper -->
+    <div class="col-md-3 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(2) ユーザーページのフォローするボタンをクリック</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-3.static-page-about-list-wrapper -->
+    <div class="col-md-3 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(3) メニューバーからフォローリストをクリック</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-3.static-page-about-list-wrapper -->
+    <div class="col-md-3 static-page-about-list-wrapper">
+      <div class="static-page-about-list-text">
+        <p>(4) フォロー中のユーザーとフォロワーが一覧で表示されます</p>
+      </div><!-- .static-page-about-list-text -->
+      <div class="static-page-about-list-image">
+        <%= image_tag "region/asia.jpg", size: "360x300" %>
+      </div><!-- .static-page-about-list-image -->
+    </div><!-- .col-md-3.static-page-about-list-wrapper -->
+  </div><!-- .row.static-page-about-follow -->
+</div><!-- .container -->
