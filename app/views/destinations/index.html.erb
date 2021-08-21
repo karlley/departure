@@ -1,9 +1,9 @@
 <% provide(:title, "Search") %>
 <div class="container-fluid list-with-map-wrapper">
   <% if @search_word.present? %>
-    <h1>"<%= @search_word %>" Search Results : <%= @destinations.count %></h1>
+    <h1>"<%= @search_word %>" 検索結果 : <%= @destinations.count %>件</h1>
   <% else %>
-    <h1>All Destinations</h1>
+    <h1>すべての旅先</h1>
   <% end %>
    <%= render "list_with_map" %>
 </div><!-- .container-fluid .list-with-map-wrapper -->

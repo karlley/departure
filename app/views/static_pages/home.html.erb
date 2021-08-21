@@ -12,7 +12,7 @@
       <h2>キーワードで探す</h2>
       <div class="static-page-home-search-form">
         <%= search_form_for @q, html: { class: "input-group" }  do |f| %>
-          <%= f.search_field :name_or_spot_or_address_cont, placeholder: "旅先を探す", class: "form-control", id: "home_keyword_search" %>
+          <%= f.search_field :name_or_spot_or_address_cont, placeholder: "東京、東京タワー", class: "form-control", id: "home_keyword_search" %>
           <span class="input-group-btn">
             <%= button_tag type: "submit", class: "btn btn-default" do %>
               <i class="fas fa-search"></i>

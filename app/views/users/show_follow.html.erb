@@ -1,9 +1,9 @@
 <% provide(:title, @title) %>
 <div class="container user-follow-wrapper">
   <% if controller.action_name == "following" %>
-    <h1>Following / <%= link_to "Followers", followers_user_path(@user) %></h1>
+    <h1>フォロー / <%= link_to "フォロワー", followers_user_path(@user) %></h1>
   <% elsif controller.action_name == "followers" %>
-    <h1><%= link_to "Following", following_user_path(@user) %> / Followers</h1>
+    <h1><%= link_to "フォロー", following_user_path(@user) %> / フォロワー</h1>
   <% end %>
 
   <%= render partial: "users/show_follow_stats", locals: { user: @user } %>
