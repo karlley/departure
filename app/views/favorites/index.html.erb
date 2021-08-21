@@ -1,6 +1,6 @@
 <% provide(:title, "Favorites") %>
 <div class="container-fluid list-with-map-wrapper">
-  <h1>Favorites (<%= @favorites.count %>)</h1>
+  <h1>お気に入り (<%= @favorites.count %>)</h1>
 </div><!-- .container-fluid .list-with-map-wrapper -->
 <% if @favorites.present? %>
   <%= render "destinations/list_with_map" %>
