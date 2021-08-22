@@ -44,7 +44,7 @@
           </div><!-- .destination-description -->
 
           <div class="destination-list-lower-end">
-            <p class="destination-list-country-name"><i class="fa fa-map-marker"></i> <%= get_country_name(destination) %></p>
+            <p class="destination-list-country-name"><i class="fa fa-map-marker"></i> <%= get_country_name(destination).truncate(10) %></p>
             <div class="destination-list-favorite-timestamp">
               <%= render "users/favorite_form" %>
               <div class="destination-list-timestamp">
