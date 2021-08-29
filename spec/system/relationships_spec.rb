@@ -13,12 +13,12 @@ RSpec.describe "Relationships", type: :system do
         visit following_user_path(user1)
       end
 
-      it "'Following / Followers'が表示される" do
-        expect(page).to have_content "Following / Followers"
+      it "'フォロー / フォロワー'が表示される" do
+        expect(page).to have_content "フォロー / フォロワー"
       end
 
       it "users#followers へのリンクが表示される" do
-        expect(page).to have_link "Followers", href: followers_user_path(user1)
+        expect(page).to have_link "フォロワー", href: followers_user_path(user1)
       end
 
       it "正しいタイトルが表示される事" do
@@ -75,11 +75,11 @@ RSpec.describe "Relationships", type: :system do
       end
 
       it "'Following / Followers'が表示される" do
-        expect(page).to have_content "Following / Followers"
+        expect(page).to have_content "フォロー / フォロワー"
       end
 
       it "users#following へのリンクが表示される" do
-        expect(page).to have_link "Following", href: following_user_path(user1)
+        expect(page).to have_link "フォロー", href: following_user_path(user1)
       end
 
       it "正しいタイトルが表示される事" do

@@ -52,48 +52,47 @@ end
 
 # Destination
 
-  10.times do |n|
+10.times do |n|
+  picture = File.open("#{Rails.root}/app/assets/images/sample/sample_#{Faker::Number.between(from: 1, to: 10)}.jpg")
+  # 旅先名のリスト
+  name = "サンプル #{n + 1}の旅先"
+  description = "これは#{n + 1}番目の旅先です！"
+  # :expense のenum 表示に合わせて1-8 の数字を生成,
+  expense = Faker::Number.between(from: 1, to: 8)
+  season = Faker::Number.between(from: 1, to: 12)
+  # seed で作成したCountry オブジェクトの中からランダムに国を選択
+  country_id = Country.find(Faker::Number.between(from: 1, to: 249)).id
+  spot = Faker::Address.street_name
+  latitude = Faker::Address.latitude
+  longitude = Faker::Address.longitude
+  address = Faker::Address.full_address
+  # :expense のenum 表示に合わせて1-8 の数字を生成,
+  expense = Faker::Number.between(from: 1, to: 8)
+  season = Faker::Number.between(from: 1, to: 12)
+  # 体験の中からランダムに選択
+  experience_list = ["アクティビティ", "歴史", "一人旅"]
+  experience = experience_list[Faker::Number.between(from: 0, to: 2)]
+  # seed で作成したAirline オブジェクトの中からランダムに航空会社を選択
+  airline_id = Airline.find(Faker::Number.between(from: 1, to: 90)).id
+  food = Faker::Food.dish
+  # 管理人は含まない
+  user_id = Faker::Number.between(from: 2, to: 4)
 
-    picture = File.open("#{Rails.root}/app/assets/images/sample/sample_#{Faker::Number.between(from: 1, to: 10)}.jpg")
-    # 旅先名のリスト
-    name = "サンプル #{n + 1}の旅先"
-    description = "これは#{n + 1}番目の旅先です！"
-    # :expense のenum 表示に合わせて1-8 の数字を生成,
-    expense = Faker::Number.between(from: 1, to: 8)
-    season = Faker::Number.between(from: 1, to: 12)
-    # seed で作成したCountry オブジェクトの中からランダムに国を選択
-    country_id =  Country.find(Faker::Number.between(from: 1, to: 249)).id
-    spot = Faker::Address.street_name
-    latitude = Faker::Address.latitude
-    longitude = Faker::Address.longitude
-    address = Faker::Address.full_address
-    # :expense のenum 表示に合わせて1-8 の数字を生成,
-    expense = Faker::Number.between(from: 1, to: 8)
-    season = Faker::Number.between(from: 1, to: 12)
-    # 体験の中からランダムに選択
-    experience_list = ["アクティビティ", "歴史", "一人旅"]
-    experience = experience_list[(Faker::Number.between(from: 0, to: 2))]
-    # seed で作成したAirline オブジェクトの中からランダムに航空会社を選択
-    airline_id = Airline.find(Faker::Number.between(from: 1, to: 90)).id
-    food = Faker::Food.dish
-    # 管理人は含まない
-    user_id = Faker::Number.between(from: 2, to: 4)
-
-    Destination.create!(picture: picture,
-                        name: name,
-                        description: description,
-                        country_id: country_id,
-                        spot: spot,
-                        latitude: latitude,
-                        longitude: longitude,
-                        address: address,
-                        expense: expense,
-                        season: season,
-                        experience: experience,
-                        airline_id: airline_id,
-                        food: food,
-                        user_id: user_id)
-  end
+  Destination.create!(picture: picture,
+                      name: name,
+                      description: description,
+                      country_id: country_id,
+                      spot: spot,
+                      latitude: latitude,
+                      longitude: longitude,
+                      address: address,
+                      expense: expense,
+                      season: season,
+                      experience: experience,
+                      airline_id: airline_id,
+                      food: food,
+                      user_id: user_id)
+end
 
 # Relationship
 users = User.all

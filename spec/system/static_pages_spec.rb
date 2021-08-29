@@ -75,7 +75,7 @@ RSpec.describe "StaticPages", type: :system do
             fill_in "home_keyword_search", with: search_word
             # Enter キー押下
             find("#home_keyword_search").send_keys :return
-            expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果 : 1"
             expect(page).to have_css "div.destination-list-post", count: 1
           end
 
@@ -86,7 +86,7 @@ RSpec.describe "StaticPages", type: :system do
             fill_in "home_keyword_search", with: search_word
             # Enter キー押下
             find("#home_keyword_search").send_keys :return
-            expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果 : 1"
             expect(page).to have_css "div.destination-list-post", count: 1
           end
 
@@ -97,7 +97,7 @@ RSpec.describe "StaticPages", type: :system do
             fill_in "home_keyword_search", with: search_word
             # Enter キー押下
             find("#home_keyword_search").send_keys :return
-            expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果 : 1"
             expect(page).to have_css "div.destination-list-post", count: 1
           end
 
@@ -108,7 +108,7 @@ RSpec.describe "StaticPages", type: :system do
             fill_in "home_keyword_search", with: search_word
             # Enter キー押下
             find("#home_keyword_search").send_keys :return
-            expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果 : 1"
             expect(page).to have_css "div.destination-list-post", count: 1
           end
 
@@ -119,7 +119,7 @@ RSpec.describe "StaticPages", type: :system do
             fill_in "home_keyword_search", with: ""
             # Enter キー押下
             find("#home_keyword_search").send_keys :return
-            expect(page).to have_css "h1", text: "All Destinations"
+            expect(page).to have_css "h1", text: "すべての旅先"
             expect(page).to have_css "div.destination-list-post", count: post_count
           end
         end
@@ -140,7 +140,7 @@ RSpec.describe "StaticPages", type: :system do
           it "アジアの絞り込み結果が表示される" do
             asia_link = find ".static-page-home-category-link.region-asia"
             asia_link.click
-            expect(page).to have_css "h1", text: "\"アジア\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"アジア\" 検索結果 : 1"
             expect(page).to have_link destination_region_asia.name.truncate(30), href: destination_path(destination_region_asia)
             expect(page).to have_link destination_region_asia.user.name, href: user_path(destination_region_asia.user)
           end
@@ -148,7 +148,7 @@ RSpec.describe "StaticPages", type: :system do
           it "アメリカの絞り込み結果が表示される" do
             america_link = find ".static-page-home-category-link.region-america"
             america_link.click
-            expect(page).to have_css "h1", text: "\"アメリカ\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"アメリカ\" 検索結果 : 1"
             expect(page).to have_link destination_region_america.name.truncate(30), href: destination_path(destination_region_america)
             expect(page).to have_link destination_region_america.user.name, href: user_path(destination_region_america.user)
           end
@@ -156,7 +156,7 @@ RSpec.describe "StaticPages", type: :system do
           it "ヨーロッパの絞り込み結果が表示される" do
             europe_link = find ".static-page-home-category-link.region-europe"
             europe_link.click
-            expect(page).to have_css "h1", text: "\"ヨーロッパ\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"ヨーロッパ\" 検索結果 : 1"
             expect(page).to have_link destination_region_europe.name.truncate(30), href: destination_path(destination_region_europe)
             expect(page).to have_link destination_region_europe.user.name, href: user_path(destination_region_europe.user)
           end
@@ -176,7 +176,7 @@ RSpec.describe "StaticPages", type: :system do
           it "アクティビティの絞り込み結果が表示される" do
             activity_link = find ".static-page-home-category-link.experience-activity"
             activity_link.click
-            expect(page).to have_css "h1", text: "\"アクティビティ\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"アクティビティ\" 検索結果 : 1"
             expect(page).to have_link destination_experience_activity.name.truncate(30), href: destination_path(destination_experience_activity)
             expect(page).to have_link destination_experience_activity.user.name, href: user_path(destination_experience_activity.user)
           end
@@ -184,7 +184,7 @@ RSpec.describe "StaticPages", type: :system do
           it "歴史の絞り込み結果が表示される" do
             history_link = find ".static-page-home-category-link.experience-history"
             history_link.click
-            expect(page).to have_css "h1", text: "\"歴史\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"歴史\" 検索結果 : 1"
             expect(page).to have_link destination_experience_history.name.truncate(30), href: destination_path(destination_experience_history)
             expect(page).to have_link destination_experience_history.user.name, href: user_path(destination_experience_history.user)
           end
@@ -192,7 +192,7 @@ RSpec.describe "StaticPages", type: :system do
           it "一人旅の絞り込み結果が表示される" do
             solo_travel_link = find ".static-page-home-category-link.experience-solo-travel"
             solo_travel_link.click
-            expect(page).to have_css "h1", text: "\"一人旅\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"一人旅\" 検索結果 : 1"
             expect(page).to have_link destination_experience_solo_travel.name.truncate(30), href: destination_path(destination_experience_solo_travel)
             expect(page).to have_link destination_experience_solo_travel.user.name, href: user_path(destination_experience_solo_travel.user)
           end
@@ -212,7 +212,7 @@ RSpec.describe "StaticPages", type: :system do
           it "スターアライアンスの絞り込み結果が表示される" do
             europe_link = find ".static-page-home-category-link.alliance-star-alliance"
             europe_link.click
-            expect(page).to have_css "h1", text: "\"スターアライアンス\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"スターアライアンス\" 検索結果 : 1"
             expect(page).to have_link destination_alliance_star_alliance.name.truncate(30), href: destination_path(destination_alliance_star_alliance)
             expect(page).to have_link destination_alliance_star_alliance.user.name, href: user_path(destination_alliance_star_alliance.user)
           end
@@ -220,7 +220,7 @@ RSpec.describe "StaticPages", type: :system do
           it "ワンワールドの絞り込み結果が表示される" do
             europe_link = find ".static-page-home-category-link.alliance-one-world"
             europe_link.click
-            expect(page).to have_css "h1", text: "\"ワンワールド\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"ワンワールド\" 検索結果 : 1"
             expect(page).to have_link destination_alliance_one_world.name.truncate(30), href: destination_path(destination_alliance_one_world)
             expect(page).to have_link destination_alliance_one_world.user.name, href: user_path(destination_alliance_one_world.user)
           end
@@ -228,7 +228,7 @@ RSpec.describe "StaticPages", type: :system do
           it "スカイチームの絞り込み結果が表示される" do
             europe_link = find ".static-page-home-category-link.alliance-sky-team"
             europe_link.click
-            expect(page).to have_css "h1", text: "\"スカイチーム\" Search Results : 1"
+            expect(page).to have_css "h1", text: "\"スカイチーム\" 検索結果 : 1"
             expect(page).to have_link destination_alliance_sky_team.name.truncate(30), href: destination_path(destination_alliance_sky_team)
             expect(page).to have_link destination_alliance_sky_team.user.name, href: user_path(destination_alliance_sky_team.user)
           end
@@ -242,8 +242,8 @@ RSpec.describe "StaticPages", type: :system do
       visit about_path
     end
 
-    it "What's Departure? の文字列の存在を確認" do
-      expect(page).to have_content "What's Departure?"
+    it "'Departureとは？'の文字列の存在を確認" do
+      expect(page).to have_content "Departureとは？"
     end
 
     it "正しいタイトル表示を確認" do

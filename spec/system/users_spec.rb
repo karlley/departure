@@ -453,8 +453,8 @@ RSpec.describe "Users", type: :system do
         visit favorites_path
       end
 
-      it "'Favorites' の文字列が表示される" do
-        expect(page).to have_content "Favorites"
+      it "'お気に入り'の文字列が表示される" do
+        expect(page).to have_content "お気に入り"
       end
 
       it "いいね!の件数が表示される" do
