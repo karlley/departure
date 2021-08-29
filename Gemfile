@@ -47,10 +47,9 @@ gem 'gmaps4rails'
 gem 'geocoder'
 gem 'dotenv-rails'
 gem 'ransack'
+gem 'fog-aws'
 
 group :production do
-  # fog のインストールでエラーが出たのでfog-local に変更
-  gem 'fog-local'
 end
 
 group :development, :test do
