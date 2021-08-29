@@ -7,8 +7,10 @@ class PictureUploader < CarrierWave::Uploader::Base
   # storage :file
   # storage :fog
 
-  # production 環境ではクラウドストレージに画像を保存する
+  # production, develop 環境ではクラウドストレージに画像を保存する
   if Rails.env.production?
+    storage :fog
+  elsif Rails.env.development?
     storage :fog
   else
     storage :file
