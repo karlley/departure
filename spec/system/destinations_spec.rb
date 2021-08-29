@@ -156,7 +156,7 @@ RSpec.describe "Destinations", type: :system do
         expect(page).to have_link destination.user.name, href: user_path(destination.user)
         # 50文字以上を省略しているのも検証
         expect(page).to have_content destination.description.truncate(50)
-        country_name = get_country_name(destination)
+        country_name = get_country_name(destination).truncate(10)
         expect(page).to have_content country_name
         expect(page).to have_content "いいね!"
         expect(page).to have_css "div.destination-list-timestamp"
@@ -169,10 +169,10 @@ RSpec.describe "Destinations", type: :system do
         # per_page が12件なので13件のテストデータを作成
         create_list(:destination, 13, user: user)
         visit destinations_path
-        expect(page).to have_content "All Destinations"
+        expect(page).to have_content "すべての旅先"
         expect(page).to have_css "div.pagination"
         Destination.take(12).each do |d|
-          expect(page).to have_link d.name
+          expect(page).to have_link d.name.truncate(30)
         end
       end
     end
@@ -428,7 +428,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "header_keyword_search", with: search_word
         # Enter キー押下
         find("#header_keyword_search").send_keys :return
-        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+        expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果 : 1"
         expect(page).to have_css "div.destination-list-post", count: 1
       end
 
@@ -439,7 +439,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "header_keyword_search", with: search_word
         # Enter キー押下
         find("#header_keyword_search").send_keys :return
-        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+        expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果 : 1"
         expect(page).to have_css "div.destination-list-post", count: 1
       end
 
@@ -450,7 +450,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "header_keyword_search", with: search_word
         # Enter キー押下
         find("#header_keyword_search").send_keys :return
-        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+        expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果 : 1"
         expect(page).to have_css "div.destination-list-post", count: 1
       end
 
@@ -461,7 +461,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "header_keyword_search", with: search_word
         # Enter キー押下
         find("#header_keyword_search").send_keys :return
-        expect(page).to have_css "h1", text: "\"#{search_word}\" Search Results : 1"
+        expect(page).to have_css "h1", text: "\"#{search_word}\" 検索結果 : 1"
         expect(page).to have_css "div.destination-list-post", count: 1
       end
 
@@ -472,7 +472,7 @@ RSpec.describe "Destinations", type: :system do
         fill_in "header_keyword_search", with: ""
         # Enter キー押下
         find("#header_keyword_search").send_keys :return
-        expect(page).to have_css "h1", text: "All Destinations"
+        expect(page).to have_css "h1", text: "すべての旅先"
         expect(page).to have_css "div.destination-list-post", count: post_count
       end
     end
