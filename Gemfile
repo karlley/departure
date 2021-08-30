@@ -48,9 +48,7 @@ gem 'geocoder'
 gem 'dotenv-rails'
 gem 'ransack'
 gem 'fog-aws'
-
-group :production do
-end
+gem 'ancestry'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
