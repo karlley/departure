@@ -7,7 +7,11 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :destinations
+  resources :destinations do
+    collection do
+      get "get_region_countries", defaults: { format: "json" }
+    end
+  end
   resources :relationships, only: [:create, :destroy]
   get :login, to: "sessions#new"
   post :login, to: "sessions#create"
