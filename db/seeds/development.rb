@@ -7,15 +7,16 @@ Faker::Config.locale = :ja
 # Country
 require "csv"
 
-CSV.foreach("country.csv", headers: true) do |row|
+CSV.foreach("db/country.csv", headers: true) do |row|
   Country.create!(
     country_name: row["国・地域名"],
-    region: row["場所"]
+    region: row["場所"],
+    ancestry: row["ancestry"]
   )
 end
 
 # Airline
-CSV.foreach("airline.csv", headers: true) do |row|
+CSV.foreach("db/airline.csv", headers: true) do |row|
   Airline.create!(
     airline_name: row["航空会社"],
     country_id: row["国番号"],
