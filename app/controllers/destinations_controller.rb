@@ -49,9 +49,13 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
-    # TODO: インスタンス変数化
-    # @country = Country.all
-    # @airline = Airline.all
+     # エリア選択の初期値
+    @regions = Country.where(ancestry: nil)
+    @airlines = Airline.all
+  end
+
+  def get_region_countries
+    @region_countries = Country.find("#{params[:region_id]}").children
   end
 
   def create
