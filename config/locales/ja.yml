@@ -27,6 +27,7 @@ ja:
         name: 行き先名
         description: 説明
         spot: スポット
+        region_id: 地域
         country_id: 国
         picture: 行き先の写真
         expense: 費用
