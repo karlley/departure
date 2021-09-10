@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     end
   end
   resources :destinations do
+    # new Ajax 取得用
     collection do
+      get "get_region_countries", defaults: { format: "json" }
+    end
+    # edit Ajax 取得用
+    member do
       get "get_region_countries", defaults: { format: "json" }
     end
   end
