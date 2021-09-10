@@ -21,6 +21,7 @@ class Destination < ApplicationRecord
   validates :experience, length: { maximum: 50 }
   validates :food, length: { maximum: 50 }
   validate :picture_size
+  validate :region_id
 
   # geocoder で経度, 緯度を取得する
   geocoded_by :address_keyword
