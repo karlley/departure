@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_01_185741) do
+ActiveRecord::Schema.define(version: 2021_09_10_080733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_185741) do
     t.string "food"
     t.bigint "country_id"
     t.bigint "airline_id"
+    t.integer "region_id"
     t.index ["airline_id"], name: "index_destinations_on_airline_id"
     t.index ["country_id"], name: "index_destinations_on_country_id"
     t.index ["user_id", "created_at"], name: "index_destinations_on_user_id_and_created_at"
