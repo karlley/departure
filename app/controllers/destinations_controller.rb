@@ -75,8 +75,6 @@ class DestinationsController < ApplicationController
     @regions = Country.where(ancestry: nil)
     selected_region = Country.find_by(id: @destination.country_id).parent
     @countries = selected_region.children
-    #登録したregion_id から対応する国名一覧を取得
-    #@countries = Country.where(@destination.region_id)
     @airlines = Airline.all
   end
 
