@@ -1,4 +1,5 @@
-$(function () {
+// gem turbolinks でready イベントが発火しないのでturbolinks:load
+$(document).on('turbolinks:load', function () {
   // 国名のセレクトボックスのoption 作成
   function appendOption(country) {
     var html = `<option value="${country.id}">${country.country_name}</option>`;
@@ -11,7 +12,6 @@ $(function () {
                                 <label for="destination_country_id">国</label>
                                 <span class="input-need"> *必須</span>
                                 <select class="form-control" id="destination_country_id" name="destination[country_id]">
-                                  <option value="">国名を選択</option>
                                   ${insertHTML}
                                 </select>
                               </div>`;
