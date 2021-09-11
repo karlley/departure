@@ -23,13 +23,20 @@
   </div>
   <div class="form-group" id="destination_region">
     <%= f.label :region_id %><span class="input-need"> *必須</span>
-    <%= f.collection_select :region_id, @regions, :id, :country_name, { prompt: "地域を選択" }, { class: "form-control", id: "destination_region_id" } %>
+    <%= f.collection_select :region_id, @regions, :id, :country_name, { include_blank: "地域を選択" }, { class: "form-control", id: "destination_region_id" } %>
   </div>
   <div class="form-group-wrapper" id="destination_country">
+    <% #edit 時のみ国名セレクトボックスを先に表示 %>
+    <% if edit_page? %>
+      <div class="form-group" id="country_select_box">
+        <%= f.label :country_id %><span class="input-need"> *必須</span>
+        <%= f.collection_select :country_id, @countries, :id, :country_name, { include_blank: "国を選択" }, { class: "form-control", id: "destination_region_id" } %>
+      </div>
+    <% end %>
   </div>
   <div class="form-group">
     <%= f.label :expense %><span class="input-need"> *必須</span>
-    <%= f.select :expense, options_for_select(Destination.expenses, @destination.expense_before_type_cast), { prompt: "費用を選択" }, { class: "form-control", id: "destination_expense" } %>
+    <%= f.select :expense, options_for_select(Destination.expenses, @destination.expense_before_type_cast), { include_blank: "費用を選択" }, { class: "form-control", id: "destination_expense" } %>
   </div>
   <div class="form-group">
     <%= f.label :season %><span class="input-need"> *必須</span>
@@ -41,7 +48,7 @@
   </div>
   <div class="form-group">
     <%= f.label :airline_id %>
-    <%= f.collection_select :airline_id, @airlines, :id, :airline_name, { prompt: "航空会社を選択" }, { class: "form-control", id: "destination_airline_id" } %>
+    <%= f.collection_select :airline_id, @airlines, :id, :airline_name, { prompt: "飛行機は使っていない" }, { class: "form-control", id: "destination_airline_id" } %>
   </div>
   <div class="form-group">
     <%= f.label :food %>
@@ -50,16 +57,16 @@
   <%= f.submit class: "btn btn-primary destination-form-submit-btn" %>
   <% if edit_page? %>
     <div class="destination-form-delete-wrapper">
-    <%= link_to "削除する", destination_path(@destination), method: :delete, data: { confirm: "削除してよろしいですか?" }, class: "btn btn-danger destination-form-delete-btn" %> 
-  <% end %>
+      <%= link_to "削除する", destination_path(@destination), method: :delete, data: { confirm: "削除してよろしいですか?" }, class: "btn btn-danger destination-form-delete-btn" %> 
+    <% end %>
     </div>
-<% end %>
+  <% end %>
 
-<script type="text/javascript">
-  $("#destination_picture").bind("change", function() {
-    var size_inmegabytes = this.files[0].size/1024/1024;
-    if (size_in_megabytes > 5) {
-      alert("The maximum size of a picture you can update is 5MB.");
-    }
-  });
-</script>
+  <script type="text/javascript">
+    $("#destination_picture").bind("change", function() {
+      var size_inmegabytes = this.files[0].size/1024/1024;
+      if (size_in_megabytes > 5) {
+        alert("The maximum size of a picture you can update is 5MB.");
+      }
+    });
+  </script>
