@@ -49,9 +49,13 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
-    # TODO: インスタンス変数化
-    # @country = Country.all
-    # @airline = Airline.all
+     # エリア選択の初期値
+    @regions = Country.where(ancestry: nil)
+    @airlines = Airline.all
+  end
+
+  def get_region_countries
+    @region_countries = Country.find("#{params[:region_id]}").children
   end
 
   def create
@@ -68,6 +72,10 @@ class DestinationsController < ApplicationController
 
   def edit
     @destination = Destination.find(params[:id])
+    @regions = Country.where(ancestry: nil)
+    selected_region = Country.find_by(id: @destination.country_id).parent
+    @countries = selected_region.children
+    @airlines = Airline.all
   end
 
   def update
@@ -99,7 +107,7 @@ class DestinationsController < ApplicationController
   def destination_params
     # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :expense, :season, :experience, :airline, :food)
     # :expense をenum 定義しているのでInt 型に変換して追加
-    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline_id, :food).merge(expense: params[:destination][:expense].to_i)
+    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline_id, :food, :region_id).merge(expense: params[:destination][:expense].to_i)
   end
 
   def correct_user

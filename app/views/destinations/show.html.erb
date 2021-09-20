@@ -73,7 +73,7 @@
       <p class="destination-show-season"><i class="fas fa-suitcase-rolling"></i> <%= @destination.season %>月</p>
       <p class="destination-show-experience"><i class="fas fa-hiking"></i> 体験: <%= @destination.experience %></p>
       <% if @airline.nil? %>
-        <p class="destination-show-airline-name"><i class="fas fa-plane"></i> 航空会社: 未使用</p>
+        <p class="destination-show-airline-name"><i class="fas fa-plane"></i> 航空会社: 飛行機は使っていない</p>
       <% else %>
         <p class="destination-show-airline-name"><i class="fas fa-plane"></i> 航空会社: <%= @airline.airline_name %></p>
         <p class="destination-show-alliance"><i class="far fa-handshake"></i> アライアンス: <%= @airline.alliance %></p>

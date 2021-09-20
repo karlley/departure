@@ -1,0 +1,259 @@
+番号,国・地域名,ISO 3166-1に於ける英語名,数,三字,二字,場所,各行政区分,ancestry
+1,アジア,,,,,,,
+2,アメリカ,,,,,,,
+3,ヨーロッパ,,,,,,,
+4,アフリカ,,,,,,,
+5,オセアニア,,,,,,,
+6,中東,,,,,,,
+7,インド洋地域,,,,,,,
+8,地中海地域,,,,,,,
+9,その他,,,,,,,
+10,アイスランド,Iceland,352,ISL,IS,北ヨーロッパ,ISO 3166-2:IS,3
+11,アイルランド,Ireland,372,IRL,IE,西ヨーロッパ,ISO 3166-2:IE,3
+12,アゼルバイジャン,Azerbaijan,31,AZE,AZ,東ヨーロッパ,ISO 3166-2:AZ,3
+13,アフガニスタン,Afghanistan,4,AFG,AF,中東,ISO 3166-2:AF,6
+14,アメリカ合衆国,United States,840,USA,US,北アメリカ,ISO 3166-2:US,2
+15,アメリカ領ヴァージン諸島,Virgin Islands,850,VIR,VI,中央アメリカ,ISO 3166-2:VI,2
+16,アメリカ領サモア,American Samoa,16,ASM,AS,オセアニア,ISO 3166-2:AS,5
+17,アラブ首長国連邦,United Arab Emirates,784,ARE,AE,中東,ISO 3166-2:AE,6
+18,アルジェリア,Algeria,12,DZA,DZ,北アフリカ,ISO 3166-2:DZ,4
+19,アルゼンチン,Argentina,32,ARG,AR,南アメリカ,ISO 3166-2:AR,2
+20,アルバ,Aruba,533,ABW,AW,中央アメリカ,ISO 3166-2:AW,2
+21,アルバニア,Albania,8,ALB,AL,東ヨーロッパ,ISO 3166-2:AL,3
+22,アルメニア,Armenia,51,ARM,AM,東ヨーロッパ,ISO 3166-2:AM,3
+23,アンギラ,Anguilla,660,AIA,AI,中央アメリカ,ISO 3166-2:AI,2
+24,アンゴラ,Angola,24,AGO,AO,南アフリカ,ISO 3166-2:AO,4
+25,アンティグア・バーブーダ,Antigua and Barbuda,28,ATG,AG,中央アメリカ,ISO 3166-2:AG,2
+26,アンドラ,Andorra,20,AND,AD,西ヨーロッパ,ISO 3166-2:AD,3
+27,イエメン,Yemen,887,YEM,YE,中東,ISO 3166-2:YE,6
+28,イギリス,United Kingdom,826,GBR,GB,西ヨーロッパ,ISO 3166-2:GB,3
+29,イギリス領インド洋地域,British Indian Ocean Territory,86,IOT,IO,インド洋地域,ISO 3166-2:IO,7
+30,イギリス領ヴァージン諸島,Virgin Islands,92,VGB,VG,中央アメリカ,ISO 3166-2:VG,2
+31,イスラエル,Israel,376,ISR,IL,中東,ISO 3166-2:IL,6
+32,イタリア,Italy,380,ITA,IT,西ヨーロッパ,ISO 3166-2:IT,3
+33,イラク,Iraq,368,IRQ,IQ,中東,ISO 3166-2:IQ,6
+34,イラン|イラン・イスラム共和国,Iran,364,IRN,IR,中東,ISO 3166-2:IR,6
+35,インド,India,356,IND,IN,南アジア,ISO 3166-2:IN,1
+36,インドネシア,Indonesia,360,IDN,ID,東南アジア,ISO 3166-2:ID,1
+37,ウォリス・フツナ,Wallis and Futuna,876,WLF,WF,オセアニア,ISO 3166-2:WF,5
+38,ウガンダ,Uganda,800,UGA,UG,中央アフリカ,ISO 3166-2:UG,4
+39,ウクライナ,Ukraine,804,UKR,UA,東ヨーロッパ,ISO 3166-2:UA,3
+40,ウズベキスタン,Uzbekistan,860,UZB,UZ,中央アジア,ISO 3166-2:UZ,1
+41,ウルグアイ,Uruguay,858,URY,UY,南アメリカ,ISO 3166-2:UY,2
+42,エクアドル,Ecuador,218,ECU,EC,南アメリカ,ISO 3166-2:EC,2
+43,エジプト,Egypt,818,EGY,EG,北アフリカ,ISO 3166-2:EG,4
+44,エストニア,Estonia,233,EST,EE,東ヨーロッパ,ISO 3166-2:EE,3
+45,エチオピア,Ethiopia,231,ETH,ET,東アフリカ,ISO 3166-2:ET,4
+46,エリトリア,Eritrea,232,ERI,ER,東アフリカ,ISO 3166-2:ER,4
+47,エルサルバドル,El Salvador,222,SLV,SV,中央アメリカ,ISO 3166-2:SV,2
+48,オーストラリア,Australia,36,AUS,AU,オセアニア,ISO 3166-2:AU,5
+49,オーストリア,Austria,40,AUT,AT,東ヨーロッパ,ISO 3166-2:AT,3
+50,オーランド諸島,Åland Islands,248,ALA,AX,北ヨーロッパ,ISO 3166-2:AX,3
+51,オマーン,Oman,512,OMN,OM,中東,ISO 3166-2:OM,6
+52,オランダ,Netherlands,528,NLD,NL,西ヨーロッパ,ISO 3166-2:NL,3
+53,ガーナ,Ghana,288,GHA,GH,西アフリカ,ISO 3166-2:GH,4
+54,カーボベルデ,Cape Verde,132,CPV,CV,西アフリカ,ISO 3166-2:CV,4
+55,ガーンジー,Guernsey,831,GGY,GG,西ヨーロッパ,ISO 3166-2:GG,3
+56,ガイアナ,Guyana,328,GUY,GY,南アメリカ,ISO 3166-2:GY,2
+57,カザフスタン,Kazakhstan,398,KAZ,KZ,中央アジア,ISO 3166-2:KZ,1
+58,カタール,Qatar,634,QAT,QA,中東,ISO 3166-2:QA,6
+59,合衆国領有小離島,United States Minor Outlying Islands,581,UMI,UM,オセアニア,ISO 3166-2:UM,5
+60,カナダ,Canada,124,CAN,CA,北アメリカ,ISO 3166-2:CA,2
+61,ガボン,Gabon,266,GAB,GA,中央アフリカ,ISO 3166-2:GA,4
+62,カメルーン,Cameroon,120,CMR,CM,中央アフリカ,ISO 3166-2:CM,4
+63,ガンビア,Gambia,270,GMB,GM,西アフリカ,ISO 3166-2:GM,4
+64,カンボジア,Cambodia,116,KHM,KH,東南アジア,ISO 3166-2:KH,1
+65,北マリアナ諸島,Northern Mariana Islands,580,MNP,MP,オセアニア,ISO 3166-2:MP,5
+66,ギニア,Guinea,324,GIN,GN,西アフリカ,ISO 3166-2:GN,4
+67,ギニアビサウ,Guinea-Bissau,624,GNB,GW,西アフリカ,ISO 3166-2:GW,4
+68,キプロス,Cyprus,196,CYP,CY,地中海地域,ISO 3166-2:CY,8
+69,キューバ,Cuba,192,CUB,CU,中央アメリカ,ISO 3166-2:CU,2
+70,キュラソー島|キュラソー,Curaçao,531,CUW,CW,中央アメリカ,ISO 3166-2:CW,2
+71,ギリシャ,Greece,300,GRC,GR,西ヨーロッパ,ISO 3166-2:GR,3
+72,キリバス,Kiribati,296,KIR,KI,オセアニア,ISO 3166-2:KI,5
+73,キルギス,Kyrgyzstan,417,KGZ,KG,中央アジア,ISO 3166-2:KG,1
+74,グアテマラ,Guatemala,320,GTM,GT,中央アメリカ,ISO 3166-2:GT,2
+75,グアドループ,Guadeloupe,312,GLP,GP,中央アメリカ,ISO 3166-2:GP,2
+76,グアム,Guam,316,GUM,GU,オセアニア,ISO 3166-2:GU,5
+77,クウェート,Kuwait,414,KWT,KW,中東,ISO 3166-2:KW,6
+78,クック諸島,Cook Islands,184,COK,CK,オセアニア,ISO 3166-2:CK,5
+79,グリーンランド,Greenland,304,GRL,GL,北ヨーロッパ,ISO 3166-2:GL,3
+80,クリスマス島 (オーストラリア)|クリスマス島,Christmas Island,162,CXR,CX,オセアニア,ISO 3166-2:CX,5
+81,グルジア,Georgia,268,GEO,GE,東ヨーロッパ,ISO 3166-2:GE,3
+82,グレナダ,Grenada,308,GRD,GD,中央アメリカ,ISO 3166-2:GD,2
+83,クロアチア,Croatia,191,HRV,HR,東ヨーロッパ,ISO 3166-2:HR,3
+84,ケイマン諸島,Cayman Islands,136,CYM,KY,中央アメリカ,ISO 3166-2:KY,2
+85,ケニア,Kenya,404,KEN,KE,東アフリカ,ISO 3166-2:KE,4
+86,コートジボワール,Côte d'Ivoire,384,CIV,CI,西アフリカ,ISO 3166-2:CI,4
+87,ココス諸島|ココス（キーリング）諸島,Cocos (Keeling) Islands,166,CCK,CC,インド洋地域,ISO 3166-2:CC,7
+88,コスタリカ,Costa Rica,188,CRI,CR,中央アメリカ,ISO 3166-2:CR,2
+89,コモロ,Comoros,174,COM,KM,インド洋地域,ISO 3166-2:KM,7
+90,コロンビア,Colombia,170,COL,CO,南アメリカ,ISO 3166-2:CO,2
+91,コンゴ共和国,Congo,178,COG,CG,中央アフリカ,ISO 3166-2:CG,4
+92,コンゴ民主共和国,Congo,180,COD,CD,中央アフリカ,ISO 3166-2:CD,4
+93,サウジアラビア,Saudi Arabia,682,SAU,SA,中東,ISO 3166-2:SA,6
+94,サウスジョージア・サウスサンドウィッチ諸島,South Georgia and the South Sandwich Islands,239,SGS,GS,南アメリカ,ISO 3166-2:GS,2
+95,サモア,Samoa,882,WSM,WS,オセアニア,ISO 3166-2:WS,5
+96,サントメ・プリンシペ,Sao Tome and Principe,678,STP,ST,中央アフリカ,ISO 3166-2:ST,4
+97,サン・バルテルミー島|サン・バルテルミー,Saint Barthélemy,652,BLM,BL,中央アメリカ,ISO 3166-2:BL,2
+98,ザンビア,Zambia,894,ZMB,ZM,南アフリカ,ISO 3166-2:ZM,4
+99,サンピエール島・ミクロン島,Saint Pierre and Miquelon,666,SPM,PM,北アメリカ,ISO 3166-2:PM,2
+100,サンマリノ,San Marino,674,SMR,SM,西ヨーロッパ,ISO 3166-2:SM,3
+101,サン・マルタン (西インド諸島)|サン・マルタン（フランス領）,Saint Martin (French part),663,MAF,MF,中央アメリカ,ISO 3166-2:MF,2
+102,シエラレオネ,Sierra Leone,694,SLE,SL,西アフリカ,ISO 3166-2:SL,4
+103,ジブチ,Djibouti,262,DJI,DJ,東アフリカ,ISO 3166-2:DJ,4
+104,ジブラルタル,Gibraltar,292,GIB,GI,西ヨーロッパ,ISO 3166-2:GI,3
+105,ジャージー,Jersey,832,JEY,JE,西ヨーロッパ,ISO 3166-2:JE,3
+106,ジャマイカ,Jamaica,388,JAM,JM,中央アメリカ,ISO 3166-2:JM,2
+107,シリア|シリア・アラブ共和国,Syrian Arab Republic,760,SYR,SY,中東,ISO 3166-2:SY,6
+108,シンガポール,Singapore,702,SGP,SG,東南アジア,ISO 3166-2:SG,1
+109,シント・マールテン|シント・マールテン（オランダ領）,Sint Maarten (Dutch part),534,SXM,SX,中央アメリカ,ISO 3166-2:SX,2
+110,ジンバブエ,Zimbabwe,716,ZWE,ZW,南アフリカ,ISO 3166-2:ZW,4
+111,スイス,Switzerland,756,CHE,CH,西ヨーロッパ,ISO 3166-2:CH,3
+112,スウェーデン,Sweden,752,SWE,SE,北ヨーロッパ,ISO 3166-2:SE,3
+113,スーダン,Sudan,729,SDN,SD,東アフリカ,ISO 3166-2:SD,4
+114,スヴァールバル諸島およびヤンマイエン島,Svalbard and Jan Mayen,744,SJM,SJ,北ヨーロッパ,ISO 3166-2:SJ,3
+115,スペイン,Spain,724,ESP,ES,西ヨーロッパ,ISO 3166-2:ES,3
+116,スリナム,Suriname,740,SUR,SR,南アメリカ,ISO 3166-2:SR,2
+117,スリランカ,Sri Lanka,144,LKA,LK,南アジア,ISO 3166-2:LK,1
+118,スロバキア,Slovakia,703,SVK,SK,東ヨーロッパ,ISO 3166-2:SK,3
+119,スロベニア,Slovenia,705,SVN,SI,東ヨーロッパ,ISO 3166-2:SI,3
+120,スワジランド,Swaziland,748,SWZ,SZ,南アフリカ,ISO 3166-2:SZ,4
+121,セーシェル,Seychelles,690,SYC,SC,インド洋地域,ISO 3166-2:SC,7
+122,赤道ギニア,Equatorial Guinea,226,GNQ,GQ,中央アフリカ,ISO 3166-2:GQ,4
+123,セネガル,Senegal,686,SEN,SN,西アフリカ,ISO 3166-2:SN,4
+124,セルビア,Serbia,688,SRB,RS,東ヨーロッパ,ISO 3166-2:RS,3
+125,セントクリストファー・ネイビス,Saint Kitts and Nevis,659,KNA,KN,中央アメリカ,ISO 3166-2:KN,2
+126,セントビンセント・グレナディーン|セントビンセントおよびグレナディーン諸島,Saint Vincent and the Grenadines,670,VCT,VC,中央アメリカ,ISO 3166-2:VC,2
+127,セントヘレナ・アセンションおよびトリスタンダクーニャ,Saint Helena,654,SHN,SH,西アフリカ,ISO 3166-2:SH,4
+128,セントルシア,Saint Lucia,662,LCA,LC,中央アメリカ,ISO 3166-2:LC,2
+129,ソマリア,Somalia,706,SOM,SO,東アフリカ,ISO 3166-2:SO,4
+130,ソロモン諸島,Solomon Islands,90,SLB,SB,オセアニア,ISO 3166-2:SB,5
+131,タークス・カイコス諸島,Turks and Caicos Islands,796,TCA,TC,中央アメリカ,ISO 3166-2:TC,2
+132,タイ王国|タイ,Thailand,764,THA,TH,東南アジア,ISO 3166-2:TH,1
+133,大韓民国,Korea,410,KOR,KR,東アジア,ISO 3166-2:KR,1
+134,台湾,Taiwan,158,TWN,TW,東アジア,ISO 3166-2:TW,1
+135,タジキスタン,Tajikistan,762,TJK,TJ,中央アジア,ISO 3166-2:TJ,1
+136,タンザニア,Tanzania,834,TZA,TZ,東アフリカ,ISO 3166-2:TZ,4
+137,チェコ,Czech Republic,203,CZE,CZ,東ヨーロッパ,ISO 3166-2:CZ,3
+138,チャド,Chad,148,TCD,TD,中央アフリカ,ISO 3166-2:TD,4
+139,中央アフリカ共和国,Central African Republic,140,CAF,CF,中央アフリカ,ISO 3166-2:CF,4
+140,中華人民共和国|中国,China,156,CHN,CN,東アジア,ISO 3166-2:CN,1
+141,チュニジア,Tunisia,788,TUN,TN,北アフリカ,ISO 3166-2:TN,4
+142,朝鮮民主主義人民共和国,Korea,408,PRK,KP,東アジア,ISO 3166-2:KP,1
+143,チリ,Chile,152,CHL,CL,南アメリカ,ISO 3166-2:CL,2
+144,ツバル,Tuvalu,798,TUV,TV,オセアニア,ISO 3166-2:TV,5
+145,デンマーク,Denmark,208,DNK,DK,北ヨーロッパ,ISO 3166-2:DK,3
+146,ドイツ,Germany,276,DEU,DE,西ヨーロッパ,ISO 3166-2:DE,3
+147,トーゴ,Togo,768,TGO,TG,西アフリカ,ISO 3166-2:TG,4
+148,トケラウ,Tokelau,772,TKL,TK,オセアニア,ISO 3166-2:TK,5
+149,ドミニカ共和国,Dominican Republic,214,DOM,DO,中央アメリカ,ISO 3166-2:DO,2
+150,ドミニカ国,Dominica,212,DMA,DM,中央アメリカ,ISO 3166-2:DM,2
+151,トリニダード・トバゴ,Trinidad and Tobago,780,TTO,TT,中央アメリカ,ISO 3166-2:TT,2
+152,トルクメニスタン,Turkmenistan,795,TKM,TM,中央アジア,ISO 3166-2:TM,1
+153,トルコ,Turkey,792,TUR,TR,中東,ISO 3166-2:TR,6
+154,トンガ,Tonga,776,TON,TO,オセアニア,ISO 3166-2:TO,5
+155,ナイジェリア,Nigeria,566,NGA,NG,中央アフリカ,ISO 3166-2:NG,4
+156,ナウル,Nauru,520,NRU,NR,オセアニア,ISO 3166-2:NR,5
+157,ナミビア,Namibia,516,NAM,NA,南アフリカ,ISO 3166-2:NA,4
+158,南極,Antarctica,10,ATA,AQ,南極,ISO 3166-2:AQ,9
+159,ニウエ,Niue,570,NIU,NU,オセアニア,ISO 3166-2:NU,5
+160,ニカラグア,Nicaragua,558,NIC,NI,中央アメリカ,ISO 3166-2:NI,2
+161,ニジェール,Niger,562,NER,NE,中央アフリカ,ISO 3166-2:NE,4
+162,日本,Japan,392,JPN,JP,東アジア,ISO 3166-2:JP,1
+163,西サハラ,Western Sahara,732,ESH,EH,西アフリカ,ISO 3166-2:EH,4
+164,ニューカレドニア,New Caledonia,540,NCL,NC,オセアニア,ISO 3166-2:NC,5
+165,ニュージーランド,New Zealand,554,NZL,NZ,オセアニア,ISO 3166-2:NZ,5
+166,ネパール,Nepal,524,NPL,NP,南アジア,ISO 3166-2:NP,1
+167,ノーフォーク島,Norfolk Island,574,NFK,NF,オセアニア,ISO 3166-2:NF,5
+168,ノルウェー,Norway,578,NOR,NO,北ヨーロッパ,ISO 3166-2:NO,3
+169,ハード島とマクドナルド諸島,Heard Island and McDonald Islands,334,HMD,HM,インド洋地域,ISO 3166-2:HM,7
+170,バーレーン,Bahrain,48,BHR,BH,中東,ISO 3166-2:BH,6
+171,ハイチ,Haiti,332,HTI,HT,中央アメリカ,ISO 3166-2:HT,2
+172,パキスタン,Pakistan,586,PAK,PK,南アジア,ISO 3166-2:PK,1
+173,バチカン|バチカン市国,Holy See (Vatican City State),336,VAT,VA,西ヨーロッパ,ISO 3166-2:VA,3
+174,パナマ,Panama,591,PAN,PA,中央アメリカ,ISO 3166-2:PA,2
+175,バヌアツ,Vanuatu,548,VUT,VU,オセアニア,ISO 3166-2:VU,5
+176,バハマ,Bahamas,44,BHS,BS,中央アメリカ,ISO 3166-2:BS,2
+177,パプアニューギニア,Papua New Guinea,598,PNG,PG,オセアニア,ISO 3166-2:PG,5
+178,バミューダ諸島|バミューダ,Bermuda,60,BMU,BM,中央アメリカ,ISO 3166-2:BM,2
+179,パラオ,Palau,585,PLW,PW,オセアニア,ISO 3166-2:PW,5
+180,パラグアイ,Paraguay,600,PRY,PY,南アメリカ,ISO 3166-2:PY,2
+181,バルバドス,Barbados,52,BRB,BB,中央アメリカ,ISO 3166-2:BB,2
+182,パレスチナ,Palestinian Territory,275,PSE,PS,中東,ISO 3166-2:PS,6
+183,ハンガリー,Hungary,348,HUN,HU,東ヨーロッパ,ISO 3166-2:HU,3
+184,バングラデシュ,Bangladesh,50,BGD,BD,南アジア,ISO 3166-2:BD,1
+185,東ティモール,Timor-Leste,626,TLS,TL,東南アジア,ISO 3166-2:TL,1
+186,ピトケアン諸島|ピトケアン,Pitcairn,612,PCN,PN,オセアニア,ISO 3166-2:PN,5
+187,フィジー,Fiji,242,FJI,FJ,オセアニア,ISO 3166-2:FJ,5
+188,フィリピン,Philippines,608,PHL,PH,東南アジア,ISO 3166-2:PH,1
+189,フィンランド,Finland,246,FIN,FI,北ヨーロッパ,ISO 3166-2:FI,3
+190,ブータン,Bhutan,64,BTN,BT,南アジア,ISO 3166-2:BT,1
+191,ブーベ島,Bouvet Island,74,BVT,BV,南極,ISO 3166-2:BV,9
+192,プエルトリコ,Puerto Rico,630,PRI,PR,中央アメリカ,ISO 3166-2:PR,2
+193,フェロー諸島,Faroe Islands,234,FRO,FO,北ヨーロッパ,ISO 3166-2:FO,3
+194,フォークランド諸島|フォークランド（マルビナス）諸島,Falkland Islands (Malvinas),238,FLK,FK,南アメリカ,ISO 3166-2:FK,2
+195,ブラジル,Brazil,76,BRA,BR,南アメリカ,ISO 3166-2:BR,2
+196,フランス,France,250,FRA,FR,西ヨーロッパ,ISO 3166-2:FR,3
+197,フランス領ギアナ,French Guiana,254,GUF,GF,南アメリカ,ISO 3166-2:GF,2
+198,フランス領ポリネシア,French Polynesia,258,PYF,PF,オセアニア,ISO 3166-2:PF,5
+199,フランス領南方・南極地域,French Southern Territories,260,ATF,TF,インド洋地域,ISO 3166-2:TF,7
+200,ブルガリア,Bulgaria,100,BGR,BG,東ヨーロッパ,ISO 3166-2:BG,3
+201,ブルキナファソ,Burkina Faso,854,BFA,BF,西アフリカ,ISO 3166-2:BF,4
+202,ブルネイ|ブルネイ・ダルサラーム,Brunei Darussalam,96,BRN,BN,東南アジア,ISO 3166-2:BN,1
+203,ブルンジ,Burundi,108,BDI,BI,中央アフリカ,ISO 3166-2:BI,4
+204,ベトナム,Viet Nam,704,VNM,VN,東南アジア,ISO 3166-2:VN,1
+205,ベナン,Benin,204,BEN,BJ,西アフリカ,ISO 3166-2:BJ,4
+206,ベネズエラ|ベネズエラ・ボリバル共和国,Venezuela,862,VEN,VE,南アメリカ,ISO 3166-2:VE,2
+207,ベラルーシ,Belarus,112,BLR,BY,東ヨーロッパ,ISO 3166-2:BY,3
+208,ベリーズ,Belize,84,BLZ,BZ,中央アメリカ,ISO 3166-2:BZ,2
+209,ペルー,Peru,604,PER,PE,南アメリカ,ISO 3166-2:PE,2
+210,ベルギー,Belgium,56,BEL,BE,西ヨーロッパ,ISO 3166-2:BE,3
+211,ポーランド,Poland,616,POL,PL,東ヨーロッパ,ISO 3166-2:PL,3
+212,ボスニア・ヘルツェゴビナ,Bosnia and Herzegovina,70,BIH,BA,東ヨーロッパ,ISO 3166-2:BA,3
+213,ボツワナ,Botswana,72,BWA,BW,南アフリカ,ISO 3166-2:BW,4
+214,BES諸島|ボネール、シント・ユースタティウスおよびサバ,Bonaire,535,BES,BQ,中央アメリカ,ISO 3166-2:BQ,2
+215,ボリビア|ボリビア多民族国,Bolivia,68,BOL,BO,南アメリカ,ISO 3166-2:BO,2
+216,ポルトガル,Portugal,620,PRT,PT,西ヨーロッパ,ISO 3166-2:PT,3
+217,香港,Hong Kong,344,HKG,HK,東アジア,ISO 3166-2:HK,1
+218,ホンジュラス,Honduras,340,HND,HN,中央アメリカ,ISO 3166-2:HN,2
+219,マーシャル諸島,Marshall Islands,584,MHL,MH,オセアニア,ISO 3166-2:MH,5
+220,マカオ,Macao,446,MAC,MO,東アジア,ISO 3166-2:MO,1
+221,マケドニア共和国|マケドニア旧ユーゴスラビア共和国,Macedonia,807,MKD,MK,東ヨーロッパ,ISO 3166-2:MK,3
+222,マダガスカル,Madagascar,450,MDG,MG,インド洋地域,ISO 3166-2:MG,7
+223,マヨット,Mayotte,175,MYT,YT,インド洋地域,ISO 3166-2:YT,7
+224,マラウイ,Malawi,454,MWI,MW,南アフリカ,ISO 3166-2:MW,4
+225,マリ共和国|マリ,Mali,466,MLI,ML,西アフリカ,ISO 3166-2:ML,4
+226,マルタ,Malta,470,MLT,MT,地中海地域,ISO 3166-2:MT,8
+227,マルティニーク,Martinique,474,MTQ,MQ,中央アメリカ,ISO 3166-2:MQ,2
+228,マレーシア,Malaysia,458,MYS,MY,東南アジア,ISO 3166-2:MY,1
+229,マン島,Isle of Man,833,IMN,IM,西ヨーロッパ,ISO 3166-2:IM,3
+230,ミクロネシア連邦,Micronesia,583,FSM,FM,オセアニア,ISO 3166-2:FM,5
+231,南アフリカ共和国|南アフリカ,South Africa,710,ZAF,ZA,南アフリカ,ISO 3166-2:ZA,4
+232,南スーダン,South Sudan,728,SSD,SS,東アフリカ,ISO 3166-2:SS,4
+233,ミャンマー,Myanmar,104,MMR,MM,東南アジア,ISO 3166-2:MM,1
+234,メキシコ,Mexico,484,MEX,MX,中央アメリカ,ISO 3166-2:MX,2
+235,モーリシャス,Mauritius,480,MUS,MU,南アフリカ,ISO 3166-2:MU,4
+236,モーリタニア,Mauritania,478,MRT,MR,西アフリカ,ISO 3166-2:MR,4
+237,モザンビーク,Mozambique,508,MOZ,MZ,南アフリカ,ISO 3166-2:MZ,4
+238,モナコ,Monaco,492,MCO,MC,西ヨーロッパ,ISO 3166-2:MC,3
+239,モルディブ,Maldives,462,MDV,MV,インド洋地域,ISO 3166-2:MV,7
+240,モルドバ|モルドバ共和国,Moldova,498,MDA,MD,東ヨーロッパ,ISO 3166-2:MD,3
+241,モロッコ,Morocco,504,MAR,MA,北アフリカ,ISO 3166-2:MA,4
+242,モンゴル国|モンゴル,Mongolia,496,MNG,MN,東アジア,ISO 3166-2:MN,1
+243,モンテネグロ,Montenegro,499,MNE,ME,東ヨーロッパ,ISO 3166-2:ME,3
+244,モントセラト,Montserrat,500,MSR,MS,中央アメリカ,ISO 3166-2:MS,2
+245,ヨルダン,Jordan,400,JOR,JO,中東,ISO 3166-2:JO,6
+246,ラオス|ラオス人民民主共和国,Lao People's Democratic Republic,418,LAO,LA,東南アジア,ISO 3166-2:LA,1
+247,ラトビア,Latvia,428,LVA,LV,東ヨーロッパ,ISO 3166-2:LV,3
+248,リトアニア,Lithuania,440,LTU,LT,東ヨーロッパ,ISO 3166-2:LT,3
+249,リビア,Libya,434,LBY,LY,北アフリカ,ISO 3166-2:LY,4
+250,リヒテンシュタイン,Liechtenstein,438,LIE,LI,西ヨーロッパ,ISO 3166-2:LI,3
+251,リベリア,Liberia,430,LBR,LR,西アフリカ,ISO 3166-2:LR,4
+252,ルーマニア,Romania,642,ROU,RO,東ヨーロッパ,ISO 3166-2:RO,3
+253,ルクセンブルク,Luxembourg,442,LUX,LU,西ヨーロッパ,ISO 3166-2:LU,3
+254,ルワンダ,Rwanda,646,RWA,RW,中央アフリカ,ISO 3166-2:RW,4
+255,レソト,Lesotho,426,LSO,LS,南アフリカ,ISO 3166-2:LS,4
+256,レバノン,Lebanon,422,LBN,LB,中東,ISO 3166-2:LB,6
+257,レユニオン,Réunion,638,REU,RE,インド洋地域,ISO 3166-2:RE,7
+258,ロシア|ロシア連邦,Russian Federation,643,RUS,RU,ロシア,ISO 3166-2:RU,9

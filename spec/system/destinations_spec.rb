@@ -326,11 +326,11 @@ RSpec.describe "Destinations", type: :system do
     end
 
     context "アライアンスの表示/非表示" do
-      it "航空会社が未選択の場合には航空会社に'未使用'が表示され, アライアンスは非表示になること" do
+      it "航空会社が未選択の場合には航空会社に'飛行機は使っていない'が表示され, アライアンスは非表示になること" do
         login_for_system(user)
         # 航空会社が選択されていないFactory を使用
         visit destination_path(destination_airline_unselected)
-        expect(page).to have_selector ".destination-show-airline-name", text: "未使用"
+        expect(page).to have_selector ".destination-show-airline-name", text: "飛行機は使っていない"
         # アライアンスの非表示を確認
         expect(page).not_to have_css ".destination-show-alliance"
       end
