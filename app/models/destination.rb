@@ -9,11 +9,22 @@ class Destination < ApplicationRecord
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 50 }
-  validates :country, presence: true, length: { maximum: 100 }
+  validates :region_id, presence: true
   validates :country_id, presence: true
-  validates :expense, presence: true
+  # 費用をenum で管理する
+  enum expense: {
+    till_50000: 1,
+    till_100000: 2,
+    till_200000: 3,
+    till_300000: 4,
+    till_500000: 5,
+    till_700000: 6,
+    till_1000000: 7,
+    over_1000000: 8,
+  }
+  # enum 定義以外の値を許可しない
+  validates :expense, inclusion: { in: Destination.expenses.keys }
   validates :season, presence: true
-  validate :airline
   validate :airline_id
   validates :description, length: { maximum: 140 }, allow_nil: true
   validates :spot, length: { maximum: 100 }
@@ -21,7 +32,6 @@ class Destination < ApplicationRecord
   validates :experience, length: { maximum: 50 }
   validates :food, length: { maximum: 50 }
   validate :picture_size
-  validate :region_id
 
   # geocoder で経度, 緯度を取得する
   geocoded_by :address_keyword
@@ -58,18 +68,6 @@ class Destination < ApplicationRecord
   def feed_comment(destination_id)
     Comment.where("destination_id = ?", destination_id)
   end
-
-  # 費用をenum で管理する
-  enum expense: {
-    "￥10,000 ~ ￥50,000": 1,
-    "￥50,000 ~ ￥100,000": 2,
-    "￥100,000 ~ ￥200,000": 3,
-    "￥200,000 ~ ￥300,000": 4,
-    "￥300,000 ~ ￥500,000": 5,
-    "￥500,000 ~ ￥700,000": 6,
-    "￥700,000 ~ ￥1000,000": 7,
-    "￥1000,000 ~": 8,
-  }
 
   private
 
