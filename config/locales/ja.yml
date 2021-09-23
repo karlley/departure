@@ -23,7 +23,12 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
       destination:
+        # バリデーションエラーで表示される関連付けたモデル名
+        user: ユーザー
+        country: 地域/国
+        # ここまで
         id: ID
+        user_id: ユーザー
         name: 行き先名
         description: 説明
         spot: スポット
