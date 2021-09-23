@@ -49,7 +49,7 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
-     # エリア選択の初期値
+    # 地域選択の初期値
     @regions = Country.where(ancestry: nil)
     @airlines = Airline.all
   end
@@ -59,14 +59,19 @@ class DestinationsController < ApplicationController
   end
 
   def create
-    # TODO: enum のAugumentError 対策
     @destination = current_user.destinations.build(destination_params)
     if @destination.save
       @destination.add_address
       flash[:success] = "Destination added!"
       redirect_to destination_path(@destination)
     else
-      render 'destinations/new'
+      @regions = Country.where(ancestry: nil)
+      # 地域選択済みで国一覧を取得
+      if destination_params[:region_id] != ""
+        @countries = Country.find(destination_params[:region_id].to_i).children
+      end
+      @airlines = Airline.all
+      render 'new'
     end
   end
 
@@ -85,6 +90,12 @@ class DestinationsController < ApplicationController
       flash[:success] = "Destination updated!"
       redirect_to @destination
     else
+      @regions = Country.where(ancestry: nil)
+      # 地域選択済みで国一覧を取得
+      if destination_params[:region_id] != ""
+        @countries = Country.find(destination_params[:region_id].to_i).children
+      end
+      @airlines = Airline.all
       render 'edit'
     end
   end
@@ -105,9 +116,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    # params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country, :picture, :expense, :season, :experience, :airline, :food)
-    # :expense をenum 定義しているのでInt 型に変換して追加
-    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline_id, :food, :region_id).merge(expense: params[:destination][:expense].to_i)
+    params.require(:destination).permit(:name, :description, :spot, :latitude, :longitude, :address, :country_id, :picture, :season, :experience, :airline_id, :food, :region_id, :expense)
   end
 
   def correct_user

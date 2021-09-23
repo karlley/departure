@@ -5,8 +5,10 @@ class Destination < ApplicationRecord
   belongs_to :airline, optional: true
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+
   default_scope { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
+
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 50 }
   validates :region_id, presence: true

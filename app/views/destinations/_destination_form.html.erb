@@ -21,13 +21,15 @@
     <%= f.label :spot %>
     <%= f.text_field :spot, class: "form-control", id: "destination_spot" %>
   </div>
+  <% if @regions.present? %>
   <div class="form-group" id="destination_region">
     <%= f.label :region_id %><span class="input-need"> *必須</span>
     <%= f.collection_select :region_id, @regions, :id, :country_name, { include_blank: "地域を選択" }, { class: "form-control", id: "destination_region_id" } %>
   </div>
+  <% end %>
   <div class="form-group-wrapper" id="destination_country">
-    <% #edit 時のみ国名セレクトボックスを先に表示 %>
-    <% if edit_page? %>
+    <% #地域選択時のみ国名セレクトボックスを先に表示 %>
+    <% if @countries.present? %>
       <div class="form-group" id="country_select_box">
         <%= f.label :country_id %><span class="input-need"> *必須</span>
         <%= f.collection_select :country_id, @countries, :id, :country_name, { include_blank: "国を選択" }, { class: "form-control", id: "destination_region_id" } %>
@@ -36,7 +38,7 @@
   </div>
   <div class="form-group">
     <%= f.label :expense %><span class="input-need"> *必須</span>
-    <%= f.select :expense, options_for_select(Destination.expenses, @destination.expense_before_type_cast), { include_blank: "費用を選択" }, { class: "form-control", id: "destination_expense" } %>
+    <%= f.select :expense, options_for_select(Destination.expenses.keys.map{|k| [I18n.t("enums.destination.expense.#{k}"), k]}, @destination.expense), { include_blank: "費用を選択" }, class: 'form-control', id: 'destination_expense' %>
   </div>
   <div class="form-group">
     <%= f.label :season %><span class="input-need"> *必須</span>
@@ -48,7 +50,7 @@
   </div>
   <div class="form-group">
     <%= f.label :airline_id %>
-    <%= f.collection_select :airline_id, @airlines, :id, :airline_name, { prompt: "飛行機は使っていない" }, { class: "form-control", id: "destination_airline_id" } %>
+    <%= f.collection_select :airline_id, @airlines, :id, :airline_name, { include_blank: "飛行機は使っていない" }, { class: "form-control", id: "destination_airline_id" } %>
   </div>
   <div class="form-group">
     <%= f.label :food %>
