@@ -12,10 +12,5 @@ RSpec.describe Country, type: :model do
       country = build(:country, country_name: nil)
       expect(country).not_to be_valid
     end
-
-    it "region が無い場合は無効な状態で有ること" do
-      country = build(:country, region: nil)
-      expect(country).not_to be_valid
-    end
   end
 end

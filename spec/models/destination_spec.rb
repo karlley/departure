@@ -60,7 +60,7 @@ RSpec.describe Destination, type: :model do
     it "費用が未選択で無効な状態であること" do
       destination = build(:destination, expense: nil)
       destination.valid?
-      expect(destination.errors[:expense]).to include("を入力してください")
+      expect(destination.errors[:expense]).to include("は一覧にありません")
     end
 
     it "シーズンが未選択で無効な状態であること" do
@@ -74,13 +74,6 @@ RSpec.describe Destination, type: :model do
       destination.valid?
       expect(destination.errors[:experience]).to include("は50文字以内で入力してください")
     end
-
-    # 必須選択を解除
-    # it " 航空会社が未選択で無効な状態であること" do
-    #   destination = build(:destination, airline: nil)
-    #   destination.valid?
-    #   expect(destination.errors[:airline]).to include("航空会社を選択してください")
-    # end
 
     it "食べ物が50文字以内であること" do
       destination = build(:destination, food: "a" * 51)
@@ -106,7 +99,7 @@ RSpec.describe Destination, type: :model do
 
   context "address_keyword メソッド" do
     it "geocoder で使用する文字列を生成できること" do
-      destination = build(:destination, name: "行き先名", country_id: 153, spot: "スポット")
+      destination = build(:destination, name: "行き先名", country_id: 162, spot: "スポット")
       keyword = destination.address_keyword
       expect(keyword).to eq "行き先名, 日本, スポット"
     end
