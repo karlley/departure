@@ -1,15 +1,20 @@
 FactoryBot.define do
   factory :destination do
     name { Faker::Address.city }
-    # seed で作成したCountry オブジェクトの中からランダムに国を選択
-    country_id { Country.find(Faker::Number.between(from: 1, to: 249)).id }
+    # Country モデルの中から国名のidをランダムに選択
+    selected_country_id = Country.find(Faker::Number.between(from: 10, to: 258)).id
+    country_id { selected_country_id }
+    # selected_country_id の親カテゴリのid
+    region_id { Country.find(selected_country_id).parent.id }
     sequence(:description) { |n| "Destinaton No.#{n}!" }
     spot { Faker::Address.street_name }
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
     address { Faker::Address.full_address }
-    # :expense のenum 用に1-8 の数字を生成
-    expense { Faker::Number.between(from: 1, to: 8) }
+    # enum のvalue
+    expense_list = ["till_50000", "till_100000", "till_200000", "till_300000", "till_500000", "till_700000", "till_1000000", "over_1000000"]
+    # enum のvalue をランダムに1つ選択
+    expense { expense_list.sample }
     season { Faker::Number.between(from: 1, to: 12) }
     experience { "Your Experience!" }
     # seed で作成したAirline オブジェクトの中からランダムに国を選択
@@ -52,19 +57,19 @@ FactoryBot.define do
   trait :region_asia do
     name { "Region_Asia" }
     # 日本
-    country_id { 153 }
+    country_id { 162 }
   end
 
   trait :region_america do
     name { "Region_America" }
     # アメリカ
-    country_id { 5 }
+    country_id { 14 }
   end
 
   trait :region_europe do
     name { "Region_Europe" }
     # イギリス
-    country_id { 19 }
+    country_id { 28 }
   end
 
   trait :experience_activity do
