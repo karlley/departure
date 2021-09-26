@@ -37,3 +37,6 @@ Lint/UselessAssignment:
 
 Airbnb/RiskyActiverecordInvocation:
   Enabled: false
+
+Airbnb/FactoryAttrReferencesClass:
+  Enabled: false
