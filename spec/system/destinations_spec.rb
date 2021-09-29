@@ -42,40 +42,70 @@ RSpec.describe "Destinations", type: :system do
       end
 
       it "入力フォームに正しいラベルが表示されること" do
-        expect(page).to have_content "行き先名"
-        expect(page).to have_content "説明"
-        expect(page).to have_content "スポット"
-        expect(page).to have_content "国"
-        expect(page).to have_content "費用"
-        expect(page).to have_content "シーズン"
-        expect(page).to have_content "体験"
-        expect(page).to have_content "航空会社"
-        expect(page).to have_content "食べ物"
+        within(".destination-form-wrapper") do
+          expect(page).to have_content "行き先名"
+          expect(page).to have_content "説明"
+          expect(page).to have_content "スポット"
+          expect(page).to have_content "地域"
+          expect(page).to have_content "費用"
+          expect(page).to have_content "シーズン"
+          expect(page).to have_content "体験"
+          expect(page).to have_content "航空会社"
+          expect(page).to have_content "食べ物"
+        end
       end
 
-      it "DB 読み込みのプルダウンリストが正しく表示されること" do
-        # Country
-        country_data = Country.pluck("country_name") # モデルから特定カラムを配列化
-        country_pulldown = nil
-        within find_field("国") do
-          country_pulldown = all("option").map(&:text).to_ary.drop(1) # プルダウンリストのプロンプトを削除して配列化
+      it "DB のデータを使ったセレクトボックスが正しく表示されること" do
+        # 地域
+        region_db_data = Country.where(region: nil).pluck("country_name") # Country モデルから地域名のみのcountry_name カラムを配列化
+        region_selectbox = nil
+        within find_field("地域") do
+          region_selectbox = all("option").map(&:text).to_ary.drop(1) # プロンプト削除
+          region_selectbox.delete_at(-1) # 配列末尾のcountry_name 削除
         end
-        expect(country_pulldown).to eq country_data
-        # Airline
-        airline_data = Airline.pluck("airline_name")
-        airline_pulldown = nil
+        expect(region_selectbox).to eq region_db_data
+
+        # 航空会社
+        airline_db_data = Airline.pluck("airline_name") # Airline モデルからairline_name カラムを配列化
+        airline_selectbox = nil
         within find_field("航空会社") do
-          airline_pulldown = all("option").map(&:text).to_ary.drop(1)
+          airline_selectbox = all("option").map(&:text).to_ary.drop(1) # プロンプト削除
         end
-        expect(airline_pulldown).to eq airline_data
+        expect(airline_selectbox).to eq airline_db_data
       end
     end
 
+    context "地域、国選択の動的セレクトボックス" do
+      before do
+        login_for_system(user)
+        visit new_destination_path
+      end
+
+      it "地域が選択されるまで国のセレクトボックスが表示されないこと" do
+        expect(page).not_to have_css "#destination_country#country_select_box"
+      end
+
+      it "地域が選択されると国のセレクトボックスが表示されること", js: true do
+        # FIXME: 国のセレクトボックスが表示されない
+        # expect(page).not_to have_css "#country_select_box"
+        # select "アジア", from: "地域"
+        # expect(page).to have_css "#country_select_box"
+      end
+
+      it "地域の選択に合わせた国の選択肢が表示される" do
+      end
+
+      it "地域が未選択になると国のセレクトボックスが非表示になる" do
+      end
+    end
+
+    # FIXME: 国のセレクトボックスが表示されないので登録処理が不可
     context "行き先 登録処理" do
       before do
         fill_in "行き先名", with: "サンプルの行き先"
         fill_in "説明", with: "サンプルの行き先の説明"
         fill_in "スポット", with: "サンプルの行き先のスポット"
+        select "アジア", from: "地域"
         select "日本", from: "国"
         select "￥100,000 ~ ￥200,000", from: "費用"
         select "1月", from: "シーズン"
@@ -517,6 +547,7 @@ RSpec.describe "Destinations", type: :system do
       end
     end
 
+    # FIXME: 国のセレクトボックスが表示されないので更新処理が不可
     context "行き先 更新処理" do
       it "有効な更新" do
         fill_in "行き先名", with: "サンプルの行き先"

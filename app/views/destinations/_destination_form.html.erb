@@ -1,4 +1,4 @@
-<%= form_with model: @destination, local: true do |f| %>
+<%= form_with model: @destination, class: "destination-form-wrapper", local: true do |f| %>
   <%= render "shared/error_messages", object: f.object %>
   <div class="destination-form-picture-select">
     <%= f.label :picture %>
