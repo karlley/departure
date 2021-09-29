@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_29_054428) do
+ActiveRecord::Schema.define(version: 2021_09_11_074836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2021_07_29_054428) do
     t.string "region"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_countries_on_ancestry"
   end
 
   create_table "destinations", force: :cascade do |t|
@@ -52,12 +54,13 @@ ActiveRecord::Schema.define(version: 2021_07_29_054428) do
     t.float "latitude"
     t.float "longitude"
     t.string "address"
-    t.integer "expense"
+    t.integer "expense", default: 0, null: false
     t.integer "season"
     t.string "experience"
     t.string "food"
     t.bigint "country_id"
     t.bigint "airline_id"
+    t.integer "region_id"
     t.index ["airline_id"], name: "index_destinations_on_airline_id"
     t.index ["country_id"], name: "index_destinations_on_country_id"
     t.index ["user_id", "created_at"], name: "index_destinations_on_user_id_and_created_at"

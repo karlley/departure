@@ -7,15 +7,16 @@ Faker::Config.locale = :ja
 # Country
 require "csv"
 
-CSV.foreach("country.csv", headers: true) do |row|
+CSV.foreach("db/country.csv", headers: true) do |row|
   Country.create!(
     country_name: row["国・地域名"],
-    region: row["場所"]
+    region: row["場所"],
+    ancestry: row["ancestry"]
   )
 end
 
 # Airline
-CSV.foreach("airline.csv", headers: true) do |row|
+CSV.foreach("db/airline.csv", headers: true) do |row|
   Airline.create!(
     airline_name: row["航空会社"],
     country_id: row["国番号"],
@@ -60,8 +61,8 @@ end
   # :expense のenum 表示に合わせて1-8 の数字を生成,
   expense = Faker::Number.between(from: 1, to: 8)
   season = Faker::Number.between(from: 1, to: 12)
-  # seed で作成したCountry オブジェクトの中からランダムに国を選択
-  country_id = Country.find(Faker::Number.between(from: 1, to: 249)).id
+  # seed で作成したCountry オブジェクトの中からランダムに国名のみを選択
+  country_id = Country.find(Faker::Number.between(from: 10, to: 258)).id
   spot = Faker::Address.street_name
   latitude = Faker::Address.latitude
   longitude = Faker::Address.longitude
@@ -77,6 +78,8 @@ end
   food = Faker::Food.dish
   # 管理人は含まない
   user_id = Faker::Number.between(from: 2, to: 4)
+  # country_idの親カテゴリのid
+  region_id = Country.find(country_id).parent.id
 
   Destination.create!(picture: picture,
                       name: name,
@@ -91,7 +94,8 @@ end
                       experience: experience,
                       airline_id: airline_id,
                       food: food,
-                      user_id: user_id)
+                      user_id: user_id,
+                      region_id: region_id)
 end
 
 # Relationship

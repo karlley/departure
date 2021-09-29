@@ -22,8 +22,9 @@ RSpec.describe "New Destinations", type: :request do
         post destinations_path, params: { destination: {
           name: "行き先のサンプル",
           description: "行き先のサンプルの説明",
-          country_id: 1,
-          expense: 1,
+          region_id: 1,
+          country_id: 10,
+          expense: "till_50000",
           season: 1,
           picture: picture_1,
         } }
@@ -37,8 +38,9 @@ RSpec.describe "New Destinations", type: :request do
         post destinations_path, params: { destination: {
           name: "",
           description: "行き先のサンプルの説明",
-          country_id: 1,
-          expense: 1,
+          region_id: 1,
+          country_id: 10,
+          expense: "till_50000",
           season: 1,
           picture: picture_1,
         } }

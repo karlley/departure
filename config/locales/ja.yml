@@ -23,10 +23,16 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
       destination:
+        # バリデーションエラーで表示される関連付けたモデル名
+        user: ユーザー
+        country: 地域/国
+        # ここまで
         id: ID
+        user_id: ユーザー
         name: 行き先名
         description: 説明
         spot: スポット
+        region_id: 地域
         country_id: 国
         picture: 行き先の写真
         expense: 費用
@@ -42,6 +48,17 @@ ja:
         user_id: コメント投稿者のID
         destination_id: コメントされた行き先のID
         content: コメント
+  enums:
+    destination:
+      expense:
+        till_50000: ￥10,000 ~ ￥50,000
+        till_100000: ￥50,000 ~ ￥100,000
+        till_200000: ￥100,000 ~ ￥200,000
+        till_300000: ￥200,000 ~ ￥300,000
+        till_500000: ￥300,000 ~ ￥500,000
+        till_700000: ￥500,000 ~ ￥700,000
+        till_1000000: ￥700,000 ~ ￥1000,000
+        over_1000000: ￥1000,000 ~
   date:
     abbr_day_names:
     - 日
